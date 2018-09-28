@@ -1409,7 +1409,9 @@ section {
   margin: 9px 0 18px;
 }
 .table thead {
-  color: #999999;
+      background-color: #9E9E9E;
+    color: #ffffff;
+  /*color: #999999;*/
 }
 .table thead > tr > th {
   color: inherit;

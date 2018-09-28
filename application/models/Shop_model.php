@@ -1,108 +1,81 @@
 <?php
 defined('BASEPATH') OR exit('No direct script access allowed');
 class Shop_model extends CI_Model {
-  
-  public function add_shop($username){
-  
-	$number = $_POST[adult];
-	$mm = $_POST[time_num];
-	if($_POST[time_num]<10){
-		$mm = "0".$_POST[time_num];
-	}
-	if($_POST[persion_china]<=0){
-		$_POST[persion_china] = 0;
-	}
-	if($_POST[persion_other]<=0){
-		$_POST[persion_other] = 0;
-	}
-		/*$data["code"] = "";
-		$data["plan_id"] = $_POST[price_plan];
-		$data["plan_commission"] = $arr[plan][plan_id];
-		$data["price_park_unit"] = $price_park_driver;
-		$data["price_park_total"] = $price_park_driver;
-		$data["price_person_unit"] = $price_person_driver;
-		$data["price_person_total"] = $all_price_person_driver;
-//		$data["price_all_total"] = $price_park_driver + $all_price_person_driver;
-		$data["price_extra_park"] = $price_extra_park;
-		$data["price_extra_person"] = $price_extra_park;
-		$data["income_price_park"] = $income_price_park;*/
-		$data["plan_id"] = $_POST[price_plan];
-		$data["pax"] = $_POST[adult];
-		$data["program"] = $_POST[program];
-		$data["transfer_date"] = date('Y-m-d');
-//		$data["ondate"] = $_POST[transfer_date_new];
-//		$data["outdate"] = $_POST[transfer_date_new];
-		$data["airout_h"] = "00";
-		$data["airout_m"] = $mm;
-		$data["airout_time"] = "00".":"."$mm";
-//		$data["car_color"] = $_POST[car_color];
-		$data["car_type"] = trim($_POST[txt_car_type]);
-		$data["i_cartype"] = $_POST[car_type];
-		$data["car_plate"] = $_POST[car_plate];
-		$data["check_use_car_id"] = $_POST[check_use_car_id];
-		$data["adult"] = $_POST[adult];
-		$data["child"] = $_POST[child];
-		$data["phone"] = $_POST[dri_phone];
-//		$data["nation"] = $_POST[nation];
-		$data["booking_by"] = $_GET[driver];
-//		$data["payment_type"] = $_POST[payment_type];
-		$data["drivername"] = $_GET[driver];
-//		$data["namedriver"] = $_POST[namedriver];
-//		$data["ondate_time"] = $_POST[ondate_time];
-//		"posted" = "$_SESSION[data_user_driver]";
-		$data["post_date"] = time();
-		$data["update_date"] = time();
 
-		if($_POST[nation]==1){
-			$data["num_ch"] = $_POST[persion_china];
-		}else if($_POST[nation]==2){
-			$data["num_other"] = $_POST[persion_other];
-		}else{
-			$data["num_ch"] = $_POST[persion_china];
-			$data["num_other"] = $_POST[persion_other];
-		}
-		
-	$result = $this->db->insert('order_booking', $data);
+  public function add_region(){
+	$data[i_shop] = $_POST[i_shop];
+	$result = $this->db->insert(TBL_SHOP_COUNTRY, $data);
 	$last_id = mysql_insert_id();
-	$data[last_id] = $last_id;
-	$data[result] = $result;
+	
 
-	$member_db = $last_id;
-	if ($member_db >= 10000)
-	{
-		$member_in = "$member_db";
-	}
-	elseif ($member_db >= 1000)
-	{
-		$member_in = "0$member_db";
-	}
-	elseif ($member_db >= 100)
-	{
-		$member_in = "00$member_db";
-	}
-	elseif ($member_db >= 10)
-	{
-		$member_in = "000$member_db";
-	}
-	else
-	{
-		$member_in = "0000$member_db";
-	}
-	$data_update[invoice] = "S$member_in";
-//	$data_update[result] = $db->update_db('order_booking',$data_update,'id = "'.$last_id.'" ');
-	$this->db->where('id', $last_id);
-	$data_update[result] = $this->db->update('order_booking', $data_update); 
-	
-	$data[update] = $data_update;
-
-	$this->linenoti();
-	
-	return $data;
-	
+	$data2[i_shop_country] = $last_id;
+	$data2[i_country] = $_POST[id];
+	$data2[s_country_code] = $_POST[country_code];
+	$data2[s_topic_en] = $_POST[name_en];
+	$data2[s_topic_th] = $_POST[name_th];
+	$data2[s_topic_cn] = $_POST[name_cn];
+	$result2 = $this->db->insert(TBL_SHOP_COUNTRY_ICON, $data2);
+	return $result2;
   }
-  
+   public function add_region_sub(){
+	
+	
+
+	$data[i_shop_country] = $_POST[id_shop_country];
+	$data[i_country] = $_POST[id];
+	$data[s_country_code] = $_POST[country_code];
+	$data[s_topic_en] = $_POST[name_en];
+	$data[s_topic_th] = $_POST[name_th];
+	$data[s_topic_cn] = $_POST[name_cn];
+	$result = $this->db->insert(TBL_SHOP_COUNTRY_ICON, $data);
+	
+	return $result;
+  }
+  public function add_plan_price(){
+
+  	$data[i_shop_country] = $_POST[i_shop_country];
+  	$data[i_plan_price] = $_POST[i_plan_price];	
+	$result = $this->db->insert(TBL_SHOP_COUNTRY_COM, $data);
+	$last_id = mysql_insert_id();
+
+	$data2[i_shop_country_com] = $last_id;
+	$data2[i_shop_country_icon] = $_POST[i_plan_price];	
+	$data2[s_topic_en] = $_POST[topic_en];
+	$data2[s_topic_th] = $_POST[topic_th];
+	$data2[s_topic_cn] = $_POST[topic_cn];
+	$result2 = $this->db->insert(TBL_SHOP_COUNTRY_COM_LIST, $data2);
+	
+	return $result;
+  }
+
+  public function add_plan_price_sub(){
+	
+	
+
+	$data[i_shop_country_com] = $_POST[i_shop_country_com];
+	$data[i_shop_country_icon] = $_POST[i_plan_price];	
+	$data[s_topic_en] = $_POST[topic_en];
+	$data[s_topic_th] = $_POST[topic_th];
+	$data[s_topic_cn] = $_POST[topic_cn];
+	$result = $this->db->insert(TBL_SHOP_COUNTRY_COM_LIST, $data);
+	
+	return $result;
+  }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
   public function cancel_shop(){
-  	
   	$data[status] = "CANCEL";
 	$data[cancel_type] = $_POST[type_cancel];
 	$data[driver_complete] = 1;

@@ -508,15 +508,15 @@ left join shopping_product as t2 on t1.product_id = t2.id where  t1.type='phone'
       $status = 0;
     }
     $table = $this->input->post('tbl');
-    $chk = explode('_',$table);
-    if ($chk[0] == 'tbl') {
+    // $chk = explode('_',$table);
+    // if ($chk[0] == 'tbl') {
       
-    } else {
-      $table = 'tbl_'.$table;
-    }
-    $this->i_status = $status;
+    // } else {
+    //   $table = 'tbl_'.$table;
+    // }
+    $this->status = $status;
     $this->db->update($table,$this,array('id' => $id));
-    $this->session->set_userdata(array('savedata' => 1));
+    // $this->session->set_userdata(array('savedata' => 1));
     return $id;
   }
 

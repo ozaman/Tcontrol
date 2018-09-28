@@ -6,6 +6,7 @@ class Main extends CI_Controller {
 	$this->load->model('Main_model');
 	$this->load->model('Mobile_model');
   }
+  
   public function index() {
 
   }

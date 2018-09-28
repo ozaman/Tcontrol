@@ -18,7 +18,7 @@
 
 		<!-- BEGIN STYLESHEETS -->
 		<!-- <link rel="stylesheet" href="<?=base_url();?>assets/bootstrap/font_custom/app-new/css/app-icon.css?v=<?=time()?>"> -->
-				<link href='http://fonts.googleapis.com/css?family=Roboto:300italic,400italic,300,400,500,700,900' rel='stylesheet' type='text/css'/>
+				<link href='https://fonts.googleapis.com/css?family=Roboto:300italic,400italic,300,400,500,700,900' rel='stylesheet' type='text/css'/>
 			<link type="text/css" rel="stylesheet" href="<?=base_url();?>assets/css/modules/boostbox/css/theme-default/bootstrap.css?v=<?=time()?>" />
 
 			<link type="text/css" rel="stylesheet" href="<?=base_url();?>assets/css/modules/boostbox/css/theme-default/boostbox.css?v=<?=time()?>" />
@@ -27,7 +27,10 @@
 
 			<link type="text/css" rel="stylesheet" href="<?=base_url();?>assets/css/modules/boostbox/css/theme-default/boostbox_responsive.css?v=<?=time()?>" />
 			<link type="text/css" rel="stylesheet" href="<?=base_url();?>assets/css/modules/boostbox/css/theme-default/app-icon.css?v=<?=time()?>" />
-
+			<link type="text/css" rel="stylesheet" href="<?=base_url();?>assets/css/modules/boostbox/css/theme-default/libs/toastr/toastr.css?v=<?=time()?>">
+<script>
+	var base_url = '<?=base_url();?>';
+</script>
 	
 		<!-- END STYLESHEETS -->
 
@@ -73,7 +76,7 @@
 			
 			<li><span class="navbar-devider"></span></li>
 			<li class="dropdown">
-				<a href="javascript:void(0);" class="navbar-profile dropdown-toggle text-bold" data-toggle="dropdown"> <i class="fa fa-user fa-fw"></i> CSD Admin <i class="fa fa-fw fa-angle-down"></i> <img class="img-circle" src="/assets/img/modules/boostbox/avatar1.jpg?1401441850" alt=""></a>
+				<a href="javascript:void(0);" class="navbar-profile dropdown-toggle text-bold" data-toggle="dropdown"> <i class="fa fa-user fa-fw"></i> CSD Admin <i class="fa fa-fw fa-angle-down"></i> <img class="img-circle" src="" alt=""></a>
 				<ul class="dropdown-menu animation-slide">
 					<!-- <li class="dropdown-header">Config</li> -->
 					<li><a onclick="get_profile()">แก้ไขข้อมูลส่วนตัว</a></li>
@@ -89,6 +92,28 @@
 <!-- END NAVBAR -->
 </header>
 	<!-- END HEADER-->
+	<div id="base">
+
+	<div id="sidebar">
+		<?php 
+
+		$this->load->view('mainpage/menu_left');
+		?>
+	</div>
+
+	<div id="content">
+		<section>
+			<!-- <ol class="breadcrumb">
+				<li class="head_title"><a class="head_title"></a></li>
+				<li class="head_title_sub"><a class="head_title_sub"></a></li>
+				<li class="head_title_sub_2" style="display: none;"><a class="head_title_sub_2"></a></li>
+				<li class="head_title_sub_3" style="display: none;" ><a class="head_title_sub_3"></a></li>
+				<li class="head_title_sub_4" style="display: none;" ><a class="head_title_sub_4"></a></li>
+				</ol>
+
+				
+				<div class="section-body ">
+					<div class="row" id="body_page_call"> -->
 
 		
 	

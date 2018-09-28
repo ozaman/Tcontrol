@@ -83,10 +83,10 @@
 		</a>
 		<!--start submenu -->
 		<ul>
-			<li><a onclick="shop('categorie')">หมวดหมู่ทั้งหมด</a></li>
-			<li><a href="tables/static">ร้านค้าทั้งหมด</a></li>
+			<li><a href="<?=base_url();?>shop/data_shop_categorie" >หมวดหมู่ทั้งหมด</a></li>
+			<li><a  href="<?=base_url();?>shop/data_shop_all" >ร้านค้าทั้งหมด</a></li>
 
-			<li><a href="tables/dynamic">ประเภทสินค้าย่อย</a></li>
+			<!-- <li><a href="tables/dynamic">ประเภทสินค้าย่อย</a></li> -->
 
 			
 
