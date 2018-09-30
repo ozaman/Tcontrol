@@ -29,23 +29,22 @@
 							?>
 							<div class="row">
 								<div class="form-group form-group-md">
-									<div class="col-md-2">
+									<div class="col-md-1">
 										<div class="form-group form-group-md">
 											<span><?=$key+1;?>).</span>
-											<button id="btn_status<?=$val->id;?>" type="button" onclick="updateStatus('<?=$val->id;?>','<?=$val->status;?>','<?=TBL_SHOP_COUNTRY;?>')" style="padding: 1px 5px;  cursor: pointer; width: 36px;" class="btn btn-xs <?=$btn_color;?> btn-equal" data-toggle="tooltip" data-placement="top" data-original-title="เปิดฝปิด" ><?=$text_status;?></button>
-											<button type="button" class="btn btn-xs btn-danger btn-equal" data-toggle="modal" data-target="#deleteModal"  data-original-title="ลบ" onclick="firstDelete('ค่าตอบแทน','<?=$val->id;?>','<?=TBL_SHOP_COUNTRY_ICON;?>')"><i class="fa fa-trash-o"></i></button>
+											
 										</div>
 									</div>
-									<div class="col-md-8 ">
+									<div class="col-md-11 ">
 										
 										
 										<?php
 
 										foreach($arr[region] as $key=>$val2){
 											?>
-											<div class="form-group form-group-md">
+											<!-- <div class="form-group form-group-md"> -->
 
-												<div class="col-md-4">
+												<div class="col-md-3">
 													<?php
 													if ($val->id == $val2->i_shop_country) {
 														?>
@@ -58,17 +57,12 @@
 													?>
 												</div>
 
-											</div>
+											<!-- </div> -->
 										<?php }?>
 										
 
 									</div>
-									<div class="col-md-2">
-
-										<button type="button" class="btn btn-primary btn-md" id="btn_region_sub<?=$val2->id;?>" onclick="submit_region_sub('<?=$val->id;?>')">
-											<span id="txt_btn_save"> เพิ่ม /แก้ไข้ </span>
-										</button>
-									</div>
+									
 										<!-- <div class="col-md-12">
 												<div class="box_sub_region<?=$val->id;?>">
 													
@@ -83,6 +77,7 @@
 
 									<div class="row">
 										<div class="form-group form-group-md">
+											
 											<?php
 											$_where = array();
 											$_where['i_shop_country_icon'] = $val->id;
@@ -116,8 +111,8 @@
 															<div  class="col-md-4 " style="margin-right: 5px">
 
 																<div  class="form-group ">
-																	<div class="input-group">
-																		<span  class="input-group-addon"><?=$val2->s_topic_th;?>  </span>
+																	<div class="input-group" >
+																		<span  class="input-group-addon" style="width: 64px"><?=$val2->s_topic_th;?>  </span>
 
 																		<input  type="text" class="form-control" value="<?=$val2->i_price;?>" disabled>
 																		<span  class="input-group-addon"><?=$val2->s_payment;?>  </span>
@@ -148,8 +143,6 @@
 						</div>
 
 						<!-- </div> -->
-						<div class="row">
-
-						</div>
+						
 						<!-- </form> -->
 					</div>

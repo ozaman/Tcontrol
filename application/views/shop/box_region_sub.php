@@ -5,29 +5,24 @@
 		</div>
 	</div>
 	<div class="box-outlined" style=" padding: 15px;margin-bottom: 15px">
-		<input type="hiddens" name="" id="id_country" value="">
+		<input type="hidden" name="" id="id_country" value="<?=$_POST[country_id];?>">
 		<div class="form-group form-group-md">
 			<div class="col-md-12">
 				<label class="control-label">สัญชาติ</label>
 			</div>
 			<div class="col-md-12">
-				<?php
-				foreach($region_icon as $key=>$val2){
-					?>
-					<div class="col-md-4">
-						<img src="<?=base_url();?>assets/img/flag/icon/<?=$val2->s_country_code;?>.png">
-						<span style="font-size: 16px">
-							<?=$val2->s_topic_th;?>
-						</span>
-					</div>
-				<?php }?>
+				<div id="box_region_icon"></div>
+				
 			</div>
 		</div>
-		<div class="col-md-12">
+		<!-- <div class="col-md-12">
 			<label class="control-label">เลือกสัญชาติ</label>
-		</div>
+		</div> -->
 		<div class="form-group form-group-md">			
 			<div class="col-md-11">
+				 <div class="input-group" >
+                                        <span class="input-group-addon">เลือกสัญชาติ</span>
+
 				<select name="select_country" class="form-control" id="select_country" onchange="change_region_sub(this.value)">
 					<option value="">- เลือกสัญชาติ -</option>
 					<?php
@@ -39,6 +34,7 @@
 						}
 					} ?>
 				</select>
+				</div>
 			</div>
 			<div class="col-md-1">
 				<button type="button" class="btn btn-primary btn-md" id="btn_region_sub5" onclick="save_region_sub()">
@@ -54,31 +50,29 @@
 	</div>
 	<div class="box-outlined" style=" padding: 15px">
 		<div class="form-group ">
-			<div class="col-md-12">
+			<!-- <div class="col-md-12">
 				<label class="control-label">ประเภทค่าตอบแทน</label>
-			</div>
-			<div class="col-md-12">
-				<select name="select_country" class="form-control" id="select_country" onchange="change_plan_price(this.value)">
-					<option value="">- ประเภทค่าตอบแทน -</option>
-					<?php
-					foreach($plan_price as $key=>$val3){
-						?>
-						<option value="<?=$key;?>" ><?=$val3->topic_th;?></option>
-					<?php } ?>
-				</select>
-			</div>
-			<!-- <div class="col-md-1">
-				<button type="button" class="btn btn-primary btn-md" id="btn_region_sub5" onclick="save_plan_price()">
-					<span id="txt_btn_save"> เพิ่ม </span>
-				</button>
 			</div> -->
+			<div class="col-md-11">
+				<div id="box_price_plan">
+					
+				</div>
+				
+			</div>
 		</div>
 		<div class="form-group ">
 			<div class="col-md-12">
 				<div id="box_plan_com"></div>
 				
 			</div>
+			<div class="col-md-12">
+				<div id="box_plan_comision" style="padding: 15px;">
+				
+
+				</div>
+			</div>
 		</div>
+
 	</div>
 
 	<script >
@@ -90,13 +84,14 @@
 				name_th: data_country[item].name_th,
 				name_cn: data_country[item].name_cn,
 				country_code: data_country[item].country_code,
-				i_shop: '<?=$_POST[id];?>'
+				i_shop: '<?=$_POST[country_id];?>'
 			}
 			console.log(param)
 		}
 		function change_plan_price(item) {
 			var data_plan_price = JSON.parse('<?=json_encode($plan_price);?>');
 			param_plan_price = {
+				// id:data_plan_price[item].id,
 				i_plan_price: data_plan_price[item].id,
 				topic_en: data_plan_price[item].topic_en,
 				topic_th: data_plan_price[item].topic_th,
@@ -122,5 +117,73 @@
 
 			});
 			
+		}
+		box_plan_comision();
+		function box_plan_comision() {
+		var url = base_url+ "shop/box_plan_comision";
+			var param = {
+				country_id: '<?=$_POST[country_id];?>'
+			}
+			console.log(param)
+			$.ajax({
+				url: url,
+				data: param,
+				type: 'post',
+				error: function() {
+					console.log('Error Profile');
+				},
+				success: function(res) {
+					// console.log(res);
+					$('#box_plan_comision').html(res)
+
+				}
+
+			});
+		}
+		box_region_icon();
+		function box_region_icon() {
+		var url = base_url+ "shop/box_region_icon";
+			var param = {
+				country_id: '<?=$_POST[country_id];?>'
+			}
+			console.log(param)
+			$.ajax({
+				url: url,
+				data: param,
+				type: 'post',
+				error: function() {
+					console.log('Error Profile');
+				},
+				success: function(res) {
+					// console.log(res);
+					$('#box_region_icon').html(res)
+
+				}
+
+
+			});
+		}
+		box_price_plan()
+		function box_price_plan() {
+		var url = base_url+ "shop/box_price_plan";
+			var param = {
+				country_id: '<?=$_POST[country_id];?>'
+			}
+			console.log(param)
+			$.ajax({
+				url: url,
+				data: param,
+				type: 'post',
+				error: function() {
+					console.log('Error Profile');
+				},
+				success: function(res) {
+					// console.log(res);
+					$('#box_price_plan').html(res)
+
+				}
+
+
+			});
 		}
 	</script>

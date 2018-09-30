@@ -487,14 +487,23 @@ left join shopping_product as t2 on t1.product_id = t2.id where  t1.type='phone'
   }
 
   public function delete($id,$table) {
-    $chk = explode('_',$table);
-    if ($chk[0] == 'tbl') {
+    // $chk = explode('_',$table);
+    // if ($chk[0] == 'tbl') {
       
-    } else {
-      $table = 'tbl_'.$table;
+    // } else {
+    //   $table = 'tbl_'.$table;
+    // }
+    if ($table == 'shop_country_com_list_price') {
+    $this->db->where('i_shop_country_com_list',$id);
+    $query = $this->db->delete(TBL_SHOP_COUNTRY_COM_LIST_PRICE);
+    }
+    if ($table == 'shop_country_icon') {
+     $this->db->where('id',$id);
+    $query = $this->db->delete(TBL_SHOP_COUNTRY);
     }
     $this->db->where('id',$id);
     $query = $this->db->delete($table);
+
     return $query;
   }
 

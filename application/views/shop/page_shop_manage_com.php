@@ -10,35 +10,39 @@
 
 
 			<div class="form-group form-group-md">
-				<div class="col-md-2">
-					<label class="control-label">เลือกสัญชาติ</label>
-				</div>
+				
 
-				<div class="col-md-10">
+				<div class="col-md-12">
 					<!-- <form class="form-horizontal form-banded form-bordered" id="form_region" > -->
 						<!-- <div class="col-md-12"> -->
 							<div class="row">
-								<div class="col-md-11">
-									<select name="select_country" class="form-control" id="select_country" onchange="change_region(this.value)">
-										<option value="">- เลือกสัญชาติ -</option>
+                                <!-- <div class="col-md-2">
+                                    
+                                </div> -->
+                                <div class="col-md-11">
+                                    <div class="input-group" >
+                                        <span class="input-group-addon">เลือกสัญชาติ</span>
+                                   <select name="select_country" class="form-control" id="select_country" onchange="change_region(this.value)">
+                                      <option value="">- เลือกสัญชาติ -</option>
 
-										<?php
+                                      <?php
 
-										
-										foreach($country as $key=>$val){
+
+                                      foreach($country as $key=>$val){
 
 				                  // if($shop->main == $main->id ){
 				                  //   $selected_sub = "selected";
 				                  // }else{
 				                  //   $selected_sub = "";
 				                  // }
-											?>
-											
-											<option value="<?=$key;?>" ><?=$val->name_th;?></option>
-										<?php } ?>
-									</select>
-								</div>
-								<div class="col-md-1">
+                                         ?>
+
+                                         <option value="<?=$key;?>" ><?=$val->name_th;?></option>
+                                     <?php } ?>
+                                 </select>
+                             </div>
+                             </div>
+                             <div class="col-md-1">
 									<!-- <input name="region_id" type="hidden" id="sub"  value="1">
             						<input name="region_country_code" type="hidden" id="main" value="1">
             						<input name="region_country_code" type="hidden" id="main" value="1"> -->

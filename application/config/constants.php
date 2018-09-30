@@ -98,6 +98,8 @@ define('TBL_SHOP_COUNTRY_COM_LIST', 'shop_country_com_list');
 define('TBL_SHOP_COUNTRY_COM_LIST_PRICE', '	shop_country_com_list_price');
 define('TBL_SHOP_COUNTRY_ICON', 'shop_country_icon');
 define('TBL_SHOP_PLAN_COM', 'shop_plan_com');
+define('TBL_SHOP_PAYMENT_CHANNEL','shop_payment_channel');
+
 
 
 

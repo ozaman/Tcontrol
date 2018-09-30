@@ -91,7 +91,7 @@
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-default" data-dismiss="modal">ไม่</button>
-                <button type="button" class="btn btn-primary">ใช่</button>
+                <button type="button" class="btn btn-primary" data-dismiss="modal" onclick="finalDelete()">ใช่</button>
             </div>
         </div><!-- /.modal-content -->
     </div><!-- /.modal-dialog -->

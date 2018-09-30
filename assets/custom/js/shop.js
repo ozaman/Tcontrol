@@ -102,8 +102,14 @@ $.ajax({
     }
 });
 }
-function commision(item) {
+function open_commision(id) {
+    // body...
     $('#modal_custom').show()
+    commision(id)
+}
+function commision(item) {
+    // alert('aaaaaa')
+    // $('#modal_custom').show()
    // $('.head_title').html('จัดการร้านค้า')
    //  $('.head_title_sub').html('หมวดหมู่ทั้งหมด')
    //  $('.head_title_sub_2').show()
@@ -128,6 +134,37 @@ $.ajax({
     success: function(ele) {
         console.log('Success Profile');
         $('#dody_modal_custom').html(ele);
+
+    }
+});
+}
+function box_region_show(item) {
+    // alert('aaaaaa')
+    // $('#modal_custom').show()
+   // $('.head_title').html('จัดการร้านค้า')
+   //  $('.head_title_sub').html('หมวดหมู่ทั้งหมด')
+   //  $('.head_title_sub_2').show()
+   //  $('.head_title_sub_2').html('ช้อปปิ้งทั้งหมด ')
+   //  $('.head_title_sub_3').show()
+   //  $('.head_title_sub_4').show()
+   //  $('.head_title_sub_3').html('ร้านช้อปปิ้งทั้งหมด')
+   //  $('.head_title_sub_4').html('จัดการร้านช้อปปิ้ง')
+   var url = base_url+ "shop/box_region_show";
+   var param = {
+    id: item
+}
+console.log(url)
+
+$.ajax({
+    url: url,
+    data: param,
+    type: 'post',
+    error: function() {
+        console.log('Error Profile');
+    },
+    success: function(ele) {
+        // console.log('Success Profile');
+        $('#box_region_show').html(ele);
 
     }
 });
@@ -221,7 +258,9 @@ function save_region_sub() {
             console.log('Error Profile');
         },
         success: function(ele) {
-           console.log(ele);
+           // console.log(ele);
+           commision($('#manage_com').val())
+           box_region_icon()
                     // $('.box_sub_region'+id).html(ele);
                     // $('#btn_region_sub'+id).attr('onclick','save_region_sub('+shop+','+id_shop_country+')');
 
@@ -229,47 +268,72 @@ function save_region_sub() {
             });
     // body...
 }
+// function save_plan_price() {
+//     var url = base_url+ "shop/add_plan_price";
+//     // console.log(shop)
+//     // console.log(id_shop_country)
+
+//     console.log(param_plan_price)
+//     $.ajax({
+//         url: url,
+//         data: param_plan_price,
+//         type: 'post',
+//         error: function() {
+//             console.log('Error Profile');
+//         },
+//         success: function(res) {
+//             console.log(res);
+//             param_plan_price = ''
+//             console.log('aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa--------------------------***********************************')
+//              commision($('#manage_com').val())
+//             if (res == true) {
+//                var url = base_url+ "shop/get_region_sub";
+//                var param = {
+//                 country_id: $('#id_country').val()
+//             }
+//             $.ajax({
+//                 url: url,
+//                 data: param,
+//                 type: 'post',
+//                 error: function() {
+//                     console.log('Error Profile');
+//                 },
+//                 success: function(ele) {
+//                     // commision($('#manage_com').val())
+//                    $('#dody_modal_custom_2').html(ele);
+
+
+//                }
+//            });
+//         }
+//     }
+
+// });
+//     // body...
+// }
+
 function save_plan_price() {
-    var url = base_url+ "shop/add_plan_price";
-    // console.log(shop)
-    // console.log(id_shop_country)
-    
-    console.log(param_plan_price)
+    var url = base_url+ "shop/save_plan_price";
+    console.log($('#plan_com_price').serialize())
     $.ajax({
         url: url,
-        data: param_plan_price,
+        data: $('#plan_com_price').serialize(),
         type: 'post',
         error: function() {
             console.log('Error Profile');
         },
         success: function(res) {
-            console.log(res);
-            param_plan_price = ''
-            if (res == true) {
-               var url = base_url+ "shop/get_region_sub";
-               var param = {
-                country_id: $('#id_country').val()
-            }
-            $.ajax({
-                url: url,
-                data: param,
-                type: 'post',
-                error: function() {
-                    console.log('Error Profile');
-                },
-                success: function(ele) {
-
-                   $('#dody_modal_custom_2').html(ele);
+            commision($('#manage_com').val())
+            $('#box_plan_com').html('');
+            box_plan_comision();
+            box_price_plan();
 
 
-               }
-           });
         }
-    }
-
-});
-    // body...
+    });
 }
+
+
 function get_plan_price_sub(id) {
     console.log(id)
     $('#modal_custom_3').show();
@@ -347,7 +411,7 @@ function save_plan_price_sub(id) {
     // body...
 }
 function updateStatus(id,status,table) {
- var url = base_url + "shop/updateStatus";
+   var url = base_url + "shop/updateStatus";
     // console.log(shop)
     // console.log(id_shop_country)
     var param = {
@@ -367,44 +431,119 @@ function updateStatus(id,status,table) {
             console.log('Error Profile');
         },
         success: function(res) {
-           console.log(res);
-           if (status ==1) {
-               Command: toastr["warning"]("ปิดบริการแล้ว")
-               $('#span_status'+id).removeClass('text-success')
-               $('#span_status'+id).addClass('text-danger')
-               $('#span_status'+id).html('ปิด');
-               $('#span_status'+id).attr("onclick","updateStatus('"+id+"','0','"+table+"')");
+         console.log(res);
+         if (status ==1) {
+             Command: toastr["warning"]("ปิดบริการแล้ว")
+             if (table == 'shop_country') {
+               $('#btn_status'+id).removeClass('btn-success')
+               $('#btn_status'+id).addClass('btn-warning')
+               $('#btn_status'+id).html('ปิด');
+               $('#btn_status'+id).attr("onclick","updateStatus('"+id+"','0','"+table+"')");
            }
-           else {
-               Command: toastr["success"]("เปิดบริการแล้ว")
-               $('#span_status'+id).addClass('text-success')
-               $('#span_status'+id).removeClass('text-danger')
-               $('#span_status'+id).html('เปิด');
-               $('#span_status'+id).attr("onclick","updateStatus('"+id+"','1','"+table+"')");
-           }
-       
-         toastr.options = {
-          "closeButton": true,
-          "debug": false,
-          "positionClass": "toast-top-right",
-          "onclick": null,
-          "showDuration": "1000",
-          "hideDuration": "1000",
-          "timeOut": "5000",
-          "extendedTimeOut": "1000",
-          "showEasing": "swing",
-          "hideEasing": "linear",
-          "showMethod": "fadeIn",
-          "hideMethod": "fadeOut"
-      }
+           else{
+
+            $('#span_status'+id).removeClass('text-success')
+            $('#span_status'+id).addClass('text-danger')
+            $('#span_status'+id).html('ปิด');
+            $('#span_status'+id).attr("onclick","updateStatus('"+id+"','0','"+table+"')");
+        }
+
+    }
+    else {
+     Command: toastr["success"]("เปิดบริการแล้ว")
+     if (table == 'shop_country') {
+        $('#btn_status'+id).addClass('btn-success')
+        $('#btn_status'+id).removeClass('btn-warning')
+
+        $('#btn_status'+id).html('เปิด');
+        $('#btn_status'+id).attr("onclick","updateStatus('"+id+"','1','"+table+"')");
+    }
+    else{
+        $('#span_status'+id).addClass('text-success')
+        $('#span_status'+id).removeClass('text-danger')
+        $('#span_status'+id).html('เปิด');
+        $('#span_status'+id).attr("onclick","updateStatus('"+id+"','1','"+table+"')");
+    }
 
 
-  }    
+}
+
+toastr.options = {
+  "closeButton": true,
+  "debug": false,
+  "positionClass": "toast-top-right",
+  "onclick": null,
+  "showDuration": "1000",
+  "hideDuration": "1000",
+  "timeOut": "5000",
+  "extendedTimeOut": "1000",
+  "showEasing": "swing",
+  "hideEasing": "linear",
+  "showMethod": "fadeIn",
+  "hideMethod": "fadeOut"
+}
+
+
+}    
 });
 }
+var topic_delete,id_delete,table_delete;
 function firstDelete(topic,id,table) {
-   $('#span_title_delete').html(topic);
-   $('#id_item_delete').val(id)
+ $('#span_title_delete').html(topic);
+ $('#id_item_delete').val(id)
+ topic_delete = topic;
+ id_delete = id;
+ table_delete = table;
+ console.log(topic_delete)
+ console.log(id_delete)
+ console.log(table_delete)
+}
+function finalDelete() {
+    var url = base_url+"shop/delete";
+    var param = {
+        id: id_delete,
+        tbl:table_delete
+    }
+    console.log(param)
+    $.ajax({
+        url: url,
+        data: param,
+        type: 'post',
+        error: function() {
+            console.log('Error Profile');
+        },
+        success: function(res) {
+            console.log(res);
+            if (table_delete == 'shop_country_icon') {
+                commision($('#manage_com').val())
+            }
+            else{
+                box_region_icon();
+                box_plan_comision();
+            }
+            
+        }
+
+    });
+}
+function cal_map(id) {
+   var url = base_url+ "shop/get_shop_map";
+   var param = {
+    id: id
 }
 
+$.ajax({
+    url: url,
+    data: param,
+    type: 'post',
+    error: function() {
+      console.log('Error Profile');
+  },
+  success: function(ele) {
+      console.log('Success Profile');
+      $('#map_frame').html(ele);
+
+  }
+});
+}
 
