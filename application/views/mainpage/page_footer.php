@@ -22,11 +22,12 @@
         <form class="form-horizontal" role="form">
             <div class="modal-body">
                <div id="dody_modal_custom"></div>
-               <div class="modal-footer">
+               
+           </div>
+           <div class="modal-footer">
                    <button type="button" class="btn btn-default" data-dismiss="modal" onclick="close_modal_custom('shop_manage')">ปิด</button>
                    <!-- <button type="button" class="btn btn-primary">Login</button> -->
                </div>
-           </div>
 
        </form>
    </div>
@@ -42,11 +43,12 @@
         <form class="form-horizontal" role="form">
             <div class="modal-body">
                <div id="dody_modal_custom_3"></div>
-               <div class="modal-footer">
+              
+           </div>
+            <div class="modal-footer">
                    <button type="button" class="btn btn-default" data-dismiss="modal" onclick="close_modal_custom('plan_price')">ปิด</button>
                    <!-- <button type="button" class="btn btn-primary">Login</button> -->
                </div>
-           </div>
 
        </form>
    </div>
@@ -67,12 +69,13 @@
 
                         </div>
                     </div>
-                    <div class="modal-footer">
+                    
+
+                </div>
+                <div class="modal-footer">
                         <button type="button" class="btn btn-default" data-dismiss="modal" onclick="close_modal_custom('shop_manage_sub')">ปิด</button>
                         <!-- <button type="button" class="btn btn-primary">Login</button> -->
                     </div>
-
-                </div>
                 
             </form>
         </div><!-- /.modal-content -->

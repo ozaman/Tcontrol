@@ -78,6 +78,7 @@ define('TBL_SHOPPING_PRODUCT', 'shopping_product');
 define('TBL_SHOPPING_OPEN_TIME', 'shopping_open_time');
 define('TBL_SHOPPING_CONTACT', 'shopping_contact');
 
+// define('TBL_SHOPPING_OPEN_TIME', 'shopping_open_time');
 
 define('TBL_SHOPPING_PRODUCT_MAIN', 'shopping_product_main');
 define('TBL_SHOPPING_PRODUCT_SUB', 'shopping_product_sub');

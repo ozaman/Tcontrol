@@ -31,7 +31,7 @@
 								<div class="form-group form-group-md">
 									<div class="col-md-1">
 										<div class="form-group form-group-md">
-											<span><?=$key+1;?>).</span>
+											<span class="btn btn-support3 btn-rounded btn-outline btn-equal"><?=$key+1;?></span>
 											
 										</div>
 									</div>
@@ -48,7 +48,7 @@
 													<?php
 													if ($val->id == $val2->i_shop_country) {
 														?>
-														<img src="<?=base_url();?>assets/img/flag/icon/<?=$val2->s_country_code;?>.png">
+														<img class="img-region" src="<?=base_url();?>assets/img/flag/icon/<?=$val2->s_country_code;?>.png">
 														<span style="font-size: 16px">
 															<?=$val2->s_topic_th;?>
 														</span>
@@ -99,23 +99,29 @@
 
 												<div  class="form-group ">
 													
-													<div class="col-md-1">
-														<span class="pull-right"> - </span> 
-													</div>
-													<div class="col-md-11">
+													<!-- <div class="col-md-1">
+														<span class="pull-right"> * </span> 
+													</div> -->
+													<div class="col-md-12">
 														<?php
 
 														foreach($data['list_price'] as $key=>$val2){
+															if ($val2->s_payment == 'โอน') {
+																$curen = '%';
+															}
+															else{
+																$curen = '';
+															}
 															?>
 
-															<div  class="col-md-4 " style="margin-right: 5px">
+															<div  class="col-md-5 " style="margin-right: 5px">
 
 																<div  class="form-group ">
 																	<div class="input-group" >
 																		<span  class="input-group-addon" style="width: 64px"><?=$val2->s_topic_th;?>  </span>
-
-																		<input  type="text" class="form-control" value="<?=$val2->i_price;?>" disabled>
-																		<span  class="input-group-addon"><?=$val2->s_payment;?>  </span>
+																		
+																		<input  type="text" class="form-control" value="<?=$val2->i_price;?> <?=$curen;?>" disabled>
+																		<span  class="input-group-addon" style="width: 64px"><?=$val2->s_payment;?>  </span>
 																	</div>
 
 																</div>

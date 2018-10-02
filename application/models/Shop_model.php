@@ -67,13 +67,14 @@ class Shop_model extends CI_Model {
 		$_select = array('*');
 		$_order = array();
 		$_order['id'] = 'asc';
+		
 		$data['plan_com'] = $this->Main_model->fetch_data('','',TBL_SHOP_PLAN_COM,$_where,$_select,$_order);
-			$plan[i_shop_country_icon] = $_POST[i_country_icon_plan];
-			$plan[i_plan_price] = $_POST[i_price_plan];	
-			
+		$plan[i_shop_country_icon] = $_POST[i_country_icon_plan];
+		$plan[i_plan_price] = $_POST[i_price_plan];	
 
-			$result = $this->db->insert(TBL_SHOP_COUNTRY_COM_LIST, $plan);
-			$last_id = mysql_insert_id();
+
+		$result = $this->db->insert(TBL_SHOP_COUNTRY_COM_LIST, $plan);
+		$last_id = mysql_insert_id();
 
 		foreach ($data['plan_com'] as $val) {
 			// $this->db->where('id<>',$val->i_shop_country_icon);
@@ -93,7 +94,32 @@ class Shop_model extends CI_Model {
 
 		}
 
-		return json_encode($result);
+		return $result;
+	}
+
+	public function save_edit_com(){
+		$_where = array();
+		$_where['i_shop_country_com_list'] = $_GET[i_shop_country_com_list];
+		$_select = array('*');
+		$_order = array();
+		$_order['id'] = 'asc';
+		$arr['plan_com'] = $this->Main_model->fetch_data('','',TBL_SHOP_COUNTRY_COM_LIST_PRICE,$_where,$_select,$_order);
+		foreach ($arr['plan_com'] as $val) {
+			// $this->db->where('id<>',$val->i_shop_country_icon);
+			// echo $val->s_topic_th;
+			// $data = array();
+			
+			//$data = array();
+			
+			$this->db->where('id', $val->id);
+			//$ss = 'input_'.$_GET[i_shop_country_com_list].'_'.$val->id;
+			$data[i_price] = $_POST[input_.$_GET[i_shop_country_com_list]._.$val->id];
+			$result = $this->db->update(TBL_SHOP_COUNTRY_COM_LIST_PRICE, $data); 
+
+		}
+
+
+		return $_POST;
 	}
 
 

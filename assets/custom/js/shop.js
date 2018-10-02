@@ -261,6 +261,7 @@ function save_region_sub() {
            // console.log(ele);
            commision($('#manage_com').val())
            box_region_icon()
+           box_select_region_icon()
                     // $('.box_sub_region'+id).html(ele);
                     // $('#btn_region_sub'+id).attr('onclick','save_region_sub('+shop+','+id_shop_country+')');
 
@@ -323,14 +324,22 @@ function save_plan_price() {
             console.log('Error Profile');
         },
         success: function(res) {
-            commision($('#manage_com').val())
-            $('#box_plan_com').html('');
-            box_plan_comision();
-            box_price_plan();
+            console.log(res)
+            if (res == '') {
+               Command: toastr["warning"]("กรุณาเลือกช่องทางการจ่ายเงิน")
+           }
+           else{
+             $('#btn_save_price_plann').hide();
+              commision($('#manage_com').val())
+              $('#box_plan_com').html('');
+              box_plan_comision();
+              box_price_plan();  
+          }
 
 
-        }
-    });
+
+      }
+  });
 }
 
 
@@ -514,8 +523,10 @@ function finalDelete() {
         },
         success: function(res) {
             console.log(res);
-            if (table_delete == 'shop_country_icon') {
+            if (table_delete == 'shop_country_icon' || table_delete == 'shop_country_com_list') {
                 commision($('#manage_com').val())
+                box_plan_comision();
+                box_region_icon();
             }
             else{
                 box_region_icon();
@@ -546,4 +557,42 @@ $.ajax({
   }
 });
 }
+function edit_plan_com_price(id){
+    console.log(id)
+
+    $('.btn_show_hide').addClass('hide')
+    $('.btn_show_hide').removeClass('show')
+    $('#btn_'+id).addClass('show')
+            // $(".input_"+id).prop('disabled', true);
+            $(".input_"+id).prop('disabled', false);
+            // $('#btn_'+id).removeClass('hide')
+        }
+        function save_edit_com(id){
+            console.log(id)
+            
+            // $('#btn_'+id).removeClass('hide')
+            var url = base_url+ "shop/save_edit_com?i_shop_country_com_list="+id;
+            console.log($('#edit_plan_com_price'+id).serialize())
+            $.ajax({
+                url: url,
+                data: $('#edit_plan_com_price'+id).serialize(),
+                type: 'post',
+                error: function() {
+                  console.log('Error Profile');
+              },
+              success: function(res) {
+                  console.log(res);
+                  box_plan_comision();
+                  commision($('#manage_com').val())
+                  box_price_plan();
+                  $('.btn_show_hide').addClass('hide')
+                  $('.btn_show_hide').removeClass('show')
+                  $('#btn_'+id).hide()
+            // $(".input_"+id).prop('disabled', true);
+            $(".input_"+id).prop('disabled', true);
+                  //$('#map_frame').html(ele);
+
+              }
+          });
+        }
 

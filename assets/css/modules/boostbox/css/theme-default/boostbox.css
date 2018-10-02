@@ -3447,7 +3447,7 @@ li.dropdown-progress .progress {
 }
 .box {
   position: relative;
-  margin-bottom: 20px;
+  /*margin-bottom: 20px;*/
   background-color: #ffffff;
 }
 .box:before,

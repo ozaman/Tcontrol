@@ -28,6 +28,7 @@
 			<link type="text/css" rel="stylesheet" href="<?=base_url();?>assets/css/modules/boostbox/css/theme-default/boostbox_responsive.css?v=<?=time()?>" />
 			<link type="text/css" rel="stylesheet" href="<?=base_url();?>assets/css/modules/boostbox/css/theme-default/app-icon.css?v=<?=time()?>" />
 			<link type="text/css" rel="stylesheet" href="<?=base_url();?>assets/css/modules/boostbox/css/theme-default/libs/toastr/toastr.css?v=<?=time()?>">
+			<link type="text/css" rel="stylesheet" href="<?=base_url();?>assets/custom/css/main.css?v=<?=time()?>">
 <script>
 	var base_url = '<?=base_url();?>';
 </script>

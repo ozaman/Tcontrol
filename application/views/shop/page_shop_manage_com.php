@@ -1,6 +1,7 @@
 
-<div class="col-lg-12">
+<!--  -->
 	<div class="box box-outlined">
+        <div class="col-lg-12">
 		<div class="box-head">
 			<header><h4 class="text-light">เพิ่มสัญชาติที่ให้ปริการ</h4></header>
 			<input type="hidden" name="" id="id_shop_product" value="<?=$_POST[id];?>">
@@ -42,11 +43,11 @@
                                  </select>
                              </div>
                              </div>
-                             <div class="col-md-1">
+                             <div class="col-md-1" align="right">
 									<!-- <input name="region_id" type="hidden" id="sub"  value="1">
             						<input name="region_country_code" type="hidden" id="main" value="1">
             						<input name="region_country_code" type="hidden" id="main" value="1"> -->
-            						<button type="button" class="btn btn-primary btn-md"   onclick="submit_region('<?=$_POST[id];?>')"> <span id="txt_btn_save5"> เพิ่ม </span></button>
+            						<button type="button" class="btn btn-primary btn-md"   onclick="submit_region('<?=$_POST[id];?>')" style="width: 100%"> <span id="txt_btn_save5"> เพิ่ม </span></button>
             					</div>
             				</div>
 

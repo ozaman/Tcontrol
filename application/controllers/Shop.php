@@ -244,10 +244,31 @@ class Shop extends CI_Controller {
 		$this->load->view('shop/box_plan_com',$data);
 	}
 	public function save_plan_price(){
-		$data = $this->Shop_model->save_plan_price();
-		$this->load->view('shop/box_plan_com',$data);
+		$_where = array();
+		$_where['i_plan_price'] = $_POST[i_price_plan];
+		$_select = array('*');
+		$_order = array();
+		$_order['id'] = 'asc';
+		
+		$data['plan_com'] = $this->Main_model->fetch_data('','',TBL_SHOP_PLAN_COM,$_where,$_select,$_order);
+		$chk = 1;
+		foreach ($data['plan_com'] as $val) {
+			if ($_POST[money_.$val->element] == '') {
+				$chk = 0;
+			}
+		}
+		if ($chk == 1) {
+			$data = $this->Shop_model->save_plan_price();
+		$this->load->view('shop/box_plan_com');
 		echo json_encode($data);
+		}
+		
+		
 	}
+	// function call_save_plan_price(){
+
+		
+	// }
 	public function box_plan_comision(){
 		$this->load->view('shop/box_plan_comision');
 	}
@@ -256,6 +277,9 @@ class Shop extends CI_Controller {
 	}
 	public function box_price_plan(){
 		$this->load->view('shop/box_price_plan');
+	}
+	public function box_select_region_icon(){
+		$this->load->view('shop/box_select_region_icon');
 	}
 	public function delete(){
 		$id = $this->input->post('id');
@@ -276,6 +300,10 @@ class Shop extends CI_Controller {
 		$data['region'] = $this->Main_model->fetch_data('','',TBL_SHOP_COUNTRY,$_where,$_select,$_order);
 		//echo json_encode($data);
 		$this->load->view('shop/box_region_show',$data);
+	}
+	public function save_edit_com(){
+		$data = $this->Shop_model->save_edit_com();
+		echo json_encode($data);
 	}
 
 }

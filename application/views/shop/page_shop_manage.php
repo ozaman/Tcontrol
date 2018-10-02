@@ -306,30 +306,49 @@
   <div class="col-lg-12">
     <div class="box box-outlined">
       <div class="box-head">
-        <header>
-          <div class="col-md-6">
-            <h4 class="text-light"><i class="fa fa-pencil fa-fw"></i> ประเภทรายจ่าย <strong></strong></h4>
-          </div>
-          <div class="col-md-6">
-            <button type="button" class="btn btn-success btn-md" onclick="open_commision('<?=$shop->id;?>')"> <span id="txt_btn_save5"> แก้ไขประเภทรายจ่าย </span></button>
-          </div>
-        </header>
-      </div>
-      <div class="box-body no-padding">
+        <ul class="nav nav-tabs" data-toggle="tabs">
+          <li class="active"><a href="#t_share_app"> T-share - App</a></li>
+          <li class=""><a href="#shop_t_share"> T-share - ร้านค้า</a></li>
 
- <form class=" form-banded "  >
-        <div class="col-md-12"> 
-          <div  id="box_region_show"></div>
-        </div>
+        </ul>
       </div>
+      <div class="box-body tab-content">
+        <div class="tab-pane active" id="t_share_app">
+         
+            <div class="box-head">
+             
+                <div class="col-md-4">
+                  <h4 class="text-light"><i class="fa fa-pencil fa-fw"></i> ประเภทรายจ่าย </h4>
+                </div>
+                <div class="col-md-4">
+                  <button type="button" class="btn btn-success btn-md" onclick="open_commision('<?=$shop->id;?>')"> <span id="txt_btn_save5"> แก้ไขประเภทรายจ่าย </span></button>
+                </div>
+            
+            </div>
+            <div class="box-body no-padding">
 
+           
+              <div class="col-md-12"> 
+                <div  id="box_region_show"></div>
+              </div>
             
 
-         
-         <div class="box-head">
-          <header><h4 class="text-light"><i class="fa fa-pencil fa-fw"></i> ผู้ติดต่อ <strong></strong></h4></header>
+
+          </div>
         </div>
-         <form class="form-horizontal form-banded form-bordered"  >
+          <div class="tab-pane" id="shop_t_share">            <p>TEST.</p>
+          </div>
+
+        </div>
+      
+
+
+
+
+      <div class="box-head">
+        <header><h4 class="text-light"><i class="fa fa-pencil fa-fw"></i> ผู้ติดต่อ <strong></strong></h4></header>
+      </div>
+      <form class="form-horizontal form-banded form-bordered"  >
         <div class="form-group form-group-md">
           <div class="col-md-12">
             <div class="table-responsive no-margin">
@@ -381,71 +400,239 @@
 
       </div>
       <div class="box-head">
-        <header><h4 class="text-light"><i class="fa fa-pencil fa-fw"></i> ผู้ติดต่อ <strong></strong></h4></header>
+        <header><h4 class="text-light"><i class="fa fa-pencil fa-fw"></i> เวลาทำการ <strong></strong></h4></header>
       </div>
+      <?php 
+      $_where = array();
+      $_where['id'] = $_GET[id];
+      $_where['product_day'] = 'Mon';
+      $_select = array('*');  
+      $_order = array();
+      $_order['topic_en'] = 'asc';  
+
+      $arr[open_mon] = $this->Main_model->rowdata(TBL_SHOPPING_OPEN_TIME,$_where,$_select);
+      $day = array("Sun","Mon","Tue","Wed","Thu","Fri","Sat");
+      for($i=1;$i<=24;$i++){
+        $invID = str_pad($i, 2, '0', STR_PAD_LEFT);
+        $hour[] = $invID;
+      }
+      for($i=0;$i<=11;$i++){
+        $cal = $i*5;
+        $invID = str_pad($cal, 2, '0', STR_PAD_LEFT);
+        $time[] = $invID;
+      }
+      
+      ?>
       <div class="form-group form-group-md">
 
 
         <div class="col-md-12">
           <table width="100%">
             <tr>
+              <td><strong>เวลาทำการ A :</strong></td>
 
-              <td colspan="2"> 
-               <table width="100%">
-                 <tbody><tr>
-                  <td width="14%"><label style="margin-bottom: -3px;" for="open_time_all">24 ชม. ทุกวัน</label> </td>
-                  <td width="5%"><input type="checkbox" name="open_time_all" id="open_time_all" style="width: 20px;"></td>
+              <td><table width="100%" border="0" cellspacing="0" cellpadding="0">
+                <tbody>
+                  <tr>
+                    <td width="60">เปิด</td>
+                    <td width="140">
+                      <select style="height: 30px; border: 1px solid #ccc;  border-radius: 2px;" name="hour_open_default" id="hour_open_default">
+                        <?php
+                        foreach($hour as $val){
 
-                  <td width="14%"><label style="margin-bottom: -3px;" for="open_all">เปิดทุกวัน</label> </td>
-                  <td><input type="checkbox" checked="checked" name="open_all" id="open_all" style="width: 20px;"></td>
-                </tr>
-              </tbody></table>          
+                          if($arr[open_mon]->start_h ==$val ){
+                            $selected = "selected";
+                          }else{
+                            $selected = "";
+                          }
+                          ?>
+                          <option    <?=$selected;?> value="<?=$val;?>"><?=$val;?></option>
+                        <?php } ?>
+                      </select> .
 
-              <table width="100%" style="margin-top: 25px;">
-                <tbody><tr>
-                  <td width="14%"><label for="open_alway_Sun" style="margin-bottom: -3px;">เปิด 24 ชม.</label></td>
-                  <td><input type="checkbox" name="open_alway_Sun" id="open_alway_Sun" value="1" onclick="eachOpenAlway('Sun');" style="width: 20px;"></td>
-                  <td width="16%" align="center"><label for="Sun" style=" margin-bottom: -3px;">Sun</label></td>
-                  <td width="5%">
-                    <input name="Sun" onclick="closeDay('Sun');" id="Sun" type="checkbox" class="checkbox-plan" checked="checked" value="1" style="width: 20px;"></td>
-                    <td width="5%" align="center"><strong>A</strong></td>
-                    <td>เปิด</td>
+                      <select style="height: 30px; border: 1px solid #ccc;  border-radius: 2px;" name="time_open_default" id="time_open_default">
+                        <? foreach($time as $value){ 
+                          if($arr[open_mon]->start_m ==$value){
+                            $selected = "selected";
+                          }else{
+                            $selected = "";
+                          }?>
+                          
+                          <option <?=$selected;?> value="<?=$value?>"><?=$value?></option>
+                        <?   } ?> 
+                      </select> น.</td>
+                      <td width="50">ปิด&nbsp;</td>
+                      <td> <select style="height: 30px; border: 1px solid #ccc;  border-radius: 2px;" name="hour_close_default" id="hour_close_default">
+                        <? foreach($hour as $value){ 
+                          if($arr[open_mon]->finish_h==$value){
+                            $selected = "selected";
+                          }else{
+                            $selected = "";
+                          }?>
+                          
+                          <option <?=$selected;?> value="<?=$value?>"><?=$value?></option>
+                        <?   } ?> 
+                      </select> .
+                      <select style="height: 30px; border: 1px solid #ccc;  border-radius: 2px;" name="time_close_default" id="time_close_default">
+                        <? foreach($time as $value){ 
+                          if($arr[open_mon]->finish_m==$value){
+                            $selected = "selected";
+                          }else{
+                            $selected = "";
+                          }?>
+                          
+                          <option <?=$selected;?> value="<?=$value?>"><?=$value?></option>
+                        <?   } ?> 
+                      </select> น.</td>
+                      <td align="right"><button type="button" class="btn btn-md btn-info" id="default_time"><strong>ค่าเริ่มต้น</strong></button></td>
+                    </tr>
+                  </tbody>
+                </table></td>
+
+              </tr>
+              <tr>
+
+                <td colspan="2"> 
+                 <table width="100%">
+                   <tbody><tr>
+                    <td width="14%"><label style="margin-bottom: -3px;" for="open_time_all">24 ชม. ทุกวัน</label> </td>
+                    <td width="5%"><input type="checkbox" name="open_time_all" id="open_time_all" style="width: 20px;"></td>
+
+                    <td width="14%"><label style="margin-bottom: -3px;" for="open_all">เปิดทุกวัน</label> </td>
+                    <td><input type="checkbox" checked="checked" name="open_all" id="open_all" style="width: 20px;"></td>
+                  </tr>
+                </tbody></table>          
+
+                <table width="100%" style="margin-top: 25px;">
+                  <tbody><tr>
+                    <td width="14%"><label for="open_alway_Sun" style="margin-bottom: -3px;">เปิด 24 ชม.</label></td>
+                    <td><input type="checkbox" name="open_alway_Sun" id="open_alway_Sun" value="1" onclick="eachOpenAlway('Sun');" style="width: 20px;"></td>
+                    <td width="16%" align="center"><label for="Sun" style=" margin-bottom: -3px;">Sun</label></td>
+                    <td width="5%">
+                      <input name="Sun" onclick="closeDay('Sun');" id="Sun" type="checkbox" class="checkbox-plan" checked="checked" value="1" style="width: 20px;"></td>
+                      <td width="5%" align="center"><strong>A</strong></td>
+                      <td>เปิด</td>
+                      <td>
+                       <select style="height: 30px; border: 1px solid #ccc;  border-radius: 2px;" name="hour_open_Sun" id="hour_open_Sun">
+                         <option value="01">01</option>
+
+
+                       </select> .
+                       <select style="height: 30px; border: 1px solid #ccc; border-radius: 2px;" name="time_open_Sun" id="time_open_Sun">
+                         <option value="00" selected="">00</option>
+                         <option value="05">05</option>
+
+                       </select> น.
+                     </td>
+                     <td>ปิด</td>
+                     <td>
+                       <select style="height: 30px; border: 1px solid #ccc;  border-radius: 2px;" name="hour_close_Sun" id="hour_close_Sun">
+                        <option value="01">01</option>
+
+
+
+                      </select> .
+                      <select style="height: 30px; border: 1px solid #ccc;  border-radius: 2px;" name="time_close_Sun" id="time_close_Sun">
+
+                        <option value="00" selected="">00</option>
+
+
+                      </select> น.
+                    </td>
+                    <td><label for="time_other_Sun" style=" margin-bottom: -3px;">เวลาเพิ่มเติม</label></td>
+
+
                     <td>
-                     <select style="height: 30px; border: 1px solid #ccc;  border-radius: 2px;" name="hour_open_Sun" id="hour_open_Sun">
+
+                      <input type="checkbox" value="1" id="time_other_Sun" name="time_other_Sun" onclick="timeOther('Sun');" style="width: 20px;">
+                    </td>
+                  </tr>
+                  <tr id="other_time_Sun" style="display: none;">
+                   <td></td>
+                   <td></td>
+                   <td></td>
+                   <td></td>
+                   <td align="center" bgcolor="#FDFAD5"><strong>B</strong></td>
+                   <td bgcolor="#FDFAD5">เปิด</td>
+                   <td bgcolor="#FDFAD5">
+
+                     <select style="height: 30px; border: 1px solid #ccc;  border-radius: 2px;" name="hour_open_Sun_2" id="hour_open_Sun_2">
                        <option value="01">01</option>
 
 
                      </select> .
-                     <select style="height: 30px; border: 1px solid #ccc; border-radius: 2px;" name="time_open_Sun" id="time_open_Sun">
-                       <option value="00" selected="">00</option>
-                       <option value="05">05</option>
+                     <select style="height: 30px; border: 1px solid #ccc; border-radius: 2px;" name="time_open_Sun_2" id="time_open_Sun_2">
+                       <option value="00">00</option>
+
 
                      </select> น.
                    </td>
-                   <td>ปิด</td>
-                   <td>
-                     <select style="height: 30px; border: 1px solid #ccc;  border-radius: 2px;" name="hour_close_Sun" id="hour_close_Sun">
+                   <td bgcolor="#FDFAD5">ปิด</td>
+                   <td bgcolor="#FDFAD5">
+                     <select style="height: 30px; border: 1px solid #ccc;  border-radius: 2px;" name="hour_close_Sun_2" id="hour_close_Sun_2">
+
                       <option value="01">01</option>
 
 
 
                     </select> .
-                    <select style="height: 30px; border: 1px solid #ccc;  border-radius: 2px;" name="time_close_Sun" id="time_close_Sun">
+                    <select style="height: 30px; border: 1px solid #ccc;  border-radius: 2px;" name="time_close_Sun_2" id="time_close_Sun_2">
+
+                      <option value="00">00</option>
+
+
+
+                    </select> น.
+                  </td>
+                </tr>
+              </tbody></table> 
+
+
+              <table width="100%" style="margin-top: 25px;">
+                <tbody><tr>
+                  <td width="14%"><label for="open_alway_Mon" style="margin-bottom: -3px;">เปิด 24 ชม.</label></td>
+                  <td><input type="checkbox" name="open_alway_Mon" id="open_alway_Mon" value="1" onclick="eachOpenAlway('Mon');" style="width: 20px;"></td>
+                  <td width="16%" align="center"><label for="Mon" style=" margin-bottom: -3px;">Mon</label></td>
+                  <td width="5%">
+                    <input name="Mon" onclick="closeDay('Mon');" id="Mon" type="checkbox" class="checkbox-plan" checked="checked" value="1" style="width: 20px;"></td>
+                    <td width="5%" align="center"><strong>A</strong></td>
+                    <td>เปิด</td>
+                    <td>
+                     <select style="height: 30px; border: 1px solid #ccc;  border-radius: 2px;" name="hour_open_Mon" id="hour_open_Mon">
+                       <option value="01">01</option>
+
+
+                     </select> .
+                     <select style="height: 30px; border: 1px solid #ccc; border-radius: 2px;" name="time_open_Mon" id="time_open_Mon">
+                       <option value="00" selected="">00</option>
+                       <option value="05">05</option>
+
+
+                     </select> น.
+                   </td>
+                   <td>ปิด</td>
+                   <td>
+                     <select style="height: 30px; border: 1px solid #ccc;  border-radius: 2px;" name="hour_close_Mon" id="hour_close_Mon">
+
+                      <option value="01">01</option>
+
+                    </select> .
+                    <select style="height: 30px; border: 1px solid #ccc;  border-radius: 2px;" name="time_close_Mon" id="time_close_Mon">
 
                       <option value="00" selected="">00</option>
 
 
                     </select> น.
                   </td>
-                  <td><label for="time_other_Sun" style=" margin-bottom: -3px;">เวลาเพิ่มเติม</label></td>
+                  <td><label for="time_other_Mon" style=" margin-bottom: -3px;">เวลาเพิ่มเติม</label></td>
 
 
                   <td>
 
-                    <input type="checkbox" value="1" id="time_other_Sun" name="time_other_Sun" onclick="timeOther('Sun');" style="width: 20px;">
+                    <input type="checkbox" value="1" id="time_other_Mon" name="time_other_Mon" onclick="timeOther('Mon');" style="width: 20px;">
                   </td>
                 </tr>
-                <tr id="other_time_Sun" style="display: none;">
+                <tr id="other_time_Mon" style="display: none;">
                  <td></td>
                  <td></td>
                  <td></td>
@@ -454,12 +641,12 @@
                  <td bgcolor="#FDFAD5">เปิด</td>
                  <td bgcolor="#FDFAD5">
 
-                   <select style="height: 30px; border: 1px solid #ccc;  border-radius: 2px;" name="hour_open_Sun_2" id="hour_open_Sun_2">
+                   <select style="height: 30px; border: 1px solid #ccc;  border-radius: 2px;" name="hour_open_Mon_2" id="hour_open_Mon_2">
                      <option value="01">01</option>
 
 
                    </select> .
-                   <select style="height: 30px; border: 1px solid #ccc; border-radius: 2px;" name="time_open_Sun_2" id="time_open_Sun_2">
+                   <select style="height: 30px; border: 1px solid #ccc; border-radius: 2px;" name="time_open_Mon_2" id="time_open_Mon_2">
                      <option value="00">00</option>
 
 
@@ -467,14 +654,13 @@
                  </td>
                  <td bgcolor="#FDFAD5">ปิด</td>
                  <td bgcolor="#FDFAD5">
-                   <select style="height: 30px; border: 1px solid #ccc;  border-radius: 2px;" name="hour_close_Sun_2" id="hour_close_Sun_2">
+                   <select style="height: 30px; border: 1px solid #ccc;  border-radius: 2px;" name="hour_close_Mon_2" id="hour_close_Mon_2">
 
                     <option value="01">01</option>
 
 
-
                   </select> .
-                  <select style="height: 30px; border: 1px solid #ccc;  border-radius: 2px;" name="time_close_Sun_2" id="time_close_Sun_2">
+                  <select style="height: 30px; border: 1px solid #ccc;  border-radius: 2px;" name="time_close_Mon_2" id="time_close_Mon_2">
 
                     <option value="00">00</option>
 
@@ -488,20 +674,20 @@
 
             <table width="100%" style="margin-top: 25px;">
               <tbody><tr>
-                <td width="14%"><label for="open_alway_Mon" style="margin-bottom: -3px;">เปิด 24 ชม.</label></td>
-                <td><input type="checkbox" name="open_alway_Mon" id="open_alway_Mon" value="1" onclick="eachOpenAlway('Mon');" style="width: 20px;"></td>
-                <td width="16%" align="center"><label for="Mon" style=" margin-bottom: -3px;">Mon</label></td>
+                <td width="14%"><label for="open_alway_Tue" style="margin-bottom: -3px;">เปิด 24 ชม.</label></td>
+                <td><input type="checkbox" name="open_alway_Tue" id="open_alway_Tue" value="1" onclick="eachOpenAlway('Tue');" style="width: 20px;"></td>
+                <td width="16%" align="center"><label for="Tue" style=" margin-bottom: -3px;">Tue</label></td>
                 <td width="5%">
-                  <input name="Mon" onclick="closeDay('Mon');" id="Mon" type="checkbox" class="checkbox-plan" checked="checked" value="1" style="width: 20px;"></td>
+                  <input name="Tue" onclick="closeDay('Tue');" id="Tue" type="checkbox" class="checkbox-plan" checked="checked" value="1" style="width: 20px;"></td>
                   <td width="5%" align="center"><strong>A</strong></td>
                   <td>เปิด</td>
                   <td>
-                   <select style="height: 30px; border: 1px solid #ccc;  border-radius: 2px;" name="hour_open_Mon" id="hour_open_Mon">
+                   <select style="height: 30px; border: 1px solid #ccc;  border-radius: 2px;" name="hour_open_Tue" id="hour_open_Tue">
                      <option value="01">01</option>
 
 
                    </select> .
-                   <select style="height: 30px; border: 1px solid #ccc; border-radius: 2px;" name="time_open_Mon" id="time_open_Mon">
+                   <select style="height: 30px; border: 1px solid #ccc; border-radius: 2px;" name="time_open_Tue" id="time_open_Tue">
                      <option value="00" selected="">00</option>
                      <option value="05">05</option>
 
@@ -510,27 +696,30 @@
                  </td>
                  <td>ปิด</td>
                  <td>
-                   <select style="height: 30px; border: 1px solid #ccc;  border-radius: 2px;" name="hour_close_Mon" id="hour_close_Mon">
+                   <select style="height: 30px; border: 1px solid #ccc;  border-radius: 2px;" name="hour_close_Tue" id="hour_close_Tue">
 
                     <option value="01">01</option>
 
+
+
                   </select> .
-                  <select style="height: 30px; border: 1px solid #ccc;  border-radius: 2px;" name="time_close_Mon" id="time_close_Mon">
+                  <select style="height: 30px; border: 1px solid #ccc;  border-radius: 2px;" name="time_close_Tue" id="time_close_Tue">
 
                     <option value="00" selected="">00</option>
 
 
+
                   </select> น.
                 </td>
-                <td><label for="time_other_Mon" style=" margin-bottom: -3px;">เวลาเพิ่มเติม</label></td>
+                <td><label for="time_other_Tue" style=" margin-bottom: -3px;">เวลาเพิ่มเติม</label></td>
 
 
                 <td>
 
-                  <input type="checkbox" value="1" id="time_other_Mon" name="time_other_Mon" onclick="timeOther('Mon');" style="width: 20px;">
+                  <input type="checkbox" value="1" id="time_other_Tue" name="time_other_Tue" onclick="timeOther('Tue');" style="width: 20px;">
                 </td>
               </tr>
-              <tr id="other_time_Mon" style="display: none;">
+              <tr id="other_time_Tue" style="display: none;">
                <td></td>
                <td></td>
                <td></td>
@@ -539,12 +728,12 @@
                <td bgcolor="#FDFAD5">เปิด</td>
                <td bgcolor="#FDFAD5">
 
-                 <select style="height: 30px; border: 1px solid #ccc;  border-radius: 2px;" name="hour_open_Mon_2" id="hour_open_Mon_2">
+                 <select style="height: 30px; border: 1px solid #ccc;  border-radius: 2px;" name="hour_open_Tue_2" id="hour_open_Tue_2">
                    <option value="01">01</option>
 
 
                  </select> .
-                 <select style="height: 30px; border: 1px solid #ccc; border-radius: 2px;" name="time_open_Mon_2" id="time_open_Mon_2">
+                 <select style="height: 30px; border: 1px solid #ccc; border-radius: 2px;" name="time_open_Tue_2" id="time_open_Tue_2">
                    <option value="00">00</option>
 
 
@@ -552,17 +741,16 @@
                </td>
                <td bgcolor="#FDFAD5">ปิด</td>
                <td bgcolor="#FDFAD5">
-                 <select style="height: 30px; border: 1px solid #ccc;  border-radius: 2px;" name="hour_close_Mon_2" id="hour_close_Mon_2">
+                 <select style="height: 30px; border: 1px solid #ccc;  border-radius: 2px;" name="hour_close_Tue_2" id="hour_close_Tue_2">
 
                   <option value="01">01</option>
 
 
+
                 </select> .
-                <select style="height: 30px; border: 1px solid #ccc;  border-radius: 2px;" name="time_close_Mon_2" id="time_close_Mon_2">
+                <select style="height: 30px; border: 1px solid #ccc;  border-radius: 2px;" name="time_close_Tue_2" id="time_close_Tue_2">
 
                   <option value="00">00</option>
-
-
 
                 </select> น.
               </td>
@@ -572,52 +760,49 @@
 
           <table width="100%" style="margin-top: 25px;">
             <tbody><tr>
-              <td width="14%"><label for="open_alway_Tue" style="margin-bottom: -3px;">เปิด 24 ชม.</label></td>
-              <td><input type="checkbox" name="open_alway_Tue" id="open_alway_Tue" value="1" onclick="eachOpenAlway('Tue');" style="width: 20px;"></td>
-              <td width="16%" align="center"><label for="Tue" style=" margin-bottom: -3px;">Tue</label></td>
+              <td width="14%"><label for="open_alway_Wed" style="margin-bottom: -3px;">เปิด 24 ชม.</label></td>
+              <td><input type="checkbox" name="open_alway_Wed" id="open_alway_Wed" value="1" onclick="eachOpenAlway('Wed');" style="width: 20px;"></td>
+              <td width="16%" align="center"><label for="Wed" style=" margin-bottom: -3px;">Wed</label></td>
               <td width="5%">
-                <input name="Tue" onclick="closeDay('Tue');" id="Tue" type="checkbox" class="checkbox-plan" checked="checked" value="1" style="width: 20px;"></td>
+                <input name="Wed" onclick="closeDay('Wed');" id="Wed" type="checkbox" class="checkbox-plan" checked="checked" value="1" style="width: 20px;"></td>
                 <td width="5%" align="center"><strong>A</strong></td>
                 <td>เปิด</td>
                 <td>
-                 <select style="height: 30px; border: 1px solid #ccc;  border-radius: 2px;" name="hour_open_Tue" id="hour_open_Tue">
+                 <select style="height: 30px; border: 1px solid #ccc;  border-radius: 2px;" name="hour_open_Wed" id="hour_open_Wed">
                    <option value="01">01</option>
 
 
                  </select> .
-                 <select style="height: 30px; border: 1px solid #ccc; border-radius: 2px;" name="time_open_Tue" id="time_open_Tue">
+                 <select style="height: 30px; border: 1px solid #ccc; border-radius: 2px;" name="time_open_Wed" id="time_open_Wed">
                    <option value="00" selected="">00</option>
-                   <option value="05">05</option>
 
 
                  </select> น.
                </td>
                <td>ปิด</td>
                <td>
-                 <select style="height: 30px; border: 1px solid #ccc;  border-radius: 2px;" name="hour_close_Tue" id="hour_close_Tue">
+                 <select style="height: 30px; border: 1px solid #ccc;  border-radius: 2px;" name="hour_close_Wed" id="hour_close_Wed">
 
                   <option value="01">01</option>
 
 
-
                 </select> .
-                <select style="height: 30px; border: 1px solid #ccc;  border-radius: 2px;" name="time_close_Tue" id="time_close_Tue">
+                <select style="height: 30px; border: 1px solid #ccc;  border-radius: 2px;" name="time_close_Wed" id="time_close_Wed">
 
                   <option value="00" selected="">00</option>
 
 
-
                 </select> น.
               </td>
-              <td><label for="time_other_Tue" style=" margin-bottom: -3px;">เวลาเพิ่มเติม</label></td>
+              <td><label for="time_other_Wed" style=" margin-bottom: -3px;">เวลาเพิ่มเติม</label></td>
 
 
               <td>
 
-                <input type="checkbox" value="1" id="time_other_Tue" name="time_other_Tue" onclick="timeOther('Tue');" style="width: 20px;">
+                <input type="checkbox" value="1" id="time_other_Wed" name="time_other_Wed" onclick="timeOther('Wed');" style="width: 20px;">
               </td>
             </tr>
-            <tr id="other_time_Tue" style="display: none;">
+            <tr id="other_time_Wed" style="display: none;">
              <td></td>
              <td></td>
              <td></td>
@@ -626,12 +811,12 @@
              <td bgcolor="#FDFAD5">เปิด</td>
              <td bgcolor="#FDFAD5">
 
-               <select style="height: 30px; border: 1px solid #ccc;  border-radius: 2px;" name="hour_open_Tue_2" id="hour_open_Tue_2">
+               <select style="height: 30px; border: 1px solid #ccc;  border-radius: 2px;" name="hour_open_Wed_2" id="hour_open_Wed_2">
                  <option value="01">01</option>
 
 
                </select> .
-               <select style="height: 30px; border: 1px solid #ccc; border-radius: 2px;" name="time_open_Tue_2" id="time_open_Tue_2">
+               <select style="height: 30px; border: 1px solid #ccc; border-radius: 2px;" name="time_open_Wed_2" id="time_open_Wed_2">
                  <option value="00">00</option>
 
 
@@ -639,16 +824,16 @@
              </td>
              <td bgcolor="#FDFAD5">ปิด</td>
              <td bgcolor="#FDFAD5">
-               <select style="height: 30px; border: 1px solid #ccc;  border-radius: 2px;" name="hour_close_Tue_2" id="hour_close_Tue_2">
+               <select style="height: 30px; border: 1px solid #ccc;  border-radius: 2px;" name="hour_close_Wed_2" id="hour_close_Wed_2">
 
                 <option value="01">01</option>
 
 
-
               </select> .
-              <select style="height: 30px; border: 1px solid #ccc;  border-radius: 2px;" name="time_close_Tue_2" id="time_close_Tue_2">
+              <select style="height: 30px; border: 1px solid #ccc;  border-radius: 2px;" name="time_close_Wed_2" id="time_close_Wed_2">
 
                 <option value="00">00</option>
+
 
               </select> น.
             </td>
@@ -658,20 +843,20 @@
 
         <table width="100%" style="margin-top: 25px;">
           <tbody><tr>
-            <td width="14%"><label for="open_alway_Wed" style="margin-bottom: -3px;">เปิด 24 ชม.</label></td>
-            <td><input type="checkbox" name="open_alway_Wed" id="open_alway_Wed" value="1" onclick="eachOpenAlway('Wed');" style="width: 20px;"></td>
-            <td width="16%" align="center"><label for="Wed" style=" margin-bottom: -3px;">Wed</label></td>
+            <td width="14%"><label for="open_alway_Thu" style="margin-bottom: -3px;">เปิด 24 ชม.</label></td>
+            <td><input type="checkbox" name="open_alway_Thu" id="open_alway_Thu" value="1" onclick="eachOpenAlway('Thu');" style="width: 20px;"></td>
+            <td width="16%" align="center"><label for="Thu" style=" margin-bottom: -3px;">Thu</label></td>
             <td width="5%">
-              <input name="Wed" onclick="closeDay('Wed');" id="Wed" type="checkbox" class="checkbox-plan" checked="checked" value="1" style="width: 20px;"></td>
+              <input name="Thu" onclick="closeDay('Thu');" id="Thu" type="checkbox" class="checkbox-plan" checked="checked" value="1" style="width: 20px;"></td>
               <td width="5%" align="center"><strong>A</strong></td>
               <td>เปิด</td>
               <td>
-               <select style="height: 30px; border: 1px solid #ccc;  border-radius: 2px;" name="hour_open_Wed" id="hour_open_Wed">
+               <select style="height: 30px; border: 1px solid #ccc;  border-radius: 2px;" name="hour_open_Thu" id="hour_open_Thu">
                  <option value="01">01</option>
 
 
                </select> .
-               <select style="height: 30px; border: 1px solid #ccc; border-radius: 2px;" name="time_open_Wed" id="time_open_Wed">
+               <select style="height: 30px; border: 1px solid #ccc; border-radius: 2px;" name="time_open_Thu" id="time_open_Thu">
                  <option value="00" selected="">00</option>
 
 
@@ -679,28 +864,29 @@
              </td>
              <td>ปิด</td>
              <td>
-               <select style="height: 30px; border: 1px solid #ccc;  border-radius: 2px;" name="hour_close_Wed" id="hour_close_Wed">
+               <select style="height: 30px; border: 1px solid #ccc;  border-radius: 2px;" name="hour_close_Thu" id="hour_close_Thu">
 
                 <option value="01">01</option>
 
 
               </select> .
-              <select style="height: 30px; border: 1px solid #ccc;  border-radius: 2px;" name="time_close_Wed" id="time_close_Wed">
+              <select style="height: 30px; border: 1px solid #ccc;  border-radius: 2px;" name="time_close_Thu" id="time_close_Thu">
 
                 <option value="00" selected="">00</option>
 
 
+
               </select> น.
             </td>
-            <td><label for="time_other_Wed" style=" margin-bottom: -3px;">เวลาเพิ่มเติม</label></td>
+            <td><label for="time_other_Thu" style=" margin-bottom: -3px;">เวลาเพิ่มเติม</label></td>
 
 
             <td>
 
-              <input type="checkbox" value="1" id="time_other_Wed" name="time_other_Wed" onclick="timeOther('Wed');" style="width: 20px;">
+              <input type="checkbox" value="1" id="time_other_Thu" name="time_other_Thu" onclick="timeOther('Thu');" style="width: 20px;">
             </td>
           </tr>
-          <tr id="other_time_Wed" style="display: none;">
+          <tr id="other_time_Thu" style="display: none;">
            <td></td>
            <td></td>
            <td></td>
@@ -709,12 +895,12 @@
            <td bgcolor="#FDFAD5">เปิด</td>
            <td bgcolor="#FDFAD5">
 
-             <select style="height: 30px; border: 1px solid #ccc;  border-radius: 2px;" name="hour_open_Wed_2" id="hour_open_Wed_2">
+             <select style="height: 30px; border: 1px solid #ccc;  border-radius: 2px;" name="hour_open_Thu_2" id="hour_open_Thu_2">
                <option value="01">01</option>
 
 
              </select> .
-             <select style="height: 30px; border: 1px solid #ccc; border-radius: 2px;" name="time_open_Wed_2" id="time_open_Wed_2">
+             <select style="height: 30px; border: 1px solid #ccc; border-radius: 2px;" name="time_open_Thu_2" id="time_open_Thu_2">
                <option value="00">00</option>
 
 
@@ -722,13 +908,14 @@
            </td>
            <td bgcolor="#FDFAD5">ปิด</td>
            <td bgcolor="#FDFAD5">
-             <select style="height: 30px; border: 1px solid #ccc;  border-radius: 2px;" name="hour_close_Wed_2" id="hour_close_Wed_2">
+             <select style="height: 30px; border: 1px solid #ccc;  border-radius: 2px;" name="hour_close_Thu_2" id="hour_close_Thu_2">
 
               <option value="01">01</option>
 
 
+
             </select> .
-            <select style="height: 30px; border: 1px solid #ccc;  border-radius: 2px;" name="time_close_Wed_2" id="time_close_Wed_2">
+            <select style="height: 30px; border: 1px solid #ccc;  border-radius: 2px;" name="time_close_Thu_2" id="time_close_Thu_2">
 
               <option value="00">00</option>
 
@@ -741,20 +928,20 @@
 
       <table width="100%" style="margin-top: 25px;">
         <tbody><tr>
-          <td width="14%"><label for="open_alway_Thu" style="margin-bottom: -3px;">เปิด 24 ชม.</label></td>
-          <td><input type="checkbox" name="open_alway_Thu" id="open_alway_Thu" value="1" onclick="eachOpenAlway('Thu');" style="width: 20px;"></td>
-          <td width="16%" align="center"><label for="Thu" style=" margin-bottom: -3px;">Thu</label></td>
+          <td width="14%"><label for="open_alway_Fri" style="margin-bottom: -3px;">เปิด 24 ชม.</label></td>
+          <td><input type="checkbox" name="open_alway_Fri" id="open_alway_Fri" value="1" onclick="eachOpenAlway('Fri');" style="width: 20px;"></td>
+          <td width="16%" align="center"><label for="Fri" style=" margin-bottom: -3px;">Fri</label></td>
           <td width="5%">
-            <input name="Thu" onclick="closeDay('Thu');" id="Thu" type="checkbox" class="checkbox-plan" checked="checked" value="1" style="width: 20px;"></td>
+            <input name="Fri" onclick="closeDay('Fri');" id="Fri" type="checkbox" class="checkbox-plan" checked="checked" value="1" style="width: 20px;"></td>
             <td width="5%" align="center"><strong>A</strong></td>
             <td>เปิด</td>
             <td>
-             <select style="height: 30px; border: 1px solid #ccc;  border-radius: 2px;" name="hour_open_Thu" id="hour_open_Thu">
+             <select style="height: 30px; border: 1px solid #ccc;  border-radius: 2px;" name="hour_open_Fri" id="hour_open_Fri">
                <option value="01">01</option>
 
 
              </select> .
-             <select style="height: 30px; border: 1px solid #ccc; border-radius: 2px;" name="time_open_Thu" id="time_open_Thu">
+             <select style="height: 30px; border: 1px solid #ccc; border-radius: 2px;" name="time_open_Fri" id="time_open_Fri">
                <option value="00" selected="">00</option>
 
 
@@ -762,13 +949,13 @@
            </td>
            <td>ปิด</td>
            <td>
-             <select style="height: 30px; border: 1px solid #ccc;  border-radius: 2px;" name="hour_close_Thu" id="hour_close_Thu">
+             <select style="height: 30px; border: 1px solid #ccc;  border-radius: 2px;" name="hour_close_Fri" id="hour_close_Fri">
 
               <option value="01">01</option>
 
 
             </select> .
-            <select style="height: 30px; border: 1px solid #ccc;  border-radius: 2px;" name="time_close_Thu" id="time_close_Thu">
+            <select style="height: 30px; border: 1px solid #ccc;  border-radius: 2px;" name="time_close_Fri" id="time_close_Fri">
 
               <option value="00" selected="">00</option>
 
@@ -776,15 +963,15 @@
 
             </select> น.
           </td>
-          <td><label for="time_other_Thu" style=" margin-bottom: -3px;">เวลาเพิ่มเติม</label></td>
+          <td><label for="time_other_Fri" style=" margin-bottom: -3px;">เวลาเพิ่มเติม</label></td>
 
 
           <td>
 
-            <input type="checkbox" value="1" id="time_other_Thu" name="time_other_Thu" onclick="timeOther('Thu');" style="width: 20px;">
+            <input type="checkbox" value="1" id="time_other_Fri" name="time_other_Fri" onclick="timeOther('Fri');" style="width: 20px;">
           </td>
         </tr>
-        <tr id="other_time_Thu" style="display: none;">
+        <tr id="other_time_Fri" style="display: none;">
          <td></td>
          <td></td>
          <td></td>
@@ -793,12 +980,12 @@
          <td bgcolor="#FDFAD5">เปิด</td>
          <td bgcolor="#FDFAD5">
 
-           <select style="height: 30px; border: 1px solid #ccc;  border-radius: 2px;" name="hour_open_Thu_2" id="hour_open_Thu_2">
+           <select style="height: 30px; border: 1px solid #ccc;  border-radius: 2px;" name="hour_open_Fri_2" id="hour_open_Fri_2">
              <option value="01">01</option>
 
 
            </select> .
-           <select style="height: 30px; border: 1px solid #ccc; border-radius: 2px;" name="time_open_Thu_2" id="time_open_Thu_2">
+           <select style="height: 30px; border: 1px solid #ccc; border-radius: 2px;" name="time_open_Fri_2" id="time_open_Fri_2">
              <option value="00">00</option>
 
 
@@ -806,16 +993,17 @@
          </td>
          <td bgcolor="#FDFAD5">ปิด</td>
          <td bgcolor="#FDFAD5">
-           <select style="height: 30px; border: 1px solid #ccc;  border-radius: 2px;" name="hour_close_Thu_2" id="hour_close_Thu_2">
+           <select style="height: 30px; border: 1px solid #ccc;  border-radius: 2px;" name="hour_close_Fri_2" id="hour_close_Fri_2">
 
             <option value="01">01</option>
 
 
 
           </select> .
-          <select style="height: 30px; border: 1px solid #ccc;  border-radius: 2px;" name="time_close_Thu_2" id="time_close_Thu_2">
+          <select style="height: 30px; border: 1px solid #ccc;  border-radius: 2px;" name="time_close_Fri_2" id="time_close_Fri_2">
 
             <option value="00">00</option>
+
 
 
           </select> น.
@@ -826,20 +1014,20 @@
 
     <table width="100%" style="margin-top: 25px;">
       <tbody><tr>
-        <td width="14%"><label for="open_alway_Fri" style="margin-bottom: -3px;">เปิด 24 ชม.</label></td>
-        <td><input type="checkbox" name="open_alway_Fri" id="open_alway_Fri" value="1" onclick="eachOpenAlway('Fri');" style="width: 20px;"></td>
-        <td width="16%" align="center"><label for="Fri" style=" margin-bottom: -3px;">Fri</label></td>
+        <td width="14%"><label for="open_alway_Sat" style="margin-bottom: -3px;">เปิด 24 ชม.</label></td>
+        <td><input type="checkbox" name="open_alway_Sat" id="open_alway_Sat" value="1" onclick="eachOpenAlway('Sat');" style="width: 20px;"></td>
+        <td width="16%" align="center"><label for="Sat" style=" margin-bottom: -3px;">Sat</label></td>
         <td width="5%">
-          <input name="Fri" onclick="closeDay('Fri');" id="Fri" type="checkbox" class="checkbox-plan" checked="checked" value="1" style="width: 20px;"></td>
+          <input name="Sat" onclick="closeDay('Sat');" id="Sat" type="checkbox" class="checkbox-plan" checked="checked" value="1" style="width: 20px;"></td>
           <td width="5%" align="center"><strong>A</strong></td>
           <td>เปิด</td>
           <td>
-           <select style="height: 30px; border: 1px solid #ccc;  border-radius: 2px;" name="hour_open_Fri" id="hour_open_Fri">
+           <select style="height: 30px; border: 1px solid #ccc;  border-radius: 2px;" name="hour_open_Sat" id="hour_open_Sat">
              <option value="01">01</option>
 
 
            </select> .
-           <select style="height: 30px; border: 1px solid #ccc; border-radius: 2px;" name="time_open_Fri" id="time_open_Fri">
+           <select style="height: 30px; border: 1px solid #ccc; border-radius: 2px;" name="time_open_Sat" id="time_open_Sat">
              <option value="00" selected="">00</option>
 
 
@@ -847,13 +1035,13 @@
          </td>
          <td>ปิด</td>
          <td>
-           <select style="height: 30px; border: 1px solid #ccc;  border-radius: 2px;" name="hour_close_Fri" id="hour_close_Fri">
+           <select style="height: 30px; border: 1px solid #ccc;  border-radius: 2px;" name="hour_close_Sat" id="hour_close_Sat">
 
             <option value="01">01</option>
 
 
           </select> .
-          <select style="height: 30px; border: 1px solid #ccc;  border-radius: 2px;" name="time_close_Fri" id="time_close_Fri">
+          <select style="height: 30px; border: 1px solid #ccc;  border-radius: 2px;" name="time_close_Sat" id="time_close_Sat">
 
             <option value="00" selected="">00</option>
 
@@ -861,15 +1049,15 @@
 
           </select> น.
         </td>
-        <td><label for="time_other_Fri" style=" margin-bottom: -3px;">เวลาเพิ่มเติม</label></td>
+        <td><label for="time_other_Sat" style=" margin-bottom: -3px;">เวลาเพิ่มเติม</label></td>
 
 
         <td>
 
-          <input type="checkbox" value="1" id="time_other_Fri" name="time_other_Fri" onclick="timeOther('Fri');" style="width: 20px;">
+          <input type="checkbox" value="1" id="time_other_Sat" name="time_other_Sat" onclick="timeOther('Sat');" style="width: 20px;">
         </td>
       </tr>
-      <tr id="other_time_Fri" style="display: none;">
+      <tr id="other_time_Sat" style="display: none;">
        <td></td>
        <td></td>
        <td></td>
@@ -878,12 +1066,12 @@
        <td bgcolor="#FDFAD5">เปิด</td>
        <td bgcolor="#FDFAD5">
 
-         <select style="height: 30px; border: 1px solid #ccc;  border-radius: 2px;" name="hour_open_Fri_2" id="hour_open_Fri_2">
+         <select style="height: 30px; border: 1px solid #ccc;  border-radius: 2px;" name="hour_open_Sat_2" id="hour_open_Sat_2">
            <option value="01">01</option>
 
 
          </select> .
-         <select style="height: 30px; border: 1px solid #ccc; border-radius: 2px;" name="time_open_Fri_2" id="time_open_Fri_2">
+         <select style="height: 30px; border: 1px solid #ccc; border-radius: 2px;" name="time_open_Sat_2" id="time_open_Sat_2">
            <option value="00">00</option>
 
 
@@ -891,14 +1079,14 @@
        </td>
        <td bgcolor="#FDFAD5">ปิด</td>
        <td bgcolor="#FDFAD5">
-         <select style="height: 30px; border: 1px solid #ccc;  border-radius: 2px;" name="hour_close_Fri_2" id="hour_close_Fri_2">
+         <select style="height: 30px; border: 1px solid #ccc;  border-radius: 2px;" name="hour_close_Sat_2" id="hour_close_Sat_2">
 
           <option value="01">01</option>
 
 
 
         </select> .
-        <select style="height: 30px; border: 1px solid #ccc;  border-radius: 2px;" name="time_close_Fri_2" id="time_close_Fri_2">
+        <select style="height: 30px; border: 1px solid #ccc;  border-radius: 2px;" name="time_close_Sat_2" id="time_close_Sat_2">
 
           <option value="00">00</option>
 
@@ -908,92 +1096,6 @@
       </td>
     </tr>
   </tbody></table> 
-
-
-  <table width="100%" style="margin-top: 25px;">
-    <tbody><tr>
-      <td width="14%"><label for="open_alway_Sat" style="margin-bottom: -3px;">เปิด 24 ชม.</label></td>
-      <td><input type="checkbox" name="open_alway_Sat" id="open_alway_Sat" value="1" onclick="eachOpenAlway('Sat');" style="width: 20px;"></td>
-      <td width="16%" align="center"><label for="Sat" style=" margin-bottom: -3px;">Sat</label></td>
-      <td width="5%">
-        <input name="Sat" onclick="closeDay('Sat');" id="Sat" type="checkbox" class="checkbox-plan" checked="checked" value="1" style="width: 20px;"></td>
-        <td width="5%" align="center"><strong>A</strong></td>
-        <td>เปิด</td>
-        <td>
-         <select style="height: 30px; border: 1px solid #ccc;  border-radius: 2px;" name="hour_open_Sat" id="hour_open_Sat">
-           <option value="01">01</option>
-
-
-         </select> .
-         <select style="height: 30px; border: 1px solid #ccc; border-radius: 2px;" name="time_open_Sat" id="time_open_Sat">
-           <option value="00" selected="">00</option>
-
-
-         </select> น.
-       </td>
-       <td>ปิด</td>
-       <td>
-         <select style="height: 30px; border: 1px solid #ccc;  border-radius: 2px;" name="hour_close_Sat" id="hour_close_Sat">
-
-          <option value="01">01</option>
-
-
-        </select> .
-        <select style="height: 30px; border: 1px solid #ccc;  border-radius: 2px;" name="time_close_Sat" id="time_close_Sat">
-
-          <option value="00" selected="">00</option>
-
-
-
-        </select> น.
-      </td>
-      <td><label for="time_other_Sat" style=" margin-bottom: -3px;">เวลาเพิ่มเติม</label></td>
-
-
-      <td>
-
-        <input type="checkbox" value="1" id="time_other_Sat" name="time_other_Sat" onclick="timeOther('Sat');" style="width: 20px;">
-      </td>
-    </tr>
-    <tr id="other_time_Sat" style="display: none;">
-     <td></td>
-     <td></td>
-     <td></td>
-     <td></td>
-     <td align="center" bgcolor="#FDFAD5"><strong>B</strong></td>
-     <td bgcolor="#FDFAD5">เปิด</td>
-     <td bgcolor="#FDFAD5">
-
-       <select style="height: 30px; border: 1px solid #ccc;  border-radius: 2px;" name="hour_open_Sat_2" id="hour_open_Sat_2">
-         <option value="01">01</option>
-
-
-       </select> .
-       <select style="height: 30px; border: 1px solid #ccc; border-radius: 2px;" name="time_open_Sat_2" id="time_open_Sat_2">
-         <option value="00">00</option>
-
-
-       </select> น.
-     </td>
-     <td bgcolor="#FDFAD5">ปิด</td>
-     <td bgcolor="#FDFAD5">
-       <select style="height: 30px; border: 1px solid #ccc;  border-radius: 2px;" name="hour_close_Sat_2" id="hour_close_Sat_2">
-
-        <option value="01">01</option>
-
-
-
-      </select> .
-      <select style="height: 30px; border: 1px solid #ccc;  border-radius: 2px;" name="time_close_Sat_2" id="time_close_Sat_2">
-
-        <option value="00">00</option>
-
-
-
-      </select> น.
-    </td>
-  </tr>
-</tbody></table> 
 
 
 </td>

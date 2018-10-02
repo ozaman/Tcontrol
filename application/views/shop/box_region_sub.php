@@ -20,21 +20,10 @@
 		</div> -->
 		<div class="form-group form-group-md">			
 			<div class="col-md-11">
-				 <div class="input-group" >
-                                        <span class="input-group-addon">เลือกสัญชาติ</span>
-
-				<select name="select_country" class="form-control" id="select_country" onchange="change_region_sub(this.value)">
-					<option value="">- เลือกสัญชาติ -</option>
-					<?php
-					foreach($country as $key=>$val3){
-						if ($val3->id != $val2->i_country) {
-							?>
-							<option value="<?=$key;?>" ><?=$val3->name_th;?></option>
-							<?php
-						}
-					} ?>
-				</select>
-				</div>
+				
+					<div id="box_select_region_icon"></div>
+					
+				<!-- </div> -->
 			</div>
 			<div class="col-md-1">
 				<button type="button" class="btn btn-primary btn-md" id="btn_region_sub5" onclick="save_region_sub()">
@@ -50,15 +39,20 @@
 	</div>
 	<div class="box-outlined" style=" padding: 15px">
 		<div class="form-group ">
-			<!-- <div class="col-md-12">
-				<label class="control-label">ประเภทค่าตอบแทน</label>
-			</div> -->
-			<div class="col-md-11">
+
+			<div class="col-md-12">
 				<div id="box_price_plan">
 					
 				</div>
 				
 			</div>
+			<!-- <div class="col-md-1"> -->
+				<!-- <label class="control-label">ประเภทค่าตอบแทน</label> -->
+				<!-- <div class="col-md-12" > -->
+					<!-- <div class="row"> -->
+						
+				<!-- </div> -->
+			<!-- </div> -->
 		</div>
 		<div class="form-group ">
 			<div class="col-md-12">
@@ -67,7 +61,7 @@
 			</div>
 			<div class="col-md-12">
 				<div id="box_plan_comision" style="padding: 15px;">
-				
+
 
 				</div>
 			</div>
@@ -111,6 +105,7 @@
 				},
 				success: function(res) {
 					// console.log(res);
+					 $('#btn_save_price_plann').show();
 					$('#box_plan_com').html(res)
 
 				}
@@ -120,7 +115,7 @@
 		}
 		box_plan_comision();
 		function box_plan_comision() {
-		var url = base_url+ "shop/box_plan_comision";
+			var url = base_url+ "shop/box_plan_comision";
 			var param = {
 				country_id: '<?=$_POST[country_id];?>'
 			}
@@ -142,7 +137,7 @@
 		}
 		box_region_icon();
 		function box_region_icon() {
-		var url = base_url+ "shop/box_region_icon";
+			var url = base_url+ "shop/box_region_icon";
 			var param = {
 				country_id: '<?=$_POST[country_id];?>'
 			}
@@ -165,7 +160,7 @@
 		}
 		box_price_plan()
 		function box_price_plan() {
-		var url = base_url+ "shop/box_price_plan";
+			var url = base_url+ "shop/box_price_plan";
 			var param = {
 				country_id: '<?=$_POST[country_id];?>'
 			}
@@ -180,6 +175,29 @@
 				success: function(res) {
 					// console.log(res);
 					$('#box_price_plan').html(res)
+
+				}
+
+
+			});
+		}
+		box_select_region_icon()
+		function box_select_region_icon() {
+			var url = base_url+ "shop/box_select_region_icon";
+			var param = {
+				country_id: '<?=$_POST[country_id];?>'
+			}
+			console.log(param)
+			$.ajax({
+				url: url,
+				data: param,
+				type: 'post',
+				error: function() {
+					console.log('Error Profile');
+				},
+				success: function(res) {
+					// console.log(res);
+					$('#box_select_region_icon').html(res)
 
 				}
 

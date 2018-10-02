@@ -10,8 +10,8 @@ $data['region_icon'] = $this->Main_model->fetch_data('','',TBL_SHOP_COUNTRY_ICON
 foreach($data['region_icon'] as $key=>$val){
 	?>
 	<div class="col-md-4">
-		<button type="button" class="btn btn-xs btn-danger btn-equal" data-toggle="modal" data-target="#deleteModal" onclick="firstDelete('สัญชาติ <?=$val->s_topic_th;?>','<?=$val->id;?>','<?=TBL_SHOP_COUNTRY_ICON;?>')"><i class="fa fa-trash-o"></i></button>
-		<img src="<?=base_url();?>assets/img/flag/icon/<?=$val->s_country_code;?>.png">
+		<button type="button" class="btn btn-md btn-danger btn-equal" data-toggle="modal" data-target="#deleteModal" onclick="firstDelete('สัญชาติ <?=$val->s_topic_th;?>','<?=$val->id;?>','<?=TBL_SHOP_COUNTRY_ICON;?>')"><i class="fa fa-trash-o"></i></button>
+		<img class="img-region" src="<?=base_url();?>assets/img/flag/icon/<?=$val->s_country_code;?>.png">
 
 		<span style="font-size: 16px">
 			<?=$val->s_topic_th;?>

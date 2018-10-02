@@ -77,7 +77,7 @@
 									?>
 									<div class="col-md-12">
 										<div class="col-md-3">
-											<img src="<?=base_url();?>assets/img/flag/icon/<?=$val3->s_country_code;?>.png">
+											<img class="img-region" src="<?=base_url();?>assets/img/flag/icon/<?=$val3->s_country_code;?>.png">
 											<span style="font-size: 16px">
 												<?=$val3->s_topic_th;?>
 											</span>
@@ -122,7 +122,7 @@
 									?>
 									<div class="col-md-12">
 										<div class="col-md-3">
-											<img src="<?=base_url();?>assets/img/flag/icon/<?=$val3->s_country_code;?>.png">
+											<img class="img-region" src="<?=base_url();?>assets/img/flag/icon/<?=$val3->s_country_code;?>.png">
 											<span style="font-size: 16px">
 												<?=$val3->s_topic_th;?>
 											</span>
@@ -167,7 +167,7 @@
 									?>
 									<div class="col-md-12">
 										<div class="col-md-3">
-											<img src="<?=base_url();?>assets/img/flag/icon/<?=$val3->s_country_code;?>.png">
+											<img class="img-region" src="<?=base_url();?>assets/img/flag/icon/<?=$val3->s_country_code;?>.png">
 											<span style="font-size: 16px">
 												<?=$val3->s_topic_th;?>
 											</span>
