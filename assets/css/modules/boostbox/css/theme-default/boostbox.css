@@ -4171,6 +4171,7 @@ li.dropdown-progress .progress {
   background-color: #ffffff;
   background-image: none;
   color: #333333;
+  border-radius: 5px;
 }
 .box-loader {
   display: block;

@@ -15,7 +15,9 @@
 	<div class="box box-outlined">
 		<div class="box-head">
 			<div class="box-body">
+				<a href="<?=base_url();?>shop/shop_manage?state=add">
 				<button class="btn btn-primary" data-toggle="modal" data-target="#formModal"><span><i class="fa fa-plus"></i> </span>เพิ่มร้านค้า</button>
+			</a>
 			</div>
 			
 			<!-- <header><h4 class="text-light">Table <strong>Basic</strong></h4></header> -->
@@ -54,7 +56,7 @@
 					?>
 					<tr>
 						<td><?=$key+1;?></td>
-						<td><a href="<?=base_url();?>shop/shop_manage?id=<?=$val->id;?>">
+						<td><a href="<?=base_url();?>shop/shop_manage?state=edit&id=<?=$val->id;?>">
 								<button onclick="//manage_shop_ordertype('<?=$val->id;?>')" type="button" class="btn btn-xs btn-primary btn-equal" data-toggle="tooltip" data-placement="top" data-original-title="แก้ไข"><i class="fa fa-search-plus" ></i></i></button></a>
 							</td>
 						<!-- <td>

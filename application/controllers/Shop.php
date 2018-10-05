@@ -272,6 +272,9 @@ class Shop extends CI_Controller {
 	public function box_plan_comision(){
 		$this->load->view('shop/box_plan_comision');
 	}
+	public function box_plan_time(){
+		$this->load->view('shop/box_plan_time');
+	}
 	public function box_region_icon(){
 		$this->load->view('shop/box_region_icon');
 	}
@@ -290,7 +293,7 @@ class Shop extends CI_Controller {
 	public function box_region_show(){
 
 		$_where = array();
-		$_where['i_shop'] = 1;
+		$_where['i_shop'] = $_POST[id];
       	// $_where['i_shop'] = 1;
       	// $_where['i_status'] = 1;
 		$_select = array('*');
@@ -305,6 +308,15 @@ class Shop extends CI_Controller {
 		$data = $this->Shop_model->save_edit_com();
 		echo json_encode($data);
 	}
+	public function submit_data_plan_time(){
+		$data = $this->Shop_model->submit_data_plan_time();
+		echo json_encode($data);
+		
+		
+		}
+		
+		
+	
 
 }
 

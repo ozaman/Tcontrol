@@ -1,5 +1,6 @@
 <ol class="breadcrumb">
 	<li class="head_title"><a class="head_title">จัดการร้านค้า</a></li>
+	<li class="head_title_sub" href="<?=base_url();?>shop/data_shop_categorie">หมวดหมู่ทั้งหมด  </li>
 	<li class="head_title_sub"><a class="head_title_sub">ช้อปปิ้งทั้งหมด</a></li>
 	<li class="head_title_sub_2" style="display: none;"><a class="head_title_sub_2"></a></li>
 	<li class="head_title_sub_3" style="display: none;" ><a class="head_title_sub_3"></a></li>
@@ -16,7 +17,9 @@
 					<div class="box-head">
 						<div class="box-body" style="padding-bottom: 0">
 							<a href="<?=base_url();?>shop/data_shop_categorie"><button class="btn " ><span><i class="fa fa-chevron-left" ></i> </span>กลับ</button></a>
+							<a href="<?=base_url();?>shop/shop_manage?type=<?=$_GET[id];?>">
 							<button class="btn btn-success" data-toggle="modal" data-target="#formModal"><span><i class="fa fa-plus"></i> </span>เพิ่มร้านค้า</button>
+						</a>
 						</div>
 
 						<!-- <header><h4 class="text-light">Table <strong>Basic</strong></h4></header> -->

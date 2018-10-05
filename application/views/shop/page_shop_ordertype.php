@@ -16,7 +16,9 @@
 					<div class="box-head">
 						<div class="box-body" style="padding-bottom: 0">
 							<!-- <button class="btn " onclick="get_categories_sub('<?=$_POST[id];?>')"><span><i class="fa fa-chevron-left" ></i> </span>กลับ</button> -->
+							<a href="<?=base_url();?>shop/shop_manage?sub=<?=$_GET[id];?>&state=add">
 							<button class="btn btn-success" data-toggle="modal" data-target="#formModal"><span><i class="fa fa-plus"></i> </span>เพิ่มร้านค้า</button>
+							</a>
 						</div>
 						
 						<!-- <header><h4 class="text-light">Table <strong>Basic</strong></h4></header> -->
@@ -65,7 +67,7 @@
 							<button type="button" class="btn btn-xs btn-default btn-equal" onclick="edit_shop_ordertype('<?=$val->id;?>')"><i class="fa fa-pencil"></i></button>
 						</td> -->
 						<td>
-							<a href="<?=base_url();?>shop/shop_manage?id=<?=$val->id;?>">
+							<a href="<?=base_url();?>shop/shop_manage?sub=<?=$_GET[id];?>&id=<?=$val->id;?>">
 								<button type="button" class="btn btn-xs btn-primary btn-equal" onclick="//manage_shop_ordertype('<?=$val->id;?>')"><i class="fa fa-search-plus" ></i></button>
 							</a>
 						</td>

@@ -1,5 +1,6 @@
 // callinit();
-var param_plan_price;
+var param_plan_price,
+day, obj_day;
 // shop('categorie')
 
 function get_shop_all() {
@@ -12,13 +13,14 @@ function get_shop_all() {
 
     // $('.head_title_sub_4').hide()
 
-    var url = base_url+ "shop/data_shop_all";
-    $.post(url,function(ele){
-        $('#body_page_call').html(ele);
+    var url = base_url + "shop/data_shop_all";
+    $.post(url, function(ele) {
+      $('#body_page_call').html(ele);
     });
 
-}
-function get_categories_sub(item){
+  }
+
+  function get_categories_sub(item) {
     // $('.head_title').html('จัดการร้านค้า')
     // $('.head_title_sub').html('หมวดหมู่ทั้งหมด')
     // $('.head_title_sub_2').show()
@@ -26,26 +28,27 @@ function get_categories_sub(item){
     // $('.head_title_sub_3').hide()
     // $('.head_title_sub_4').hide()
 
-    var url = base_url+ "shop/categorie_sub";
+    var url = base_url + "shop/categorie_sub";
     var param = {
-        id: item
+      id: item
     }
 
     $.ajax({
-        url: url,
-        data: param,
-        type: 'post',
-        error: function() {
-            console.log('Error Profile');
-        },
-        success: function(ele) {
-            console.log('Success Profile');
-            $('#body_page_call').html(ele);
+      url: url,
+      data: param,
+      type: 'post',
+      error: function() {
+        console.log('Error Profile');
+      },
+      success: function(ele) {
+        console.log('Success Profile');
+        $('#body_page_call').html(ele);
 
-        }
+      }
     });
-}
-function get_shop_ordertype(item) {
+  }
+
+  function get_shop_ordertype(item) {
     // $('.head_title').html('จัดการร้านค้า')
     // $('.head_title_sub').html('หมวดหมู่ทั้งหมด')
     // $('.head_title_sub_2').show()
@@ -54,221 +57,229 @@ function get_shop_ordertype(item) {
     // $('.head_title_sub_4').hide()
 
     // $('.head_title_sub_3').html('ร้านช้อปปิ้งทั้งหมด')
-    var url = base_url+ "shop/shop_ordertype";
+    var url = base_url + "shop/shop_ordertype";
     var param = {
-        id: item
+      id: item
     }
 
     $.ajax({
-        url: url,
-        data: param,
-        type: 'post',
-        error: function() {
-            console.log('Error Profile');
-        },
-        success: function(ele) {
-            console.log('Success Profile');
-            $('#body_page_call').html(ele);
-
-        }
-    });
-}
-
-function manage_shop_ordertype(item) {
-   // $('.head_title').html('จัดการร้านค้า')
-   // $('.head_title_sub').html('หมวดหมู่ทั้งหมด')
-   // $('.head_title_sub_2').show()
-   // $('.head_title_sub_2').html('ช้อปปิ้งทั้งหมด ')
-   // $('.head_title_sub_3').show()
-   // $('.head_title_sub_4').show()
-   // $('.head_title_sub_3').html('ร้านช้อปปิ้งทั้งหมด')
-   // $('.head_title_sub_4').html('จัดการร้านช้อปปิ้ง')
-   var url = base_url+"shop/shop_manage";
-   var param = {
-    id: item
-}
-
-$.ajax({
-    url: url,
-    data: param,
-    type: 'post',
-    error: function() {
+      url: url,
+      data: param,
+      type: 'post',
+      error: function() {
         console.log('Error Profile');
-    },
-    success: function(ele) {
+      },
+      success: function(ele) {
         console.log('Success Profile');
         $('#body_page_call').html(ele);
 
+      }
+    });
+  }
+
+  function manage_shop_ordertype(item) {
+    // $('.head_title').html('จัดการร้านค้า')
+    // $('.head_title_sub').html('หมวดหมู่ทั้งหมด')
+    // $('.head_title_sub_2').show()
+    // $('.head_title_sub_2').html('ช้อปปิ้งทั้งหมด ')
+    // $('.head_title_sub_3').show()
+    // $('.head_title_sub_4').show()
+    // $('.head_title_sub_3').html('ร้านช้อปปิ้งทั้งหมด')
+    // $('.head_title_sub_4').html('จัดการร้านช้อปปิ้ง')
+    var url = base_url + "shop/shop_manage";
+    var param = {
+      id: item
     }
-});
-}
-function open_commision(id) {
+
+    $.ajax({
+      url: url,
+      data: param,
+      type: 'post',
+      error: function() {
+        console.log('Error Profile');
+      },
+      success: function(ele) {
+        console.log('Success Profile');
+        $('#body_page_call').html(ele);
+
+      }
+    });
+  }
+
+  function open_commision(id) {
     // body...
     $('#modal_custom').show()
     commision(id)
-}
-function commision(item) {
+  }
+
+  function commision(item) {
     // alert('aaaaaa')
     // $('#modal_custom').show()
-   // $('.head_title').html('จัดการร้านค้า')
-   //  $('.head_title_sub').html('หมวดหมู่ทั้งหมด')
-   //  $('.head_title_sub_2').show()
-   //  $('.head_title_sub_2').html('ช้อปปิ้งทั้งหมด ')
-   //  $('.head_title_sub_3').show()
-   //  $('.head_title_sub_4').show()
-   //  $('.head_title_sub_3').html('ร้านช้อปปิ้งทั้งหมด')
-   //  $('.head_title_sub_4').html('จัดการร้านช้อปปิ้ง')
-   var url = base_url+ "shop/shop_manage_com";
-   var param = {
-    id: item
-}
-console.log(url)
+    // $('.head_title').html('จัดการร้านค้า')
+    //  $('.head_title_sub').html('หมวดหมู่ทั้งหมด')
+    //  $('.head_title_sub_2').show()
+    //  $('.head_title_sub_2').html('ช้อปปิ้งทั้งหมด ')
+    //  $('.head_title_sub_3').show()
+    //  $('.head_title_sub_4').show()
+    //  $('.head_title_sub_3').html('ร้านช้อปปิ้งทั้งหมด')
+    //  $('.head_title_sub_4').html('จัดการร้านช้อปปิ้ง')
+    var url = base_url + "shop/shop_manage_com";
+    var param = {
+      id: item
+    }
+    console.log(url)
 
-$.ajax({
-    url: url,
-    data: param,
-    type: 'post',
-    error: function() {
+    $.ajax({
+      url: url,
+      data: param,
+      type: 'post',
+      error: function() {
         console.log('Error Profile');
-    },
-    success: function(ele) {
+      },
+      success: function(ele) {
         console.log('Success Profile');
         $('#dody_modal_custom').html(ele);
 
-    }
-});
-}
-function box_region_show(item) {
+      }
+    });
+  }
+
+  function box_region_show(item) {
+    console.log(item)
     // alert('aaaaaa')
     // $('#modal_custom').show()
-   // $('.head_title').html('จัดการร้านค้า')
-   //  $('.head_title_sub').html('หมวดหมู่ทั้งหมด')
-   //  $('.head_title_sub_2').show()
-   //  $('.head_title_sub_2').html('ช้อปปิ้งทั้งหมด ')
-   //  $('.head_title_sub_3').show()
-   //  $('.head_title_sub_4').show()
-   //  $('.head_title_sub_3').html('ร้านช้อปปิ้งทั้งหมด')
-   //  $('.head_title_sub_4').html('จัดการร้านช้อปปิ้ง')
-   var url = base_url+ "shop/box_region_show";
-   var param = {
-    id: item
-}
-console.log(url)
-
-$.ajax({
-    url: url,
-    data: param,
-    type: 'post',
-    error: function() {
-        console.log('Error Profile');
-    },
-    success: function(ele) {
-        // console.log('Success Profile');
-        $('#box_region_show').html(ele);
-
+    // $('.head_title').html('จัดการร้านค้า')
+    //  $('.head_title_sub').html('หมวดหมู่ทั้งหมด')
+    //  $('.head_title_sub_2').show()
+    //  $('.head_title_sub_2').html('ช้อปปิ้งทั้งหมด ')
+    //  $('.head_title_sub_3').show()
+    //  $('.head_title_sub_4').show()
+    //  $('.head_title_sub_3').html('ร้านช้อปปิ้งทั้งหมด')
+    //  $('.head_title_sub_4').html('จัดการร้านช้อปปิ้ง')
+    var url = base_url + "shop/box_region_show";
+    var param = {
+      id: item
     }
-});
-}
-function submit_region(item) {
-    console.log(param)
-    var url = base_url+ "shop/add_region";
+    console.log(url)
+
     $.ajax({
-        url: url,
-        data: param,
-        type: 'post',
-        error: function() {
+      url: url,
+      data: param,
+      type: 'post',
+      error: function() {
+        console.log('Error Profile');
+      },
+      success: function(ele) {
+            // console.log('Success Profile');
+            $('#box_region_show').html(ele);
+
+          }
+        });
+  }
+
+  function submit_region(item) {
+    console.log(param)
+    var url = base_url + "shop/add_region";
+    $.ajax({
+      url: url,
+      data: param,
+      type: 'post',
+      error: function() {
+        console.log('Error Profile');
+      },
+      success: function(res) {
+        console.log(res);
+        var url2 = base_url + "shop/get_region";
+        var param = {
+          i_shop: item
+        }
+        console.log(url2)
+        $.ajax({
+          url: url2,
+          data: param,
+          type: 'post',
+          error: function() {
             console.log('Error Profile');
-        },
-        success: function(res) {
-            console.log(res);
-            var url2 = base_url+ "shop/get_region";
-            var param = {
-                i_shop: item
-            }
-            console.log(url2)
-            $.ajax({
-                url: url2,
-                data: param,
-                type: 'post',
-                error: function() {
-                    console.log('Error Profile');
-                },
-                success: function(ele) {
+          },
+          success: function(ele) {
                     // console.log(ele);
                     $('#box_com_add').html(ele);
 
-                }
-            });
+                  }
+                });
 
-        }
+      }
     });
-}
-function submit_region_sub(id) {
+  }
+
+  function submit_region_sub(id) {
     $('#modal_custom_2').show()
     $('#title_add_region_sub').html('เพ่ิมสัญชาติ')
-    var url = base_url+ "shop/get_region_sub";
+    var url = base_url + "shop/get_region_sub";
     var param = {
-        country_id: id
+      country_id: id
     }
     // console.log(country)
     console.log(id)
     $.ajax({
-        url: url,
-        data: param,
-        type: 'post',
-        error: function() {
-            console.log('Error Profile');
-        },
-        success: function(ele) {
-                   // console.log(ele);
-                   $('#dody_modal_custom_2').html(ele);
-                   $('#id_country').val(id);
-                    // $('#btn_region_sub'+id).attr('onclick','save_region_sub('+id+')');
+      url: url,
+      data: param,
+      type: 'post',
+      error: function() {
+        console.log('Error Profile');
+      },
+      success: function(ele) {
+            // console.log(ele);
+            $('#dody_modal_custom_2').html(ele);
+            $('#id_country').val(id);
+            // $('#btn_region_sub'+id).attr('onclick','save_region_sub('+id+')');
 
-                }
-            });
+          }
+        });
 
 
-}
-function close_modal_custom(opt){
+  }
+
+  function close_modal_custom(opt) {
     console.log(opt)
     if (opt == 'shop_manage') {
-        $('#modal_custom').hide(500)
+      $('#modal_custom').hide(500)
     }
     if (opt == 'shop_manage_sub') {
-        $('#modal_custom_2').hide(500)
+      $('#modal_custom_2').hide(500)
     }
     if (opt == 'plan_price') {
-        $('#modal_custom_3').hide(500)
+      $('#modal_custom_3').hide(500)
     }
 
-}
-function save_region_sub() {
-    var url = base_url+ "shop/add_region_sub";
+  }
+
+  function save_region_sub() {
+    var url = base_url + "shop/add_region_sub";
     // console.log(shop)
     // console.log(id_shop_country)
     param.i_shop = $('#id_shop_product').val();
-    param.id_shop_country =  $('#id_country').val();
+    param.id_shop_country = $('#id_country').val();
     console.log(param)
     $.ajax({
-        url: url,
-        data: param,
-        type: 'post',
-        error: function() {
-            console.log('Error Profile');
-        },
-        success: function(ele) {
-           // console.log(ele);
-           commision($('#manage_com').val())
-           box_region_icon()
-           box_select_region_icon()
-                    // $('.box_sub_region'+id).html(ele);
-                    // $('#btn_region_sub'+id).attr('onclick','save_region_sub('+shop+','+id_shop_country+')');
+      url: url,
+      data: param,
+      type: 'post',
+      error: function() {
+        console.log('Error Profile');
+      },
+      success: function(ele) {
+            // console.log(ele);
+            commision($('#manage_com').val())
+            box_region_icon()
+            box_select_region_icon()
+            // $('.box_sub_region'+id).html(ele);
+            // $('#btn_region_sub'+id).attr('onclick','save_region_sub('+shop+','+id_shop_country+')');
 
-                }
-            });
+          }
+        });
     // body...
-}
+  }
 // function save_plan_price() {
 //     var url = base_url+ "shop/add_plan_price";
 //     // console.log(shop)
@@ -314,86 +325,86 @@ function save_region_sub() {
 // }
 
 function save_plan_price() {
-    var url = base_url+ "shop/save_plan_price";
-    console.log($('#plan_com_price').serialize())
-    $.ajax({
-        url: url,
-        data: $('#plan_com_price').serialize(),
-        type: 'post',
-        error: function() {
-            console.log('Error Profile');
-        },
-        success: function(res) {
-            console.log(res)
-            if (res == '') {
-               Command: toastr["warning"]("กรุณาเลือกช่องทางการจ่ายเงิน")
-           }
-           else{
-             $('#btn_save_price_plann').hide();
-              commision($('#manage_com').val())
-              $('#box_plan_com').html('');
-              box_plan_comision();
-              box_price_plan();  
-          }
-
-
-
+  var url = base_url + "shop/save_plan_price";
+  console.log($('#plan_com_price').serialize())
+  $.ajax({
+    url: url,
+    data: $('#plan_com_price').serialize(),
+    type: 'post',
+    error: function() {
+      console.log('Error Profile');
+    },
+    success: function(res) {
+      console.log(res)
+      if (res == '') {
+        Command: toastr["warning"]("กรุณาเลือกช่องทางการจ่ายเงิน")
       }
+      else {
+        $('#btn_save_price_plann').hide();
+        commision($('#manage_com').val())
+        $('#box_plan_com').html('');
+        box_plan_comision();
+        box_price_plan();
+      }
+
+
+
+    }
   });
 }
 
 
 function get_plan_price_sub(id) {
-    console.log(id)
-    $('#modal_custom_3').show();
-    var url = base_url+ "shop/get_plan_price_sub";
+  console.log(id)
+  $('#modal_custom_3').show();
+  var url = base_url + "shop/get_plan_price_sub";
     // console.log(shop)
     // console.log(id_shop_country)
     var param = {
-        i_shop_country_com: id,
-        i_shop_country:$('#id_country').val()
+      i_shop_country_com: id,
+      i_shop_country: $('#id_country').val()
     }
-                // $('#i_shop_country_com').val(id)
+    // $('#i_shop_country_com').val(id)
     // param.i_shop_country_com = $('#id_shop_product').val();
     // param.id_shop_country =  $('#id_country').val();
     console.log(param)
     $.ajax({
-        url: url,
-        data: param,
-        type: 'post',
-        error: function() {
-            console.log('Error Profile');
-        },
-        success: function(ele) {
-         //console.log(ele);
-         $('#dody_modal_custom_3').html(ele);
-                    // $('#btn_region_sub'+id).attr('onclick','save_region_sub('+shop+','+id_shop_country+')');
+      url: url,
+      data: param,
+      type: 'post',
+      error: function() {
+        console.log('Error Profile');
+      },
+      success: function(ele) {
+            //console.log(ele);
+            $('#dody_modal_custom_3').html(ele);
+            // $('#btn_region_sub'+id).attr('onclick','save_region_sub('+shop+','+id_shop_country+')');
 
-                }
-            });
+          }
+        });
     // body...
-}
+  }
 
 
 
 
-function save_plan_price_sub(id) {
-    var url = base_url+"shop/add_plan_price_sub";
+  function save_plan_price_sub(id) {
+    var url = base_url + "shop/add_plan_price_sub";
     // console.log(shop)
     // console.log(id_shop_country)
-    
+
     console.log(param_plan_price)
-     // param_plan_price.i_shop_country_com = id;
-     $.ajax({
-        url: url,
-        data: param_plan_price,
-        type: 'post',
-        error: function() {
-            console.log('Error Profile');
-        },
-        success: function(res) {
-            console.log(res);
-            param_plan_price = ''
+    // param_plan_price.i_shop_country_com = id;
+    $.ajax({
+      url: url,
+      data: param_plan_price,
+      type: 'post',
+      error: function() {
+        console.log('Error Profile');
+      },
+      success: function(res) {
+        console.log(res);
+        param_plan_price = ''
             // if (res == true) {
             //      var url = "shop/get_region_sub";
             //     var param = {
@@ -414,185 +425,530 @@ function save_plan_price_sub(id) {
             //      }
             //  });
             // }
-        }
+          }
 
-    });
+        });
     // body...
-}
-function updateStatus(id,status,table) {
-   var url = base_url + "shop/updateStatus";
+  }
+
+  function updateStatus(id, status, table) {
+    var url = base_url + "shop/updateStatus";
     // console.log(shop)
     // console.log(id_shop_country)
     var param = {
-        id: id,
-        tbl:table,
-        status:status
+      id: id,
+      tbl: table,
+      status: status
     }
-                // $('#i_shop_country_com').val(id)
+    // $('#i_shop_country_com').val(id)
     // param.i_shop_country_com = $('#id_shop_product').val();
     // param.id_shop_country =  $('#id_country').val();
     console.log(param)
     $.ajax({
-        url: url,
-        data: param,
-        type: 'post',
-        error: function() {
-            console.log('Error Profile');
-        },
-        success: function(res) {
-         console.log(res);
-         if (status ==1) {
-             Command: toastr["warning"]("ปิดบริการแล้ว")
-             if (table == 'shop_country') {
-               $('#btn_status'+id).removeClass('btn-success')
-               $('#btn_status'+id).addClass('btn-warning')
-               $('#btn_status'+id).html('ปิด');
-               $('#btn_status'+id).attr("onclick","updateStatus('"+id+"','0','"+table+"')");
-           }
-           else{
+      url: url,
+      data: param,
+      type: 'post',
+      error: function() {
+        console.log('Error Profile');
+      },
+      success: function(res) {
+        console.log(res);
+        if (status == 1) {
+          Command: toastr["warning"]("ปิดบริการแล้ว")
+          if (table == 'shop_country') {
+            $('#btn_status' + id).removeClass('btn-success')
+            $('#btn_status' + id).addClass('btn-warning')
+            $('#btn_status' + id).html('ปิด');
+            $('#btn_status' + id).attr("onclick", "updateStatus('" + id + "','0','" + table + "')");
+          } else {
 
-            $('#span_status'+id).removeClass('text-success')
-            $('#span_status'+id).addClass('text-danger')
-            $('#span_status'+id).html('ปิด');
-            $('#span_status'+id).attr("onclick","updateStatus('"+id+"','0','"+table+"')");
+            $('#span_status' + id).removeClass('text-success')
+            $('#span_status' + id).addClass('text-danger')
+            $('#span_status' + id).html('ปิด');
+            $('#span_status' + id).attr("onclick", "updateStatus('" + id + "','0','" + table + "')");
+          }
+
+        }
+        else {
+          Command: toastr["success"]("เปิดบริการแล้ว")
+          if (table == 'shop_country') {
+            $('#btn_status' + id).addClass('btn-success')
+            $('#btn_status' + id).removeClass('btn-warning')
+
+            $('#btn_status' + id).html('เปิด');
+            $('#btn_status' + id).attr("onclick", "updateStatus('" + id + "','1','" + table + "')");
+          } else {
+            $('#span_status' + id).addClass('text-success')
+            $('#span_status' + id).removeClass('text-danger')
+            $('#span_status' + id).html('เปิด');
+            $('#span_status' + id).attr("onclick", "updateStatus('" + id + "','1','" + table + "')");
+          }
+
+
         }
 
-    }
-    else {
-     Command: toastr["success"]("เปิดบริการแล้ว")
-     if (table == 'shop_country') {
-        $('#btn_status'+id).addClass('btn-success')
-        $('#btn_status'+id).removeClass('btn-warning')
-
-        $('#btn_status'+id).html('เปิด');
-        $('#btn_status'+id).attr("onclick","updateStatus('"+id+"','1','"+table+"')");
-    }
-    else{
-        $('#span_status'+id).addClass('text-success')
-        $('#span_status'+id).removeClass('text-danger')
-        $('#span_status'+id).html('เปิด');
-        $('#span_status'+id).attr("onclick","updateStatus('"+id+"','1','"+table+"')");
-    }
+        toastr.options = {
+          "closeButton": true,
+          "debug": false,
+          "positionClass": "toast-top-right",
+          "onclick": null,
+          "showDuration": "1000",
+          "hideDuration": "1000",
+          "timeOut": "5000",
+          "extendedTimeOut": "1000",
+          "showEasing": "swing",
+          "hideEasing": "linear",
+          "showMethod": "fadeIn",
+          "hideMethod": "fadeOut"
+        }
 
 
-}
+      }
+    });
+  }
+  var topic_delete, id_delete, table_delete;
 
-toastr.options = {
-  "closeButton": true,
-  "debug": false,
-  "positionClass": "toast-top-right",
-  "onclick": null,
-  "showDuration": "1000",
-  "hideDuration": "1000",
-  "timeOut": "5000",
-  "extendedTimeOut": "1000",
-  "showEasing": "swing",
-  "hideEasing": "linear",
-  "showMethod": "fadeIn",
-  "hideMethod": "fadeOut"
-}
+  function firstDelete(topic, id, table) {
+    $('#span_title_delete').html(topic);
+    $('#id_item_delete').val(id)
+    topic_delete = topic;
+    id_delete = id;
+    table_delete = table;
+    console.log(topic_delete)
+    console.log(id_delete)
+    console.log(table_delete)
+  }
 
-
-}    
-});
-}
-var topic_delete,id_delete,table_delete;
-function firstDelete(topic,id,table) {
- $('#span_title_delete').html(topic);
- $('#id_item_delete').val(id)
- topic_delete = topic;
- id_delete = id;
- table_delete = table;
- console.log(topic_delete)
- console.log(id_delete)
- console.log(table_delete)
-}
-function finalDelete() {
-    var url = base_url+"shop/delete";
+  function finalDelete() {
+    var url = base_url + "shop/delete";
     var param = {
-        id: id_delete,
-        tbl:table_delete
+      id: id_delete,
+      tbl: table_delete
     }
     console.log(param)
     $.ajax({
-        url: url,
-        data: param,
-        type: 'post',
-        error: function() {
-            console.log('Error Profile');
-        },
-        success: function(res) {
-            console.log(res);
-            if (table_delete == 'shop_country_icon' || table_delete == 'shop_country_com_list') {
-                commision($('#manage_com').val())
-                box_plan_comision();
-                box_region_icon();
-            }
-            else{
-                box_region_icon();
-                box_plan_comision();
-            }
-            
+      url: url,
+      data: param,
+      type: 'post',
+      error: function() {
+        console.log('Error Profile');
+      },
+      success: function(res) {
+        console.log(res);
+        if (table_delete == 'shop_country_icon' || table_delete == 'shop_country_com_list') {
+          commision($('#manage_com').val())
+          box_plan_comision();
+          box_region_icon();
+        } else {
+          box_region_icon();
+          box_plan_comision();
         }
 
+      }
+
     });
-}
-function cal_map(id) {
-   var url = base_url+ "shop/get_shop_map";
-   var param = {
-    id: id
-}
-
-$.ajax({
-    url: url,
-    data: param,
-    type: 'post',
-    error: function() {
-      console.log('Error Profile');
-  },
-  success: function(ele) {
-      console.log('Success Profile');
-      $('#map_frame').html(ele);
-
   }
-});
-}
-function edit_plan_com_price(id){
+
+  function cal_map(id) {
+    var url = base_url + "shop/get_shop_map";
+    var param = {
+      id: id
+    }
+
+    $.ajax({
+      url: url,
+      data: param,
+      type: 'post',
+      error: function() {
+        console.log('Error Profile');
+      },
+      success: function(ele) {
+        console.log('Success Profile');
+        $('#map_frame').html(ele);
+
+      }
+    });
+  }
+
+  function edit_plan_com_price(id) {
     console.log(id)
 
     $('.btn_show_hide').addClass('hide')
     $('.btn_show_hide').removeClass('show')
-    $('#btn_'+id).addClass('show')
-            // $(".input_"+id).prop('disabled', true);
-            $(".input_"+id).prop('disabled', false);
-            // $('#btn_'+id).removeClass('hide')
-        }
-        function save_edit_com(id){
-            console.log(id)
-            
-            // $('#btn_'+id).removeClass('hide')
-            var url = base_url+ "shop/save_edit_com?i_shop_country_com_list="+id;
-            console.log($('#edit_plan_com_price'+id).serialize())
-            $.ajax({
-                url: url,
-                data: $('#edit_plan_com_price'+id).serialize(),
-                type: 'post',
-                error: function() {
-                  console.log('Error Profile');
-              },
-              success: function(res) {
-                  console.log(res);
-                  box_plan_comision();
-                  commision($('#manage_com').val())
-                  box_price_plan();
-                  $('.btn_show_hide').addClass('hide')
-                  $('.btn_show_hide').removeClass('show')
-                  $('#btn_'+id).hide()
-            // $(".input_"+id).prop('disabled', true);
-            $(".input_"+id).prop('disabled', true);
-                  //$('#map_frame').html(ele);
+    $('#btn_' + id).addClass('show')
 
-              }
+    $(".input_" + id).prop('disabled', false);
+
+  }
+
+  function save_edit_com(id) {
+    console.log(id)
+
+
+    var url = base_url + "shop/save_edit_com?i_shop_country_com_list=" + id;
+    console.log($('#edit_plan_com_price' + id).serialize())
+    $.ajax({
+      url: url,
+      data: $('#edit_plan_com_price' + id).serialize(),
+      type: 'post',
+      error: function() {
+        console.log('Error Profile');
+      },
+      success: function(res) {
+        console.log(res);
+        box_plan_comision();
+        commision($('#manage_com').val())
+        box_price_plan();
+        $('.btn_show_hide').addClass('hide')
+        $('.btn_show_hide').removeClass('show')
+        $('#btn_' + id).hide()
+
+        $(".input_" + id).prop('disabled', true);
+
+
+      }
+    });
+  }
+
+  function submit_data_plan_time(id,op) {
+    // console.log($('#myform_main').serialize());
+    var url = base_url + "shop/submit_data_plan_time?shop_id=" + id + '&op='+op;
+    $.ajax({
+      url: url,
+      data: $('#myform_main').serialize(),
+      type: 'post',
+        // contentType: "application/json; charset=utf-8",
+        dataType: 'json',
+        error: function() {
+          console.log('Error Profile');
+        },
+        success: function(res) {
+          console.log(res);
+
+          var url = base_url + "shop/box_plan_time?id="+id;
+          console.log(url)
+          $.post(url, function(ele) {
+            // console.log(ele)
+            $('#box_plan_time').html(ele);
           });
         }
+      });
+  }
 
+  function timeOther(day) {
+    if ($('#time_other_all').prop("checked") === false) {
+        //    $.each(obj_day, function( index, value ) {
+        // console.log('#other_time_'+value)
+        // console.log($('#other_time_'+value).prop("checked"))
+        //                   if($('#other_time_'+value).prop("checked") === true) {
+        //                    console.log('bbbb')
+        //                    // $('#time_other_'+value).click();
+        //                    $('#other_time_'+value).show();
+        //                  }
+        //                  });
+    }
+    if ($('#time_other_' + day).prop("checked") === false) {
+        $('#other_time_' + day).show();
+        console.log('#other_time_' + day)
+
+        var hour_main = $('#hour_open_' + day).val();
+        var time_main = $('#time_open_' + day).val();
+    } else {
+       $('#time_other_' + day).prop( "checked", true );
+        $('#other_time_' + day).hide();
+    }
+  }
+
+    function time_other_all() {
+      console.log($('#time_other_all').is(":checked"))
+    console.log(obj_day)
+    if ($('#time_other_all').prop("checked") === false) {
+        $('#row_time_other').show();
+        $.each(obj_day, function(index, value) {
+            //                   
+            if (!$('#time_other_' + value).is(":checked")) {
+                $('#time_other_' + value).click();
+                $('#time_other_' + value).prop( "checked", true );
+                // $('#time_other_' + day).prop("checked",true)
+                $('#other_time_' + value).show();
+            }
+        });
+    } else {
+        $('#row_time_other').hide();
+        $.each(obj_day, function(index, value) {
+
+            // $('#time_other_all').prop('checked', false);
+            if ($('#time_other_' + value).is(":checked") === true) {
+              $('#time_other_' + value).prop( "checked", false );
+                $('#time_other_' + value).click();
+            }
+        });
+    }
+  }
+
+  function open_time_all() {
+    // body...
+
+    // console.log($('#open_time_all').prop("checked"))
+
+    var hour_open_default = $('#hour_open_default').val();
+    var time_open_default = $('#time_open_default').val();
+    var hour_close_default = $('#hour_close_default').val();
+    var time_close_default = $('#time_close_default').val();
+    if ($('#open_time_all').prop("checked") === false) {
+
+
+      $.each(obj_day, function(index, value) {
+
+        if (!$('#open_alway_' + value).is(":checked")) {
+          $('#open_alway_' + value).click();
+          $('#open_alway_' + value).prop("checked", true)
+        }
+
+            // $('#open_alway_'+value).click();
+
+            // $('#open_alway_'+value).prop('checked', true);
+
+            $('#hour_open_' + value).val('24');
+            $('#time_open_' + value).val('00');
+
+            $('#hour_close_' + value).val('24');
+            $('#time_close_' + value).val('00');
+
+            $('#hour_open_' + value).attr("disabled", true);
+            $('#hour_open_' + value).css("background-color", '#ddd');
+            $('#time_open_' + value).attr("disabled", true);
+            $('#time_open_' + value).css("background-color", '#ddd');
+
+            $('#hour_close_' + value).attr("disabled", true);
+            $('#hour_close_' + value).css("background-color", '#ddd');
+            $('#time_close_' + value).attr("disabled", true);
+            $('#time_close_' + value).css("background-color", '#ddd');
+          });
+    } else {
+      $.each(obj_day, function(index, value) {
+        if ($('#open_alway_' + value).prop("checked")) {
+                // alert('aaaa')
+                $('#open_alway_' + value).click();
+                $('#open_alway_' + value).prop("checked", false)
+              }
+            //$('#open_alway_'+value).prop('checked', false);
+
+            $('#hour_open_' + value).val(hour_open_default);
+            $('#time_open_' + value).val(time_open_default);
+
+            $('#hour_close_' + value).val(hour_close_default);
+            $('#time_close_' + value).val(time_close_default);
+
+            $('#hour_open_' + value).attr("disabled", false);
+            $('#hour_open_' + value).css("background-color", '#fff');
+            $('#time_open_' + value).attr("disabled", false);
+            $('#time_open_' + value).css("background-color", '#fff');
+
+            $('#hour_close_' + value).attr("disabled", false);
+            $('#hour_close_' + value).css("background-color", '#fff');
+            $('#time_close_' + value).attr("disabled", false);
+            $('#time_close_' + value).css("background-color", '#fff');
+          });
+    }
+    $('#open_time_all').val($(this).is(':checked'));
+  }
+
+  function eachOpenAlway(day) {
+    if ($('#open_alway_' + day).is(":checked")) {
+
+      $('#hour_open_' + day).val('24');
+      $('#time_open_' + day).val('00');
+
+      $('#hour_close_' + day).val('24');
+      $('#time_close_' + day).val('00');
+
+      $('#hour_open_' + day).attr("disabled", true);
+      $('#hour_open_' + day).css("background-color", '#ddd');
+      $('#time_open_' + day).attr("disabled", true);
+      $('#time_open_' + day).css("background-color", '#ddd');
+
+      $('#hour_close_' + day).attr("disabled", true);
+      $('#hour_close_' + day).css("background-color", '#ddd');
+      $('#time_close_' + day).attr("disabled", true);
+      $('#time_close_' + day).css("background-color", '#ddd');
+    } else {
+      var hour_open_default = $('#hour_open_default').val();
+      var time_open_default = $('#time_open_default').val();
+
+      var hour_close_default = $('#hour_close_default').val();
+      var time_close_default = $('#time_close_default').val();
+      $('#hour_open_' + day).val(hour_open_default);
+      $('#time_open_' + day).val(time_open_default);
+
+      $('#hour_close_' + day).val(hour_close_default);
+      $('#time_close_' + day).val(time_close_default);
+
+      $('#hour_open_' + day).attr("disabled", false);
+      $('#hour_open_' + day).css("background-color", '#fff');
+      $('#time_open_' + day).attr("disabled", false);
+      $('#time_open_' + day).css("background-color", '#fff');
+
+      $('#hour_close_' + day).attr("disabled", false);
+      $('#hour_close_' + day).css("background-color", '#fff');
+      $('#time_close_' + day).attr("disabled", false);
+      $('#time_close_' + day).css("background-color", '#fff');
+    }
+  }
+
+  function open_all() {
+    console.log($('#open_all').is(":checked"))
+    if ($('#open_all').is(":checked") === false) {
+      $.each(obj_day, function(index, value) {
+        if (!$('#' + value).is(":checked")) {
+          $('#' + value).click();
+          $('#' + value).prop("checked", true)
+        }
+
+        if ($('#open_alway_' + value).is(":checked")) {
+
+        } else {
+          $('#hour_open_' + value).attr("disabled", false);
+          $('#hour_open_' + value).css("background-color", '#fff');
+          $('#time_open_' + value).attr("disabled", false);
+          $('#time_open_' + value).css("background-color", '#fff');
+
+          $('#hour_close_' + value).attr("disabled", false);
+          $('#hour_close_' + value).css("background-color", '#fff');
+          $('#time_close_' + value).attr("disabled", false);
+          $('#time_close_' + value).css("background-color", '#fff');
+        }
+
+      });
+
+    } else {
+      $.each(obj_day, function(index, value) {
+        if ($('#' + value).is(":checked") === true) {
+          $('#' + value).click();
+          $('#' + value).prop("checked", false)
+
+        }
+            // $('#'+value).click();
+            $('#hour_open_' + value).attr("disabled", true);
+            $('#hour_open_' + value).css("background-color", '#ddd');
+            $('#time_open_' + value).attr("disabled", true);
+            $('#time_open_' + value).css("background-color", '#ddd');
+
+            $('#hour_close_' + value).attr("disabled", true);
+            $('#hour_close_' + value).css("background-color", '#ddd');
+            $('#time_close_' + value).attr("disabled", true);
+            $('#time_close_' + value).css("background-color", '#ddd');
+          });
+    }
+  }
+
+  function closeDay(day) {
+         alert(day)
+    if ($('#' + day).is(":checked")) {
+      if ($('#open_alway_' + day).is(":checked")) {
+
+      } else {
+        $('#hour_open_' + day).attr("disabled", false);
+        $('#hour_open_' + day).css("background-color", '#fff');
+        $('#time_open_' + day).attr("disabled", false);
+        $('#time_open_' + day).css("background-color", '#fff');
+
+        $('#hour_close_' + day).attr("disabled", false);
+        $('#hour_close_' + day).css("background-color", '#fff');
+        $('#time_close_' + day).attr("disabled", false);
+        $('#time_close_' + day).css("background-color", '#fff');
+      }
+
+    } else {
+        //        if($('#open_alway_'+day).is(":checked")){
+          $('#hour_open_' + day).attr("disabled", true);
+          $('#hour_open_' + day).css("background-color", '#ddd');
+          $('#time_open_' + day).attr("disabled", true);
+          $('#time_open_' + day).css("background-color", '#ddd');
+
+          $('#hour_close_' + day).attr("disabled", true);
+          $('#hour_close_' + day).css("background-color", '#ddd');
+          $('#time_close_' + day).attr("disabled", true);
+          $('#time_close_' + day).css("background-color", '#ddd');
+        //      }
+
+      }
+    }
+
+    function default_time() {
+      var hour_open_default = $('#hour_open_default').val();
+      var time_open_default = $('#time_open_default').val();
+      var hour_close_default = $('#hour_close_default').val();
+      var time_close_default = $('#time_close_default').val();
+      $.each(obj_day, function(index, value) {
+        if ($('#open_alway_' + value).is(":checked")) {
+
+        } else {
+          $('#hour_open_' + value).val(hour_open_default);
+          $('#time_open_' + value).val(time_open_default);
+
+          $('#hour_close_' + value).val(hour_close_default);
+          $('#time_close_' + value).val(time_close_default);
+        }
+        console.log(value + " : " + hour_open_default);
+
+
+      });
+
+    }
+
+    function default_time_other() {
+      var hour_open_default = $('#hour_open_default_other').val();
+      var time_open_default = $('#time_open_default_other').val();
+      var hour_close_default = $('#hour_close_default_other').val();
+      var time_close_default = $('#time_close_default_other').val();
+      $.each(obj_day, function( index, value ) {
+        if($('#open_alway_'+value).is(":checked")){
+        }else{
+          $('#hour_open_'+value+'_2').val(hour_open_default);
+          $('#time_open_'+value+'_2').val(time_open_default);
+          $('#hour_open_'+value+'_2').css('border-color','#fd0101');
+          $('#time_open_'+value+'_2').css('border-color','#fd0101');
+          $('#hour_close_'+value+'_2').val(hour_close_default);
+          $('#time_close_'+value+'_2').val(time_close_default);
+          $('#hour_close_'+value+'_2').css('border-color','#fd0101');
+          $('#time_close_'+value+'_2').css('border-color','#fd0101');
+          setTimeout(function(){
+            $('#hour_open_'+value+'_2').css('border-color','#ccc');
+            $('#time_open_'+value+'_2').css('border-color','#ccc');
+            $('#hour_close_'+value+'_2').css('border-color','#ccc');
+            $('#time_close_'+value+'_2').css('border-color','#ccc');
+          }, 2000);
+        }
+//                  console.log(value+" : "+hour_open_default);
+});
+    }
+
+   function form_detail_shop(id,op) {
+    console.log($('#form_detail_shop').serialize());
+    var url = base_url + "shop/submit_data_plan_time?shop_id=" + id + '&op='+op;
+    $.ajax({
+      url: url,
+      data: $('#form_detail_shop').serialize(),
+      type: 'post',
+        // contentType: "application/json; charset=utf-8",
+        dataType: 'json',
+        error: function() {
+          console.log('Error Profile');
+        },
+        success: function(res) {
+          console.log(res);
+
+          // var url = base_url + "shop/box_plan_time?id="+id;
+          // console.log(url)
+          // $.post(url, function(ele) {
+          //   // console.log(ele)
+          //   $('#box_plan_time').html(ele);
+          // });
+        }
+      });
+  }
+
+  function select_category(itm) {
+    console.log(itm)
+  }

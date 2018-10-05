@@ -77,6 +77,8 @@ defined('FOPEN_READ_WRITE_CREATE_STRICT')       OR define('FOPEN_READ_WRITE_CREA
 define('TBL_SHOPPING_PRODUCT', 'shopping_product');
 define('TBL_SHOPPING_OPEN_TIME', 'shopping_open_time');
 define('TBL_SHOPPING_CONTACT', 'shopping_contact');
+define('TBL_SHOPPING_CONTACT_TYPE', 'shopping_contact_type');
+
 
 // define('TBL_SHOPPING_OPEN_TIME', 'shopping_open_time');
 

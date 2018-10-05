@@ -1,6 +1,6 @@
 <ol class="breadcrumb">
 	<li class="head_title"><a class="head_title">จัดการร้านค้า</a></li>
-	<li class="head_title_sub"><a class="head_title_sub">ร้านค่าทั้งหมด</a></li>
+	<li class="head_title_sub">หมวดหมู่ทั้งหมด</li>
 	<li class="head_title_sub_2" style="display: none;"><a class="head_title_sub_2"></a></li>
 	<li class="head_title_sub_3" style="display: none;" ><a class="head_title_sub_3"></a></li>
 	<li class="head_title_sub_4" style="display: none;" ><a class="head_title_sub_4"></a></li>
