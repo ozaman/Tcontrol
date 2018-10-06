@@ -1,3 +1,4 @@
+ <form class="form-horizontal form-banded form-bordered"  id="form_shop_all"   >
 <?php 
   if ($_GET[state] == 'add') {
     $shop_page = 'เพิ่มร้านค่า';
@@ -18,11 +19,12 @@
   <!-- <h3 class="text-standard"><i class="fa fa-fw fa-arrow-circle-right text-gray-light"></i><small>ร้านค้าทั้งหมด</small></h3> -->
   <!-- </div> -->
   <div class="section-body ">
+   
     <input type="hidden" name="" id="manage_com" value="<?=$_GET[id];?>">
     <div class="row" id="body_page_call"><div class="col-md-6" >
       <div class="col-lg-12">
         <?php
-        echo $_GET[state].'*************';
+        // echo $_GET[state].'*************';
 
 
 
@@ -64,14 +66,14 @@
         if ($_GET[state] == 'add') {
     $shop_page = 'เพิ่มร้านค่า';
 
-    echo $_GET[sub].'-----'.$arr[sub][0]->main;
-    $chk_disabled = '';
+    // echo $_GET[sub].'-----'.$arr[sub][0]->main;
+    // $chk_disabled = '';
     
     
   }
   else {
     $shop_page = 'แก้ไขร้านค่า';
-    $chk_disabled = 'disabled';
+    // $chk_disabled = 'disabled';
   }
         ?>
         <div class="box box-outlined">
@@ -79,14 +81,15 @@
             <header><h4 class="text-light"><i class="fa fa-pencil fa-fw"></i> ข้อมูลสถานที่ <strong></strong></h4></header>
           </div>
           <div class="box-body no-padding">
-            <form class="form-horizontal form-banded form-bordered"  id="form_detail_shop"   >
+            <!-- <form class="form-horizontal form-banded form-bordered"  id="form_detail_shop"   > -->
               <div class="form-group form-group-md">
                 <div class="col-md-2">
                   <label class="control-label">หมวดหมู่</label>
                 </div>
 
-                <div class="col-md-10">
-                  <select id="select_category" class="form-control" name="main" <?=$chk_disabled;?> onchange="select_category(this)">
+                <div class="col-md-10" >
+                  <select id="select_category" class="form-control" name="main"  onchange="_select_category(this.value);" >
+                    <option value="">เลือกหมวดหมู่ </option>
                     <?php
                 // print_r(json_encode($arr[main]));
                     foreach($arr[main] as $key=>$main){
@@ -108,12 +111,13 @@
                   <label class="control-label">ประเภท</label>
                 </div>
 
-                <div class="col-md-10">
-                  <select id="select_type" class="form-control"  <?=$chk_disabled;?>>
+                <div class="col-md-10" id="data_select_category">
+                  <select id="select_type" class="form-control" name="sub"> <?=$chk_disabled;?> >
+                    <option value="">เลือกประเภท</option>
                    <?php
-                // print_r(json_encode($arr[main]));
+                
                    foreach($arr[sub] as $key=>$sub){
-
+ print_r(json_encode($sub->id));
                     if($shop->sub == $sub->id ){
                       $selected_sub = "selected";
                     }else{
@@ -161,8 +165,8 @@
           </div>
 
           <div class="col-md-10">
-            <select class="form-control" name="region" id="region" >
-              <!-- <option value="">- เลือกภูมิภาค -</option> -->
+            <select class="form-control" name="region" id="region" onclick="_region(this.value)">
+              <option value="">เลือกภูมิภาค </option>
               <?php
                 // print_r(json_encode($arr[main]));
               foreach($arr[region] as $key=>$region){
@@ -185,8 +189,8 @@
           </div>
 
           <div class="col-md-10">
-            <select class="form-control" name="province" id="province" >
-              <!-- <option value="">- เลือกจังหวัด -</option> -->
+            <select class="form-control" name="province" id="province" onchange="_province(this.value);">
+              <option value="">เลือกจังหวัด</option>
               <?php
                 // print_r(json_encode($arr[main]));
               foreach($arr[province] as $key=>$province){
@@ -212,7 +216,7 @@
 
           <div class="col-md-10">
             <select name="select_amphur" class="form-control" id="select_amphur" >
-              <!-- <option value="">- เลือกเขต/อำเภอ -</option> -->
+              <option value="">เลือกเขต/อำเภอ</option>
               <?php
               foreach($arr[amphur] as $key=>$amphur){
 
@@ -302,7 +306,15 @@
   </div>
 
   <div class="col-md-2">
-    <button type="button" class="btn btn-primary btn-md" id="submit_data_1"> <span id="txt_btn_save5" onclick="form_detail_shop('<?=$_GET[id];?>','shop')"> บันทึกข้อมูล </span></button>
+     <?php
+            if ($_GET[state] == 'add') {
+              $btn_none = 'hide';
+            }
+            else{
+             $btn_none = 'show';
+            }
+           ?>
+    <button type="button" class="btn btn-primary btn-md <?=$btn_none;?>" id="submit_data_1" onclick="form_detail_shop('<?=$_GET[id];?>','shop')"> <span id="txt_btn_save5" > บันทึกข้อมูล </span></button>
   </div>
 </div>
 
@@ -340,17 +352,18 @@
               <h4 class="text-light"><i class="fa fa-pencil fa-fw"></i> ประเภทรายจ่าย </h4>
             </div>
             <div class="col-md-4">
-              <button type="button" class="btn btn-success btn-md" onclick="open_commision('<?=$shop->id;?>')"> <span id="txt_btn_save5"> แก้ไขประเภทรายจ่าย </span></button>
+              
+              <button type="button" class="btn btn-success btn-md " onclick="open_commision('<?=$shop->id;?>')"> <span id="txt_btn_save5"> แก้ไขประเภทรายจ่าย </span></button>
             </div>
             
           </div>
           <div class="box-body no-padding">
-            <form class="form-horizontal form-banded form-bordered">
+            <!-- <form class="form-horizontal form-banded form-bordered"> -->
 
             <div class="col-md-12"> 
               <div  id="box_region_show"></div>
             </div>
-            </form>
+            <!-- </form> -->
 
 
           </div>
@@ -432,7 +445,7 @@
         <div class="box-head">
           <header><h4 class="text-light"> เวลาทำการ <strong></strong></h4></header>
         </div>
-         <form class="form-horizontal form-banded form-bordered" action="" name="myform_main"  id="myform_main" method="post">
+         <!-- <form class="form-horizontal form-banded form-bordered" action="" name="myform_main"  id="myform_main" method="post"> -->
           <div class="box-body" style="padding: 10px">
         <div class="form-group form-group-md">
 
@@ -451,11 +464,25 @@
            
 
             <div class="col-md-12">
+              <?php
+            if ($_GET[state] == 'add') {
+             ?>
+              <button type="button" class="btn btn-primary btn-md pull-right" id="submit_data_2" onclick="submit_add_shop()"> <span > บันทึกข้อมูล </span></button>
+             <?php
+
+            }
+            else{
+              ?>
               <button type="button" class="btn btn-primary btn-md pull-right" id="submit_data_2" onclick="submit_data_plan_time('<?=$_GET[id];?>','time')"> <span > บันทึกข้อมูล </span></button>
+              <?php
+              
+            }
+           ?>
+             
             </div>
           </div>
            </div>
-        </form>
+        <!-- </form> -->
 
 
 
@@ -464,12 +491,14 @@
       </div><!--end .box-body -->
     </div><!--end .box -->
   </div>
+   
+  </div>
+  </form>
   <script>
     setTimeout(function(){
      cal_map('<?=$shop->id;?>')
      box_region_show($('#manage_com').val())
    }, 1000);
-
 
 
  </script>

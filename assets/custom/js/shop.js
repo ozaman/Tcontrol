@@ -615,7 +615,7 @@ function get_plan_price_sub(id) {
     var url = base_url + "shop/submit_data_plan_time?shop_id=" + id + '&op='+op;
     $.ajax({
       url: url,
-      data: $('#myform_main').serialize(),
+      data: $('#form_shop_all').serialize(),
       type: 'post',
         // contentType: "application/json; charset=utf-8",
         dataType: 'json',
@@ -646,43 +646,43 @@ function get_plan_price_sub(id) {
         //                    $('#other_time_'+value).show();
         //                  }
         //                  });
-    }
-    if ($('#time_other_' + day).prop("checked") === false) {
+      }
+      if ($('#time_other_' + day).prop("checked") === false) {
         $('#other_time_' + day).show();
         console.log('#other_time_' + day)
 
         var hour_main = $('#hour_open_' + day).val();
         var time_main = $('#time_open_' + day).val();
-    } else {
+      } else {
        $('#time_other_' + day).prop( "checked", true );
-        $('#other_time_' + day).hide();
-    }
-  }
+       $('#other_time_' + day).hide();
+     }
+   }
 
-    function time_other_all() {
-      console.log($('#time_other_all').is(":checked"))
+   function time_other_all() {
+    console.log($('#time_other_all').is(":checked"))
     console.log(obj_day)
     if ($('#time_other_all').prop("checked") === false) {
-        $('#row_time_other').show();
-        $.each(obj_day, function(index, value) {
+      $('#row_time_other').show();
+      $.each(obj_day, function(index, value) {
             //                   
             if (!$('#time_other_' + value).is(":checked")) {
-                $('#time_other_' + value).click();
-                $('#time_other_' + value).prop( "checked", true );
+              $('#time_other_' + value).click();
+              $('#time_other_' + value).prop( "checked", true );
                 // $('#time_other_' + day).prop("checked",true)
                 $('#other_time_' + value).show();
-            }
-        });
+              }
+            });
     } else {
-        $('#row_time_other').hide();
-        $.each(obj_day, function(index, value) {
+      $('#row_time_other').hide();
+      $.each(obj_day, function(index, value) {
 
             // $('#time_other_all').prop('checked', false);
             if ($('#time_other_' + value).is(":checked") === true) {
               $('#time_other_' + value).prop( "checked", false );
-                $('#time_other_' + value).click();
+              $('#time_other_' + value).click();
             }
-        });
+          });
     }
   }
 
@@ -843,23 +843,23 @@ function get_plan_price_sub(id) {
   }
 
   function closeDay(day) {
-         alert(day)
-    if ($('#' + day).is(":checked")) {
-      if ($('#open_alway_' + day).is(":checked")) {
-
-      } else {
-        $('#hour_open_' + day).attr("disabled", false);
-        $('#hour_open_' + day).css("background-color", '#fff');
-        $('#time_open_' + day).attr("disabled", false);
-        $('#time_open_' + day).css("background-color", '#fff');
-
-        $('#hour_close_' + day).attr("disabled", false);
-        $('#hour_close_' + day).css("background-color", '#fff');
-        $('#time_close_' + day).attr("disabled", false);
-        $('#time_close_' + day).css("background-color", '#fff');
-      }
+   alert(day)
+   if ($('#' + day).is(":checked")) {
+    if ($('#open_alway_' + day).is(":checked")) {
 
     } else {
+      $('#hour_open_' + day).attr("disabled", false);
+      $('#hour_open_' + day).css("background-color", '#fff');
+      $('#time_open_' + day).attr("disabled", false);
+      $('#time_open_' + day).css("background-color", '#fff');
+
+      $('#hour_close_' + day).attr("disabled", false);
+      $('#hour_close_' + day).css("background-color", '#fff');
+      $('#time_close_' + day).attr("disabled", false);
+      $('#time_close_' + day).css("background-color", '#fff');
+    }
+
+  } else {
         //        if($('#open_alway_'+day).is(":checked")){
           $('#hour_open_' + day).attr("disabled", true);
           $('#hour_open_' + day).css("background-color", '#ddd');
@@ -924,13 +924,13 @@ function get_plan_price_sub(id) {
 });
     }
 
-   function form_detail_shop(id,op) {
-    console.log($('#form_detail_shop').serialize());
-    var url = base_url + "shop/submit_data_plan_time?shop_id=" + id + '&op='+op;
-    $.ajax({
-      url: url,
-      data: $('#form_detail_shop').serialize(),
-      type: 'post',
+    function form_detail_shop(id,op) {
+      console.log($('#form_shop_all').serialize());
+      var url = base_url + "shop/submit_data_plan_time?shop_id=" + id + '&op='+op;
+      $.ajax({
+        url: url,
+        data: $('#form_shop_all').serialize(),
+        type: 'post',
         // contentType: "application/json; charset=utf-8",
         dataType: 'json',
         error: function() {
@@ -947,8 +947,87 @@ function get_plan_price_sub(id) {
           // });
         }
       });
-  }
+    }
+    
+    function _select_category(itm) {
+      console.log('-----')
+      console.log(itm)
+      var url = base_url + "shop/select_type?id_sub=" + itm+'&table=shop_sub';
+      $.post(url, function(res) {
+        console.log(res)
+        var htmlOption = "<option value=''>กรุณาเลือก</option>";
+        $.each(res, function (i, item) {
+          htmlOption += "<option value='" + item.id + "'>" + item.topic_th + "</option>";
+        });
+        $("#select_type").html(htmlOption);
+        // $("#select_type").val();
+        // $('select_type', select).remove();
+        // select.val(selectedOption);
+           // $('#select_type').html(ele);
+         });
+    }
+    function _region(itm) {
+      console.log('-----')
+      console.log(itm)
+       var htmlOption = '';
+      var url = base_url + "shop/select_type?id_sub=" + itm+'&table=province';
+      console.log(url)
+      $.post(url, function(res) {
+        console.log(res)
+         htmlOption = "<option value=''>กรุณาเลือก</option>";
+        $.each(res, function (i, item) {
+          htmlOption += "<option value='" + item.id + "'>" + item.name_th + "</option>";
+        });
+        $("#province").html(htmlOption);
+        // $("#select_type").val();
+        // $('select_type', select).remove();
+        // select.val(selectedOption);
+           // $('#select_type').html(ele);
+         });
+    }
+    function _province(itm) {
+      var url = base_url + "shop/select_type?id_sub=" + itm+'&table=amphur';
+      var htmlOption = '';
+      $.post(url, function(res) {
+        console.log(res)
+         htmlOption = "<option value=''>กรุณาเลือก</option>";
+        $.each(res, function (i, item) {
+          htmlOption += "<option value='" + item.id + "'>" + item.name_th + "</option>";
+        });
+        $("#select_amphur").html(htmlOption);
+        // $("#select_type").val();
+        // $('select_type', select).remove();
+        // select.val(selectedOption);
+           // $('#select_type').html(ele);
+         });
+    }
 
-  function select_category(itm) {
-    console.log(itm)
-  }
+    /********ADD SHOP ********/
+    function submit_add_shop() {
+      var  ss = $('#form_shop_all').serialize();
+      console.log(JSON.stringify(ss));
+      var url = base_url + "shop/submit_data_plan_time?op=add";
+      $.ajax({
+        url: url,
+        data: $('#form_shop_all').serialize(),
+        type: 'post',
+        // contentType: "application/json; charset=utf-8",
+        dataType: 'json',
+        error: function() {
+          console.log('Error');
+        },
+        success: function(res) {
+          console.log(res);
+          if (res.result == true) {
+            location.href = base_url+'shop/shop_manage?sub='+res.sub+'&id='+res.product_id;
+          }
+
+          // var url = base_url + "shop/box_plan_time?id="+id;
+          // console.log(url)
+          // $.post(url, function(ele) {
+          //   // console.log(ele)
+          //   $('#box_plan_time').html(ele);
+          // });
+        }
+      });
+    }

@@ -56,7 +56,7 @@
 					?>
 					<tr>
 						<td><?=$key+1;?></td>
-						<td><a href="<?=base_url();?>shop/shop_manage?state=edit&id=<?=$val->id;?>">
+						<td><a href="<?=base_url();?>shop/shop_manage?sub=<?=$val->sub;?>&id=<?=$val->id;?>">
 								<button onclick="//manage_shop_ordertype('<?=$val->id;?>')" type="button" class="btn btn-xs btn-primary btn-equal" data-toggle="tooltip" data-placement="top" data-original-title="แก้ไข"><i class="fa fa-search-plus" ></i></i></button></a>
 							</td>
 						<!-- <td>

@@ -7,7 +7,6 @@ class Shop_model extends CI_Model {
 		$result = $this->db->insert(TBL_SHOP_COUNTRY, $data);
 		$last_id = mysql_insert_id();
 
-
 		$data2[i_shop_country] = $last_id;
 		$data2[i_country] = $_POST[id];
 		$data2[s_country_code] = $_POST[country_code];
@@ -18,9 +17,6 @@ class Shop_model extends CI_Model {
 		return $result2;
 	}
 	public function add_region_sub(){
-
-
-
 		$data[i_shop_country] = $_POST[id_shop_country];
 		$data[i_country] = $_POST[id];
 		$data[s_country_code] = $_POST[country_code];
@@ -32,33 +28,26 @@ class Shop_model extends CI_Model {
 		return $result;
 	}
 	public function add_plan_price(){
-
 		$data[i_shop_country] = $_POST[i_shop_country];
-		$data[i_plan_price] = $_POST[i_plan_price];	
+		$data[i_plan_price] = $_POST[i_plan_price];
 		$result = $this->db->insert(TBL_SHOP_COUNTRY_COM, $data);
 		$last_id = mysql_insert_id();
-
 		$data2[i_shop_country_com] = $last_id;
-		$data2[i_shop_country_icon] = $_POST[i_plan_price];	
+		$data2[i_shop_country_icon] = $_POST[i_plan_price];
 		$data2[s_topic_en] = $_POST[topic_en];
 		$data2[s_topic_th] = $_POST[topic_th];
 		$data2[s_topic_cn] = $_POST[topic_cn];
 		$result2 = $this->db->insert(TBL_SHOP_COUNTRY_COM_LIST, $data2);
-
 		return $result;
 	}
 
 	public function add_plan_price_sub(){
-
-
-
 		$data[i_shop_country_com] = $_POST[i_shop_country_com];
-		$data[i_shop_country_icon] = $_POST[i_plan_price];	
+		$data[i_shop_country_icon] = $_POST[i_plan_price];
 		$data[s_topic_en] = $_POST[topic_en];
 		$data[s_topic_th] = $_POST[topic_th];
 		$data[s_topic_cn] = $_POST[topic_cn];
 		$result = $this->db->insert(TBL_SHOP_COUNTRY_COM_LIST, $data);
-
 		return $result;
 	}
 	public function save_plan_price(){
@@ -67,20 +56,15 @@ class Shop_model extends CI_Model {
 		$_select = array('*');
 		$_order = array();
 		$_order['id'] = 'asc';
-		
 		$data['plan_com'] = $this->Main_model->fetch_data('','',TBL_SHOP_PLAN_COM,$_where,$_select,$_order);
 		$plan[i_shop_country_icon] = $_POST[i_country_icon_plan];
-		$plan[i_plan_price] = $_POST[i_price_plan];	
+		$plan[i_plan_price] = $_POST[i_price_plan];
 
 
 		$result = $this->db->insert(TBL_SHOP_COUNTRY_COM_LIST, $plan);
 		$last_id = mysql_insert_id();
 
 		foreach ($data['plan_com'] as $val) {
-			// $this->db->where('id<>',$val->i_shop_country_icon);
-			// echo $val->s_topic_th;
-			// $data = array();
-			
 			$data = array();
 			$data[i_shop_country_com_list] = $last_id;
 			$data[i_shop_country_icon] = $_POST[i_country_icon_plan];
@@ -88,12 +72,9 @@ class Shop_model extends CI_Model {
 			$data[s_topic_th] = $val->s_topic_th;
 			$data[i_price] = $_POST[$val->element];
 			$data[s_payment] = $_POST[money_.$val->element];
-			// $data[i_plan_price] = $_POST[];
-
 			$result = $this->db->insert(TBL_SHOP_COUNTRY_COM_LIST_PRICE, $data);
 
 		}
-
 		return $result;
 	}
 
@@ -105,16 +86,9 @@ class Shop_model extends CI_Model {
 		$_order['id'] = 'asc';
 		$arr['plan_com'] = $this->Main_model->fetch_data('','',TBL_SHOP_COUNTRY_COM_LIST_PRICE,$_where,$_select,$_order);
 		foreach ($arr['plan_com'] as $val) {
-			// $this->db->where('id<>',$val->i_shop_country_icon);
-			// echo $val->s_topic_th;
-			// $data = array();
-			
-			//$data = array();
-			
 			$this->db->where('id', $val->id);
-			//$ss = 'input_'.$_GET[i_shop_country_com_list].'_'.$val->id;
 			$data[i_price] = $_POST[input_.$_GET[i_shop_country_com_list]._.$val->id];
-			$result = $this->db->update(TBL_SHOP_COUNTRY_COM_LIST_PRICE, $data); 
+			$result = $this->db->update(TBL_SHOP_COUNTRY_COM_LIST_PRICE, $data);
 
 		}
 
@@ -123,7 +97,6 @@ class Shop_model extends CI_Model {
 	}
 	public function submit_data_plan_time(){
 		$day = array("Sun","Mon","Tue","Wed","Thu","Fri","Sat");
-		
 		for($i=1;$i<=24;$i++){
 			$invID = str_pad($i, 2, '0', STR_PAD_LEFT);
 			$hour[] = $invID;
@@ -134,84 +107,97 @@ class Shop_model extends CI_Model {
 			$time[] = $invID;
 		}
 		if ($_GET[op] == 'time') {
-			
-		$data[open_Sun] =  $_POST[Sun];
-		$data[open_Mon] =  $_POST[Mon];
-		$data[open_Tue] =  $_POST[Tue];
-		$data[open_Wed] =  $_POST[Wed];
-		$data[open_Thu] =  $_POST[Thu];
-		$data[open_Fri] =  $_POST[Fri];
-		$data[open_Sat] =  $_POST[Sat];
-		$this->db->where('id', $_GET[shop_id]);
-		$result = $this->db->update(TBL_SHOPPING_PRODUCT, $data);
-		$last_id = $_GET[shop_id];
-		$data_loop = '';
-		foreach($day as $value){
-			$hour_open = 'hour_open_'.$value;
-			$time_open = 'time_open_'.$value;
-			$hour_close = 'hour_close_'.$value;
-			$time_close = 'time_close_'.$value;
-			$open_alway = "open_alway_".$value;
-			if($_POST[$value]==NULL or $_POST[$value]==""){
-				$status = 0;
-			}
-			else{
-				$status = 1;
-			}
-			if($_POST[$open_alway]==NULL or $_POST[$open_alway]==""){
-				$status_alway = 0;
-			}else{
-				$status_alway = 1;
-			}
+			$data = array();
+			$data[topic_cn] =  $_POST[topic_cn];
+			$data[topic_th] =  $_POST[topic_th];
+			$data[topic_en] =  $_POST[topic_en];
+			$data[map] =  $_POST[map];
+			$data[lat] =  $_POST[lat_db];
+			$data[lng] =  $_POST[lng_db];
+			$data[address] =  $_POST[address];
+			$data[phone] =  $_POST[phone];
+			$data[email] =  $_POST[email];
+			$data[province] =  $_POST[province];
+			$data[return_guest] =  $_POST[return_guest];
+			$data[amphur] =  $_POST[select_amphur];
+			$data[region] =  $_POST[region];
+			$data[main] =  $_POST[main];
+			$data[sub] =  $_POST[sub];
+			$data[open_Sun] =  $_POST[Sun];
+			$data[open_Mon] =  $_POST[Mon];
+			$data[open_Tue] =  $_POST[Tue];
+			$data[open_Wed] =  $_POST[Wed];
+			$data[open_Thu] =  $_POST[Thu];
+			$data[open_Fri] =  $_POST[Fri];
+			$data[open_Sat] =  $_POST[Sat];
+			$this->db->where('id', $_GET[shop_id]);
+			$result = $this->db->update(TBL_SHOPPING_PRODUCT, $data);
+			$last_id = $_GET[shop_id];
+			$data_loop = '';
+			foreach($day as $value){
+				$hour_open = 'hour_open_'.$value;
+				$time_open = 'time_open_'.$value;
+				$hour_close = 'hour_close_'.$value;
+				$time_close = 'time_close_'.$value;
+				$open_alway = "open_alway_".$value;
+				if($_POST[$value]==NULL or $_POST[$value]==""){
+					$status = 0;
+				}
+				else{
+					$status = 1;
+				}
+				if($_POST[$open_alway]==NULL or $_POST[$open_alway]==""){
+					$status_alway = 0;
+				}else{
+					$status_alway = 1;
+				}
 
-			if($_POST[$hour_open]==NULL or $_POST[$hour_open]==""){
-				$hour_open_val = 00;
-			}else{
-				$hour_open_val = $_POST[$hour_open];
-			}
-			if($_POST[$time_open]==NULL or $_POST[$time_open]==""){
-				$time_open_val = 00;
-			}else{
-				$time_open_val = $_POST[$time_open];
-			}
-			if($_POST[$hour_close]==NULL or $_POST[$hour_close]==""){
-				$hour_close_val = 00;
-			}else{
-				$hour_close_val = $_POST[$hour_close];
-			}
-			if($_POST[$time_close]==NULL or $_POST[$time_close]==""){
-				$time_close_val = 00;
-			}else{
-				$time_close_val = $_POST[$time_close];
-			}
-			$day_row = array();
-			$day_row['product_id'] = $last_id;
-			$day_row['product_day'] = $value;
-			$day_row['status'] = $status;
-			$day_row['open_always'] = $status_alway;
-			$day_row['type'] = 1;
-			
-			$day_row['start_h'] = $hour_open_val;
-			$day_row['start_m'] = $time_open_val;
-			$day_row['finish_h'] = $hour_close_val;
-			$day_row['finish_m'] = $time_close_val;
-			$_where = array();
+				if($_POST[$hour_open]==NULL or $_POST[$hour_open]==""){
+					$hour_open_val = 00;
+				}else{
+					$hour_open_val = $_POST[$hour_open];
+				}
+				if($_POST[$time_open]==NULL or $_POST[$time_open]==""){
+					$time_open_val = 00;
+				}else{
+					$time_open_val = $_POST[$time_open];
+				}
+				if($_POST[$hour_close]==NULL or $_POST[$hour_close]==""){
+					$hour_close_val = 00;
+				}else{
+					$hour_close_val = $_POST[$hour_close];
+				}
+				if($_POST[$time_close]==NULL or $_POST[$time_close]==""){
+					$time_close_val = 00;
+				}else{
+					$time_close_val = $_POST[$time_close];
+				}
+				$day_row = array();
+				$day_row['product_id'] = $last_id;
+				$day_row['product_day'] = $value;
+				$day_row['status'] = $status;
+				$day_row['open_always'] = $status_alway;
+				$day_row['type'] = 1;
+
+				$day_row['start_h'] = $hour_open_val;
+				$day_row['start_m'] = $time_open_val;
+				$day_row['finish_h'] = $hour_close_val;
+				$day_row['finish_m'] = $time_close_val;
+				$_where = array();
 				$_where['product_id'] = $last_id;
 				$_where['product_day'] = $value;
 				$num_row = $this->Main_model->num_row(TBL_SHOPPING_OPEN_TIME,$_where);
-			
-			if($num_row<=0){
-				$result = $this->db->insert(TBL_SHOPPING_OPEN_TIME, $day_row);
-			}else{
+				if($num_row<=0){
+					$result = $this->db->insert(TBL_SHOPPING_OPEN_TIME, $day_row);
+				}else{
 					$this->db->where('product_id', $last_id);
 					$this->db->where('product_day', $value);
 					$result = $this->db->update(TBL_SHOPPING_OPEN_TIME, $day_row);
-			}
-			$time_other = 'time_other_'.$value;
-			if($_POST[$time_other]!="" or $_POST[$time_other]!=null){
+				}
+				$time_other = 'time_other_'.$value;
+				if($_POST[$time_other]!="" or $_POST[$time_other]!=null){
 					$hour_open2 = 'hour_open_'.$value.'_2';
 					$time_open2 = 'time_open_'.$value.'_2';
-					
 					$hour_close2 = 'hour_close_'.$value.'_2';
 					$time_close2 = 'time_close_'.$value.'_2';
 					if($_POST[$hour_open2]==NULL or $_POST[$hour_open2]==""){
@@ -235,75 +221,194 @@ class Shop_model extends CI_Model {
 						$time_close_val2 = $_POST[$time_close2];
 					}
 					$day_row_other = array();
-						$day_row_other['product_id'] = $last_id;
-						$day_row_other['product_day'] = $value;
-						$day_row_other['status'] = $_POST[$time_other];
-						$day_row_other['open_always'] = $status_alway;
-						$day_row_other['type'] = 1;
-						
-						$day_row_other['start_h'] = $hour_open_val2;
-						$day_row_other['start_m'] = $time_open_val2;
-						$day_row_other['finish_h'] = $hour_close_val2;
-						$day_row_other['finish_m'] = $time_close_val2;
-						$day_row_other['time_other_number'] = 2;
-						$data_loop .= json_encode($day_row_other);
-				$_where = array();
-				$_where['product_id'] = $last_id;
-				$_where['product_day'] = $value;
-				$_where['time_other_number'] = 2;
-				$num_row_other = $this->Main_model->num_row(TBL_SHOPPING_OPEN_TIME,$_where);
-				if($num_row_other<=0){
-					$result = $this->db->insert(TBL_SHOPPING_OPEN_TIME, $day_row_other);
-				}else{
+					$day_row_other['product_id'] = $last_id;
+					$day_row_other['product_day'] = $value;
+					$day_row_other['status'] = $_POST[$time_other];
+					$day_row_other['open_always'] = $status_alway;
+					$day_row_other['type'] = 1;
+
+					$day_row_other['start_h'] = $hour_open_val2;
+					$day_row_other['start_m'] = $time_open_val2;
+					$day_row_other['finish_h'] = $hour_close_val2;
+					$day_row_other['finish_m'] = $time_close_val2;
+					$day_row_other['time_other_number'] = 2;
+					$data_loop .= json_encode($day_row_other);
+					$_where = array();
+					$_where['product_id'] = $last_id;
+					$_where['product_day'] = $value;
+					$_where['time_other_number'] = 2;
+					$num_row_other = $this->Main_model->num_row(TBL_SHOPPING_OPEN_TIME,$_where);
+					if($num_row_other<=0){
+						$result = $this->db->insert(TBL_SHOPPING_OPEN_TIME, $day_row_other);
+					}else{
+						$this->db->where('product_id', $last_id);
+						$this->db->where('product_day', $value);
+						$this->db->where('time_other_number', 2);
+						$result = $this->db->update(TBL_SHOPPING_OPEN_TIME, $day_row_other);
+					}
+				}
+				else{
+					$day_row_other = array();
+					$day_row_other['status'] = $_POST[$time_other];
 					$this->db->where('product_id', $last_id);
 					$this->db->where('product_day', $value);
 					$this->db->where('time_other_number', 2);
 					$result = $this->db->update(TBL_SHOPPING_OPEN_TIME, $day_row_other);
 				}
 			}
-			else{
-				$day_row_other = array();
-				$day_row_other['status'] = $_POST[$time_other];
-				$this->db->where('product_id', $last_id);
-					$this->db->where('product_day', $value);
-					$this->db->where('time_other_number', 2);
-				$result = $this->db->update(TBL_SHOPPING_OPEN_TIME, $day_row_other);
-			}
+			return $data_loop;
 		}
-		return $data_loop;
-		}
+
+
 		if ($_GET[op] == 'shop') {
 			$data = array();
 			$data[topic_cn] =  $_POST[topic_cn];
-		$data[topic_th] =  $_POST[topic_th];
-		$data[topic_en] =  $_POST[topic_en];
-		$data[map] =  $_POST[map];
-		$data[lat_db] =  $_POST[lat_db];
-		$data[lng_db] =  $_POST[lng_db];
-		$data[address] =  $_POST[address];
-		$data[phone] =  $_POST[phone];
-		$data[email] =  $_POST[email];
-		$data[province] =  $_POST[province];
-		// $data[sub] =  $_POST[sub];
-		$data[return_guest] =  $_POST[return_guest];
-		$data[select_amphur] =  $_POST[select_amphur];
-		$data[region] =  $_POST[region];
-		$data[set_vat] =  $_POST[set_vat];
-		$data[return_vat] =  $_POST[return_vat];
-		// $data[main] =  $_POST[main];
-		$this->db->where('product_id', $_GET[shop_id]);
-					$this->db->where('product_day', $value);
-					$result = $this->db->update(TBL_SHOPPING_PRODUCT, $day_row);
+			$data[topic_th] =  $_POST[topic_th];
+			$data[topic_en] =  $_POST[topic_en];
+			$data[map] =  $_POST[map];
+			$data[lat] =  $_POST[lat_db];
+			$data[lng] =  $_POST[lng_db];
+			$data[address] =  $_POST[address];
+			$data[phone] =  $_POST[phone];
+			$data[email] =  $_POST[email];
+			$data[province] =  $_POST[province];
+			$data[return_guest] =  $_POST[return_guest];
+			$data[amphur] =  $_POST[select_amphur];
+			$data[region] =  $_POST[region];
+			$data[main] =  $_POST[main];
+			$data[sub] =  $_POST[sub];
+			$this->db->where('id', $_GET[shop_id]);
+			$result = $this->db->update(TBL_SHOPPING_PRODUCT, $data);
+			return $result;
+		}
 
 
+		if ($_GET[op] == 'add') {
+			$data_return = array();
+			$data = array();
+			$data[topic_cn] =  $_POST[topic_cn];
+			$data[topic_th] =  $_POST[topic_th];
+			$data[topic_en] =  $_POST[topic_en];
+			$data[map] =  $_POST[map];
+			$data[lat] =  $_POST[lat_db];
+			$data[lng] =  $_POST[lng_db];
+			$data[address] =  $_POST[address];
+			$data[phone] =  $_POST[phone];
+			$data[email] =  $_POST[email];
+			$data[province] =  $_POST[province];
+			$data[return_guest] =  $_POST[return_guest];
+			$data[amphur] =  $_POST[select_amphur];
+			$data[region] =  $_POST[region];
+			$data[main] =  $_POST[main];
+			$data[sub] =  $_POST[sub];
+			$data[open_Sun] =  $_POST[Sun];
+			$data[open_Mon] =  $_POST[Mon];
+			$data[open_Tue] =  $_POST[Tue];
+			$data[open_Wed] =  $_POST[Wed];
+			$data[open_Thu] =  $_POST[Thu];
+			$data[open_Fri] =  $_POST[Fri];
+			$data[open_Sat] =  $_POST[Sat];
+			$result = $this->db->insert(TBL_SHOPPING_PRODUCT, $data);
+			$last_id = mysql_insert_id();
+			$data_return[product_id] = $last_id;
+			$data_return[sub] = $_POST[sub];
 
-		return $data;
+			foreach($day as $value){
+				$hour_open = 'hour_open_'.$value;
+				$time_open = 'time_open_'.$value;
+				$hour_close = 'hour_close_'.$value;
+				$time_close = 'time_close_'.$value;
+				$open_alway = "open_alway_".$value;
+				if($_POST[$value]==NULL or $_POST[$value]==""){
+					$status = 0;
+				}
+				else{
+					$status = 1;
+				}
+				if($_POST[$open_alway]==NULL or $_POST[$open_alway]==""){
+					$status_alway = 0;
+				}else{
+					$status_alway = 1;
+				}
+				if($_POST[$hour_open]==NULL or $_POST[$hour_open]==""){
+					$hour_open_val = 00;
+				}else{
+					$hour_open_val = $_POST[$hour_open];
+				}
+				if($_POST[$time_open]==NULL or $_POST[$time_open]==""){
+					$time_open_val = 00;
+				}else{
+					$time_open_val = $_POST[$time_open];
+				}
+				if($_POST[$hour_close]==NULL or $_POST[$hour_close]==""){
+					$hour_close_val = 00;
+				}else{
+					$hour_close_val = $_POST[$hour_close];
+				}
+				if($_POST[$time_close]==NULL or $_POST[$time_close]==""){
+					$time_close_val = 00;
+				}else{
+					$time_close_val = $_POST[$time_close];
+				}
+				$day_row = array();
+				$day_row['product_id'] = $last_id;
+				$day_row['product_day'] = $value;
+				$day_row['status'] = $status;
+				$day_row['open_always'] = $status_alway;
+				$day_row['type'] = 1;
+				$day_row['start_h'] = $hour_open_val;
+				$day_row['start_m'] = $time_open_val;
+				$day_row['finish_h'] = $hour_close_val;
+				$day_row['finish_m'] = $time_close_val;
+				$result = $this->db->insert(TBL_SHOPPING_OPEN_TIME, $day_row);
+				$time_other = 'time_other_'.$value;
+				if($_POST[$time_other]!="" or $_POST[$time_other]!=null){
+					$hour_open2 = 'hour_open_'.$value.'_2';
+					$time_open2 = 'time_open_'.$value.'_2';
+					$hour_close2 = 'hour_close_'.$value.'_2';
+					$time_close2 = 'time_close_'.$value.'_2';
+					if($_POST[$hour_open2]==NULL or $_POST[$hour_open2]==""){
+						$hour_open_val2 = 00;
+					}else{
+						$hour_open_val2 = $_POST[$hour_open2];
+					}
+					if($_POST[$time_open2]==NULL or $_POST[$time_open2]==""){
+						$time_open_val2 = 00;
+					}else{
+						$time_open_val2 = $_POST[$time_open2];
+					}
+					if($_POST[$hour_close2]==NULL or $_POST[$hour_close2]==""){
+						$hour_close_val2 = 00;
+					}else{
+						$hour_close_val2 = $_POST[$hour_close2];
+					}
+					if($_POST[$time_close2]==NULL or $_POST[$time_close2]==""){
+						$time_close_val2 = 00;
+					}else{
+						$time_close_val2 = $_POST[$time_close2];
+					}
+					$day_row_other = array();
+					$day_row_other['product_id'] = $last_id;
+					$day_row_other['product_day'] = $value;
+					$day_row_other['status'] = $_POST[$time_other];
+					$day_row_other['open_always'] = $status_alway;
+					$day_row_other['type'] = 1;
+					$day_row_other['start_h'] = $hour_open_val2;
+					$day_row_other['start_m'] = $time_open_val2;
+					$day_row_other['finish_h'] = $hour_close_val2;
+					$day_row_other['finish_m'] = $time_close_val2;
+					$day_row_other['time_other_number'] = 2;
+					$result = $this->db->insert(TBL_SHOPPING_OPEN_TIME, $day_row_other);
+				}
+			}
+			$data_return[result] = $result;
+			return $data_return;
 		}
 	}
 
 
 
-
+/********* END SHOP MODEL **********/
 
 
 
