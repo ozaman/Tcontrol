@@ -1,8 +1,34 @@
 // callinit();
 var param_plan_price,
 day, obj_day;
+var option = '';
 // shop('categorie')
+// box_region_show()
+function _box_region_show(item,options) {
+    console.log(item)
+    console.log(options)
+    $('#section_state').val(options)
+    option = options;
+    var url = base_url + "shop/box_region_show?option="+options;
+    var param = {
+      id: item
+    }
+    console.log(url)
 
+    $.ajax({
+      url: url,
+      data: param,
+      type: 'post',
+      error: function() {
+        console.log('Error Profile');
+      },
+      success: function(ele) {
+            // console.log(ele);
+            $('.box_region_show').html(ele);
+
+          }
+        });
+  }
 function get_shop_all() {
     // alert('aaaaa')
     // console.log(username);
@@ -13,7 +39,7 @@ function get_shop_all() {
 
     // $('.head_title_sub_4').hide()
 
-    var url = base_url + "shop/data_shop_all";
+    var url = base_url + "shop/data_shop_all?option="+option;
     $.post(url, function(ele) {
       $('#body_page_call').html(ele);
     });
@@ -28,7 +54,7 @@ function get_shop_all() {
     // $('.head_title_sub_3').hide()
     // $('.head_title_sub_4').hide()
 
-    var url = base_url + "shop/categorie_sub";
+    var url = base_url + "shop/categorie_sub?option="+option;
     var param = {
       id: item
     }
@@ -57,7 +83,7 @@ function get_shop_all() {
     // $('.head_title_sub_4').hide()
 
     // $('.head_title_sub_3').html('ร้านช้อปปิ้งทั้งหมด')
-    var url = base_url + "shop/shop_ordertype";
+    var url = base_url + "shop/shop_ordertype?option="+option;
     var param = {
       id: item
     }
@@ -86,7 +112,7 @@ function get_shop_all() {
     // $('.head_title_sub_4').show()
     // $('.head_title_sub_3').html('ร้านช้อปปิ้งทั้งหมด')
     // $('.head_title_sub_4').html('จัดการร้านช้อปปิ้ง')
-    var url = base_url + "shop/shop_manage";
+    var url = base_url + "shop/shop_manage?option="+option;
     var param = {
       id: item
     }
@@ -123,7 +149,7 @@ function get_shop_all() {
     //  $('.head_title_sub_4').show()
     //  $('.head_title_sub_3').html('ร้านช้อปปิ้งทั้งหมด')
     //  $('.head_title_sub_4').html('จัดการร้านช้อปปิ้ง')
-    var url = base_url + "shop/shop_manage_com";
+    var url = base_url + "shop/shop_manage_com?option="+option;
     var param = {
       id: item
     }
@@ -144,42 +170,13 @@ function get_shop_all() {
     });
   }
 
-  function box_region_show(item) {
-    console.log(item)
-    // alert('aaaaaa')
-    // $('#modal_custom').show()
-    // $('.head_title').html('จัดการร้านค้า')
-    //  $('.head_title_sub').html('หมวดหมู่ทั้งหมด')
-    //  $('.head_title_sub_2').show()
-    //  $('.head_title_sub_2').html('ช้อปปิ้งทั้งหมด ')
-    //  $('.head_title_sub_3').show()
-    //  $('.head_title_sub_4').show()
-    //  $('.head_title_sub_3').html('ร้านช้อปปิ้งทั้งหมด')
-    //  $('.head_title_sub_4').html('จัดการร้านช้อปปิ้ง')
-    var url = base_url + "shop/box_region_show";
-    var param = {
-      id: item
-    }
-    console.log(url)
-
-    $.ajax({
-      url: url,
-      data: param,
-      type: 'post',
-      error: function() {
-        console.log('Error Profile');
-      },
-      success: function(ele) {
-            // console.log('Success Profile');
-            $('#box_region_show').html(ele);
-
-          }
-        });
-  }
+  
 
   function submit_region(item) {
     console.log(param)
-    var url = base_url + "shop/add_region";
+    var url = base_url + "shop/add_region?option="+option;
+    console.log(url)
+    // return false;
     $.ajax({
       url: url,
       data: param,
@@ -189,7 +186,8 @@ function get_shop_all() {
       },
       success: function(res) {
         console.log(res);
-        var url2 = base_url + "shop/get_region";
+         Command: toastr["success"]("เพิ่มสัญชาติสำเร็จ")
+        var url2 = base_url + "shop/get_region?option="+option;
         var param = {
           i_shop: item
         }
@@ -215,7 +213,7 @@ function get_shop_all() {
   function submit_region_sub(id) {
     $('#modal_custom_2').show()
     $('#title_add_region_sub').html('เพ่ิมสัญชาติ')
-    var url = base_url + "shop/get_region_sub";
+    var url = base_url + "shop/get_region_sub?option="+option;
     var param = {
       country_id: id
     }
@@ -255,7 +253,7 @@ function get_shop_all() {
   }
 
   function save_region_sub() {
-    var url = base_url + "shop/add_region_sub";
+    var url = base_url + "shop/add_region_sub?option="+option;
     // console.log(shop)
     // console.log(id_shop_country)
     param.i_shop = $('#id_shop_product').val();
@@ -270,9 +268,11 @@ function get_shop_all() {
       },
       success: function(ele) {
             // console.log(ele);
+         Command: toastr["success"]("เพิ่มสัญชาติสำเร็จ")
+            
             commision($('#manage_com').val())
-            box_region_icon()
-            box_select_region_icon()
+            _box_region_icon()
+            _box_select_region_icon()
             // $('.box_sub_region'+id).html(ele);
             // $('#btn_region_sub'+id).attr('onclick','save_region_sub('+shop+','+id_shop_country+')');
 
@@ -325,8 +325,9 @@ function get_shop_all() {
 // }
 
 function save_plan_price() {
-  var url = base_url + "shop/save_plan_price";
+  var url = base_url + "shop/save_plan_price?option="+option;
   console.log($('#plan_com_price').serialize())
+  console.log(param_plan_price)
   $.ajax({
     url: url,
     data: $('#plan_com_price').serialize(),
@@ -343,7 +344,7 @@ function save_plan_price() {
         $('#btn_save_price_plann').hide();
         commision($('#manage_com').val())
         $('#box_plan_com').html('');
-        box_plan_comision();
+        _box_plan_comision();
         box_price_plan();
       }
 
@@ -357,7 +358,7 @@ function save_plan_price() {
 function get_plan_price_sub(id) {
   console.log(id)
   $('#modal_custom_3').show();
-  var url = base_url + "shop/get_plan_price_sub";
+  var url = base_url + "shop/get_plan_price_sub?option="+option;
     // console.log(shop)
     // console.log(id_shop_country)
     var param = {
@@ -389,7 +390,7 @@ function get_plan_price_sub(id) {
 
 
   function save_plan_price_sub(id) {
-    var url = base_url + "shop/add_plan_price_sub";
+    var url = base_url + "shop/add_plan_price_sub?option="+option;
     // console.log(shop)
     // console.log(id_shop_country)
 
@@ -432,12 +433,12 @@ function get_plan_price_sub(id) {
   }
 
   function updateStatus(id, status, table) {
-    var url = base_url + "shop/updateStatus";
+    var url = base_url + "shop/updateStatus?option="+option;
     // console.log(shop)
     // console.log(id_shop_country)
     var param = {
       id: id,
-      tbl: table,
+      tbl: table+option,
       status: status
     }
     // $('#i_shop_country_com').val(id)
@@ -520,12 +521,14 @@ function get_plan_price_sub(id) {
   }
 
   function finalDelete() {
-    var url = base_url + "shop/delete";
+    var url = base_url + "shop/delete?option="+option;
     var param = {
       id: id_delete,
       tbl: table_delete
     }
     console.log(param)
+    console.log(url)
+    // return false;
     $.ajax({
       url: url,
       data: param,
@@ -535,14 +538,27 @@ function get_plan_price_sub(id) {
       },
       success: function(res) {
         console.log(res);
-        if (table_delete == 'shop_country_icon' || table_delete == 'shop_country_com_list') {
+        // console.log($('#section_state').val())
+        // if ($('#section_state').val() == 1) {
+        if (table_delete == 'shop_country_icon'+option || table_delete == 'shop_country_com_list'+option) {
           commision($('#manage_com').val())
-          box_plan_comision();
-          box_region_icon();
+          // _box_plan_comision();
+          _box_region_icon();
         } else {
-          box_region_icon();
-          box_plan_comision();
+          _box_region_icon();
+          _box_plan_comision();
         }
+      // }
+      // else{
+        // if (table_delete == 'shop_country_icon_company' || table_delete == 'shop_country_com_list_company') {
+        //   commision_company($('#manage_com').val())
+        //   _box_plan_comision_company();
+        //   _box_region_icon_company();
+        // } else {
+        //   _box_region_icon_company();
+        //   _box_plan_comision_company();
+        // }
+      // }
 
       }
 
@@ -585,7 +601,7 @@ function get_plan_price_sub(id) {
     console.log(id)
 
 
-    var url = base_url + "shop/save_edit_com?i_shop_country_com_list=" + id;
+    var url = base_url + "shop/save_edit_com?i_shop_country_com_list=" + id+"&option="+option;
     console.log($('#edit_plan_com_price' + id).serialize())
     $.ajax({
       url: url,
@@ -596,7 +612,7 @@ function get_plan_price_sub(id) {
       },
       success: function(res) {
         console.log(res);
-        box_plan_comision();
+        _box_plan_comision();
         commision($('#manage_com').val())
         box_price_plan();
         $('.btn_show_hide').addClass('hide')

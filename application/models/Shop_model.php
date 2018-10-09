@@ -4,7 +4,7 @@ class Shop_model extends CI_Model {
 
 	public function add_region(){
 		$data[i_shop] = $_POST[i_shop];
-		$result = $this->db->insert(TBL_SHOP_COUNTRY, $data);
+		$result = $this->db->insert(TBL_SHOP_COUNTRY.$_GET[option], $data);
 		$last_id = mysql_insert_id();
 
 		$data2[i_shop_country] = $last_id;
@@ -13,7 +13,7 @@ class Shop_model extends CI_Model {
 		$data2[s_topic_en] = $_POST[name_en];
 		$data2[s_topic_th] = $_POST[name_th];
 		$data2[s_topic_cn] = $_POST[name_cn];
-		$result2 = $this->db->insert(TBL_SHOP_COUNTRY_ICON, $data2);
+		$result2 = $this->db->insert(TBL_SHOP_COUNTRY_ICON.$_GET[option], $data2);
 		return $result2;
 	}
 	public function add_region_sub(){
@@ -23,21 +23,21 @@ class Shop_model extends CI_Model {
 		$data[s_topic_en] = $_POST[name_en];
 		$data[s_topic_th] = $_POST[name_th];
 		$data[s_topic_cn] = $_POST[name_cn];
-		$result = $this->db->insert(TBL_SHOP_COUNTRY_ICON, $data);
+		$result = $this->db->insert(TBL_SHOP_COUNTRY_ICON.$_GET[option], $data);
 
 		return $result;
 	}
 	public function add_plan_price(){
 		$data[i_shop_country] = $_POST[i_shop_country];
 		$data[i_plan_price] = $_POST[i_plan_price];
-		$result = $this->db->insert(TBL_SHOP_COUNTRY_COM, $data);
+		$result = $this->db->insert(TBL_SHOP_COUNTRY_COM.$_GET[option], $data);
 		$last_id = mysql_insert_id();
 		$data2[i_shop_country_com] = $last_id;
 		$data2[i_shop_country_icon] = $_POST[i_plan_price];
 		$data2[s_topic_en] = $_POST[topic_en];
 		$data2[s_topic_th] = $_POST[topic_th];
 		$data2[s_topic_cn] = $_POST[topic_cn];
-		$result2 = $this->db->insert(TBL_SHOP_COUNTRY_COM_LIST, $data2);
+		$result2 = $this->db->insert(TBL_SHOP_COUNTRY_COM_LIST.$_GET[option], $data2);
 		return $result;
 	}
 
@@ -47,7 +47,7 @@ class Shop_model extends CI_Model {
 		$data[s_topic_en] = $_POST[topic_en];
 		$data[s_topic_th] = $_POST[topic_th];
 		$data[s_topic_cn] = $_POST[topic_cn];
-		$result = $this->db->insert(TBL_SHOP_COUNTRY_COM_LIST, $data);
+		$result = $this->db->insert(TBL_SHOP_COUNTRY_COM_LIST.$_GET[option], $data);
 		return $result;
 	}
 	public function save_plan_price(){
@@ -57,11 +57,12 @@ class Shop_model extends CI_Model {
 		$_order = array();
 		$_order['id'] = 'asc';
 		$data['plan_com'] = $this->Main_model->fetch_data('','',TBL_SHOP_PLAN_COM,$_where,$_select,$_order);
+		$plan = array();
 		$plan[i_shop_country_icon] = $_POST[i_country_icon_plan];
 		$plan[i_plan_price] = $_POST[i_price_plan];
 
 
-		$result = $this->db->insert(TBL_SHOP_COUNTRY_COM_LIST, $plan);
+		$result = $this->db->insert(TBL_SHOP_COUNTRY_COM_LIST.$_GET[option], $plan);
 		$last_id = mysql_insert_id();
 
 		foreach ($data['plan_com'] as $val) {
@@ -72,7 +73,7 @@ class Shop_model extends CI_Model {
 			$data[s_topic_th] = $val->s_topic_th;
 			$data[i_price] = $_POST[$val->element];
 			$data[s_payment] = $_POST[money_.$val->element];
-			$result = $this->db->insert(TBL_SHOP_COUNTRY_COM_LIST_PRICE, $data);
+			$result = $this->db->insert(TBL_SHOP_COUNTRY_COM_LIST_PRICE.$_GET[option], $data);
 
 		}
 		return $result;
@@ -84,11 +85,11 @@ class Shop_model extends CI_Model {
 		$_select = array('*');
 		$_order = array();
 		$_order['id'] = 'asc';
-		$arr['plan_com'] = $this->Main_model->fetch_data('','',TBL_SHOP_COUNTRY_COM_LIST_PRICE,$_where,$_select,$_order);
+		$arr['plan_com'] = $this->Main_model->fetch_data('','',TBL_SHOP_COUNTRY_COM_LIST_PRICE.$_GET[option],$_where,$_select,$_order);
 		foreach ($arr['plan_com'] as $val) {
 			$this->db->where('id', $val->id);
 			$data[i_price] = $_POST[input_.$_GET[i_shop_country_com_list]._.$val->id];
-			$result = $this->db->update(TBL_SHOP_COUNTRY_COM_LIST_PRICE, $data);
+			$result = $this->db->update(TBL_SHOP_COUNTRY_COM_LIST_PRICE.$_GET[option], $data);
 
 		}
 

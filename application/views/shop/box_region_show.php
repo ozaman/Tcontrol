@@ -7,7 +7,8 @@
 						<!-- <option value="">- เลือกสัญชาติ -</option> -->
 
 						<?php
-
+						
+						
 						// print_r(json_encode($region));
 						foreach($region as $key=>$val){
 
@@ -16,7 +17,7 @@
 							$_select = array('*');
 							$_order = array();
 							$_order['id'] = 'asc';
-							$arr[region] = $this->Main_model->fetch_data('','',TBL_SHOP_COUNTRY_ICON,$_where,$_select,$_order);
+							$arr[region] = $this->Main_model->fetch_data('','',TBL_SHOP_COUNTRY_ICON.$_GET[option],$_where,$_select,$_order);
 							if ($val->status == 1) {
 								$btn_color = 'btn-success';
 								$text_status = 'เปิด';
@@ -84,7 +85,7 @@
 											$_select = array('*');
 											$_order = array();
 											$_order['id'] = 'asc';
-											$data['list_plan'] = $this->Main_model->fetch_data('','',TBL_SHOP_COUNTRY_COM_LIST,$_where,$_select,$_order);
+											$data['list_plan'] = $this->Main_model->fetch_data('','',TBL_SHOP_COUNTRY_COM_LIST.$_GET[option],$_where,$_select,$_order);
 
 											foreach($data['list_plan'] as $key=>$val){
 
@@ -93,7 +94,7 @@
 												$_select = array('*');
 												$_order = array();
 												$_order['id'] = 'asc';
-												$data['list_price'] = $this->Main_model->fetch_data('','',TBL_SHOP_COUNTRY_COM_LIST_PRICE,$_where,$_select,$_order);
+												$data['list_price'] = $this->Main_model->fetch_data('','',TBL_SHOP_COUNTRY_COM_LIST_PRICE.$_GET[option],$_where,$_select,$_order);
 
 												?>
 

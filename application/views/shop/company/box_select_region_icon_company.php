@@ -10,14 +10,14 @@ $data['country'] = $this->Main_model->fetch_data('','',TBL_WEB_COUNTRY,$_where,$
 ?>
 <div class="input-group">
 	<span class="input-group-addon">เลือกสัญชาติ</span>
-	<select name="select_country" class="form-control" id="select_country" onchange="change_region_sub(this.value)">
+	<select name="select_country" class="form-control" id="select_country" onchange="change_region_sub_company(this.value)">
 		<option value="">- เลือกสัญชาติ -</option>
 		<?php
 		foreach($data['country'] as $key=>$val3){
 			$_where = array();
 			$_where['i_country'] = $val3->id;
 			$_select = array('id');
-			$cklist_region = $this->Main_model->rowdata(TBL_SHOP_COUNTRY_ICON.$_GET[option],$_where,$_select);
+			$cklist_region = $this->Main_model->rowdata(TBL_SHOP_COUNTRY_ICON_COMPANY,$_where,$_select);
 			if ($cklist_region->id > 0) {
 				$disselect = 'disabled';
 				$color = 'text-default';
@@ -25,7 +25,6 @@ $data['country'] = $this->Main_model->fetch_data('','',TBL_WEB_COUNTRY,$_where,$
 			else{
 				$disselect = '';
 				$color = '';
-
 			}
 			?>
 			<option <?=$disselect;?> value="<?=$key;?>" class="<?=$color;?>" > <?=$val3->name_th;?></option>

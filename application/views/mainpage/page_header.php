@@ -43,6 +43,7 @@
 <script src="<?=base_url();?>assets/js/modules/boostbox/core/demo/Demo.js?v=<?=time()?>"></script>
 <script src="<?=base_url();?>assets/custom/js/main.js?v=<?=time()?>"></script>
 <script src="<?=base_url();?>assets/custom/js/shop.js?v=<?=time()?>"></script>
+<script src="<?=base_url();?>assets/custom/js/company.js?v=<?=time()?>"></script>
 <script src="<?=base_url();?>assets/custom/js/profile.js?v=<?=time()?>"></script>
 	
 		<!-- END STYLESHEETS -->

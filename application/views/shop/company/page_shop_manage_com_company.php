@@ -14,57 +14,35 @@
 				
 
 				<div class="col-md-12">
-					<!-- <form class="form-horizontal form-banded form-bordered" id="form_region" > -->
-						<!-- <div class="col-md-12"> -->
 							<div class="row">
-                                <!-- <div class="col-md-2">
-                                    
-                                </div> -->
                                 <div class="col-md-11">
                                     <div class="input-group" >
                                         <span class="input-group-addon">เลือกสัญชาติ</span>
-                                   <select name="select_country" class="form-control" id="select_country" onchange="change_region(this.value)">
+                                   <select name="select_country" class="form-control" id="select_country" onchange="change_region_company(this.value)">
                                       <option value="">- เลือกสัญชาติ -</option>
-
                                       <?php
-
-
                                       foreach($country as $key=>$val){
-
-				                  // if($shop->main == $main->id ){
-				                  //   $selected_sub = "selected";
-				                  // }else{
-				                  //   $selected_sub = "";
-				                  // }
                                          ?>
-
                                          <option value="<?=$key;?>" ><?=$val->name_th;?></option>
                                      <?php } ?>
                                  </select>
                              </div>
                              </div>
                              <div class="col-md-1" align="right">
-									<!-- <input name="region_id" type="hidden" id="sub"  value="1">
-            						<input name="region_country_code" type="hidden" id="main" value="1">
-            						<input name="region_country_code" type="hidden" id="main" value="1"> -->
-            						<button type="button" class="btn btn-primary btn-md"   onclick="submit_region('<?=$_POST[id];?>')" style="width: 100%"> <span id="txt_btn_save5"> เพิ่ม </span></button>
+            						<button type="button" class="btn btn-primary btn-md"   onclick="submit_region_company('<?=$_POST[id];?>')" style="width: 100%"> <span id="txt_btn_save5"> เพิ่ม </span></button>
             					</div>
             				</div>
-
-
-            				<!-- </div> -->
             				<div class="row">
             					<div class="box-head">
             						<header><h4 class="text-light">จัดการค่าตอบแทน</h4></header>
             					</div>
             					<div class="col-md-12">
             						
-            						<div id="box_com_add">
+            						<div id="box_com_add_company">
             							
             						</div>
             					</div>
             				</div>
-            				<!-- </form> -->
             			</div>
 
             		</div>
@@ -75,7 +53,7 @@
         </div>
         <script>
         	var param;
-        	function change_region(item) {
+        	function change_region_company(item) {
         		// console.log(item)
         		var data_country = JSON.parse('<?=json_encode($country);?>');
         		// console.log(data_country[item])
@@ -91,14 +69,12 @@
         		console.log(param)
         		
         	}
-        	init('<?=$_POST[id];?>','<?=$_GET[option];?>')
-        	function init(item,options) {
-        		var url2 = base_url+ "shop/get_region?option="+options;
+        	init_company('<?=$_POST[id];?>')
+        	function init_company(item) {
+        		var url2 = base_url+ "company/get_region_company";
         		var param = {
         			i_shop: item
         		}
-                console.log('************************************')
-                console.log(url2)
         		$.ajax({
         			url: url2,
         			data: param,
@@ -108,7 +84,7 @@
         			},
         			success: function(ele) {
         				// console.log(ele);
-        				$('#box_com_add').html(ele);
+        				$('#box_com_add_company').html(ele);
 
         			}
         		});

@@ -16,7 +16,7 @@
 							$_select = array('*');
 							$_order = array();
 							$_order['id'] = 'asc';
-							$arr[region] = $this->Main_model->fetch_data('','',TBL_SHOP_COUNTRY_ICON.$_GET[option],$_where,$_select,$_order);
+							$arr[region] = $this->Main_model->fetch_data('','',TBL_SHOP_COUNTRY_ICON_COMPANY,$_where,$_select,$_order);
 							if ($val->status == 1) {
 								$btn_color = 'btn-success';
 								$text_status = 'เปิด';
@@ -67,11 +67,11 @@
 									</div>
 									<div class="col-md-3" >
 
-										<button type="button" class="btn btn-primary btn-md" id="btn_region_sub<?=$val2->id;?>" onclick="submit_region_sub('<?=$val->id;?>')">
+										<button type="button" class="btn btn-primary btn-md" id="btn_region_sub<?=$val2->id;?>" onclick="submit_region_sub_company('<?=$val->id;?>')">
 											<span id="txt_btn_save"> เพิ่ม /แก้ไข้ </span>
 										</button>
-										<button id="btn_status<?=$val->id;?>" type="button" onclick="updateStatus('<?=$val->id;?>','<?=$val->status;?>','<?=TBL_SHOP_COUNTRY.$_GET[option];?>')" style="  cursor: pointer; width: 36px;" class="btn btn-md <?=$btn_color;?> btn-equal" data-toggle="tooltip" data-placement="top" data-original-title="เปิดฝปิด" ><?=$text_status;?></button>
-											<button type="button" class="btn btn-md btn-danger btn-equal" data-toggle="modal" data-target="#deleteModal"  data-original-title="ลบ" onclick="firstDelete('ค่าตอบแทน','<?=$val->id;?>','<?=TBL_SHOP_COUNTRY.$_GET[option];?>')"><i class="fa fa-trash-o"></i></button>
+										<button id="btn_status<?=$val->id;?>" type="button" onclick="updateStatus('<?=$val->id;?>','<?=$val->status;?>','<?=TBL_SHOP_COUNTRY_COMPANY;?>')" style="  cursor: pointer; width: 36px;" class="btn btn-md <?=$btn_color;?> btn-equal" data-toggle="tooltip" data-placement="top" data-original-title="เปิดฝปิด" ><?=$text_status;?></button>
+											<button type="button" class="btn btn-md btn-danger btn-equal" data-toggle="modal" data-target="#deleteModal"  data-original-title="ลบ" onclick="firstDelete('ค่าตอบแทน','<?=$val->id;?>','<?=TBL_SHOP_COUNTRY_ICON_COMPANY;?>')"><i class="fa fa-trash-o"></i></button>
 									</div>
 										<!-- <div class="col-md-12">
 												<div class="box_sub_region<?=$val->id;?>">
@@ -93,7 +93,7 @@
 											$_select = array('*');
 											$_order = array();
 											$_order['id'] = 'asc';
-											$data['list_plan'] = $this->Main_model->fetch_data('','',TBL_SHOP_COUNTRY_COM_LIST.$_GET[option],$_where,$_select,$_order);
+											$data['list_plan'] = $this->Main_model->fetch_data('','',TBL_SHOP_COUNTRY_COM_LIST_PRICE,$_where,$_select,$_order);
 
 											foreach($data['list_plan'] as $key=>$val){
 
@@ -102,7 +102,7 @@
 												$_select = array('*');
 												$_order = array();
 												$_order['id'] = 'asc';
-												$data['list_price'] = $this->Main_model->fetch_data('','',TBL_SHOP_COUNTRY_COM_LIST_PRICE.$_GET[option],$_where,$_select,$_order);
+												$data['list_price'] = $this->Main_model->fetch_data('','',TBL_SHOP_COUNTRY_COM_LIST_PRICE_COMPANY,$_where,$_select,$_order);
 
 												?>
 
