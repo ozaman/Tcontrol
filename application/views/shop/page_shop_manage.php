@@ -1,4 +1,4 @@
- <form class="form-horizontal form-banded form-bordered"  id="form_shop_all"   >
+<form class="form-horizontal form-banded form-bordered"  id="form_shop_all"   >
   <?php 
   if ($_GET[state] == 'add') {
     $shop_page = 'เพิ่มร้านค่า';
@@ -14,523 +14,489 @@
     <li class="head_title_sub_3" ><?=$shop_page;?></li>
     <li class="head_title_sub_4" style="display: none;" ><a class="head_title_sub_4"></a></li>
   </ol>
-
-  <!-- <div class="section-header"> -->
-    <!-- <h3 class="text-standard"><i class="fa fa-fw fa-arrow-circle-right text-gray-light"></i><small>ร้านค้าทั้งหมด</small></h3> -->
-    <!-- </div> -->
-    <div class="section-body ">
-
-      <input type="hidden" name="" id="manage_com" value="<?=$_GET[id];?>">
+  <div class="section-body ">
+    <input type="hidden" name="" id="manage_com" value="<?=$_GET[id];?>">
       <!-- 1 T-SHARE - SHOP
            2 T-SHARE - COMPANY
-       -->
-      <input type="hidden" name="" id="section_state" value="1">
-      <div class="row" id="body_page_call"><div class="col-md-6" >
-        <div class="col-lg-12">
-          <?php
-        // echo $_GET[state].'*************';
+         -->
+         <?php
+         $_where = array();
+         $_where['main'] = $_GET[sub];
+         $_select = array('*');
+         $_order = array();
+         $_order['topic_en'] = 'asc';
+         $arr[sub] = $this->Main_model->fetch_data('','',TBL_SHOPPING_PRODUCT_SUB,$_where,$_select,$_order);
+         $_where = array();
+         $_where['id'] = $arr[sub]->main;
+         $_select = array('*');  $_order = array();
+         $_order['topic_en'] = 'asc';  
 
+         $arr[main] = $this->Main_model->fetch_data('','',TBL_SHOPPING_PRODUCT_MAIN,'',$_select,$_order);
 
+         $_select = array('*');
+         $_order = array();
+         $_order['topic_en'] = 'asc';
+         $arr[region] = $this->Main_model->fetch_data('','',TBL_WEB_REGION,'',$_select,$_order);
 
+         $_select = array('*');
+         $_order = array();
+         $_order['name_th'] = 'asc';
+         $arr[province] = $this->Main_model->fetch_data('','',TBL_WEB_PROVINCE,'',$_select,$_order);
+         $_where = array();
+         $_where['PROVINCE_ID'] = $shop->province;
+         $_select = array('*');
+         $_order = array();
+         $_order['name_th'] = 'asc';
+         $arr[amphur] = $this->Main_model->fetch_data('','',TBL_WEB_AMPHUR,$_where,$_select,$_order);
+         if ($_GET[state] == 'add') {
+          $shop_page = 'เพิ่มร้านค่า';
+        }
+        else {
+          $shop_page = 'แก้ไขร้านค่า';
+        }
+        $_where = array();
+        $_where['i_status'] = 1;
+        $_select = array('*');
+        $_order = array();
+        $_order['i_index'] = 'asc';
+        $arr[COMPENSATION] = $this->Main_model->fetch_data('','',TBL_SHOP_COMPENSATION_TYPE,$_where,$_select,$_order);
+        ?>
+        <input type="hidden" name="" id="section_state" value="1">
+        <div class="row" id="body_page_call">
+          <div class="col-md-6">
+            <div class="box box-outlined" >
+              <div class="box-head">
 
-          $_where = array();
-          $_where['main'] = $_GET[sub];
-        // $_where['main'] = 1;
-          $_select = array('*');
-          $_order = array();
-          $_order['topic_en'] = 'asc';
-          $arr[sub] = $this->Main_model->fetch_data('','',TBL_SHOPPING_PRODUCT_SUB,$_where,$_select,$_order);
-// echo json_encode($arr[sub]);
-          $_where = array();
-          $_where['id'] = $arr[sub]->main;
-          $_select = array('*');  $_order = array();
-          $_order['topic_en'] = 'asc';  
+                <div class="col-md-12"><header><h4 class="text-light"><i class="fa fa-pencil fa-fw"> </i><strong> ข้อมูลสถานที่ </strong></h4></header></div>
+                <ul class="nav nav-tabs " data-toggle="tabs" style="margin-bottom: 6px; ">
+                  <li class="active"><a href="#home_detail"> ข้อมูลสถานที่</a></li>
 
-          $arr[main] = $this->Main_model->fetch_data('','',TBL_SHOPPING_PRODUCT_MAIN,'',$_select,$_order);
+                  <li class="" onclick="_box_document(<?=$_GET[id];?>)"><a href="#document"> เอกสาร</a></li>
 
-          $_select = array('*');
-          $_order = array();
-          $_order['topic_en'] = 'asc';
-          $arr[region] = $this->Main_model->fetch_data('','',TBL_WEB_REGION,'',$_select,$_order);
+                  <li class=""><a href="#images"> รูปภาพ</a></li>
+                  <li class=""><a href="#section_time"> ติดต่อ / เวลาทำการ</a></li>
+                </ul>
+              </div>
+              <div class=" tab-content">
+                <div class="tab-pane active" id="home_detail">
+                  <div class="box-body no-padding">
+                    <div class="col-md-12">
+                      <div class="form-group form-group-md">
+                        <div class="col-md-2">
+                          <label class="control-label">หมวดหมู่</label>
+                        </div>
 
-          $_select = array('*');
-          $_order = array();
-          $_order['name_th'] = 'asc';
-          $arr[province] = $this->Main_model->fetch_data('','',TBL_WEB_PROVINCE,'',$_select,$_order);
+                        <div class="col-md-10" >
+                          <select id="select_category" class="form-control" name="main"  onchange="_select_category(this.value);" >
+                            <option value="">เลือกหมวดหมู่ </option>
+                            <?php
+                            foreach($arr[main] as $key=>$main){
+                              if($shop->main == $main->id ){
+                                $selected_sub = "selected";
+                              }else{
+                                $selected_sub = "";
+                              }
+                              ?>
+                              <option value="<?=$main->id;?>"  <?=$selected_sub;?> ><?=$main->topic_th;?></option>
+                            <?php } ?>
+                          </select>
 
+                        </div>
+                      </div>
+                      <div class="form-group form-group-md">
+                        <div class="col-md-2">
+                          <label class="control-label">ประเภท</label>
+                        </div>
+                        <div class="col-md-10" id="data_select_category">
+                          <select id="select_type" class="form-control" name="sub"> <?=$chk_disabled;?> >
+                            <option value="">เลือกประเภท</option>
+                            <?php
 
-          $_where = array();
-          $_where['PROVINCE_ID'] = $shop->province;
-        // $_where['main'] = 1;
-          $_select = array('*');
-          $_order = array();
-          $_order['name_th'] = 'asc';
-          $arr[amphur] = $this->Main_model->fetch_data('','',TBL_WEB_AMPHUR,$_where,$_select,$_order);
-    // print_r(json_encode($arr[amphur]))
-          if ($_GET[state] == 'add') {
-            $shop_page = 'เพิ่มร้านค่า';
+                            foreach($arr[sub] as $key=>$sub){
+                             if($shop->sub == $sub->id ){
+                              $selected_sub = "selected";
+                            }else{
+                              $selected_sub = "";
+                            }
+                            ?>
+                            <option value="<?=$sub->id;?>"  <?=$selected_sub;?> ><?=$sub->topic_th;?></option>
+                          <?php } ?>
 
-    // echo $_GET[sub].'-----'.$arr[sub][0]->main;
-    // $chk_disabled = '';
-
-
-          }
-          else {
-            $shop_page = 'แก้ไขร้านค่า';
-    // $chk_disabled = 'disabled';
-          }
-          ?>
-          <div class="box box-outlined">
-            <div class="box-head">
-              <header><h4 class="text-light"><i class="fa fa-pencil fa-fw"></i> ข้อมูลสถานที่ <strong></strong></h4></header>
-            </div>
-            <div class="box-body no-padding">
-              <!-- <form class="form-horizontal form-banded form-bordered"  id="form_detail_shop"   > -->
-                <div class="form-group form-group-md">
+                        </select>
+                      </div>
+                    </div>
+                    <div class="form-group form-group-md">
+                      <div class="col-md-2">
+                        <label class="control-label">ชื่อ EN</label>
+                      </div>
+                      <div class="col-md-10">
+                       <input class="form-control" name="topic_en" type="text" id="topic_en"  value="<?=$shop->topic_en?>">
+                     </div>
+                   </div>
+                   <div class="form-group form-group-md">
+                    <div class="col-md-2">
+                      <label class="control-label">ชื่อ TH</label>
+                    </div>
+                    <div class="col-md-10">
+                     <input class="form-control" name="topic_th" type="text" id="topic_th"  value="<?=$shop->topic_th?>">
+                   </div>
+                 </div>
+                 <div class="form-group form-group-md">
                   <div class="col-md-2">
-                    <label class="control-label">หมวดหมู่</label>
+                    <label class="control-label">ชื่อ CN</label>
                   </div>
 
-                  <div class="col-md-10" >
-                    <select id="select_category" class="form-control" name="main"  onchange="_select_category(this.value);" >
-                      <option value="">เลือกหมวดหมู่ </option>
-                      <?php
-                // print_r(json_encode($arr[main]));
-                      foreach($arr[main] as $key=>$main){
+                  <div class="col-md-10">
+                    <input class="form-control" name="topic_cn" type="text" id="topic_cn"  value="<?=$shop->topic_cn?>">
+                  </div>
+                </div>
+                <div class="form-group form-group-md">
+                  <div class="col-md-2">
+                    <label class="control-label">ภูมิภาค</label>
+                  </div>
 
-                        if($shop->main == $main->id ){
+                  <div class="col-md-10">
+                    <select class="form-control" name="region" id="region" onclick="_region(this.value)">
+                      <option value="">เลือกภูมิภาค </option>
+                      <?php
+                      foreach($arr[region] as $key=>$region){
+                        if($shop->region == $region->id ){
                           $selected_sub = "selected";
                         }else{
                           $selected_sub = "";
                         }
                         ?>
-                        <option value="<?=$main->id;?>"  <?=$selected_sub;?> ><?=$main->topic_th;?></option>
+                        <option value="<?=$region->id;?>"  <?=$selected_sub;?> ><?=$region->topic_th;?></option>
                       <?php } ?>
                     </select>
-
                   </div>
                 </div>
                 <div class="form-group form-group-md">
                   <div class="col-md-2">
-                    <label class="control-label">ประเภท</label>
+                    <label class="control-label">จังหวัด</label>
                   </div>
-
-                  <div class="col-md-10" id="data_select_category">
-                    <select id="select_type" class="form-control" name="sub"> <?=$chk_disabled;?> >
-                      <option value="">เลือกประเภท</option>
+                  <div class="col-md-10">
+                    <select class="form-control" name="province" id="province" onchange="_province(this.value);">
+                      <option value="">เลือกจังหวัด</option>
                       <?php
-
-                      foreach($arr[sub] as $key=>$sub){
-                       print_r(json_encode($sub->id));
-                       if($shop->sub == $sub->id ){
-                        $selected_sub = "selected";
-                      }else{
-                        $selected_sub = "";
-                      }
-                      ?>
-                      <option value="<?=$sub->id;?>"  <?=$selected_sub;?> ><?=$sub->topic_th;?></option>
-                    <?php } ?>
-
-                  </select>
-                  <!-- <input name="sub" type="hidden" id="sub"  value="<?=$_GET[sub];?>"> -->
-                  <!-- <input name="main" type="hidden" id="main" value="<?=$arr[sub][0]->main;?>"> -->
+                      foreach($arr[province] as $key=>$province){
+                        if($shop->province == $province->id ){
+                          $selected_sub = "selected";
+                        }else{
+                          $selected_sub = "";
+                        }
+                        ?>
+                        <option value="<?=$province->id;?>"  <?=$selected_sub;?> ><?=$province->name_th;?></option>
+                      <?php } ?>
+                    </select>
+                  </div>
                 </div>
-              </div>
-              <div class="form-group form-group-md">
-                <div class="col-md-2">
-                  <label class="control-label">ชื่อ EN</label>
-                </div>
+                <div class="form-group form-group-md">
+                  <div class="col-md-2">
+                    <label class="control-label">อำเภอ/เขต</label>
+                  </div>
+                  <div class="col-md-10">
+                    <select name="select_amphur" class="form-control" id="select_amphur" >
+                      <option value="">เลือกเขต/อำเภอ</option>
+                      <?php
+                      foreach($arr[amphur] as $key=>$amphur){
 
-                <div class="col-md-10">
-                 <input class="form-control" name="topic_en" type="text" id="topic_en"  value="<?=$shop->topic_en?>">
+                        if($shop->amphur == $amphur->id ){
+                          $selected_sub = "selected";
+                        }else{
+                          $selected_sub = "";
+                        }
+                        ?>
+                        <option value="<?=$amphur->id;?>"  <?=$selected_sub;?> ><?=$amphur->name_th;?></option>
+                      <?php } ?>
+
+                    </select>
+                  </div>
+                </div>
+                <div class="form-group form-group-md">
+                  <div class="col-md-2">
+                    <label class="control-label">ที่อยู่</label>
+                  </div>
+                  <div class="col-md-10">
+                   <textarea name="address" rows="3" class="form-control" id="address" placeholder="ที่อยู่"><?=$shop->address;?>
+                 </textarea>
                </div>
              </div>
              <div class="form-group form-group-md">
               <div class="col-md-2">
-                <label class="control-label">ชื่อ TH</label>
+                <label class="control-label">Link แผนที่ </label>
+              </div>
+              <div class="col-md-8">
+                <input type="text" class="form-control" value="<?=$shop->map;?>" name="map">
+              </div>
+              <div class="col-md-2">
+                <button type="button" class="btn btn-md" id="find_latlng_link"><strong>ค้นหา</strong></button>
+              </div>
+            </div>
+            <div class="form-group form-group-md">
+              <div class="col-md-2">
+                <label class="control-label">แผนที่</label>
+              </div>
+              <div class="col-md-10">
+                <input type="hidden" name="lat_db" value="<?=$shop->lat;?>" id="lat">
+                <input type="hidden" name="lng_db" value="<?=$shop->lng;?>" id="lng">
+                <div id="map_frame" style="">
+                </div>
+              </div>
+            </div>
+            <div class="form-group form-group-md">
+              <div class="col-md-2">
+                <label class="control-label">เบอร์โทรศัพท์</label>
+              </div>
+              <div class="col-md-10">
+                <input class="form-control" name="phone" type="text" id="phone"  value="<?=$shop->phone;?>">
+              </div>
+            </div>
+            <div class="form-group form-group-md">
+              <div class="col-md-2">
+                <label class="control-label">อีเมล์</label>
               </div>
 
               <div class="col-md-10">
-               <input class="form-control" name="topic_th" type="text" id="topic_th"  value="<?=$shop->topic_th?>">
-             </div>
+                <input class="form-control" name="email" type="text" id="email"  value="<?=$shop->email;?>">
+              </div>
+            </div>
+            <div class="form-group form-group-md">
+              <div class="col-md-10">
+              </div>
+              <div class="col-md-2">
+               <?php
+               if ($_GET[state] == 'add') {
+                $btn_none = 'hide';
+              }
+              else{
+               $btn_none = 'show';
+             }
+             ?>
+             <button type="button" class="btn btn-primary btn-md <?=$btn_none;?> " id="submit_data_1" onclick="form_detail_shop('<?=$_GET[id];?>','shop')"> <span id="txt_btn_save5" > บันทึกข้อมูล </span></button>
            </div>
-           <div class="form-group form-group-md">
-            <div class="col-md-2">
-              <label class="control-label">ชื่อ CN</label>
-            </div>
-
-            <div class="col-md-10">
-              <input class="form-control" name="topic_cn" type="text" id="topic_cn"  value="<?=$shop->topic_cn?>">
-            </div>
-          </div>
-          <div class="form-group form-group-md">
-            <div class="col-md-2">
-              <label class="control-label">ภูมิภาค</label>
-            </div>
-
-            <div class="col-md-10">
-              <select class="form-control" name="region" id="region" onclick="_region(this.value)">
-                <option value="">เลือกภูมิภาค </option>
-                <?php
-                // print_r(json_encode($arr[main]));
-                foreach($arr[region] as $key=>$region){
-
-                  if($shop->region == $region->id ){
-                    $selected_sub = "selected";
-                  }else{
-                    $selected_sub = "";
-                  }
-                  ?>
-                  <option value="<?=$region->id;?>"  <?=$selected_sub;?> ><?=$region->topic_th;?></option>
-                <?php } ?>
-
-              </select>
-            </div>
-          </div>
-          <div class="form-group form-group-md">
-            <div class="col-md-2">
-              <label class="control-label">จังหวัด</label>
-            </div>
-
-            <div class="col-md-10">
-              <select class="form-control" name="province" id="province" onchange="_province(this.value);">
-                <option value="">เลือกจังหวัด</option>
-                <?php
-                // print_r(json_encode($arr[main]));
-                foreach($arr[province] as $key=>$province){
-
-                  if($shop->province == $province->id ){
-                    $selected_sub = "selected";
-                  }else{
-                    $selected_sub = "";
-                  }
-                  ?>
-                  <option value="<?=$province->id;?>"  <?=$selected_sub;?> ><?=$province->name_th;?></option>
-                <?php } ?>
-
-
-              </select>
-            </div>
-
-          </div>
-          <div class="form-group form-group-md">
-            <div class="col-md-2">
-              <label class="control-label">อำเภอ/เขต</label>
-            </div>
-
-            <div class="col-md-10">
-              <select name="select_amphur" class="form-control" id="select_amphur" >
-                <option value="">เลือกเขต/อำเภอ</option>
-                <?php
-                foreach($arr[amphur] as $key=>$amphur){
-
-                  if($shop->amphur == $amphur->id ){
-                    $selected_sub = "selected";
-                  }else{
-                    $selected_sub = "";
-                  }
-                  ?>
-                  <option value="<?=$amphur->id;?>"  <?=$selected_sub;?> ><?=$amphur->name_th;?></option>
-                <?php } ?>
-
-              </select>
-            </div>
-
-          </div>
-          <div class="form-group form-group-md">
-            <div class="col-md-2">
-              <label class="control-label">ที่อยู่</label>
-            </div>
-
-            <div class="col-md-10">
-             <textarea name="address" rows="3" class="form-control" id="address" placeholder="ที่อยู่"><?=$shop->address;?>
-           </textarea>
-
          </div>
-
        </div>
-       <div class="form-group form-group-md">
-        <div class="col-md-2">
-          <label class="control-label">Link แผนที่ </label>
-        </div>
-        <div class="col-md-8">
-          <input type="text" class="form-control" value="<?=$shop->map;?>" name="map">
+     </div>
+   </div>
 
-        </div>
-        <div class="col-md-2">
-          <button type="button" class="btn btn-md" id="find_latlng_link"><strong>ค้นหา</strong></button>
-        </div>
-
-      </div>
-      <div class="form-group form-group-md">
-        <div class="col-md-2">
-          <label class="control-label">แผนที่</label>
-        </div>
-
-        <div class="col-md-10">
-          <input type="hidden" name="lat_db" value="<?=$shop->lat;?>" id="lat">
-          <input type="hidden" name="lng_db" value="<?=$shop->lng;?>" id="lng">
-          <div id="map_frame" style="">
-
-
-
-          </div>
-
-   <!--  <div class="col-md-6">
-      <input class="form-control" name="lat" type="text" id="lat" value="<?=$shop->lat;?>">
-      <p class="help-block">ละติดจูด</p>
+   <div class="tab-pane" id="document"> 
+    <div class="col-md-12">
+      <div id="box_document" onload="_box_document('<?=$_GET[id];?>')"></div>
     </div>
-    <div class="col-md-6">
-      <input class="form-control" name="lng" type="text" id="lng" value="<?=$shop->lng;?>">
-      <p class="help-block">ลองติจูด</p>
-    </div> -->
+   </div>
+   <div class="tab-pane" id="images">            <p>Duo semper accumsan ea, quidam convenire cum cu, oportere maiestatis incorrupte est eu. Soluta audiam timeam ius te, idque gubergren forensibus ad mel, persius urbanitas usu id. Civibus nostrum fabellas mea te, ne pri lucilius iudicabit. Ut cibo semper vituperatoribus vix, cum in error elitr. Vix molestiae intellegat omittantur an, nam cu modo ullum scriptorem.</p>
+    <p>Quod option numquam vel in, et fuisset delicatissimi duo, qui ut animal noluisse erroribus. Ea eum veniam audire. Per at postea mediocritatem, vim numquam aliquid eu, in nam sale gubergren. Dicant vituperata consequuntur at sea, mazim commodo</p>
   </div>
+  <div class="tab-pane" id="section_time"> <!-- TIME OPEN -->
+   <!-- Contacts -->
+   <div class="col-md-12">
+    <div class="box-head">
+      <button type="button" class="btn btn-md btn-success btn-equal " onclick="add_contact('<?=$shop->id;?>')"> <i class="fa fa-plus " ></i>
+      </button>
+      <header><h4 class="text-light"> ผู้ติดต่อ </h4></header>
+    </div>
+    <div id="box_contact" ></div>
+
+  </div><!--END Contacts -->
+  <div class="col-md-12">
+    <div class="box-head" >
+      <header><h4 class="text-light"> เวลาทำการ <strong></strong></h4></header>
+    </div>
+    <div class="form-group form-group-md">
+      <div class="col-md-12">
+        <div id="box_plan_time">
+          <?php include 'box_plan_time.php';?>
+        </div>
+      </div>
+    </div>
+    <div class="form-group form-group-md">
+      <div class="col-md-12">
+        <?php
+        if ($_GET[state] == 'add') {
+         ?>
+         <button type="button" class="btn btn-primary btn-md pull-right" id="submit_data_2" onclick="submit_add_shop()"> <span > บันทึกข้อมูล </span></button>
+         <?php
+       }
+       else{
+        ?>
+        <button type="button" class="btn btn-primary btn-md pull-right" id="submit_data_2" onclick="submit_data_plan_time('<?=$_GET[id];?>','time')"> <span > บันทึกข้อมูล </span></button>
+        <?php
+      }
+      ?>
+    </div>
+  </div>
+</div><!--  END TIME OPEN -->
 </div>
-<div class="form-group form-group-md">
-  <div class="col-md-2">
-    <label class="control-label">เบอร์โทรศัพท์</label>
-  </div>
-
-  <div class="col-md-10">
-    <input class="form-control" name="phone" type="text" id="phone"  value="<?=$shop->phone;?>">
-  </div>
 </div>
-<div class="form-group form-group-md">
-  <div class="col-md-2">
-    <label class="control-label">อีเมล์</label>
-  </div>
-
-  <div class="col-md-10">
-    <input class="form-control" name="email" type="text" id="email"  value="<?=$shop->email;?>">
-  </div>
-</div>
-<div class="form-group form-group-md">
-  <div class="col-md-10">
-
-  </div>
-
-  <div class="col-md-2">
-   <?php
-   if ($_GET[state] == 'add') {
-    $btn_none = 'hide';
-  }
-  else{
-   $btn_none = 'show';
- }
- ?>
- <button type="button" class="btn btn-primary btn-md <?=$btn_none;?>" id="submit_data_1" onclick="form_detail_shop('<?=$_GET[id];?>','shop')"> <span id="txt_btn_save5" > บันทึกข้อมูล </span></button>
-</div>
-</div>
-
-
-</form>
-</div><!--end .box-body -->
 </div><!--end .box -->
 </div>
-</div>
-
-
-
-
 
 
 <div class="col-md-6">
-
-
-
   <div class="col-lg-12">
     <div class="box box-outlined">
       <div class="box-head">
-        <ul class="nav nav-tabs" data-toggle="tabs">
-          <li class="" onclick="_box_region_show('<?=$_GET[id];?>','_company')"><a href="#shop_t_share"> T-share - ร้านค้า</a></li>
-          <li class="active" onclick="_box_region_show('<?=$_GET[id];?>','')"><a href="#t_share_app"> T-share - Taxi</a></li>
-          <li class="" onclick="_box_region_show('<?=$_GET[id];?>','_gui')"><a href="#t_share_guide"> T-share - Guide</a></li>
-
-        </ul>
-      </div>
-      <div class="box-body-s tab-content">
-        <div class="tab-pane active" id="t_share_app">
-          <div class="box-head" style="padding: 15px 0;">
-            <div class="col-md-4">
-              <h4 class="text-light">ประเภทรายจ่าย </h4>
-            </div>
-            <div class="col-md-4">
-              <button type="button" class="btn btn-success btn-md " onclick="open_commision('<?=$shop->id;?>')"> <span id="txt_btn_save5"> แก้ไขประเภทรายจ่าย </span></button>
-            </div>
-          </div>
-          <div class="box-body no-padding">
-            <div class="col-md-12"> 
-              <div  class="box_region_show"></div>
-            </div>
-          </div>
-          <!-- END  -->
-
-          <!-- Contacts -->
-          <div class="col-md-12">
-            <div class="box-head">
-              <header><h4 class="text-light"> ผู้ติดต่อ <strong></strong></h4></header>
-            </div>
-            <?php 
-            $_where = array();
-            $_where['product_id'] = $_GET[id];
-      // $_where['type'] = 'zello';
-            $_where['admintype'] = 2;
-            $_select = array('*');
-            $_order = array();
-            $_order['id'] = 'asc';  
-      // $this->db->where('product_id<>',$_GET[id]);
-      // $this->db->where('admintype<>',2);
-            $this->db->where('type<>','zello');
-            $arr[SHOPPING_CONTACT] = $this->Main_model->fetch_data('','',TBL_SHOPPING_CONTACT,$_where,$_select,$_order);
-      // print_r(json_encode($arr[SHOPPING_CONTACT]));
-            ?>
-            <!-- <form class="form-horizontal form-banded form-bordered"  > -->
-              <div class="form-group form-group-md">
-                <div class="col-md-12">
-                  <div class="table-responsive no-margin">
-                    <table class="table table-striped table-hover">
-                      <thead bgcolor="#999999" style="color: #ffffff">
-                        <tr>
-                          <th>#</th>
-                          <th>แก้ไข</th>
-                          <th>ลบ</th>
-                          <th>ชื่อ</th>
-                          <th>เบอร์โทรศัพท์</th>
-                          <th>ตำแหน่ง</th>
-
-                        </tr>
-                      </thead>
-                      <tbody>
-                        <?php foreach($arr[SHOPPING_CONTACT] as $key => $value){ 
-                          $_where = array();
-                          $_where['id'] = $value->usertype;
-                          $_select = array('*');
-                          $arr[CONTACT_TYPE] = $this->Main_model->rowdata(TBL_SHOPPING_CONTACT_TYPE,$_where,$_select);
-                          ?>
-
-                          <tr>
-                            <td><?=$key+1;?></td>
-                            <td height="30" >
-                              <button type="button" onclick="//edit_plan_com_price('10')" class="btn btn-xs btn-info btn-equal" data-toggle="tooltip" data-placement="top" data-original-title="แก้ไข้"><i class="fa fa-pencil"></i></button>
-                            </td>
-                            <td >
-                              <button type="button" class="btn btn-xs btn-danger btn-equal" data-toggle="modal" data-target="#deleteModal" data-original-title="ลบ" onclick="//firstDelete('ประเภทค่าตอบแทน','10','shop_country_com_list')"><i class="fa fa-trash-o"></i></button>
-                            </td>
-                            <td >  
-                             <?=$value->name;?> </td>
-                             <td >
-
-                              <?=$value->phone;?> 
-                            </td>
-                            <td > <?=$arr[CONTACT_TYPE]->usertype;?></td>
-                          </tr>
-                        <?php   } ?>
-                      </tbody>
-                    </table>
-                  </div>
-                </div>
-              </div>
-            </div><!--END Contacts -->
-
-            <!-- TIME OPEN -->
-            <div class="col-md-12">
-              <div class="box-head" >
-                <header><h4 class="text-light"> เวลาทำการ <strong></strong></h4></header>
-              </div>
-              <!-- <div class="box-body" style="padding: 10px"> -->
-                <div class="form-group form-group-md">
-                  <div class="col-md-12">
-                    <div id="box_plan_time">
-                      <?php include 'box_plan_time.php';?>
-                    </div>
-                  </div>
-                </div>
-                <div class="form-group form-group-md">
-                  <div class="col-md-12">
-                    <?php
-                    if ($_GET[state] == 'add') {
-                     ?>
-                     <button type="button" class="btn btn-primary btn-md pull-right" id="submit_data_2" onclick="submit_add_shop()"> <span > บันทึกข้อมูล </span></button>
-                     <?php
-
-                   }
-                   else{
-                    ?>
-                    <button type="button" class="btn btn-primary btn-md pull-right" id="submit_data_2" onclick="submit_data_plan_time('<?=$_GET[id];?>','time')"> <span > บันทึกข้อมูล </span></button>
-                    <?php
-                  }
-                  ?>
-                </div>
-              </div>
-              <!-- </div> -->
-            </div><!--  END TIME OPEN -->
-
-          </div><!-- END T-share - Taxi -->
-
-
-
-
-          <!-- T_SHARE - SHOPPING -->
-          <div class="tab-pane" id="shop_t_share">
-            <div class="box-head" style="padding: 15px 0;">
-            <div class="col-md-4">
-              <h4 class="text-light"> ประเภทรายจ่าย </h4>
-            </div>
-            <div class="col-md-4">
-              <button type="button" class="btn btn-success btn-md " onclick="open_commision('<?=$shop->id;?>')"> <span id="txt_btn_save5"> แก้ไขประเภทรายจ่าย </span></button>
-            </div>
-          </div>
-          <div class="box-body no-padding">
-            <div class="col-md-12"> 
-              <div  class="box_region_show"></div>
-            </div>
-          </div>
-          </div>
-          <div class="tab-pane" id="t_share_guide">
-            <div class="box-head" style="padding: 15px 0;">
-            <div class="col-md-4">
-              <h4 class="text-light"> ประเภทรายจ่าย </h4>
-            </div>
-            <div class="col-md-4">
-              <button type="button" class="btn btn-success btn-md " onclick="open_commision('<?=$shop->id;?>')"> <span id="txt_btn_save5"> แก้ไขประเภทรายจ่าย </span></button>
-            </div>
-          </div>
-          <div class="box-body no-padding">
-            <div class="col-md-12"> 
-              <div  class="box_region_show"></div>
-            </div>
-          </div>
-          </div>
-
+        <div class="col-md-12">
+          <header><h4 class="text-light"><i class="fa fa-pencil fa-fw"> </i><strong> ข้อมูลจัการค่าตอบแทน </strong></h4></header>
         </div>
+        <ul class="nav nav-tabs" data-toggle="tabs" >
+         <li class="<?=$active_shop;?> active" onclick="_box_region_show('<?=$_GET[id];?>','_company')">
+          <a href="#section_shop"> T-share - Shop</a>
+        </li> 
+        <?php
+        foreach($arr[COMPENSATION] as $val){
+          $_where = array();
+          $_where['i_shop'] = $_GET[id];
+          $_where['i_compensation'] = $val->id;
+          $_select = array('*');
+          $type = $this->Main_model->rowdata(TBL_SHOP_EXPENDITURE_TYPE,$_where,$_select);
+          if ($type == null) {
+            $set_value = 0;
+            $isactive = '';
+          }
+          else{
+            if ($type->i_status == 1) {
+             ?>
+             <li class="" onclick="_box_region_show('<?=$_GET[id];?>','<?=$type->s_db;?>')">
+              <a href="#section_<?=$type->s_field;?>"> T-share - <span style="text-transform:capitalize;"><?=$type->s_field;?></span></a>
+            </li>
+          <?php }
+        }
+      }?>
+    </ul>
+  </div>
+  <div class="box-body-s tab-content">
+    <!-- T_SHARE - SHOPPING -->
+    <div class="tab-pane active" id="section_shop">
+      <?php
+      if ($type->i_company == 1) {
+        $in_shop = 'active';
+        $chk_in_shop = 'checked="checked"';
+      }
+      else{
+        $in_shop = '';
+        $chk_in_shop = '';
+      }
 
+      if ($type->i_taxi == 1) {
+        $in_taxi = 'active';
+        $chk_in_taxi = 'checked="checked"';
+      }
+      else{
+        $in_taxi = '';
+        $chk_in_taxi = '';
+      }
 
+      if ($type->i_gui == 1) {
+        $in_guide = 'active';
+        $chk_in_guide = 'checked="checked"';
+      }
+      else{
+        $in_guide = '';
+        $chk_in_guide = '';
+      }
 
-
-
-
-
-
-
-
-        <!-- <form class="form-horizontal form-banded form-bordered" action="" name="myform_main"  id="myform_main" method="post"> -->
-
-          <!-- </form> -->
-
-
-
-
-
-        </div><!--end .box-body -->
-      </div><!--end .box -->
+      if ($type->i_tourist == 1) {
+        $in_tourist = 'active';
+        $chk_in_tourist = 'checked="checked"';
+      }
+      else{
+        $in_tourist = '';
+        $chk_in_tourist = '';
+      }
+      ?>
+      <div class="box-body no-padding">
+        <div class="box-head">
+          <header><h4 class="text-light"> ประเภทเปิดใช้งาน <strong></strong></h4></header>
+        </div>
+        <div class="col-md-12 ">
+          <div style="background: #f2f2f2;padding: 10px;">
+            <div  data-toggle="buttons">
+              <?php
+              foreach($arr[COMPENSATION] as $val){
+                $_where = array();
+                $_where['i_shop'] = $_GET[id];
+                $_where['i_compensation'] = $val->id;
+                $_select = array('*');
+                $type = $this->Main_model->rowdata(TBL_SHOP_EXPENDITURE_TYPE,$_where,$_select);
+                if ($type == null) {
+                  $set_value = 0;
+                  $isactive = '';
+                }
+                else{
+                  $set_value = $type->i_status;
+                  if ($set_value == 1) {
+                    $set_value = 1;
+                    $isactive = 'active';
+                  }
+                  else{
+                    $set_value = 0;
+                    $isactive = '';
+                  }
+                }
+                ?>
+                <label class="btn btn-success btn-outline <?=$isactive;?>" id="l_<?=$val->s_topic_en;?>">
+                  <input  <?=$chk_in_taxi;?> type="checkbox" name="in_taxi" id="i_<?=$val->s_topic_en;?>" value="<?=$set_value;?>" onchange="updatetype('<?=$_GET[id];?>',this.value,'<?=$val->s_topic_en;?>','<?=$val->id;?>')" > 
+                  <span style="text-transform:capitalize;"><?=$val->s_topic_en;?></span>
+                </label>
+              <?php } ?>
+            </div>
+          </div>
+          <div class="box-head" style="padding: 15px 0;">
+           <button type="button" class="btn btn-md btn-success btn-equal " onclick="open_commision('<?=$shop->id;?>')"> 
+            <i class="fa fa-plus " ></i>
+          </button>
+          <header><h4 class="text-light"> ประเภทรายจ่าย </h4></header>
+        </div>
+      </div>
+      <div class="col-md-12"> 
+        <div  class="box_region_show"></div>
+      </div>
     </div>
+  </div>
+  <?php
+  foreach($arr[COMPENSATION] as $val){
+    $_where = array();
+    $_where['i_shop'] = $_GET[id];
+    $_where['i_compensation'] = $val->id;
+    $_select = array('*');
+    $type = $this->Main_model->rowdata(TBL_SHOP_EXPENDITURE_TYPE,$_where,$_select);
+    if ($type == null) {
+      $set_value = 0;
+      $isactive = '';
+    }
+    else{
+      if ($type->i_status == 1) {
+       ?>
+       <div class="tab-pane " id="section_<?=$type->s_field;?>">
+        <div class="col-md-12">
+          <div class="box-head" style="padding: 15px 0;">
+            <button type="button" class="btn btn-md btn-success btn-equal " onclick="open_commision('<?=$shop->id;?>')"> <i class="fa fa-plus " ></i>
+            </button>
+            <header><h4 class="text-light">ประเภทรายจ่าย </h4></header>
+          </div>
+          <div class="box-body no-padding">
+            <div  class="box_region_show"></div>
+          </div>
+        </div>
+      </div>
+    <?php }}}?>
 
   </div>
+</div>
+</div>
+</div>
+</div>
+
+</div>
 </form>
 <script>
   setTimeout(function(){
    cal_map('<?=$shop->id;?>')
-   _box_region_show($('#manage_com').val(),'')
+   _box_region_show($('#manage_com').val(),'_company')
+   _box_contact('<?=$shop->id;?>')
+   // _box_document('<?=$shop->id;?>')
  }, 1000);
 
 

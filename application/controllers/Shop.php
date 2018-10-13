@@ -7,7 +7,7 @@ class Shop extends CI_Controller {
 		$this->load->model('Shop_model');
 		// if ($_GET[option] == 1) {
 		// 	$tbl = '';
-			
+
 		// }
 		// if ($_GET[option] == 2) {
 		// 	$tbl = '_company';
@@ -231,7 +231,7 @@ class Shop extends CI_Controller {
 		$_order['id'] = 'asc';
 		$data['region'] = $this->Main_model->fetch_data('','',TBL_SHOP_COUNTRY.$_GET[option],$_where,$_select,$_order);
 		$this->load->view('shop/box_region_show',$data);
-		// echo json_encode(TBL_SHOP_COUNTRY.$_GET[option]);
+		 // echo json_encode(TBL_SHOP_COUNTRY.$_GET[option]);
 	}
 	public function save_edit_com(){
 		$data = $this->Shop_model->save_edit_com();
@@ -265,6 +265,69 @@ class Shop extends CI_Controller {
 		$_select = array('*');
 		$arr = $this->Main_model->fetch_data('','',$table,$_where,$_select,$_order);
 		echo json_encode($arr); // $this->load->view('shop/select/select_type');
+	}
+	public function updatetype(){
+		$data = $this->Shop_model->updatetype();
+		echo json_encode($data);
+	}
+	public function detail_contact(){
+		$this->load->view('shop/box_contact_edit');
+	}
+	public function submit_submit_detail_contact(){
+		$data = $this->Shop_model->submit_submit_detail_contact();
+		echo json_encode($data);
+	}
+	public function box_contact(){
+		$this->load->view('shop/box_contact');
+	}
+	/********* document *********/
+	public function box_document(){
+		$this->load->view('shop/box_document');
+	}
+	public function save_document(){
+		$product_id = $_GET[id];
+		$type_doc = $_POST[type_doc];
+		if($_POST[check_expired]==1){
+			$start_expired = $_POST[date1];
+			$end_expired = $_POST[date2];
+		}else{
+			$start_expired = '';
+			$end_expired = '';
+		}
+
+		for($i=0; $i<count($_FILES['file']['name']); $i++) {
+
+			$tmpFilePath = $_FILES['file']['tmp_name'][$i];
+			if($tmpFilePath != ""){
+				// $ext = pathinfo($_FILES['file']['name'][$i], PATHINFO_EXTENSION);
+
+				// $num = time();
+
+
+				// $doc_name = $type_txt.$product_id."_".$num.$i.".".$ext;
+				// $target_file = "../data/pic/document/place/".$type_txt.$product_id."_".$num.$i.".".$ext;
+				
+				// if(move_uploaded_file($tmpFilePath, $target_file)) {
+				// 	$array = array(
+				// 		"product_id"=>$product_id, 
+				// 		"document_name"=>$doc_name, 
+				// 		"type"=>$type_doc,
+				// 		"start_expired"=>$start_expired,
+				// 		"end_expired"=>$end_expired,
+				// 		"email"=>$_POST[email_send],
+				// 		"phone"=>$_POST[phone_send],
+				// 		"alert_phone"=>$_POST[alert_phone],
+				// 		"alert_email"=>$_POST[alert_email],
+				// 		"day_alert"=>$_POST[day_alert],
+				// 		"status"=>1
+				// 	);	
+
+	   //  	// $reuslt = $db->add_db('place_document_file',$array);
+				// }
+			}
+			// echo json_encode($reuslt);   
+		}
+
 	}
 	################################ SHOP #################################
 }

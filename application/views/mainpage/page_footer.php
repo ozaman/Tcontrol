@@ -19,7 +19,7 @@
             <button type="button" class="close" data-dismiss="modal" aria-hidden="true" onclick="close_modal_custom('shop_manage')" >×</button>
             <h4 class="modal-title" id="formModalLabel"> จัดการประเภทรายจ่าย </h4>
         </div>
-        <form class="form-horizontal" role="form">
+        <!-- <form class="form-horizontal" role="form"> -->
             <div class="modal-body">
                <div id="dody_modal_custom"></div>
                
@@ -29,7 +29,7 @@
                    <!-- <button type="button" class="btn btn-primary">Login</button> -->
                </div>
 
-       </form>
+       <!-- </form> -->
    </div>
 </div>
 </div>

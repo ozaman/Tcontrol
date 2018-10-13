@@ -5,30 +5,30 @@ var option = '';
 // shop('categorie')
 // box_region_show()
 function _box_region_show(item,options) {
-    console.log(item)
-    console.log(options)
-    $('#section_state').val(options)
-    option = options;
-    var url = base_url + "shop/box_region_show?option="+options;
-    var param = {
-      id: item
-    }
-    console.log(url)
-
-    $.ajax({
-      url: url,
-      data: param,
-      type: 'post',
-      error: function() {
-        console.log('Error Profile');
-      },
-      success: function(ele) {
-            // console.log(ele);
-            $('.box_region_show').html(ele);
-
-          }
-        });
+  console.log(item)
+  console.log(options)
+  $('#section_state').val(options)
+  option = options;
+  var url = base_url + "shop/box_region_show?option="+options;
+  var param = {
+    id: item
   }
+  console.log(url)
+
+  $.ajax({
+    url: url,
+    data: param,
+    type: 'post',
+    error: function() {
+      console.log('Error Profile');
+    },
+    success: function(ele) {
+             //console.log(ele);
+             $('.box_region_show').html(ele);
+
+           }
+         });
+}
 function get_shop_all() {
     // alert('aaaaa')
     // console.log(username);
@@ -186,7 +186,7 @@ function get_shop_all() {
       },
       success: function(res) {
         console.log(res);
-         Command: toastr["success"]("เพิ่มสัญชาติสำเร็จ")
+        Command: toastr["success"]("เพิ่มสัญชาติสำเร็จ")
         var url2 = base_url + "shop/get_region?option="+option;
         var param = {
           i_shop: item
@@ -268,7 +268,7 @@ function get_shop_all() {
       },
       success: function(ele) {
             // console.log(ele);
-         Command: toastr["success"]("เพิ่มสัญชาติสำเร็จ")
+            Command: toastr["success"]("เพิ่มสัญชาติสำเร็จ")
             
             commision($('#manage_com').val())
             _box_region_icon()
@@ -431,6 +431,60 @@ function get_plan_price_sub(id) {
         });
     // body...
   }
+  function updatetype(id, values,op,icom) {
+
+    var url = base_url + "shop/updatetype?option="+option;
+
+    console.log(url)
+    console.log(id)
+    console.log(values)
+    console.log(op)
+    console.log($('#i_'+op).prop('checked'))
+    if (op == 'company') {
+      $('#l_company').addClass('active')
+      return false;
+    }
+    if ($('#i_'+op).prop('checked') == true) {
+      $('#i_'+op).prop('checked', false);
+      Command: toastr["success"]("ปิดบริการแล้ว")
+    }
+    else{
+      $('#i_'+op).prop('checked', true);
+      Command: toastr["warning"]("ปิดบริการแล้ว")
+
+
+
+    }
+
+    var param = {
+     id: id,
+     field: op,
+     status: values,
+     i_icompensation: icom
+   }
+    // $('#i_shop_country_com').val(id)
+    // param.i_shop_country_com = $('#id_shop_product').val();
+    // param.id_shop_country =  $('#id_country').val();
+    console.log(param)
+    $.ajax({
+      url: url,
+      data: param,
+      type: 'post',
+       dataType: 'json',
+      error: function() {
+        console.log('Error Profile');
+      },
+      success: function(res) {
+        console.log(res);
+        if (res == true) {
+          location.reload();
+        }
+
+
+
+      }
+    });
+  }
 
   function updateStatus(id, status, table) {
     var url = base_url + "shop/updateStatus?option="+option;
@@ -540,11 +594,16 @@ function get_plan_price_sub(id) {
         console.log(res);
         // console.log($('#section_state').val())
         // if ($('#section_state').val() == 1) {
-        if (table_delete == 'shop_country_icon'+option || table_delete == 'shop_country_com_list'+option) {
-          commision($('#manage_com').val())
+        if (table_delete == 'shopping_contact') {
+          _box_contact($('#manage_com').val())
+              Command: toastr["success"]("ลบผู้ติดต่อสำเร็จ")
+
+        }
+        if (table_delete == 'shop_country'+option || table_delete == 'shop_country_com_list'+option) {
+            commision($('#manage_com').val())
           // _box_plan_comision();
           _box_region_icon();
-        } else {
+        } else if(table_delete != 'shop_country'+option || table_delete != 'shop_country_com_list'+option) {
           _box_region_icon();
           _box_plan_comision();
         }
@@ -560,9 +619,9 @@ function get_plan_price_sub(id) {
         // }
       // }
 
-      }
+    }
 
-    });
+  });
   }
 
   function cal_map(id) {
@@ -643,6 +702,8 @@ function get_plan_price_sub(id) {
 
           var url = base_url + "shop/box_plan_time?id="+id;
           console.log(url)
+          Command: toastr["success"]("บันทึกข้อมูลสำเร็จ")
+
           $.post(url, function(ele) {
             // console.log(ele)
             $('#box_plan_time').html(ele);
@@ -859,7 +920,7 @@ function get_plan_price_sub(id) {
   }
 
   function closeDay(day) {
-   alert(day)
+   // alert(day)
    if ($('#' + day).is(":checked")) {
     if ($('#open_alway_' + day).is(":checked")) {
 
@@ -954,6 +1015,7 @@ function get_plan_price_sub(id) {
         },
         success: function(res) {
           console.log(res);
+          Command: toastr["success"]("บันทึกข้อมูลสำเร็จ")
 
           // var url = base_url + "shop/box_plan_time?id="+id;
           // console.log(url)
@@ -985,12 +1047,12 @@ function get_plan_price_sub(id) {
     function _region(itm) {
       console.log('-----')
       console.log(itm)
-       var htmlOption = '';
+      var htmlOption = '';
       var url = base_url + "shop/select_type?id_sub=" + itm+'&table=province';
       console.log(url)
       $.post(url, function(res) {
         console.log(res)
-         htmlOption = "<option value=''>กรุณาเลือก</option>";
+        htmlOption = "<option value=''>กรุณาเลือก</option>";
         $.each(res, function (i, item) {
           htmlOption += "<option value='" + item.id + "'>" + item.name_th + "</option>";
         });
@@ -1006,7 +1068,7 @@ function get_plan_price_sub(id) {
       var htmlOption = '';
       $.post(url, function(res) {
         console.log(res)
-         htmlOption = "<option value=''>กรุณาเลือก</option>";
+        htmlOption = "<option value=''>กรุณาเลือก</option>";
         $.each(res, function (i, item) {
           htmlOption += "<option value='" + item.id + "'>" + item.name_th + "</option>";
         });
@@ -1047,3 +1109,153 @@ function get_plan_price_sub(id) {
         }
       });
     }
+
+    /*********** contact *********/
+    function edit_contact(id) {
+      console.log(id)
+      $('#modal_custom').show()
+      $('#formModalLabel').html('แก้ใขข้อมูลผู้ติดต่อ')
+      var url = base_url + "shop/detail_contact?op=edit";
+      var param = {
+        id: id
+      }
+      console.log(url)
+
+      $.ajax({
+        url: url,
+        data: param,
+        type: 'post',
+        error: function() {
+          console.log('Error Profile');
+        },
+        success: function(ele) {
+          console.log('Success Profile');
+          $('#dody_modal_custom').html(ele);
+
+        }
+      });
+    // commision(id)
+  }
+  function submit_detail_contact(id,op) {
+    console.log($('#form_contact').serialize());
+    console.log(id)
+    console.log(op)
+    var  ss = $('#form_contact').serialize();
+    console.log(JSON.stringify(ss));
+    var url = base_url + "shop/submit_submit_detail_contact?op="+op;
+    $.ajax({
+      url: url,
+      data: $('#form_contact').serialize(),
+      type: 'post',
+        // contentType: "application/json; charset=utf-8",
+        dataType: 'json',
+        error: function() {
+          console.log('Error');
+        },
+        success: function(res) {
+          console.log(res);
+          if (res.result == true) {
+            $('#modal_custom').hide()
+            if (op == 'add') {
+              Command: toastr["success"]("เพิ่มข้อมูลผู้ติดต่อสำเร็จ")
+              _box_contact(res.id);
+
+            }
+            else{
+              Command: toastr["success"]("แก้ใขข้อมูลผู้ติดต่อสำเร็จ")
+              _box_contact($('#manage_com').val());
+
+            }
+          }
+          // if (res.result == true) {
+          //   location.href = base_url+'shop/shop_manage?sub='+res.sub+'&id='+res.product_id;
+          // }
+
+          // var url = base_url + "shop/box_plan_time?id="+id;
+          // console.log(url)
+          // $.post(url, function(ele) {
+          //   // console.log(ele)
+          //   $('#box_plan_time').html(ele);
+          // });
+        }
+      });
+
+    // body...
+  }
+  function add_contact(id) {
+    console.log(id)
+    $('#modal_custom').show()
+    $('#formModalLabel').html('เพิ่มข้อมูลผู้ติดต่อ')
+    var url = base_url + "shop/detail_contact?op=add";
+    var param = {
+      id: id
+    }
+    console.log(url)
+
+    $.ajax({
+      url: url,
+      data: param,
+      type: 'post',
+      error: function() {
+        console.log('Error Profile');
+      },
+      success: function(ele) {
+        console.log('Success Profile');
+        $('#dody_modal_custom').html(ele);
+
+      }
+    });
+    // commision(id)
+  }
+  function _box_contact(id) {
+    var url = base_url + "shop/box_contact?id="+id;
+    console.log(url)
+    $.post(url, function(ele) {
+            // console.log(ele)
+            $('#box_contact').html(ele);
+          });
+  }
+  /************ load document **********/
+  function _box_document(id) {
+    // alert(id)
+    var url = base_url + "shop/box_document?id="+id;
+    console.log(url)
+    $.post(url, function(ele) {
+            // console.log(ele)
+            $('#box_document').html(ele);
+          });
+  }
+  function open_check_expired() {
+    console.log($('#check_expired').is(":checked"))
+     if (!$('#check_expired').is(":checked")) {
+          $('.row_expired').show();
+          $('#' ).prop("checked", false)
+
+        }
+        else{
+          $('.row_expired').hide();
+
+        }
+            
+  }
+
+
+
+  function _form_upload_file(id) {
+    var data_form = $('#form_upload_file').serialize();
+          var data = new FormData($('#form_upload_file')[0]);
+          data.append('date1', $('#datetimepicker2').val());
+          data.append('date2', $('#datetimepicker22').val());
+          data.append('type_doc', $('#type_doc').val());
+          data.append('day_alert', $('#set_day_alert').val());
+          data.append('alert_email', $('#alert_email').val());
+          data.append('alert_phone', $('#alert_phone').val());
+          data.append('email', $('#email_for_alert').val());
+          data.append('phone', $('#phone_for_alert').val());
+          data.append('check_expired', $('#check_expired').val());
+            for(var i=0;i<$('#file_doc')[0].files.length;i++){
+            data.append('file[]', $('#file_doc')[0].files[i]);
+//            console.log(data);
+          }
+          console.log(data_form)
+  }

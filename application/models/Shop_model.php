@@ -109,21 +109,21 @@ class Shop_model extends CI_Model {
 		}
 		if ($_GET[op] == 'time') {
 			$data = array();
-			$data[topic_cn] =  $_POST[topic_cn];
-			$data[topic_th] =  $_POST[topic_th];
-			$data[topic_en] =  $_POST[topic_en];
-			$data[map] =  $_POST[map];
-			$data[lat] =  $_POST[lat_db];
-			$data[lng] =  $_POST[lng_db];
-			$data[address] =  $_POST[address];
-			$data[phone] =  $_POST[phone];
-			$data[email] =  $_POST[email];
-			$data[province] =  $_POST[province];
-			$data[return_guest] =  $_POST[return_guest];
-			$data[amphur] =  $_POST[select_amphur];
-			$data[region] =  $_POST[region];
-			$data[main] =  $_POST[main];
-			$data[sub] =  $_POST[sub];
+			// $data[topic_cn] =  $_POST[topic_cn];
+			// $data[topic_th] =  $_POST[topic_th];
+			// $data[topic_en] =  $_POST[topic_en];
+			// $data[map] =  $_POST[map];
+			// $data[lat] =  $_POST[lat_db];
+			// $data[lng] =  $_POST[lng_db];
+			// $data[address] =  $_POST[address];
+			// $data[phone] =  $_POST[phone];
+			// $data[email] =  $_POST[email];
+			// $data[province] =  $_POST[province];
+			// $data[return_guest] =  $_POST[return_guest];
+			// $data[amphur] =  $_POST[select_amphur];
+			// $data[region] =  $_POST[region];
+			// $data[main] =  $_POST[main];
+			// $data[sub] =  $_POST[sub];
 			$data[open_Sun] =  $_POST[Sun];
 			$data[open_Mon] =  $_POST[Mon];
 			$data[open_Tue] =  $_POST[Tue];
@@ -407,9 +407,61 @@ class Shop_model extends CI_Model {
 		}
 	}
 
+	public function submit_submit_detail_contact(){
+		$data_return = array();
+		
+		if ($_GET[op] == 'add') {
+			$data = array();
+			$data[name] =  $_POST[contact_name];
+			$data[usertype] =  $_POST[contact_usertype];
+			$data[admintype] =  $_POST[contact_admintype];
+			$data[phone] =  $_POST[contact_phone];
+			$data[phone_2] =  $_POST[contact_phone_2];
+			$data[email] =  $_POST[contact_email];
+			$data[email_2] =  $_POST[contact_email_2];
+			$data[line_id] =  $_POST[contact_line_id];
+			$data[wechat_id] =  $_POST[contact_wechat_id];
+			$data[skype_id] =  $_POST[contact_skype_id];
+			$data[whatsapp_id] =  $_POST[contact_whatsapp_id];
+			$data[zello_id] =  $_POST[contact_zello_id];
+			$data[product_id] = $_POST[contact_product_id];
+			$result = $this->db->insert(TBL_SHOPPING_CONTACT, $data);
+			$last_id = mysql_insert_id();
+			$data_return[id] = $last_id;
+			$data_return[result] = $result;
+			return $data_return;
+			
+		}
 
 
-/********* END SHOP MODEL **********/
+		
+
+
+		if ($_GET[op] == 'edit') {
+			
+			$data = array();
+			
+			$data[name] =  $_POST[contact_name];
+			$data[usertype] =  $_POST[contact_usertype];
+			$data[admintype] =  $_POST[contact_admintype];
+			$data[phone] =  $_POST[contact_phone];
+			$data[phone_2] =  $_POST[contact_phone_2];
+			$data[email] =  $_POST[contact_email];
+			$data[email_2] =  $_POST[contact_email_2];
+			$data[line_id] =  $_POST[contact_line_id];
+			$data[wechat_id] =  $_POST[contact_wechat_id];
+			$data[skype_id] =  $_POST[contact_skype_id];
+			$data[whatsapp_id] =  $_POST[contact_whatsapp_id];
+			$data[zello_id] =  $_POST[contact_zello_id];
+			$this->db->where('id', $_POST[contact_id]);
+			$result = $this->db->update(TBL_SHOPPING_CONTACT, $data);
+			$data_return[id] ='';
+			$data_return[result] = $result;
+			return $data_return;
+		}
+	}
+
+	/********* END SHOP MODEL **********/
 
 
 
@@ -599,14 +651,53 @@ public function car_counthis(){
 	return $query->num_rows();
   		// $this->load->view('shop/place_company',$data);
 }
-  /**
-  * 
-  * driver_topoint
-	guest_receive
-	guest_register
-	driver_pay_report
-	* 
-  * *********** End
-  * 
-  */
+public function updatetype() {
+    ///////////// Time
+	$id = $_POST[id];
+	$status = $_POST[status];
+	$compensation = $_POST[i_icompensation];
+	if ($status == 0) {
+		$status = 1;
+	} else {
+		$status = 0;
+	}
+	$field = $this->input->post('field');
+
+	$_where = array();
+	$_where['i_shop'] = $id;
+	$_where['s_field'] = $field;
+    // $_where['time_other_number'] = 2;
+
+
+
+
+	$num = $this->Main_model->num_row(TBL_SHOP_EXPENDITURE_TYPE ,$_where);
+	if ($num == 0){
+		$data = array();
+		$data[i_shop] = $id;
+		$data[s_field] = $field;
+		$data[i_status] = 1;
+		$data[i_compensation] = $compensation;
+		$data[s_db] = '_'.$field;
+		$result = $this->db->insert(TBL_SHOP_EXPENDITURE_TYPE,$data);
+
+	}
+	else{
+		$data = array();
+		$data[i_status] =  $status;
+		$where = array();
+		$where[i_shop] = $id;
+		$where[i_compensation] = $compensation;
+		// $this->db->where(i_shop, $id);
+		// $this->db->where(i_compensation, $compensation);
+		$result = $this->db->update(TBL_SHOP_EXPENDITURE_TYPE,$data,array('i_shop' => $id,'i_compensation'=>$compensation));
+	}
+
+//     $_where = array();
+// $_wh
+	// $this->$field = $status;
+	// $result= $this->db->update(TBL_SHOP_EXPENDITURE_TYPE,$this,array('id' => $id));
+    // $this->session->set_userdata(array('savedata' => 1));
+	return $result;
+}
 }

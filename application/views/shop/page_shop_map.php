@@ -15,7 +15,7 @@ $google_api="AIzaSyDJa08ZMaSnJP5A6EsL9wxqdDderh7zU90";
   width: 100%;
   height: 100%;
    overflow:hidden;
-  background: url('images/loading.gif') 50% 50% no-repeat rgb(249,249,249); background-color:#FFFFFF
+  /*background: url('images/loading.gif') 50% 50% no-repeat rgb(249,249,249); background-color:#FFFFFF*/
 }
 </style>
  
