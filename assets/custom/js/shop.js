@@ -1238,24 +1238,114 @@ function get_plan_price_sub(id) {
         }
             
   }
+$( document ).ready(function() {
+    console.log( "ready!" );
 
+$('#file_doc').change(function () {
 
+  var vals = $(this).val(),
+          val = vals.length ? vals.split('\\').pop() : '';
+          console.log(val)
+  $("#form_upload_file").submit();
+
+});
+$('#form_upload_file').submit(function (e) {
+
+  e.preventDefault();
+  var formData = new FormData($("form_upload_file")[0]);
+  // formData.append('func', 'import');
+  // formData.append('file', $('input[type=file]')[0].files[0]);
+   formData.append('date1', $('#datetimepicker2').val());
+          formData.append('date2', $('#datetimepicker22').val());
+          formData.append('type_doc', $('#type_doc').val());
+          formData.append('day_alert', $('#set_day_alert').val());
+          formData.append('alert_email', $('#alert_email').val());
+          formData.append('alert_phone', $('#alert_phone').val());
+          formData.append('email', $('#email_for_alert').val());
+          formData.append('phone', $('#phone_for_alert').val());
+          formData.append('check_expired', $('#check_expired').val());
+            // for(var i=0;i<$('#file_doc')[0].files.length;i++){
+          formData.append('file', $('#file_doc')[0].files[0]);
+//            console.log(data);
+          // }
+          console.log(formData)
+  $.ajax({
+    type: 'POST',
+    url: base_url + '/shop/save_document',
+    data: formData,
+    cache: false,
+    contentType: false,
+    processData: false,
+    beforeSend: function () {
+      //blockui_always();
+    },
+    success: function (data) {
+      console.log(data)
+     
+    },
+    error: function (data) {
+//            $("#file").val("");
+    }
+  });
+});
+});
 
   function _form_upload_file(id) {
     var data_form = $('#form_upload_file').serialize();
-          var data = new FormData($('#form_upload_file')[0]);
-          data.append('date1', $('#datetimepicker2').val());
-          data.append('date2', $('#datetimepicker22').val());
-          data.append('type_doc', $('#type_doc').val());
-          data.append('day_alert', $('#set_day_alert').val());
-          data.append('alert_email', $('#alert_email').val());
-          data.append('alert_phone', $('#alert_phone').val());
-          data.append('email', $('#email_for_alert').val());
-          data.append('phone', $('#phone_for_alert').val());
-          data.append('check_expired', $('#check_expired').val());
-            for(var i=0;i<$('#file_doc')[0].files.length;i++){
-            data.append('file[]', $('#file_doc')[0].files[i]);
-//            console.log(data);
-          }
-          console.log(data_form)
+     // data_form.append('file[]', $('#file_doc')[0].files[0]);
+    // data_form.file_doc = $('#file_doc')[0].files[0];
+           var data_form = new FormData($('#form_upload_file')[0]);
+          // data_form.append('date1', $('#datetimepicker2').val());
+          // data_form.append('date2', $('#datetimepicker22').val());
+          // data_form.append('type_doc', $('#type_doc').val());
+          // data_form.append('day_alert', $('#set_day_alert').val());
+          // data_form.append('alert_email', $('#alert_email').val());
+          // data_form.append('alert_phone', $('#alert_phone').val());
+          // data_form.append('email', $('#email_for_alert').val());
+          // data_form.append('phone', $('#phone_for_alert').val());
+          // data_form.append('check_expired', $('#check_expired').val());
+          // data_form.append('file', $('#file_doc')[0].files[0]);
+          console.log(data_form);
+          var vals = $('#file_doc').val(),
+          val = vals.length ? vals.split('\\').pop() : '';
+         // console.log($('#file_doc').val());
+        console.log(val)
+          var url = base_url + "shop/save_document";
+          // console.log($('#file_doc')[0].files[0])
+    console.log(data_form)
+    // console.log(data_form2)
+// var formData = new FormData($("#form_upload_file")[0]);
+  // formData.append('func', 'import');
+  // formData.append('file', $('input[type=file]')[0].files[0]);
+  $.ajax({
+    type: 'POST',
+    url: url,
+    data: data_form,
+    // cache: false,
+    contentType: false,
+    processData: false,
+    beforeSend: function () {
+      //blockui_always();
+    },
+    success: function (data) {
+      console.log(data)
+     
+    },
+    error: function (data) {
+//            $("#file").val("");
+    }
+  });
+    // $.ajax({
+    //   url: url,
+    //   data: data_form,
+    //   type: 'post',
+    //   error: function() {
+    //     console.log('Error Profile');
+    //   },
+    //   success: function(ele) {
+    //     console.log('Success Profile');
+    //     console.log(ele)
+
+    //   }
+    // });
   }

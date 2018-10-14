@@ -38,6 +38,19 @@
 <script src="<?=base_url();?>assets/js/modules/boostbox/core/BootstrapFixed.js"></script>
 <script src="<?=base_url();?>assets/js/modules/boostbox/libs/bootstrap/bootstrap.min.js"></script>
 <script src="<?=base_url();?>assets/js/modules/boostbox/libs/spin.js/spin.min.js"></script>
+<script src="<?=base_url();?>assets/js/modules/boostbox/libs/blueimp-file-upload/vendor/jquery.ui.widget.js"></script>
+<script src="<?=base_url();?>assets/js/modules/boostbox/libs/blueimp-file-upload/vendor/tmpl.min.js"></script>
+<script src="<?=base_url();?>assets/js/modules/boostbox/libs/blueimp-file-upload/vendor/load-image.min.js"></script>
+<script src="<?=base_url();?>assets/js/modules/boostbox/libs/blueimp-file-upload/vendor/jquery.blueimp-gallery.min.js"></script>
+<script src="<?=base_url();?>assets/js/modules/boostbox/libs/blueimp-file-upload/jquery.iframe-transport.js"></script>
+<script src="<?=base_url();?>assets/js/modules/boostbox/libs/blueimp-file-upload/jquery.fileupload.js"></script>
+<script src="<?=base_url();?>assets/js/modules/boostbox/libs/blueimp-file-upload/jquery.fileupload-process.js"></script>
+<script src="<?=base_url();?>assets/js/modules/boostbox/libs/blueimp-file-upload/jquery.fileupload-image.js"></script>
+<script src="<?=base_url();?>assets/js/modules/boostbox/libs/blueimp-file-upload/jquery.fileupload-audio.js"></script>
+<script src="<?=base_url();?>assets/js/modules/boostbox/libs/blueimp-file-upload/jquery.fileupload-video.js"></script>
+<script src="<?=base_url();?>assets/js/modules/boostbox/libs/blueimp-file-upload/jquery.fileupload-validate.js"></script>
+<script src="<?=base_url();?>assets/js/modules/boostbox/libs/blueimp-file-upload/jquery.fileupload-ui.js"></script>
+<script src="<?=base_url();?>assets/js/modules/boostbox/libs/blueimp-file-upload/main.js"></script>
 <script src="<?=base_url();?>assets/js/modules/boostbox/libs/toastr/toastr.min.js"></script><!-- <script src="<?=base_url();?>assets/js/modules/boostbox/libs/autosize/jquery.autosize.min.js"></script> -->
 <script src="<?=base_url();?>assets/js/modules/boostbox/libs/slimscroll/jquery.slimscroll.min.js"></script>
 <script src="<?=base_url();?>assets/js/modules/boostbox/core/App.js"></script>
