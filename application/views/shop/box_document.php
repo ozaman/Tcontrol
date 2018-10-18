@@ -86,6 +86,7 @@ $arr[shop] = $this->Main_model->rowdata(TBL_SHOPPING_PRODUCT,$_where,$_select);
 	</div>
 	<div class="form-group form-group-md">
 		<form id="form_upload_file"  >
+			<input type="hidden" name="product_id" value="<?=$_GET[id];?>">
 			<!-- <div class="col-md-12"> -->
 				<div class="table-responsive no-margin">
 					<div class="form-group form-group-md">
@@ -183,7 +184,7 @@ $arr[shop] = $this->Main_model->rowdata(TBL_SHOPPING_PRODUCT,$_where,$_select);
 									<div data-toggle="buttons" class="pull-right" style="display: inline-block;margin-right: 15px">
 										<label class="btn btn-success btn-md btn-outline " id="l_alert_phone">
 											<input type="checkbox" name="alert_phone" id="alert_phone" value="0" onchange="_alert_phone()"> 
-											<span style="text-transform:capitalize;">EMS</span>
+											<span style="text-transform:capitalize;">SMS</span>
 										</label>
 									</div>
 									
@@ -228,8 +229,7 @@ $arr[shop] = $this->Main_model->rowdata(TBL_SHOPPING_PRODUCT,$_where,$_select);
 										</span>
 									</div>
 									
-											<input type="file" name="file_doc2" id="file_doc2" accept="*" multiple width="100%">
-											<input type="file" name="file_doc3" id="file_doc3" accept="*" multiple width="100%">
+										
 									
 									
 									<!-- </div> -->

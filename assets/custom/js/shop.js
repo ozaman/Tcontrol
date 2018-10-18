@@ -470,7 +470,7 @@ function get_plan_price_sub(id) {
       url: url,
       data: param,
       type: 'post',
-       dataType: 'json',
+      dataType: 'json',
       error: function() {
         console.log('Error Profile');
       },
@@ -488,11 +488,19 @@ function get_plan_price_sub(id) {
 
   function updateStatus(id, status, table) {
     var url = base_url + "shop/updateStatus?option="+option;
+    var ftable = '';
+    if (table == 'shopping_contact') {
+      ftable = table;
+    }
+    else{
+      ftable = table+option;
+      
+    }
     // console.log(shop)
     // console.log(id_shop_country)
     var param = {
       id: id,
-      tbl: table+option,
+      tbl: ftable,
       status: status
     }
     // $('#i_shop_country_com').val(id)
@@ -594,12 +602,12 @@ function get_plan_price_sub(id) {
         console.log(res);
         // console.log($('#section_state').val())
         // if ($('#section_state').val() == 1) {
-        if (table_delete == 'shopping_contact') {
-          _box_contact($('#manage_com').val())
-              Command: toastr["success"]("ลบผู้ติดต่อสำเร็จ")
+          if (table_delete == 'shopping_contact') {
+            _box_contact($('#manage_com').val())
+            Command: toastr["success"]("ลบผู้ติดต่อสำเร็จ")
 
-        }
-        if (table_delete == 'shop_country'+option || table_delete == 'shop_country_com_list'+option) {
+          }
+          if (table_delete == 'shop_country'+option || table_delete == 'shop_country_com_list'+option) {
             commision($('#manage_com').val())
           // _box_plan_comision();
           _box_region_icon();
@@ -1227,125 +1235,49 @@ function get_plan_price_sub(id) {
   }
   function open_check_expired() {
     console.log($('#check_expired').is(":checked"))
-     if (!$('#check_expired').is(":checked")) {
-          $('.row_expired').show();
-          $('#' ).prop("checked", false)
+    if (!$('#check_expired').is(":checked")) {
+      $('.row_expired').show();
+      $('#' ).prop("checked", false)
 
-        }
-        else{
-          $('.row_expired').hide();
-
-        }
-            
-  }
-$( document ).ready(function() {
-    console.log( "ready!" );
-
-$('#file_doc').change(function () {
-
-  var vals = $(this).val(),
-          val = vals.length ? vals.split('\\').pop() : '';
-          console.log(val)
-  $("#form_upload_file").submit();
-
-});
-$('#form_upload_file').submit(function (e) {
-
-  e.preventDefault();
-  var formData = new FormData($("form_upload_file")[0]);
-  // formData.append('func', 'import');
-  // formData.append('file', $('input[type=file]')[0].files[0]);
-   formData.append('date1', $('#datetimepicker2').val());
-          formData.append('date2', $('#datetimepicker22').val());
-          formData.append('type_doc', $('#type_doc').val());
-          formData.append('day_alert', $('#set_day_alert').val());
-          formData.append('alert_email', $('#alert_email').val());
-          formData.append('alert_phone', $('#alert_phone').val());
-          formData.append('email', $('#email_for_alert').val());
-          formData.append('phone', $('#phone_for_alert').val());
-          formData.append('check_expired', $('#check_expired').val());
-            // for(var i=0;i<$('#file_doc')[0].files.length;i++){
-          formData.append('file', $('#file_doc')[0].files[0]);
-//            console.log(data);
-          // }
-          console.log(formData)
-  $.ajax({
-    type: 'POST',
-    url: base_url + '/shop/save_document',
-    data: formData,
-    cache: false,
-    contentType: false,
-    processData: false,
-    beforeSend: function () {
-      //blockui_always();
-    },
-    success: function (data) {
-      console.log(data)
-     
-    },
-    error: function (data) {
-//            $("#file").val("");
     }
+    else{
+      $('.row_expired').hide();
+
+    }
+
+  }
+  $( document ).ready(function() {
   });
-});
-});
 
   function _form_upload_file(id) {
-    var data_form = $('#form_upload_file').serialize();
-     // data_form.append('file[]', $('#file_doc')[0].files[0]);
-    // data_form.file_doc = $('#file_doc')[0].files[0];
-           var data_form = new FormData($('#form_upload_file')[0]);
-          // data_form.append('date1', $('#datetimepicker2').val());
-          // data_form.append('date2', $('#datetimepicker22').val());
-          // data_form.append('type_doc', $('#type_doc').val());
-          // data_form.append('day_alert', $('#set_day_alert').val());
-          // data_form.append('alert_email', $('#alert_email').val());
-          // data_form.append('alert_phone', $('#alert_phone').val());
-          // data_form.append('email', $('#email_for_alert').val());
-          // data_form.append('phone', $('#phone_for_alert').val());
-          // data_form.append('check_expired', $('#check_expired').val());
-          // data_form.append('file', $('#file_doc')[0].files[0]);
-          console.log(data_form);
-          var vals = $('#file_doc').val(),
-          val = vals.length ? vals.split('\\').pop() : '';
-         // console.log($('#file_doc').val());
-        console.log(val)
-          var url = base_url + "shop/save_document";
-          // console.log($('#file_doc')[0].files[0])
+     var data_form = $('#form_upload_file').serialize();
+    var data_form = new FormData($('#form_upload_file')[0]);
+    var url = base_url + "shop/save_document";
     console.log(data_form)
-    // console.log(data_form2)
-// var formData = new FormData($("#form_upload_file")[0]);
-  // formData.append('func', 'import');
-  // formData.append('file', $('input[type=file]')[0].files[0]);
-  $.ajax({
-    type: 'POST',
-    url: url,
-    data: data_form,
-    // cache: false,
-    contentType: false,
-    processData: false,
-    beforeSend: function () {
+    $.ajax({
+      type: 'POST',
+      url: url,
+      data: data_form,
+      cache: false,
+      contentType: false,
+      processData: false,
+      beforeSend: function () {
       //blockui_always();
     },
     success: function (data) {
       console.log(data)
-     
+      if (data.status == true) {
+        Command: toastr["success"](data.msg)
+        _box_document(id);
+      }
+      else{
+        Command: toastr["warning"](data.msg)
+      }
+
     },
     error: function (data) {
-//            $("#file").val("");
+
     }
   });
-    // $.ajax({
-    //   url: url,
-    //   data: data_form,
-    //   type: 'post',
-    //   error: function() {
-    //     console.log('Error Profile');
-    //   },
-    //   success: function(ele) {
-    //     console.log('Success Profile');
-    //     console.log(ele)
-
-    //   }
-    // });
+    
   }

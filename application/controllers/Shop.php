@@ -285,73 +285,9 @@ class Shop extends CI_Controller {
 		$this->load->view('shop/box_document');
 	}
 	public function save_document(){
-		header('Content-Type: application/json');
-		 // $id = $this->session->userdata('admin_id');
-    // if ($_FILES["file"]["name"]) {
-      $type = explode('.', $_FILES["file"]["name"]);
-      $type = strtolower($type[count($type) - 1]);
-      $url = "./uploads/admin/";
-      $name = $id . '.' . $type;
-      // if (in_array($type, array("jpg", "jpeg", "gif", "png")))
-      //   if (is_uploaded_file($_FILES["file"]["tmp_name"]))
-      //     if (move_uploaded_file($_FILES["file"]["tmp_name"], $url . $name))
-      //       // $s_image['s_image'] = $name;
-      //     // $this->db->update(TBL_ADMIN, $s_image, array('id' => $id));
-      //     echo $name;
-      //   }
-      // }
-
-
-
-
-
-		$product_id = $_GET[id];
-		$type_doc = $_POST[type_doc];
-		if($_POST[check_expired]==1){
-			$start_expired = $_POST[date1];
-			$end_expired = $_POST[date2];
-		}else{
-			$start_expired = '';
-			$end_expired = '';
-		}
-
-		for($i=0; $i<count($_FILES['file']['name']); $i++) {
-
-			$tmpFilePath = $_FILES['file']['tmp_name'][$i];
-			if($tmpFilePath != ""){
-				// $ext = pathinfo($_FILES['file']['name'][$i], PATHINFO_EXTENSION);
-
-				// $num = time();
-
-
-				// $doc_name = $type_txt.$product_id."_".$num.$i.".".$ext;
-				// $target_file = "../data/pic/document/place/".$type_txt.$product_id."_".$num.$i.".".$ext;
-				
-				// if(move_uploaded_file($tmpFilePath, $target_file)) {
-				// 	$array = array(
-				// 		"product_id"=>$product_id, 
-				// 		"document_name"=>$doc_name, 
-				// 		"type"=>$type_doc,
-				// 		"start_expired"=>$start_expired,
-				// 		"end_expired"=>$end_expired,
-				// 		"email"=>$_POST[email_send],
-				// 		"phone"=>$_POST[phone_send],
-				// 		"alert_phone"=>$_POST[alert_phone],
-				// 		"alert_email"=>$_POST[alert_email],
-				// 		"day_alert"=>$_POST[day_alert],
-				// 		"status"=>1
-				// 	);	
-
-	   //  	// $reuslt = $db->add_db('place_document_file',$array);
-				// }
-			}
-			  
-		}
-		$xx[post] = $_POST;
-		$xx[files] = $_FILES;
-		$xx[file1] = $_FILES[file_doc2];
-		$xx[file] = $_FILES[file_doc2][name];
-echo json_encode($xx);  
+		
+		$data = $this->Shop_model->save_document();
+		echo json_encode($data);
 	}
 	################################ SHOP #################################
 }

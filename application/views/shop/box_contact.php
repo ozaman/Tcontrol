@@ -1,7 +1,7 @@
 <?php 
             $_where = array();
             $_where['product_id'] = $_GET[id];
-            $_where['admintype'] = 2;
+            // $_where['admintype'] = 2;
             $_select = array('*');
             $_order = array();
             $_order['id'] = 'asc';  
@@ -17,6 +17,7 @@
                         <tr>
                           <th>#</th>
                           <th>แก้ไข</th>
+                          <th>สถานะ</th>
                           <th>ลบ</th>
                           <th>ชื่อ</th>
                           <th>เบอร์โทรศัพท์</th>
@@ -38,6 +39,19 @@
                               <button type="button" onclick="edit_contact('<?=$value->id;?>')" class="btn btn-md btn-info btn-equal" data-toggle="tooltip" data-placement="top" data-original-title="แก้ไข้"><i class="fa fa-pencil"></i></button>
                             </td>
                             <td >
+                              <?php
+                      if ($value->status == 0 ){
+                        $text_status = 'ปิด';
+                        $s_class = 'text-danger';
+                      }
+                      else{
+                        $text_status = 'เปิด';
+                        $s_class = 'text-success';
+                      }
+                      ?>
+                      <span id="span_status<?=$value->id;?>" onclick="updateStatus('<?=$value->id;?>','<?=$value->status;?>','<?=TBL_SHOPPING_CONTACT;?>')" class="<?=$s_class;?>" style="cursor: pointer;"><?=$text_status;?></span>
+                            </td>
+                            <td >
                               <button type="button" class="btn btn-md btn-danger btn-equal" data-toggle="modal" data-target="#deleteModal" data-original-title="ลบ" onclick="firstDelete('<?=$value->name;?>','<?=$value->id;?>','<?=TBL_SHOPPING_CONTACT;?>')"><i class="fa fa-trash-o"></i></button>
                             </td>
                             <td >  
@@ -46,7 +60,7 @@
 
                               <?=$value->phone;?> 
                             </td>
-                            <td > <?=$arr[CONTACT_TYPE]->usertype;?></td>
+                            <td > <?=$arr[CONTACT_TYPE]->name_th;?></td>
                           </tr>
                         <?php   } ?>
                       </tbody>
