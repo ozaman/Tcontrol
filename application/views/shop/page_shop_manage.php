@@ -9,10 +9,11 @@
   ?>
   <ol class="breadcrumb">
     <li class="head_title">จัดการร้านค้า</li>
-    <li class="head_title_sub"><a href="<?=base_url();?>shop/data_shop_categorie">ประเภทร้านค่า</a></li>
-    <li class="head_title_sub_2" ><a href="<?=base_url();?>shop/data_shop_all" class="head_title_sub_2">ร้านค่าทั้งหมด</a></li>
-    <li class="head_title_sub_3" ><?=$shop_page;?></li>
-    <li class="head_title_sub_4" style="display: none;" ><a class="head_title_sub_4"></a></li>
+    <li class="head_title_sub"><a href="<?=base_url();?>shop/categorie_sub?id=<?=$_GET[sub];?>">หมวดหมู่ทั้งหมด</a></li>
+    <li class="head_title_sub"><a  href="<?=base_url();?>shop/categorie_sub?id=<?=$_GET[id];?>" class="head_title_sub">ประเภททั้งหมด</a></li>
+
+    <li class="head_title_sub_2" ><a href="<?=base_url();?>shop/shop_ordertype?sub=<?=$_GET[sub];?>&id=<?=$_GET[id];?>">ร้านค่าทั้งหมด</a></li>
+    <li class="head_title_sub_4" style="display: nones;"><?=$shop->topic_th;?></li>
   </ol>
   <div class="section-body ">
     <input type="hidden" name="" id="manage_com" value="<?=$_GET[id];?>">
@@ -284,11 +285,11 @@
     <div class="col-md-12">
       <div id="box_document" onload="_box_document('<?=$_GET[id];?>')"></div>
     </div>
-   </div>
-   <div class="tab-pane" id="images">
+  </div>
+  <div class="tab-pane" id="images">
     <div class="col-md-12">
       <div id="box_img">
-        
+
       </div>
     </div>
   </div>
@@ -451,12 +452,14 @@
            <button type="button" class="btn btn-md btn-success btn-equal " onclick="open_commision('<?=$shop->id;?>')"> 
             <i class="fa fa-plus " ></i>
           </button>
-          <header><h4 class="text-light"> ประเภทรายจ่าย </h4></header>
+          <header style="cursor: pointer;" onclick="open_commision('<?=$shop->id;?>')"><h4 class="text-light"> ประเภทรายจ่าย </h4></header>
         </div>
       </div>
+      
       <div class="col-md-12"> 
         <div  class="box_region_show"></div>
       </div>
+      
     </div>
   </div>
   <?php
@@ -478,11 +481,29 @@
           <div class="box-head" style="padding: 15px 0;">
             <button type="button" class="btn btn-md btn-success btn-equal " onclick="open_commision('<?=$shop->id;?>')"> <i class="fa fa-plus " ></i>
             </button>
-            <header><h4 class="text-light">ประเภทรายจ่าย </h4></header>
+            <header style="cursor: pointer;" onclick="open_commision('<?=$shop->id;?>')"><h4 class="text-light">ประเภทรายจ่าย </h4></header>
           </div>
           <div class="box-body no-padding">
             <div  class="box_region_show"></div>
           </div>
+          <?php 
+          if ($type->s_field == 'taxi') {
+            ?>
+            <!-- <div class="col-md-12"> -->
+          <div class="box-head" style="padding: 15px 0;">
+            <button type="button" class="btn btn-md btn-success btn-equal " onclick="open_detail_pay('<?=$shop->id;?>','<?=$type->s_field;?>')"> <i class="fa fa-plus " ></i>
+            </button>
+            <header style="cursor: pointer;" onclick="open_detail_pay('<?=$shop->id;?>','<?=$type->s_field;?>')"><h4 class="text-light">รายละเอียดการโอน(ค่าคอม)  </h4></header>
+          </div>
+          <div class="box-body no-padding">
+             <div style="background: #f2f2f2;padding: 10px;">
+            <div  class="box_detail_pay"></div>
+          </div>
+          </div>
+        <!-- </div> -->
+        <?php
+          }
+          ?>
         </div>
       </div>
     <?php }}}?>

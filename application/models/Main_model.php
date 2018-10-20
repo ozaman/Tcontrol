@@ -521,6 +521,10 @@ if ($table == 'shop_country_icon') {
 else{
   $this->db->where('id',$id);
   $query = $this->db->delete($table);
+  if ($table == 'shop_country'.$_GET[option]) {
+    $this->db->where('i_shop_country',$id);
+    $query = $this->db->delete(TBL_SHOP_COUNTRY_ICON.$_GET[option]);
+  }
   return $query;
 }
 

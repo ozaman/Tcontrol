@@ -1,7 +1,7 @@
 <ol class="breadcrumb">
 	<li class="head_title"><a class="head_title">จัดการร้านค้า</a></li>
-	<li class="head_title_sub" href="<?=base_url();?>shop/data_shop_categorie">หมวดหมู่ทั้งหมด  </li>
-	<li class="head_title_sub"><a class="head_title_sub">ช้อปปิ้งทั้งหมด</a></li>
+	<li class="head_title_sub"><a href="<?=base_url();?>shop/data_shop_categorie">หมวดหมู่ทั้งหมด  </a></li>
+	<li class="head_title_sub"><a class="head_title_sub">ประเภททั้งหมด</a></li>
 	<li class="head_title_sub_2" style="display: none;"><a class="head_title_sub_2"></a></li>
 	<li class="head_title_sub_3" style="display: none;" ><a class="head_title_sub_3"></a></li>
 	<li class="head_title_sub_4" style="display: none;" ><a class="head_title_sub_4"></a></li>
@@ -63,7 +63,7 @@
 						<tr>
 							<td><?=$key+1;?></td>
 							<td>
-								<a href="<?=base_url();?>shop/shop_ordertype?id=<?=$val->id;?>">
+								<a href="<?=base_url();?>shop/shop_ordertype?sub=<?=$_GET[id];?>&id=<?=$val->id;?>">
 									<button type="button" class="btn btn-xs btn-primary btn-equal" onclick="//get_shop_ordertype('<?=$val->id;?>')"><i class="fa fa-search-plus" ></i></button>
 								</a>
 							</td>

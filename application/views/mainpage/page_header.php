@@ -29,15 +29,27 @@
 			<link type="text/css" rel="stylesheet" href="<?=base_url();?>assets/css/modules/boostbox/css/theme-default/app-icon.css?v=<?=time()?>" />
 			<link type="text/css" rel="stylesheet" href="<?=base_url();?>assets/css/modules/boostbox/css/theme-default/libs/toastr/toastr.css?v=<?=time()?>">
 			<link type="text/css" rel="stylesheet" href="<?=base_url();?>assets/css/modules/boostbox/css/theme-default/libs/blueimp-file-upload/jquery.fileupload.css?v=<?=time()?>">
+		<link type="text/css" rel="stylesheet" href="<?=base_url();?>assets/css/modules/boostbox/css/theme-default/libs/wysihtml5/wysihtml5.css" />
+
 			<link type="text/css" rel="stylesheet" href="<?=base_url();?>assets/custom/css/main.css?v=<?=time()?>">
 <script>
 	var base_url = '<?=base_url();?>';
 </script>
+
 <script src="<?=base_url();?>assets/js/modules/boostbox/libs/jquery/jquery-1.11.0.min.js?v=<?=time()?>"></script>
 <script src="<?=base_url();?>assets/js/modules/boostbox/libs/jquery/jquery-migrate-1.2.1.min.js"></script>
 <script src="<?=base_url();?>assets/js/modules/boostbox/core/BootstrapFixed.js"></script>
 <script src="<?=base_url();?>assets/js/modules/boostbox/libs/bootstrap/bootstrap.min.js"></script>
 <script src="<?=base_url();?>assets/js/modules/boostbox/libs/spin.js/spin.min.js"></script>
+<script src="<?=base_url();?>assets/js/modules/boostbox/libs/wysihtml5/advanced.js"></script>
+<script src="<?=base_url();?>assets/js/modules/boostbox/libs/wysihtml5/wysihtml5-0.4.0pre.min.js"></script>
+<script src="<?=base_url();?>assets/js/modules/boostbox/libs/slimscroll/jquery.slimscroll.min.js"></script>
+<script src="<?=base_url();?>assets/js/modules/boostbox/libs/ckeditor/ckeditor.js"></script>
+<script src="<?=base_url();?>assets/js/modules/boostbox/libs/ckeditor/adapters/jquery.js"></script>
+<script type="text/javascript" src="<?=base_url();?>assets/js/modules/boostbox/libs/ckeditor/config.js?t=DBAA"></script>
+<link rel="stylesheet" type="text/css" href="<?=base_url();?>assets/js/modules/boostbox/libs/ckeditor/skins/moono/editor.css">
+<script type="text/javascript" src="<?=base_url();?>assets/js/modules/boostbox/libs/ckeditor/lang/en.js"></script>
+<script type="text/javascript" src="<?=base_url();?>assets/js/modules/boostbox/libs/ckeditor/styles.js"></script>
 <script src="<?=base_url();?>assets/js/modules/boostbox/libs/blueimp-file-upload/vendor/jquery.ui.widget.js"></script>
 <script src="<?=base_url();?>assets/js/modules/boostbox/libs/blueimp-file-upload/vendor/tmpl.min.js"></script>
 <script src="<?=base_url();?>assets/js/modules/boostbox/libs/blueimp-file-upload/vendor/load-image.min.js"></script>
@@ -53,13 +65,14 @@
 <script src="<?=base_url();?>assets/js/modules/boostbox/libs/blueimp-file-upload/main.js"></script>
 <script src="<?=base_url();?>assets/js/modules/boostbox/libs/toastr/toastr.min.js"></script><!-- <script src="<?=base_url();?>assets/js/modules/boostbox/libs/autosize/jquery.autosize.min.js"></script> -->
 <script src="<?=base_url();?>assets/js/modules/boostbox/libs/slimscroll/jquery.slimscroll.min.js"></script>
+<script src="<?=base_url();?>assets/js/modules/boostbox/core/demo/DemoFormEditors.js"></script>
 <script src="<?=base_url();?>assets/js/modules/boostbox/core/App.js"></script>
 <script src="<?=base_url();?>assets/js/modules/boostbox/core/demo/Demo.js?v=<?=time()?>"></script>
 <script src="<?=base_url();?>assets/custom/js/main.js?v=<?=time()?>"></script>
 <script src="<?=base_url();?>assets/custom/js/shop.js?v=<?=time()?>"></script>
 <script src="<?=base_url();?>assets/custom/js/company.js?v=<?=time()?>"></script>
 <script src="<?=base_url();?>assets/custom/js/profile.js?v=<?=time()?>"></script>
-	
+
 		<!-- END STYLESHEETS -->
 
 

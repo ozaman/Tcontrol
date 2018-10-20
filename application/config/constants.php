@@ -137,6 +137,8 @@ define('TBL_SHOP_COUNTRY_COM_LIST_PRICE', '	shop_country_com_list_price');
 define('TBL_SHOP_COUNTRY_ICON', 'shop_country_icon');
 define('TBL_SHOP_EXPENDITURE_TYPE', 'shop_expenditure_type');
 define('TBL_SHOP_COMPENSATION_TYPE', 'shop_compensation_type');
+define('TBL_SHOP_DETAIL_PAY', 'shop_detail_pay');
+
 
 
 

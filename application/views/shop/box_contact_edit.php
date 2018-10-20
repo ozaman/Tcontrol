@@ -169,7 +169,7 @@ if ($_GET[op] == 'edit') {
     </div>
 
     <div class="col-md-10">
-     <input name="contact_line_id" type="text" class="form-control" id="contact_line_id"  value="<?$arr[SHOPPING_CONTACT][0]->line_id;?>" />
+     <input name="contact_line_id" type="text" class="form-control" id="contact_line_id"  value="<?=$arr[SHOPPING_CONTACT][0]->line_id;?>" />
    </div>
 
  </div>

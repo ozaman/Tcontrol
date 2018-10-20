@@ -300,6 +300,14 @@ class Shop extends CI_Controller {
 	public function box_img_book(){
 		$this->load->view('shop/box_img_book');
 	}
+	public function open_detail_pay(){
+		$this->load->view('shop/box_detail_pay');
+	}
+	public function submit_detail_pay(){
+		
+		$data = $this->Shop_model->submit_detail_pay();
+		echo json_encode($data);
+	}
 	################################ SHOP #################################
 }
 

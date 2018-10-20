@@ -586,11 +586,15 @@ function get_plan_price_sub(id) {
     var url = base_url + "shop/delete?option="+option;
     var param = {
       id: id_delete,
-      tbl: table_delete
+      tbl: table_delete,
+      option: option
     }
+    // con
     console.log(param)
     console.log(url)
     // return false;
+    // return false;
+    // 
     $.ajax({
       url: url,
       data: param,
@@ -613,7 +617,7 @@ function get_plan_price_sub(id) {
           if (table_delete == 'shop_country'+option || table_delete == 'shop_country_com_list'+option) {
             commision($('#manage_com').val())
           // _box_plan_comision();
-          _box_region_icon();
+          // _box_region_icon();
         } else if(table_delete != 'shop_country'+option || table_delete != 'shop_country_com_list'+option || table_delete != 'place_document_file') {
           _box_region_icon();
           _box_plan_comision();
@@ -1243,7 +1247,7 @@ function get_plan_price_sub(id) {
     $.post(url, function(ele) {
             // console.log(ele)
             $('#box_img').html(ele);
-             _box_img_book(id)
+            _box_img_book(id)
           });
   }
   function open_check_expired() {
@@ -1263,18 +1267,18 @@ function get_plan_price_sub(id) {
   });
 
   function _form_upload_file(id) {
-     var data_form = $('#form_upload_file').serialize();
-    var data_form = new FormData($('#form_upload_file')[0]);
-    var url = base_url + "shop/save_document";
-    console.log(data_form)
-    $.ajax({
-      type: 'POST',
-      url: url,
-      data: data_form,
-      cache: false,
-      contentType: false,
-      processData: false,
-      beforeSend: function () {
+   var data_form = $('#form_upload_file').serialize();
+   var data_form = new FormData($('#form_upload_file')[0]);
+   var url = base_url + "shop/save_document";
+   console.log(data_form)
+   $.ajax({
+    type: 'POST',
+    url: url,
+    data: data_form,
+    cache: false,
+    contentType: false,
+    processData: false,
+    beforeSend: function () {
       //blockui_always();
     },
     success: function (data) {
@@ -1292,20 +1296,20 @@ function get_plan_price_sub(id) {
 
     }
   });
-    
-  }
 
-var OPT;
-  function editProfile(id,op) {
-    console.log(id)
-    console.log(op)
+ }
+
+ var OPT;
+ function editProfile(id,op) {
+  console.log(id)
+  console.log(op)
   //    document.getElementById('file').click();
   OPT = op;
   $("#file").click();
 }
 
 function filechange() {
-console.log('aaaa')
+  console.log('aaaa')
   var vals = $('#file').val();
            // val = vals.length ? vals.split('\\').pop() : '';
            // console.log(val)
@@ -1322,10 +1326,10 @@ function checkForm(form) {
 }
 
 function upfile_submit() {
-console.log(OPT)
-var url = base_url + "shop/save_uploadimg?opt="+OPT;
+  console.log(OPT)
+  var url = base_url + "shop/save_uploadimg?opt="+OPT;
   var formData = $('#upfile').serialize();
-    var formData = new FormData($('#upfile')[0]);
+  var formData = new FormData($('#upfile')[0]);
   // var formData = new FormData($("upfile")[0]);
   console.log(formData)
   console.log(url)
@@ -1351,25 +1355,25 @@ var url = base_url + "shop/save_uploadimg?opt="+OPT;
       
       // var key = new Date($.now());
       if (res.status == true) {
-      if (OPT == 'logo') {
-      $('#img_logo_shop').attr('src', '../../data/pic/place/'+res.s_name);
+        if (OPT == 'logo') {
+          $('#img_logo_shop').attr('src', '../../data/pic/place/'+res.s_name);
 
+        }
+        else{
+          _box_img_book($('#shop_id_upload').val())
+        }
       }
       else{
-        _box_img_book($('#shop_id_upload').val())
-      }
-    }
-    else{
         Command: toastr["warning"](res.msg)
 
-    }
+      }
       // $('#img-profile-2').attr('src', base_url + 'uploads/admin/' + data + "?" + key);
       // $('#img-profile-3').attr('src', base_url + 'uploads/admin/' + data + "?" + key);
     },
     error: function (data) {
 //            $("#file").val("");
-    }
-  });
+}
+});
 }
 function _box_img_book(id) {
     // alert(id)
@@ -1379,4 +1383,88 @@ function _box_img_book(id) {
             // console.log(ele)
             $('#box_img_book').html(ele);
           });
+  }
+  function open_detail_pay(i_shop,res_option) {
+    $('#modal_custom').show()
+    $('#formModalLabel').html('จัดการรายละเอียดการโอนเงิน (ค่าคอม)')
+
+    // alert('aaaaaa')
+    // $('#modal_custom').show()
+    // $('.head_title').html('จัดการร้านค้า')
+    //  $('.head_title_sub').html('หมวดหมู่ทั้งหมด')
+    //  $('.head_title_sub_2').show()
+    //  $('.head_title_sub_2').html('ช้อปปิ้งทั้งหมด ')
+    //  $('.head_title_sub_3').show()
+    //  $('.head_title_sub_4').show()
+    //  $('.head_title_sub_3').html('ร้านช้อปปิ้งทั้งหมด')
+    //  $('.head_title_sub_4').html('จัดการร้านช้อปปิ้ง')
+    var url = base_url + "shop/open_detail_pay?option="+option;
+    var param = {
+      id: i_shop
+    }
+    console.log(url)
+
+    $.ajax({
+      url: url,
+      data: param,
+      type: 'post',
+      error: function() {
+        console.log('Error Profile');
+      },
+      success: function(ele) {
+        console.log('Success Profile');
+        $('#dody_modal_custom').html(ele);
+        // var editor = new wysihtml5.Editor("wysiwyg", {
+        //   toolbar: "toolbar",
+        //   parserRules: wysihtml5ParserRules
+        // });
+        // boostbox.App.monitorWysihtml5(editor);
+
+      }
+    });
+  }
+
+
+  function _submit_detail_pay() {
+    console.log($('#form_detail_pay').serialize());
+    
+    // var  ss = $('#form_contact').serialize();
+    // console.log(JSON.stringify(ss));
+    var form = $('#form_detail_pay').serialize();
+    var url = base_url + "shop/submit_detail_pay";
+    console.log(form)
+    // return false;
+    $.ajax({
+      url: url,
+      data: form,
+      type: 'post',
+        // contentType: "application/json; charset=utf-8",
+        dataType: 'json',
+        error: function() {
+          console.log('Error');
+        },
+        success: function(res) {
+          console.log(res);
+          if (res.result == true) {
+            $('#modal_custom').hide()
+            
+              Command: toastr["success"]("เพิ่มข้อมูลผู้ติดต่อสำเร็จ")
+              // _box_contact(res.id);
+
+           
+          }
+          // if (res.result == true) {
+          //   location.href = base_url+'shop/shop_manage?sub='+res.sub+'&id='+res.product_id;
+          // }
+
+          // var url = base_url + "shop/box_plan_time?id="+id;
+          // console.log(url)
+          // $.post(url, function(ele) {
+          //   // console.log(ele)
+          //   $('#box_plan_time').html(ele);
+          // });
+        }
+      });
+
+    // body...
   }

@@ -1,6 +1,8 @@
 <ol class="breadcrumb">
 	<li class="head_title"><a class="head_title">จัดการร้านค้า</a></li>
-	<li class="head_title_sub"><a class="head_title_sub">ช้อปปิ้งทั้งหมด</a></li>
+	<li class="head_title_sub"><a href="<?=base_url();?>shop/data_shop_categorie">ช้อปปิ้งทั้งหมด</a></li>
+	<li class="head_title_sub"><a  href="<?=base_url();?>shop/categorie_sub?id=<?=$_GET[id];?>" class="head_title_sub">ประเภททั้งหมด</a></li>
+
 	<li class="head_title_sub_2" ><a class="head_title_sub_2">ร้านค่าทั้งหมด</a></li>
 	<li class="head_title_sub_3" style="display: none;" ><a class="head_title_sub_3"></a></li>
 	<li class="head_title_sub_4" style="display: none;" ><a class="head_title_sub_4"></a></li>
@@ -16,6 +18,8 @@
 					<div class="box-head">
 						<div class="box-body" style="padding-bottom: 0">
 							<!-- <button class="btn " onclick="get_categories_sub('<?=$_POST[id];?>')"><span><i class="fa fa-chevron-left" ></i> </span>กลับ</button> -->
+							<a href="<?=base_url();?>shop/categorie_sub?id=<?=$_GET[id];?>"><button class="btn " ><span><i class="fa fa-chevron-left" ></i> </span>กลับ</button></a>
+
 							<a href="<?=base_url();?>shop/shop_manage?sub=<?=$_GET[id];?>&state=add">
 							<button class="btn btn-success" data-toggle="modal" data-target="#formModal"><span><i class="fa fa-plus"></i> </span>เพิ่มร้านค้า</button>
 							</a>

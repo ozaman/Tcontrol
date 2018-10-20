@@ -885,4 +885,27 @@ public function updatetype() {
     // $this->session->set_userdata(array('savedata' => 1));
 	return $result;
 }
+public function submit_detail_pay(){
+	$i_shop = $_POST[i_shop];
+	$s_masage = $_POST[s_masage];
+	$_where = array();
+	$_where['i_shop'] = $i_shop;
+	$num = $this->Main_model->num_row(TBL_SHOP_DETAIL_PAY ,$_where);
+	if ($num == 0){
+		$data = array();		
+		$data[i_shop] = $i_shop;
+		$data[s_masage] = $s_masage;
+		$result = $this->db->insert(TBL_SHOP_DETAIL_PAY,$data);
+
+	}
+	else{
+		$data = array();
+		$data[s_masage] = $s_masage;
+		$where = array();
+		$where[i_shop] = $i_shop;
+		$result = $this->db->update(TBL_SHOP_DETAIL_PAY,$data,$where);
+	}
+
+	return $result;
+}
 }
