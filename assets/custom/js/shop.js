@@ -607,11 +607,14 @@ function get_plan_price_sub(id) {
             Command: toastr["success"]("ลบผู้ติดต่อสำเร็จ")
 
           }
+          if (table_delete == 'place_document_file') {
+            _box_document($('#manage_com').val())
+          }
           if (table_delete == 'shop_country'+option || table_delete == 'shop_country_com_list'+option) {
             commision($('#manage_com').val())
           // _box_plan_comision();
           _box_region_icon();
-        } else if(table_delete != 'shop_country'+option || table_delete != 'shop_country_com_list'+option) {
+        } else if(table_delete != 'shop_country'+option || table_delete != 'shop_country_com_list'+option || table_delete != 'place_document_file') {
           _box_region_icon();
           _box_plan_comision();
         }
@@ -1233,6 +1236,16 @@ function get_plan_price_sub(id) {
             $('#box_document').html(ele);
           });
   }
+  function _box_img(id) {
+    // alert(id)
+    var url = base_url + "shop/box_img?id="+id;
+    console.log(url)
+    $.post(url, function(ele) {
+            // console.log(ele)
+            $('#box_img').html(ele);
+             _box_img_book(id)
+          });
+  }
   function open_check_expired() {
     console.log($('#check_expired').is(":checked"))
     if (!$('#check_expired').is(":checked")) {
@@ -1280,4 +1293,90 @@ function get_plan_price_sub(id) {
     }
   });
     
+  }
+
+var OPT;
+  function editProfile(id,op) {
+    console.log(id)
+    console.log(op)
+  //    document.getElementById('file').click();
+  OPT = op;
+  $("#file").click();
+}
+
+function filechange() {
+console.log('aaaa')
+  var vals = $('#file').val();
+           // val = vals.length ? vals.split('\\').pop() : '';
+           // console.log(val)
+  // $("#upfile").submit();
+  upfile_submit()
+
+}
+
+function checkForm(form) {
+  console.log(form)
+  if ($("#file").val() == "") {
+    return false;
+  }
+}
+
+function upfile_submit() {
+console.log(OPT)
+var url = base_url + "shop/save_uploadimg?opt="+OPT;
+  var formData = $('#upfile').serialize();
+    var formData = new FormData($('#upfile')[0]);
+  // var formData = new FormData($("upfile")[0]);
+  console.log(formData)
+  console.log(url)
+  console.log($('#shop_id_upload').val())
+  // formData.append('func', 'import');
+  formData.append('file', $('input[type=file]')[0].files[0]);
+  formData.append('shop_id_upload', $('#shop_id_upload').val());
+  
+  $.ajax({
+    type: 'POST',
+    url: url,
+    data: formData,
+    cache: false,
+    contentType: false,
+    processData: false,
+    beforeSend: function () {
+      //blockui_always();
+    },
+    success: function (res) {
+      console.log(res)
+      // $("#file").val("");
+      Command: toastr["success"](res.msg)
+      
+      // var key = new Date($.now());
+      if (res.status == true) {
+      if (OPT == 'logo') {
+      $('#img_logo_shop').attr('src', '../../data/pic/place/'+res.s_name);
+
+      }
+      else{
+        _box_img_book($('#shop_id_upload').val())
+      }
+    }
+    else{
+        Command: toastr["warning"](res.msg)
+
+    }
+      // $('#img-profile-2').attr('src', base_url + 'uploads/admin/' + data + "?" + key);
+      // $('#img-profile-3').attr('src', base_url + 'uploads/admin/' + data + "?" + key);
+    },
+    error: function (data) {
+//            $("#file").val("");
+    }
+  });
+}
+function _box_img_book(id) {
+    // alert(id)
+    var url = base_url + "shop/box_img_book?id="+id;
+    console.log(url)
+    $.post(url, function(ele) {
+            // console.log(ele)
+            $('#box_img_book').html(ele);
+          });
   }

@@ -505,7 +505,7 @@ class Shop_model extends CI_Model {
 					
 					$add = $this->db->insert(TBL_PLACE_DOCUMENT_FILE, $data);
 					$result[status] = $add;
-					$result[msg] = 'อัrโหลดไฟล์สำเร็จ';
+					$result[msg] = 'อัพโหลดไฟล์สำเร็จ';
 				}
 				
 
@@ -583,6 +583,67 @@ class Shop_model extends CI_Model {
 		$xx[target_file] = $target_file;
 
 		return  $result;
+	}
+
+	public function save_uploadimg()	{
+		header('Content-Type: application/json');
+		// if ($_FILES["file"]["name"]) {
+		$xx[post] = $_POST;
+		$xx[files] = $_FILES;
+		// return $xx;
+		$product_id = $_POST[shop_id_upload];
+		$result = array();
+		$type = explode('.', $_FILES[file][name]);
+		$type = strtolower($type[count($type) - 1]);
+		// return $type.'---';
+		// $url = "../data/pic/document/place/";
+
+		$num = time();
+		if ($_GET[opt] == 'logo') {
+			$doc_name = $_GET[opt].$product_id.'.'.$type;	
+		}
+		else{
+			$doc_name = $_GET[opt].$product_id.'_'.$num.'.'.$type;
+		}
+		
+		$target_file = "../data/pic/place/".$doc_name;
+		// return $_FILES[file][name].'-----'.$_FILES[file][tmp_name];
+		if (in_array($type, array("jpg", "jpeg", "gif", "png"))){
+			// return  $type;
+			if (is_uploaded_file($_FILES[file][tmp_name])){
+				// return $target_file;
+				if (move_uploaded_file($_FILES[file][tmp_name], $target_file)){
+					if ($_GET[opt] == 'logo') {
+						$data = array();
+						$data[pic_logo] =  $doc_name;
+						$this->db->where('id', $product_id);
+						$add = $this->db->update(TBL_SHOPPING_PRODUCT, $data);
+					}
+					else{
+						
+						$data = array();
+						$data[product_id] =  $product_id;
+						$data[s_name] =  $doc_name;
+						$add = $this->db->insert(TBL_SHOP_DOCUMENT_FILE_IMG, $data);
+					}
+					$result[status] = $add;
+					$result[s_name] = $doc_name;
+					$result[msg] = 'อัพโหลดไฟล์สำเร็จ';
+					return $result;
+				}
+
+			}
+		}
+
+		else{
+			$result[status] = false;
+			$result[s_name] = '';
+			$result[msg] = 'ไฟล์ที่อับโหลดไม่ถูกต้อง กรุณาอับโหลดใหม่';
+			return $result;
+			// return  '$type';
+
+		}
+
 	}
 
 	/********* END SHOP MODEL **********/

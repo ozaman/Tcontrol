@@ -289,6 +289,17 @@ class Shop extends CI_Controller {
 		$data = $this->Shop_model->save_document();
 		echo json_encode($data);
 	}
+	public function box_img(){
+		$this->load->view('shop/box_img');
+	}
+	public function save_uploadimg(){
+		
+		$data = $this->Shop_model->save_uploadimg();
+		echo json_encode($data);
+	}
+	public function box_img_book(){
+		$this->load->view('shop/box_img_book');
+	}
 	################################ SHOP #################################
 }
 

@@ -34,9 +34,12 @@ $arr[shop] = $this->Main_model->rowdata(TBL_SHOPPING_PRODUCT,$_where,$_select);
 				$_where = array();
 				$_where['product_id'] = $_GET[id];
 				$_select = array('*');
-				$arr[DOC] = $this->Main_model->rowdata(TBL_PLACE_DOCUMENT_FILE,$_where,$_select);
+				 $_order = array();
+            $_order['id'] = 'asc';  
+				$arr[DOC] = $this->Main_model->fetch_data('','',TBL_PLACE_DOCUMENT_FILE,$_where,$_select,$_order);
+				   foreach($arr[DOC] as $key => $value){ 
 				$_where = array();
-				$_where['id'] = $arr[DOC]->type;
+				$_where['id'] = $value->type;
 				$_select = array('*');
 				$arr[DOC_GROUP] = $this->Main_model->rowdata(TBL_PLACE_DETAIL_DOC_GROUP,$_where,$_select);
 				// print_r(json_encode($arr[DOC_GROUP]));
@@ -45,17 +48,17 @@ $arr[shop] = $this->Main_model->rowdata(TBL_SHOPPING_PRODUCT,$_where,$_select);
 				<tbody>
 				<tr id="row_show_file_db_<?=$val->id;?>">
 					<td><?=$arr[DOC_GROUP]->category_name;?></td>
-					<td><span title="<?=$arr[DOC]->document_name;?>"><?=$arr[DOC]->document_name;?></span></td>
-					<td align="left"><? if($arr[DOC]->end_expired=="" or $arr[DOC]->end_expired == NULL){
+					<td><span title="<?=$value->document_name;?>"><?=$value->document_name;?></span></td>
+					<td align="left"><? if($value->end_expired=="" or $value->end_expired == NULL){
 						echo "-";
 					}else{
-						echo $arr[DOC]->end_expired;
+						echo $value->end_expired;
 					}?></td>
 					<td><?=$day_lastupdate[0];?></td>
 					<td>
 						<?php 
 							$now = time(); // or your date as well
-							$your_date = strtotime($arr[DOC]->end_expired);
+							$your_date = strtotime($value->end_expired);
 							$datediff = $now - $your_date;
 							if($datediff>0){
 								$color = "color:#ff0000";
@@ -68,12 +71,19 @@ $arr[shop] = $this->Main_model->rowdata(TBL_SHOPPING_PRODUCT,$_where,$_select);
 							?>
 							<span style="<?=$color;?>" id="dift_date_<?=$arr[DOC_GROUP]->id;?>"><?=$txt_ckc." ".abs($day)." วัน";?></span>
 						</td>
-						<td><?=$arr[DOC]->day_alert;?> วัน</td>
-						<td align="center"><a href="../data/pic/document/place/<?=$arr[DOC]->document_name;?>" download><button class="btn btn-md" type="button"><i class="fa fa-download" aria-hidden="true"></i></button></a></td>
-						<td align="center"><button class="btn btn-md btn-danger btn-equal" type="button" onclick="deleteFile('<?=$arr[DOC]->id;?>','<?=$arr[DOC]->document_name;?>');"><i class="fa fa-trash-o" aria-hidden="true"></i></button></td>
+						<td><?=$value->day_alert;?> วัน</td>
+						<td align="center"><a href="../data/pic/document/place/<?=$value->document_name;?>" download><button class="btn btn-md" type="button"><i class="fa fa-download" aria-hidden="true"></i></button></a>
+						</td>
+						<td align="center">
+
+							<button type="button" class="btn btn-md btn-danger btn-equal" data-toggle="modal" data-target="#deleteModal" data-original-title="ลบ" onclick="firstDelete('ไฟล์ <?=$arr[DOC_GROUP]->category_name;?> <?=$value->document_name;?>','<?=$value->id;?>','<?=TBL_PLACE_DOCUMENT_FILE;?>')"><i class="fa fa-trash-o"></i></button>
+
+
+							<!-- <button class="btn btn-md btn-danger btn-equal" type="button" onclick="deleteFile('<?=$value->id;?>','<?=$value->document_name;?>');"><i class="fa fa-trash-o" aria-hidden="true"></i></button> -->
+						</td>
 					</tr>
 				</tbody>
-					
+					<?php }?>
 				</table>
 			</div>
 		

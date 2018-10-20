@@ -73,7 +73,7 @@
 
                   <li class="" onclick="_box_document(<?=$_GET[id];?>)"><a href="#document"> เอกสาร</a></li>
 
-                  <li class=""><a href="#images"> รูปภาพ</a></li>
+                  <li class="" onclick="_box_img(<?=$_GET[id];?>)"><a href="#images"> รูปภาพ</a></li>
                   <li class=""><a href="#section_time"> ติดต่อ / เวลาทำการ</a></li>
                 </ul>
               </div>
@@ -285,8 +285,12 @@
       <div id="box_document" onload="_box_document('<?=$_GET[id];?>')"></div>
     </div>
    </div>
-   <div class="tab-pane" id="images">            <p>Duo semper accumsan ea, quidam convenire cum cu, oportere maiestatis incorrupte est eu. Soluta audiam timeam ius te, idque gubergren forensibus ad mel, persius urbanitas usu id. Civibus nostrum fabellas mea te, ne pri lucilius iudicabit. Ut cibo semper vituperatoribus vix, cum in error elitr. Vix molestiae intellegat omittantur an, nam cu modo ullum scriptorem.</p>
-    <p>Quod option numquam vel in, et fuisset delicatissimi duo, qui ut animal noluisse erroribus. Ea eum veniam audire. Per at postea mediocritatem, vim numquam aliquid eu, in nam sale gubergren. Dicant vituperata consequuntur at sea, mazim commodo</p>
+   <div class="tab-pane" id="images">
+    <div class="col-md-12">
+      <div id="box_img">
+        
+      </div>
+    </div>
   </div>
   <div class="tab-pane" id="section_time"> <!-- TIME OPEN -->
    <!-- Contacts -->

@@ -101,6 +101,8 @@ define('TBL_WEB_PROVINCE', 'web_province');
 define('TBL_WEB_AMPHUR', 'web_amphur');
 define('TBL_WEB_COUNTRY', 'web_country');
 define('TBL_SHOP_PLAN_COM', 'shop_plan_com');
+define('TBL_SHOP_DOCUMENT_FILE_IMG', 'shop_document_file_img');
+
 define('TBL_SHOP_PAYMENT_CHANNEL','shop_payment_channel');
 
 define('TBL_SHOP_COUNTRY_TAXI', 'shop_country_taxi');

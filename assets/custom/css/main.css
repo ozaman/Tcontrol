@@ -14,3 +14,11 @@
 .row_expired{
 	display: none;
 }
+.take_photo{
+	padding: 5px;
+    color: #333333;
+    text-align: center;
+    border: 1px solid #E6E6E6;
+    border-radius: 5px;
+    background-color: #F6F6F6;
+}
