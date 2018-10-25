@@ -1079,6 +1079,7 @@ function get_plan_price_sub(id) {
          });
     }
     function _province(itm) {
+      $('#province').val(itm)
       var url = base_url + "shop/select_type?id_sub=" + itm+'&table=amphur';
       var htmlOption = '';
       $.post(url, function(res) {

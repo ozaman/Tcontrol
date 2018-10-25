@@ -13,13 +13,10 @@
   }
 };
 		var editor = new wysihtml5.Editor("wysiwyg", {
-			toolbar: {
-				custom1: true
-			},
-			customTemplates: myCustomTemplates
-          // toolbar: "toolbar",
-          // parserRules: wysihtml5ParserRules,
-      });
+			
+          toolbar: "toolbar",
+          parserRules: wysihtml5ParserRules,
+     	});
 		console.log(editor)
 		boostbox.App.monitorWysihtml5(editor);
 
@@ -27,7 +24,7 @@
         // $("#some-textarea").wysihtml5();
 // var editorObj = $("#wysiwyg").data('wysihtml5');
 // editor = editorObj.editor;
-// editor.setValue('<?=$DETAIL_PAY->s_masage;?>');
+editor.setValue('<?=$DETAIL_PAY->s_masage;?>');
 // $("#wysiwyg").wysihtml5();
 // $('#wysiwyg').html('<?=$DETAIL_PAY->s_masage;?>');
 </script>

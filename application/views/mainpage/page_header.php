@@ -53,7 +53,7 @@
 <script src="<?=base_url();?>assets/js/modules/boostbox/libs/blueimp-file-upload/vendor/jquery.ui.widget.js"></script>
 <script src="<?=base_url();?>assets/js/modules/boostbox/libs/blueimp-file-upload/vendor/tmpl.min.js"></script>
 <script src="<?=base_url();?>assets/js/modules/boostbox/libs/blueimp-file-upload/vendor/load-image.min.js"></script>
-<script src="<?=base_url();?>assets/js/modules/boostbox/libs/blueimp-file-upload/vendor/jquery.blueimp-gallery.min.js"></script>
+<script src="<?=base_url();?>assets/js/modules/boostbox/libs/blueimp-file-upload/vendor/jquery.blueimp-gallery.min.js"></script><!-- 
 <script src="<?=base_url();?>assets/js/modules/boostbox/libs/blueimp-file-upload/jquery.iframe-transport.js"></script>
 <script src="<?=base_url();?>assets/js/modules/boostbox/libs/blueimp-file-upload/jquery.fileupload.js"></script>
 <script src="<?=base_url();?>assets/js/modules/boostbox/libs/blueimp-file-upload/jquery.fileupload-process.js"></script>
@@ -61,8 +61,8 @@
 <script src="<?=base_url();?>assets/js/modules/boostbox/libs/blueimp-file-upload/jquery.fileupload-audio.js"></script>
 <script src="<?=base_url();?>assets/js/modules/boostbox/libs/blueimp-file-upload/jquery.fileupload-video.js"></script>
 <script src="<?=base_url();?>assets/js/modules/boostbox/libs/blueimp-file-upload/jquery.fileupload-validate.js"></script>
-<script src="<?=base_url();?>assets/js/modules/boostbox/libs/blueimp-file-upload/jquery.fileupload-ui.js"></script>
-<script src="<?=base_url();?>assets/js/modules/boostbox/libs/blueimp-file-upload/main.js"></script>
+<script src="<?=base_url();?>assets/js/modules/boostbox/libs/blueimp-file-upload/jquery.fileupload-ui.js"></script> -->
+<!-- <script src="<?=base_url();?>assets/js/modules/boostbox/libs/blueimp-file-upload/main.js"></script> -->
 <script src="<?=base_url();?>assets/js/modules/boostbox/libs/toastr/toastr.min.js"></script><!-- <script src="<?=base_url();?>assets/js/modules/boostbox/libs/autosize/jquery.autosize.min.js"></script> -->
 <script src="<?=base_url();?>assets/js/modules/boostbox/libs/slimscroll/jquery.slimscroll.min.js"></script>
 <script src="<?=base_url();?>assets/js/modules/boostbox/core/demo/DemoFormEditors.js"></script>
@@ -72,6 +72,7 @@
 <script src="<?=base_url();?>assets/custom/js/shop.js?v=<?=time()?>"></script>
 <script src="<?=base_url();?>assets/custom/js/company.js?v=<?=time()?>"></script>
 <script src="<?=base_url();?>assets/custom/js/profile.js?v=<?=time()?>"></script>
+<script src="<?=base_url();?>assets/custom/js/station.js?v=<?=time()?>"></script>
 
 		<!-- END STYLESHEETS -->
 

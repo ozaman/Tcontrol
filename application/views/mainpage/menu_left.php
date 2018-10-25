@@ -27,18 +27,20 @@
 		</div> -->
 	</div>
 </form>
+
+
 <!-- END MENU SEARCH -->
 
 <!-- BEGIN MAIN MENU -->
 <ul class="main-menu">
 	<!-- Menu Dashboard -->
-	<li >
+	<li id="head_home">
 		<a href="">
 			<i class="fa fa-home fa-fw"></i><span class="title">หน้าแรก</span>
 		</a>
 	</li><!--end /menu-item -->
 	<!-- Menu UI -->
-	<li>
+	<li id="head_setting">
 		<a href="javascript:void(0);">
 			<i class="fa fa-cog fa-fw"></i><span class="title">ตั้งค่าระบบ</span> <span class="expand-sign">+</span>
 		</a>
@@ -53,7 +55,7 @@
 		</ul><!--end /submenu -->
 	</li><!--end /menu-item -->
 	<!-- Menu Pages -->
-	<li >
+	<li id="head_user">
 		<a href="javascript:void(0);">
 			<i class="fa fa-users fa-fw"></i><span class="title">ผู้ใช้งานระบบ</span> <span class="expand-sign">+</span>
 		</a>
@@ -77,7 +79,7 @@
 		</ul><!--end /submenu -->
 	</li><!--end /menu-item -->
 	<!-- Menu Tables -->
-	<li class="expanded">
+	<li id="head_shop">
 		<a href="javascript:void(0);">
 			<i class="fa icon-app-uniF11A-1 fa-fw"></i><span class="title">จัดการร้านค้า</span> <span class="expand-sign">+</span>
 		</a>
@@ -92,8 +94,23 @@
 
 		</ul><!--end /submenu -->
 	</li><!--end /menu-item -->
+	<li  id="head_station">
+		<a href="javascript:void(0);">
+			<i class="fa fa-globe fa-fw"></i><span class="title">จัดการสถานที่</span> <span class="expand-sign">+</span>
+		</a>
+		<!--start submenu -->
+		<ul>
+			<li><a href="<?=base_url();?>station/place_car_station" >คิวรถ</a></li>
+			
+
+			<!-- <li><a href="tables/dynamic">ประเภทสินค้าย่อย</a></li> -->
+
+			
+
+		</ul><!--end /submenu -->
+	</li><!--end /menu-item -->
 	<!-- Menu Forms -->
-	<li>
+	<li id="head_usecontrol">
 		<a href="javascript:void(0);">
 			<i class="fa icon-app-uniF13C fa-fw"></i><span class="title">ข้อมูลการใช้บริการ</span> <span class="expand-sign">+</span>
 		</a>
@@ -108,7 +125,7 @@
 	<!-- Menu Charts -->
 	<!--end /menu-item -->
 	<!-- Menu Levels -->
-	<li>
+	<li id="head_account">
 		<a href="javascript:void(0);">
 			<i class="fa icon-app-uniF15D fa-fw"></i><span class="title">ข้อมูลบัญชี</span> <span class="expand-sign">+</span>
 		</a>
@@ -134,4 +151,11 @@
 </ul><!--end .main-menu -->
 <!-- END MAIN MENU -->
 		</div>
+		<script type="text/javascript">
+	var menu = '<?=$menu;?>'
+	// if (menu == 'station') {
+		$('#head_'+menu).removeClass('expanded');
+		$('#head_'+menu).addClass('expanded');
+	// }
+</script>
 	

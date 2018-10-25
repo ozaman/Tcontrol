@@ -21,8 +21,9 @@ class Shop extends CI_Controller {
 		$_order = array();
 		$_order['status'] = 'DESC';
 		$_order['topic_en'] = 'asc';
+		$menu[menu] = 'shop';
 		$data['shop'] = $this->Main_model->fetch_data('','',TBL_SHOPPING_PRODUCT,'',$_select,$_order);
-		$this->load->view('mainpage/page_header');
+		$this->load->view('mainpage/page_header',$menu);
 		$this->load->view('shop/shop_all', $data);
 		$this->load->view('mainpage/page_footer');
 	}
@@ -30,8 +31,9 @@ class Shop extends CI_Controller {
 		$_select = array('*');
 		$_order = array();
 		$_order['topic_en'] = 'asc';
+		$menu[menu] = 'shop';
 		$data['categorie'] = $this->Main_model->fetch_data('','',TBL_SHOPPING_PRODUCT_MAIN,'',$_select,$_order);
-		$this->load->view('mainpage/page_header');
+		$this->load->view('mainpage/page_header',$menu);
 		$this->load->view('shop/page_categories', $data);
 		$this->load->view('mainpage/page_footer');
 	}
@@ -42,7 +44,8 @@ class Shop extends CI_Controller {
 		$_order = array();
 		$_order['topic_en'] = 'asc';
 		$data['categorie_bub'] = $this->Main_model->fetch_data('','',TBL_SHOPPING_PRODUCT_SUB,$_where,$_select,$_order);
-		$this->load->view('mainpage/page_header');
+		$menu[menu] = 'shop';
+		$this->load->view('mainpage/page_header',$menu);
 		$this->load->view('shop/page_categories_sub', $data);
 		$this->load->view('mainpage/page_footer');
 	}
@@ -53,7 +56,8 @@ class Shop extends CI_Controller {
 		$_order = array();
 		$_order['topic_en'] = 'asc';
 		$data['shop_ordertype'] = $this->Main_model->fetch_data('','',TBL_SHOPPING_PRODUCT,$_where,$_select,$_order);
-		$this->load->view('mainpage/page_header');
+		$menu[menu] = 'shop';
+		$this->load->view('mainpage/page_header',$menu);
 		$this->load->view('shop/page_shop_ordertype', $data);
 		$this->load->view('mainpage/page_footer');
 	}
@@ -68,7 +72,8 @@ class Shop extends CI_Controller {
 		$_where['id'] = $_GET[id];
 		$_select = array('*');
 		$data['shop'] = $this->Main_model->rowdata(TBL_SHOPPING_PRODUCT,$_where,$_select);
-		$this->load->view('mainpage/page_header');
+		$menu[menu] = 'shop';
+		$this->load->view('mainpage/page_header',$menu);
 		$this->load->view('shop/page_shop_manage', $data);
 		$this->load->view('mainpage/page_footer');
 	}
