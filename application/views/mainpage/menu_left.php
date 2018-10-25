@@ -136,6 +136,17 @@
 			
 		</ul><!--end /submenu -->
 	</li>
+	<li id="setting_app_menu">
+		<a href="javascript:void(0);">
+			<i class="fa fa-file-text-o"></i><span class="title">ข้อมูลระบบ</span> <span class="expand-sign">+</span>
+		</a>
+		<!--start submenu -->
+		<ul>
+			<li><a href="<?=base_url();?>setting/car_brand"><span class="title">ยี่ห้อรถ</span></a></li>
+			<!--<li><a href="#"><span class="title">รายจ่ายบริษัท</span></a></li>-->
+		</ul><!--end /submenu -->
+
+	</li>
 	<!-- <li>
 		<a href="javascript:void(0);">
 			<i class="fa fa-user fa-fw"></i><span class="title">แก้ไขข้อมูลส่วนตัว</span> 
