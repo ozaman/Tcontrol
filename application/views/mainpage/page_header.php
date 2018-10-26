@@ -94,7 +94,7 @@
 		<!-- BEGIN HEADER-->
 	<header id="header">
 		<?php 
-session_start();
+//session_start();
 if($this->session->userdata('admin_use') == ''){
 
             redirect('login', 'refresh');

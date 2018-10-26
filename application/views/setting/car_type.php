@@ -64,7 +64,7 @@
 											<a style="cursor: pointer;" onclick="changeStatusCarType('<?=$val->id;?>','<?=$val->status;?>');"><?=$txt_status;?></a>
 										</td>
 									</tr>
-								<? }
+								<?php }
 								?>
 								<tr>
 									

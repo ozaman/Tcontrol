@@ -41,7 +41,7 @@ define('BASE_URL', 'http://localhost/Tcontrol/');
 |
 */
 $autoload['packages'] = array();
-$autoload['libraries'] = array('curl');
+//$autoload['libraries'] = array('curl');
 /*
 | -------------------------------------------------------------------
 |  Auto-load Libraries
