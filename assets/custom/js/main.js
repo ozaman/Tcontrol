@@ -33,3 +33,36 @@ function shop(opt) {
 		});
 	}
 }
+$('#send_login').click(function(){
+   login()
+});
+
+function login() {
+	console.log($('#form_login').serialize())
+	var url = base_url + "login/login";
+	// var param = {
+	// 	id: item
+	// }
+	console.log(url)
+
+	$.ajax({
+		url: url,
+		data: $('#form_login').serialize(),
+		type: 'post',
+		dataType: 'json',
+		error: function() {
+			console.log('Error Profile');
+		},
+		success: function(res) {
+             console.log(res);
+             if (res.status == true) {
+             	location.href = base_url;
+             }
+             else{
+             	 Command: toastr[res.icon](res.msg)
+             }
+             // $('.box_region_show').html(ele);
+
+         }
+     });
+}

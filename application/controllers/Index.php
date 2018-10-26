@@ -5,7 +5,7 @@ class Index extends CI_Controller {
     parent::__construct();
     // $this->load->model('Main_model');
     // $this->load->model('Shop_model');
-    
+
   }
 
 
@@ -17,9 +17,8 @@ public function index()	{
     $this->load->view('mainpage/page_header');
     $this->load->view('shop/page_categories', $data);
     $this->load->view('mainpage/page_footer');
-    
+
 	}
-	
 
 
   //////////////////////////// End

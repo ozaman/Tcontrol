@@ -95,6 +95,8 @@ define('TBL_PLAN_PRODUCT_PRICE_SETTING', 'plan_product_price_setting');
 define('TBL_PRODUCT_PRICE_LIST_ALL', 'product_price_list_all');
 define('TBL_ORDER_BOOKING', 'order_booking');
 define('TBL_WEB_CARALL', 'web_carall');
+define('TBL_WEB_ADMIN', 'web_admin');
+
 define('TBL_WEB_DRIVER', 'web_driver');
 define('TBL_WEB_AREA', 'web_area');
 define('TBL_WEB_REGION', 'web_region');

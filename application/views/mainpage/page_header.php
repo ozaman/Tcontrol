@@ -36,6 +36,7 @@
 	var base_url = '<?=base_url();?>';
 </script>
 
+
 <script src="<?=base_url();?>assets/js/modules/boostbox/libs/jquery/jquery-1.11.0.min.js?v=<?=time()?>"></script>
 <script src="<?=base_url();?>assets/js/modules/boostbox/libs/jquery/jquery-migrate-1.2.1.min.js"></script>
 <script src="<?=base_url();?>assets/js/modules/boostbox/core/BootstrapFixed.js"></script>
@@ -92,6 +93,20 @@
 	<body class="menubar-hoverable header-fixed ">
 		<!-- BEGIN HEADER-->
 	<header id="header">
+		<?php 
+session_start();
+if($this->session->userdata('admin_use') == ''){
+
+            redirect('login', 'refresh');
+
+        }
+        else{
+
+          //session_destroy();
+      }
+        
+	
+?>
 	
 
 

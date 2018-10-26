@@ -1,5 +1,6 @@
 <?php
 defined('BASEPATH') OR exit('No direct script access allowed');
+define('BASE_URL', 'http://localhost/Tcontrol/');
 
 /*
 | -------------------------------------------------------------------
@@ -58,7 +59,9 @@ $autoload['libraries'] = array('curl');
 |
 |	$autoload['libraries'] = array('user_agent' => 'ua');
 */
-$autoload['libraries'] = array('database','parser','form_validation');
+$autoload['libraries'] = array('session','database','form_validation','parser');
+
+// $autoload['libraries'] = array('database','parser','form_validation');
 
 /*
 | -------------------------------------------------------------------
@@ -144,3 +147,5 @@ function json_output($statusHeader,$response)
 		$ci->output->set_status_header($statusHeader);
 		$ci->output->set_output(json_encode($response));
 	}
+	
+
