@@ -3,7 +3,7 @@
 <html lang="en">
 
   <head>
-    <title>Boostbox - Locked</title>
+    <title>Control</title>
     
     <!-- BEGIN META -->
     <meta charset="utf-8">
@@ -79,7 +79,7 @@
           </div>
         </div>
         <div class="col-xs-6 text-right">
-          <button class="btn btn-primary" type="submit" id="send_login" ><i class="fa fa-key"></i>เข้าสู่ระบบ</button>
+          <button class="btn btn-primary" type="button" id="send_login" ><i class="fa fa-key"></i>เข้าสู่ระบบ</button>
         </div>
       </div>
       </form>
@@ -134,6 +134,7 @@
   <!-- END JAVASCRIPT -->
   
   </body>
+ 
   <script type="text/javascript">
      $(function () {
     if (localStorage.chkbox != '') {

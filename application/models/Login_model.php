@@ -8,6 +8,8 @@ class Login_model extends CI_Model
 		$data[post] = $_POST;
 		$username = $this->input->post('username');
 		$password = $this->input->post('password');
+		$data[user] = $username;
+		$data[pass] = $password;
 		if ($username == '') {
 			$data[status] = false;
 			$data[icon] = 'warning';
@@ -30,15 +32,19 @@ class Login_model extends CI_Model
 				$data[status] = true;
 				$data[icon] = 'success';
 				$data[msg] = 'สำเร็จ';
-				// session_start();
-				$this->session->set_userdata(array(
-					'admin_use' => $data[ADMIN]->id,
-					'level' => $data[ADMIN]->level
-
-				));
+				session_start();
+				$_SESSION['admin_use'] = $data[ADMIN]->id;
+				$_SESSION['level'] = $data[ADMIN]->level;
 				
-				return $data;
+				$this->load->library('session');
+				// $this->session->set_userdata(array(
+				// 	'admin_use' => $data[ADMIN]->id,
+				// 	'level' => $data[ADMIN]->level
+
+				// ));
 				// redirect('shop/data_shop_categorie', 'refresh');
+				return $data;
+				redirect('shop/data_shop_categorie', 'refresh');
 			}
 			else{
 				$data[status] = false;

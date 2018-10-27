@@ -13,8 +13,9 @@ public function index()	{
     $_select = array('*');
     $_order = array();
     $_order['topic_en'] = 'asc';
+    $menu[menu] = 'shop';
     $data['categorie'] = $this->Main_model->fetch_data('','',TBL_SHOPPING_PRODUCT_MAIN,'',$_select,$_order);
-    $this->load->view('mainpage/page_header');
+    $this->load->view('mainpage/page_header',$menu);
     $this->load->view('shop/page_categories', $data);
     $this->load->view('mainpage/page_footer');
 

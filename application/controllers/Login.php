@@ -17,6 +17,12 @@ class Login extends CI_Controller {
     echo json_encode($data);
 
   }
+public function logout() {
+    session_destroy();
+    header('Location: '.'index');
+     // redirect('login');
+    // echo json_encode($data);
 
+  }
 
   }

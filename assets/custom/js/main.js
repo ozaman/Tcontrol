@@ -1,3 +1,13 @@
+// $(document).ready(function() {
+// if ($.cookie("admin_use") == '') {
+//     location.href= 'login/index';
+// }
+// else{
+
+// }
+// });
+
+
 function shop(opt) {
 	console.log(opt+"_____"+'options')
 	if (opt == 'store') {
@@ -57,6 +67,9 @@ function login() {
              console.log(res);
              if (res.status == true) {
              	location.href = base_url;
+             	 // $.cookie("admin_use",res.ADMIN.id);
+             	  // $.cookie("level",res.ADMIN.level);
+             	 
              }
              else{
              	 Command: toastr[res.icon](res.msg)
