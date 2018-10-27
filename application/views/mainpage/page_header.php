@@ -94,10 +94,12 @@
 		<!-- BEGIN HEADER-->
 	<header id="header">
 		<?php 
+
 		session_start();
 		// echo $_SESSION['admin_use'].'ssssssssssssssssssssssss';
 
 if($_SESSION['admin_use'] == ''){
+
 
             redirect('login', 'refresh');
 

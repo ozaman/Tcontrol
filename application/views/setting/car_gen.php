@@ -84,7 +84,7 @@
 											<button onclick="deleteCarGen('<?=$val->id;?>');" type="button" class="btn btn-xs btn-danger btn-equal" ><i class="fa fa-trash-o"></i></button>
 										</td>
 									</tr>
-								<? }
+								<?php }
 								?>
 								<tr>
 									
