@@ -135,6 +135,8 @@ function get_shop_all() {
   function open_commision(id) {
     // body...
     $('#modal_custom').show()
+    console.log('--------------------------------------')
+    console.log(id)
     commision(id)
   }
 

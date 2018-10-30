@@ -1,8 +1,8 @@
-function open_commision(id) {
-    // body...
+// function open_commision(id) {
+//     // body...
     
-    commision(id)
-  }
+//     commision(id)
+//   }
 
   function fun_add_station() {
     $('#modal_custom').show()

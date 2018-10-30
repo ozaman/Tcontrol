@@ -74,6 +74,7 @@
 <script src="<?=base_url();?>assets/custom/js/company.js?v=<?=time()?>"></script>
 <script src="<?=base_url();?>assets/custom/js/profile.js?v=<?=time()?>"></script>
 <script src="<?=base_url();?>assets/custom/js/station.js?v=<?=time()?>"></script>
+<script src="<?=base_url();?>assets/custom/js/setting.js?v=<?=time()?>"></script>
 
 		<!-- END STYLESHEETS -->
 
@@ -96,7 +97,7 @@
 		<?php 
 
 		session_start();
-		// echo $_SESSION['admin_use'].'ssssssssssssssssssssssss';
+		//echo $_SESSION['admin_use'].'ssssssssssssssssssssssss';
 
 if($_SESSION['admin_use'] == ''){
 
@@ -109,7 +110,11 @@ if($_SESSION['admin_use'] == ''){
           //session_destroy();
       }
         
-	
+		$_where = array();
+		$_where[id] = $_SESSION['admin_use'];
+		$_select = array('*');
+		$ADMIN = $this->Main_model->rowdata(TBL_WEB_ADMIN,$_where,$_select);
+		// print_r($data[ADMIN]);
 ?>
 	
 
@@ -136,7 +141,7 @@ if($_SESSION['admin_use'] == ''){
 		<ul class="nav navbar-nav navbar-right">
 			<li><span class="navbar-devider"></span></li>
 			<li class="dropdown">
-				<a href="javascript:void(0);" class="navbar-profile dropdown-toggle text-bold" data-toggle="dropdown"> <i class="fa fa-user fa-fw"></i> CSD Admin <i class="fa fa-fw fa-angle-down"></i> <img class="img-circle" src="" alt=""></a>
+				<a href="javascript:void(0);" class="navbar-profile dropdown-toggle text-bold" data-toggle="dropdown"> <i class="fa fa-user fa-fw"></i> <?=$ADMIN->name;?> <i class="fa fa-fw fa-angle-down"></i> <img class="img-circle" src="" alt=""></a>
 				<ul class="dropdown-menu animation-slide">
 					<!-- <li class="dropdown-header">Config</li> -->
 					<li><a onclick="get_profile()">แก้ไขข้อมูลส่วนตัว</a></li>
