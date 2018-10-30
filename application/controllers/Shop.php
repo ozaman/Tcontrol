@@ -16,6 +16,18 @@ class Shop extends CI_Controller {
 		// 	$tbl = '_gui';
 		// }
 	}
+    
+    // ================================================================================================
+    public function func_withholding_update(){
+	$s_tbl = $_POST[s_tbl];	
+    $_where = array($_POST[s_where]=>$_POST[i_id]);
+    $_update = array();
+    $_update[$_POST[s_col]] = $_POST[s_val];
+      $data = $this->db->update($s_tbl,$_update,$_where);
+		echo json_encode($data);
+	}
+    // ================================================================================================
+    
 	public function data_shop_all(){
 		$_select = array('*');
 		$_order = array();

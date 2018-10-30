@@ -1,3 +1,47 @@
+// ========================================================================================
+function func_withholding(i_id,s_where,s_col,s_tbl,s_id) {
+    if ($('#i_withholding'+s_id).prop("checked") === true) {
+       $('#i_withholding'+s_id).prop( "checked", false );
+       $('#div_i_withholding_rate'+s_id).hide();
+       var s_val = 0;
+       func_withholding_update(s_val,i_id,s_where,s_col,s_tbl);
+    } else {
+       $('#i_withholding'+s_id).prop( "checked", true );
+       $('#div_i_withholding_rate'+s_id).show();
+       var s_val = 1;
+       func_withholding_update(s_val,i_id,s_where,s_col,s_tbl);
+    }
+  }
+  function func_withholding_rate(s_val,i_id,s_where,s_col,s_tbl,s_id) {
+    func_withholding_update(s_val,i_id,s_where,s_col,s_tbl);
+  }
+  function func_withholding_update(s_val,i_id,s_where,s_col,s_tbl) {
+    var url = base_url + "shop/func_withholding_update";
+    var param = {
+     s_val: s_val,
+     i_id: i_id,
+     s_where: s_where,
+     s_col: s_col,
+     s_tbl: s_tbl
+   }
+    $.ajax({
+      url: url,
+      data: param,
+      type: 'post',
+      dataType: 'json',
+      error: function() {
+        console.log('Error Profile');
+      },
+      success: function(res) {
+        if (res == true) {
+          console.log(res);
+          toastr.success('บันทึกข้อมูลสำเร็จ', '', {"closeButton": true});
+        }
+      }
+    });
+  }
+// ========================================================================================
+
 // callinit();
 var param_plan_price,
 day, obj_day;
