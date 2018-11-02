@@ -34,7 +34,7 @@
               foreach($categorie as $key => $val) {
                 $count_sub = $this->Main_model->rows(TBL_SHOPPING_PRODUCT_SUB,array('main' => $val->id));
                 ?>
-                <tr>
+              <tr id="tr_delete<?=$val->id;?>">
                   <td><?=$key + 1; ?></td>
                   <td>
                     <a onclick="func_openForm('<?=$val->id;?>', '<?=TBL_SHOPPING_PRODUCT_MAIN; ?>','แก้ไขหมวดหมู่ :: <?=$val->topic_th; ?> / <?=$val->topic_en; ?> / <?=$val->topic_cn; ?>');" class="btn text-primary">
@@ -63,7 +63,7 @@
                     <span id="span_status<?=$val->id; ?>" onclick="updateStatus('<?=$val->id; ?>', '<?=$val->status; ?>', '<?=TBL_SHOPPING_PRODUCT_MAIN; ?>')" class="<?=$s_class; ?>" style="cursor: pointer;"><?=$text_status; ?></span>
                   </td>
                   <td>
-                    <button onclick="func_openFormDelete( '<?=$val->id; ?>', '<?=TBL_SHOPPING_PRODUCT_MAIN; ?>','<?=$val->topic_th; ?> / <?=$val->topic_en; ?> / <?=$val->topic_cn; ?>')" type="button" class="btn btn-xs btn-danger btn-equal" data-toggle="modal" data-target="#deleteModal"><i class="fa fa-trash-o"></i></button>
+                    <button onclick="func_openFormDel( '<?=$val->id; ?>', '<?=TBL_SHOPPING_PRODUCT_MAIN; ?>','<?=$val->topic_th; ?> / <?=$val->topic_en; ?> / <?=$val->topic_cn; ?>')" type="button" class="btn btn-xs btn-danger btn-equal" data-toggle="modal" data-target="#deleteModalBase"><i class="fa fa-trash-o"></i></button>
                   </td>
                 </tr>
                 <?php

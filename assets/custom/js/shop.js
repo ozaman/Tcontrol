@@ -48,10 +48,17 @@ function func_SaveDataFormAction() {
       }
     });
   }
+// ========================================================================================
 function func_openFormDel(id,tbl,s_title) {
-    $('#modal_custom').show();
-    $('#formModalLabel').html(s_title);
-    var url = base_url + "shop/func_openForm";
+    //$('#modal_customDel').show();
+    $('#span_title_deleteBase').html(s_title);
+    $('#id_item_deleteBase').val(id);
+    $('#tbl_item_deleteBase').val(tbl);
+  }
+function func_SaveDeleteBase() {
+    var id = $('#id_item_deleteBase').val();
+    var tbl = $('#tbl_item_deleteBase').val();
+    var url = base_url + "shop/func_SaveDeleteBase";
     var param = {
       id: id
       ,tbl: tbl
@@ -64,7 +71,8 @@ function func_openFormDel(id,tbl,s_title) {
         console.log('Error Profile');
       },
       success: function(ele) {
-        $('#dody_modal_custom').html(ele);
+        toastr.success('ลบข้อมูลสำเร็จ', '', {"closeButton": true});
+        $('#tr_delete'+id).fadeOut(300);
       }
     });
   }
@@ -82,9 +90,9 @@ function func_withholding(i_id,s_where,s_col,s_tbl,s_id) {
        func_withholding_update(s_val,i_id,s_where,s_col,s_tbl);
     }
   }
-  function func_withholding_rate(s_val,i_id,s_where,s_col,s_tbl,s_id) {
+function func_withholding_rate(s_val,i_id,s_where,s_col,s_tbl,s_id) {
     func_withholding_update(s_val,i_id,s_where,s_col,s_tbl);
-  }
+}
   function func_withholding_update(s_val,i_id,s_where,s_col,s_tbl) {
     var url = base_url + "shop/func_withholding_update";
     var param = {

@@ -1,12 +1,14 @@
+<?php
+$category = $this->Main_model->rowdata(TBL_SHOPPING_PRODUCT_MAIN,array('id'=>$_GET[id]));
+?>
 <ol class="breadcrumb">
-	<li class="head_title"><a class="head_title">จัดการร้านค้า</a></li>
-	<li class="head_title_sub"><a href="<?=base_url();?>shop/data_shop_categorie">หมวดหมู่ทั้งหมด  </a></li>
+	<li class="head_title"><a href="<?=base_url();?>shop/data_shop_categorie" class="head_title">หมวดหมู่ทั้งหมด</a></li>
+	<li class="head_title_sub"><a ><?=$category->topic_th;?>  </a></li>
 	<li class="head_title_sub"><a class="head_title_sub">ประเภททั้งหมด</a></li>
 	<li class="head_title_sub_2" style="display: none;"><a class="head_title_sub_2"></a></li>
 	<li class="head_title_sub_3" style="display: none;" ><a class="head_title_sub_3"></a></li>
 	<li class="head_title_sub_4" style="display: none;" ><a class="head_title_sub_4"></a></li>
 </ol>
-
 <!-- <div class="section-header"> -->
 	<!-- <h3 class="text-standard"><i class="fa fa-fw fa-arrow-circle-right text-gray-light"></i><small>ร้านค้าทั้งหมด</small></h3> -->
 	<!-- </div> -->

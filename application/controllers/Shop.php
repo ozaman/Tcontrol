@@ -22,11 +22,18 @@ class Shop extends CI_Controller{
   public function func_openForm(){
     $this->load->view('shop/form/'.$_POST[tbl]);
   }
+
   public function func_SaveDataFormAction(){
     header('Content-Type: application/json');
     $data = $this->Shop_model->func_SaveDataFormAction();
     echo json_encode($data);
   }
+
+  public function func_SaveDeleteBase(){
+    $this->db->where('id',$_POST[id]);
+    $this->db->delete($_POST[tbl]);
+  }
+
   // ================================================================================================
   // ================================================================================================
   public function func_withholding_update(){

@@ -99,6 +99,26 @@
         </div><!-- /.modal-content -->
     </div><!-- /.modal-dialog -->
 </div>
+<!-- ================================================================================ -->
+<div class="modal fade in" id="deleteModalBase" tabindex="-1" role="dialog" aria-labelledby="simpleModalLabel" aria-hidden="false" >
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+                <h4 class="modal-title" id="simpleModalLabel">คุณแน่ใจหรือไม่</h4>
+            </div>
+            <div class="modal-body">
+                <input type="hidden" name="" id="id_item_deleteBase" value="">
+                <input type="hidden" name="" id="tbl_item_deleteBase" value="">
+                <p >ว่าต้องการลบ <span class="text-danger" id="span_title_deleteBase"></span></p>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">ไม่</button>
+                <button type="button" class="btn btn-primary" data-dismiss="modal" onclick="func_SaveDeleteBase()">ใช่</button>
+            </div>
+        </div><!-- /.modal-content -->
+    </div><!-- /.modal-dialog -->
+</div>
 <style>
 #modal_custom {
     z-index: 1000;
