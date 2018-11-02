@@ -1,4 +1,74 @@
 // ========================================================================================
+if(call_toastr == 1){
+  toastr.success('บันทึกข้อมูลสำเร็จ', '', {"closeButton": true});
+}
+// ========================================================================================
+function func_openForm(id,tbl,s_title) {
+    $('#modal_custom').show();
+    $('#formModalLabel').html(s_title);
+    var url = base_url + "shop/func_openForm";
+    var param = {
+      id: id
+      ,tbl: tbl
+    }
+    $.ajax({
+      url: url,
+      data: param,
+      type: 'post',
+      error: function() {
+        console.log('Error Profile');
+      },
+      success: function(ele) {
+        $('#dody_modal_custom').html(ele);
+      }
+    });
+  }
+function func_SaveDataFormAction() {
+    var url = base_url + "shop/func_SaveDataFormAction";
+    var dataForm = $('#DataFormAction').serialize();
+    console.log(dataForm);
+    $.ajax({
+      url: url,
+      data: dataForm,
+      type: 'post',
+      error: function() {
+        console.log('Error Profile');
+      },
+      success: function(res) {
+        console.log(res);
+        
+        if(res.i_status == 1){
+          $('#modal_custom').hide();
+          toastr.success('บันทึกข้อมูลสำเร็จ', '', {"closeButton": true});
+          setTimeout(function(){ location.reload(); }, 1000);
+        }else{
+          toastr.error('บันทึกข้อมูลไม่สำเร็จ', res.s_msg, {"closeButton": true});
+        }
+        
+      }
+    });
+  }
+function func_openFormDel(id,tbl,s_title) {
+    $('#modal_custom').show();
+    $('#formModalLabel').html(s_title);
+    var url = base_url + "shop/func_openForm";
+    var param = {
+      id: id
+      ,tbl: tbl
+    }
+    $.ajax({
+      url: url,
+      data: param,
+      type: 'post',
+      error: function() {
+        console.log('Error Profile');
+      },
+      success: function(ele) {
+        $('#dody_modal_custom').html(ele);
+      }
+    });
+  }
+// ========================================================================================
 function func_withholding(i_id,s_where,s_col,s_tbl,s_id) {
     if ($('#i_withholding'+s_id).prop("checked") === true) {
        $('#i_withholding'+s_id).prop( "checked", false );

@@ -34,8 +34,9 @@
 			<link type="text/css" rel="stylesheet" href="<?=base_url();?>assets/custom/css/main.css?v=<?=time()?>">
 <script>
 	var base_url = '<?=base_url();?>';
+     var call_toastr = 0;
 </script>
-
+ 
 
 <script src="<?=base_url();?>assets/js/modules/boostbox/libs/jquery/jquery-1.11.0.min.js?v=<?=time()?>"></script>
 <script src="<?=base_url();?>assets/js/modules/boostbox/libs/jquery/jquery-migrate-1.2.1.min.js"></script>
@@ -84,6 +85,22 @@
 	<script type="text/javascript" src="/assets/js/modules/materialadmin/libs/utils/html5shiv.js?1422823601"></script>
 	<script type="text/javascript" src="/assets/js/modules/materialadmin/libs/utils/respond.min.js?1422823601"></script>
     <![endif]-->
+        
+        
+        
+      <?php
+    if ($_COOKIE[savedata] == 1) {
+      ?>
+      <script>
+        call_toastr = 1;
+        var page_title = "บันทึกข้อมูลสำเร็จ";
+        var page_msg = "";
+        var page_type = 'success';
+      </script>
+      <?php
+//       @setcookie('savedata');
+    }
+    ?>
 	</head>
 
 	
