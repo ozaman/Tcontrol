@@ -23,11 +23,9 @@
                 <th width="50" align="center" >แก้ไข</th>
                 <th width="130" align="center" >จัดการประเภท</th>
                 <th height="30" align="center" ><font >TH</font> / <font >EN</font> / <font >CN</font></th>
- 
                 <th width="60" align="center" ><font >สถานะ</font></th>
                 <th width="50" align="center" ><font >ลบ</font></th>
               </tr>
-
             </thead>
             <tbody>
               <?php
@@ -37,12 +35,12 @@
               <tr id="tr_delete<?=$val->id;?>">
                   <td><?=$key + 1; ?></td>
                   <td>
-                    <a onclick="func_openForm('<?=$val->id;?>', '<?=TBL_SHOPPING_PRODUCT_MAIN; ?>','แก้ไขหมวดหมู่ :: <?=$val->topic_th; ?> / <?=$val->topic_en; ?> / <?=$val->topic_cn; ?>');" class="btn text-primary">
+                    <a style="cursor:pointer;" onclick="func_openForm('<?=$val->id;?>', '<?=TBL_SHOPPING_PRODUCT_MAIN; ?>','แก้ไขหมวดหมู่ :: <?=$val->topic_th; ?> / <?=$val->topic_en; ?> / <?=$val->topic_cn; ?>');" class="text-primary">
                       <i class="fa fa-edit fa-lg" ></i>
                     </a>
                   </td>
                   <td>
-                    <a href="<?=base_url(); ?>shop/categorie_sub?id=<?=$val->id; ?>" class="btn text-warning">
+                    <a style="cursor:pointer;" href="<?=base_url(); ?>shop/categorie_sub?id=<?=$val->id; ?>" class="text-warning">
                       <i class="fa fa-gears fa-lg" ></i> [<?=$count_sub; ?>]
                     </a>
                   </td>

@@ -5,7 +5,21 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 class Shop_model extends CI_Model{
 
   // ================================================================================================
-  public function func_SaveDataFormAction(){
+  public function func_SaveDataFormAction() {
+    switch ($_POST[tbl]) {
+      case 'shopping_product_main':
+        $response = $this->func_Saveshopping_product_main();
+        break;
+      case 'shopping_product_sub':
+        $response = $this->func_Saveshopping_product_sub();
+        break;
+      default :
+        $response = $this->default_res();
+    }
+    return $response;
+  }
+  // ================================================================================================
+  public function func_Saveshopping_product_main(){
     $response = array();
     $response[i_status] = 0;
     $response[s_focus] = 'topic_en';
@@ -28,6 +42,32 @@ class Shop_model extends CI_Model{
     }
     return $response;
   }
+  // ================================================================================================
+  public function func_Saveshopping_product_sub(){
+    $response = array();
+    $response[i_status] = 0;
+    $response[s_focus] = 'topic_en';
+    $response[s_msg] = 'กรุณากรอกประเภท EN ด้วยค่ะ';
+    if($_POST[topic_en] != '') {
+      $response[i_status] = 1;
+      $response[s_focus] = '';
+      $response[s_msg] = '';
+      $params = array();
+      $params[topic_en] = $_POST[topic_en];
+      $params[topic_th] = $_POST[topic_th];
+      $params[topic_cn] = $_POST[topic_cn];
+      $params[main] = $_POST[i_main];
+      $params[i_update_utf] = 1;
+      if($_POST[id] == NULL){
+        $this->db->insert($_POST[tbl],$params);
+      }else{
+        $this->db->update($_POST[tbl],$params,array('id'=>$_POST[id]));
+      }
+      @setcookie('savedata', 1, 60); // 86400 = 1 day
+    }
+    return $response;
+  }
+  // ================================================================================================
   // ================================================================================================
 
   public function add_region(){

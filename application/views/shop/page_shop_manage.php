@@ -7,14 +7,17 @@
     $shop_page = 'แก้ไขร้านค่า';
   }
   ?>
-  <ol class="breadcrumb">
-    <li class="head_title">จัดการร้านค้า</li>
-    <li class="head_title_sub"><a href="<?=base_url(); ?>shop/categorie_sub?id=<?=$_GET[sub]; ?>">หมวดหมู่ทั้งหมด</a></li>
-    <li class="head_title_sub"><a  href="<?=base_url(); ?>shop/categorie_sub?id=<?=$_GET[id]; ?>" class="head_title_sub">ประเภททั้งหมด</a></li>
-
-    <li class="head_title_sub_2" ><a href="<?=base_url(); ?>shop/shop_ordertype?sub=<?=$_GET[sub]; ?>&id=<?=$_GET[id]; ?>">ร้านค่าทั้งหมด</a></li>
-    <li class="head_title_sub_4" style="display: nones;"><?=$shop->topic_th; ?></li>
-  </ol>
+ 
+  <?php
+$categories_sub = $this->Main_model->rowdata(TBL_SHOPPING_PRODUCT_SUB,array('id' => $_GET[sub]));
+$category = $this->Main_model->rowdata(TBL_SHOPPING_PRODUCT_MAIN,array('id' => $_GET[main]));
+?>
+<ol class="breadcrumb">
+  <li class="head_title"><a href="<?=base_url(); ?>shop/data_shop_categorie" class="head_title">หมวดหมู่ทั้งหมด</a></li>
+  <li class="head_title"><a href="<?=base_url(); ?>shop/categorie_sub?id=<?=$shop->sub; ?>" class="head_title">หมวดหมู่<?=$category->topic_th; ?></a></li>
+  <li class="head_title_sub"><a  href="<?=base_url(); ?>shop/shop_ordertype?id=<?=$shop->sub; ?>&sub=<?=$shop->main; ?>">ประเภท<?=$categories_sub->topic_th; ?></a></li>
+  <li class="head_title_sub_4" style="display: nones;"><?=$shop->topic_th; ?></li>
+</ol>
   <div class="section-body ">
     <input type="hidden" name="" id="manage_com" value="<?=$_GET[id]; ?>">
     <!-- 1 T-SHARE - SHOP

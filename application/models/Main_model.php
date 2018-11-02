@@ -3,6 +3,13 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 class Main_model extends CI_Model {
 	 
 
+  // ================================================================================================
+  public function select_option($f,$l) {
+    if ($f == $l) {
+      return ' selected="selected" ';
+    }
+  }
+  // ================================================================================================
   public function check_user_signin() {
 
     $username = $this->input->post('real_username');

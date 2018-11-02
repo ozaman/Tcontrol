@@ -3,13 +3,14 @@ if(call_toastr == 1){
   toastr.success('บันทึกข้อมูลสำเร็จ', '', {"closeButton": true});
 }
 // ========================================================================================
-function func_openForm(id,tbl,s_title) {
+function func_openForm(id,tbl,s_title,i_main) {
     $('#modal_custom').show();
     $('#formModalLabel').html(s_title);
     var url = base_url + "shop/func_openForm";
     var param = {
       id: id
       ,tbl: tbl
+      ,i_main: i_main
     }
     $.ajax({
       url: url,
@@ -36,11 +37,10 @@ function func_SaveDataFormAction() {
       },
       success: function(res) {
         console.log(res);
-        
         if(res.i_status == 1){
           $('#modal_custom').hide();
           toastr.success('บันทึกข้อมูลสำเร็จ', '', {"closeButton": true});
-          setTimeout(function(){ location.reload(); }, 1000);
+          setTimeout(function(){ location.reload(); }, 300);
         }else{
           toastr.error('บันทึกข้อมูลไม่สำเร็จ', res.s_msg, {"closeButton": true});
         }
