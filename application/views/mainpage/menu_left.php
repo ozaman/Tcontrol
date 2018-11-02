@@ -86,7 +86,7 @@
 		<!--start submenu -->
 		<ul>
 			<li><a href="<?=base_url();?>shop/data_shop_categorie" >หมวดหมู่ทั้งหมด</a></li>
-			<li><a  href="<?=base_url();?>shop/data_shop_all" >ร้านค้าทั้งหมด</a></li>
+			<li><a  href="<?=base_url();?>shop/data_shop_all" >สถานที่ทั้งหมด</a></li>
 
 			<!-- <li><a href="tables/dynamic">ประเภทสินค้าย่อย</a></li> -->
 
