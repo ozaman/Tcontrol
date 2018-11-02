@@ -9,25 +9,37 @@
 				<div class="box box-outlined">
 					<div class="box-head">
 						<div class="box-body" style="padding-bottom: 0px;">
-						<table cellpadding="5" cellspacing="5">
-							<tr>
-								<td ><span>ชื่อยี่ห้อ</span></td>
-								<td width="5"></td>
-								<td width="200">
-									<input type="text" class="form-control" name="name_car_brand" id="name_car_brand"/>
-								</td>
-								<td width="5"></td>
-								<td><button class="btn btn-success" onclick="newCarBrand();" ><span><i class="fa fa-plus"></i> </span>เพิ่มยี่ห้อ</button></td>
-							</tr>
-						</table>
+						<form method="post" id="search_form">
+		                  <table width="100%">
+		                  		<tbody><tr>
+		                  			<td width="50"><span style="font-size: 16px;">Code</span></td>
+		                  			<td width="140"><input type="text" class="form-control" id="code" name="code" value="" style="width: 120px;"></td>
+		                  			
+		                  			<td width="65"><span style="font-size: 16px;">ทะเบียน</span></td>
+		                  			<td width="140"><input type="text" class="form-control" id="plate_num" name="plate_num" value="" style="width: 120px;"></td>
+		                  			
+		                  			<td width="40"><span style="font-size: 16px;">วันที่</span></td>
+		                  			<td width="140">				
+										<input type="text" value="2018-11-02" class="form-control" id="datepicker" name="date" style="width: 120px;" autocomplete="off">
+		                  			</td>
+		                  			
+		                  			<td valign="middle">
+		                  				 <button type="submit" class="btn btn-primary" style="margin-top: 0px;">ค้นหา</button>
+		                  			</td>
+		                  		</tr>
+		                  </tbody>
+		                </table>
+
+                  </form>
 							
 						</div>
 					</div>
-					<div class="box-body table-responsive">
-						<div class="card-body no-padding">
-                     <ul class="list divider-full-bleed" id="list_order"> <h3 style="margin-top: 0;padding-left:30px;padding-top: 20px;"> 1 รายการ </h3>                        <li class="tile" id="list_70" style="cursor: pointer;">
-                        <!-- -->
-                           <a class="tile-content ink-reaction pd-top-bottom" onclick="openBook('70','S00070');" data-toggle="modal" data-target="#modal_lg">
+					<div class="box-body table-responsive" style="padding-top: 0;">
+						<div class="card-body no-padding">         
+						<h3 style="margin-top: 0;padding-left:30px;padding-top: 5px;"> 1 รายการ </h3> 
+                     	<?php 
+                     		foreach($order as $val){ ?>
+                           <div onclick="openBook('70','S00070');" data-toggle="modal" data-target="#modal_lg" style="border: 1px solid #ccc;padding: 15px;cursor: pointer;">
                           <!-- <a class="tile-content ink-reaction pd-top-bottom" href="invoice.php?order=70" target="_blank" >-->
                               <table width="100%">
                                  <tbody><tr>
@@ -96,9 +108,10 @@
 		                           </td>
                            		</tr>
                            	</tbody></table>
-                           </a>
-                        </li>
-                        </ul>
+                           </div>
+                        <?php 
+							}
+                     	?>      
                   </div>	
 					</div><!--end .box-body -->
 			</div><!--end .box -->
@@ -108,8 +121,3 @@
 
 
 </div>
-
-<!--<script>
-	$('li').removeClass('expanded');
-	$('#setting_app_menu').addClass('expanded');
-</script>-->
