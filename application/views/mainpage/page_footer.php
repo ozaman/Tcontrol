@@ -25,7 +25,7 @@
                
            </div>
            <div class="modal-footer">
-                   <button type="button" class="btn btn-default" data-dismiss="modal" onclick="close_modal_custom('shop_manage')">ปิด</button>
+             <button type="button" class="btn btn-danger" data-dismiss="modal" onclick="close_modal_custom('shop_manage')"><i class="fa fa-times"></i> ปิด</button>
                    <!-- <button type="button" class="btn btn-primary">Login</button> -->
                </div>
 
