@@ -12,11 +12,11 @@
 									<label for="shop_cost" class="control-label">ยอดช้อปปิ้ง</label>
 								</div>
 								<div class="col-lg-7 col-md-8 col-sm-9">
-									<input type="number" name="shop_cost" id="shop_cost" class="form-control" >
+									<input type="number" name="shop_cost" id="shop_cost" class="form-control" onkeyup="calcost(this.value);" >
 								</div>
 							</div>
 							<div style="padding: 10px;">
-								<b class="font-16">ยอดรวม 0 บาท</b>
+								<b class="font-16">ยอดรวม <span id="price">0</span> บาท</b>
 							</div>
 						</form>
 					</div><!--end .box-body -->
@@ -69,7 +69,7 @@
 					<table class="table">
 									<thead>
 										<tr>
-											<th style="width:60px" class="text-center">QTY</th>
+											<th style="width:60px" class="text-center"></th>
 											<th class="text-left">DESCRIPTION</th>
 											<th style="width:140px" class="text-right">UNIT PRICE</th>
 											<th style="width:90px" class="text-right">TOTAL</th>
@@ -77,19 +77,19 @@
 									</thead>
 									<tbody>
 										<tr>
-											<td class="text-center">2</td>
-											<td>Nostrud exercitation 76 ullamco</td>
-											<td class="text-right">$385.00</td>
+											<td class="text-center">1</td>
+											<td>รายรับบริษัท</td>
+											<td class="text-right">10%</td>
 											<td class="text-right">$770.00</td>
 										</tr>
 										<tr>
-											<td class="text-center">1</td>
-											<td>Elit 9.0 sed do eiusmod</td>
+											<td class="text-center">2</td>
+											<td></td>
 											<td class="text-right">$215.00</td>
 											<td class="text-right">$215.00</td>
 										</tr>
 										<tr>
-											<td class="text-center">4</td>
+											<td class="text-center">3</td>
 											<td>commodo consequat &amp; Duis aute- irure dolor</td>
 											<td class="text-right">$405.25</td>
 											<td class="text-right">$1,621.00</td>

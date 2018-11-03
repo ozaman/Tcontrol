@@ -40,3 +40,10 @@ img.onclick = function(){
 }
 
 }
+
+function calcost(cost){
+	if(cost==""){
+		cost = 0;
+	}
+	$('#price').text(cost);
+}
