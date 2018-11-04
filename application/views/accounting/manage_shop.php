@@ -82,7 +82,15 @@ $res_com = $query->row();
                 </table>
               </td>
             </tr>
-
+            <tr>
+              <td>เอกสาร</td>
+              <td>
+                <button class="btn" style="font-size:20px;" onclick="showImgModalSrc('../../data/fileupload/store/guest_register_<?=$data->id;?>.jpg?v=<?=time();?>');">
+                  <i class="fa fa-file-image-o" aria-hidden="true"></i>
+                </button>
+               
+              </td>
+            </tr>
           </table>
         </div><!--end .box-body -->
       </div><!--end .box -->
@@ -91,37 +99,25 @@ $res_com = $query->row();
     <div class="col-md-6">
       <div class="box box-outlined">
         <div class="box-head">
-          <header><h4 class="text-light">รายรับ/รายจ่าย</h4></header>
+          <header><h4 class="text-light">ข้อมูลแท็กซี่</h4></header>
         </div>
         <table class="table">
-          <thead>
-            <tr>
-              <th style="width:60px" class="text-center"></th>
-              <th class="text-left">รายการ</th>
-              <th style="width:140px" class="text-right">UNIT PRICE</th>
-              <th style="width:90px" class="text-right">TOTAL</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr>
-              <td class="text-center">1</td>
-              <td>รายรับ</td>
-              <td class="text-right"><span id="persen_com"><?=$res_com->i_price;?></span> %</td>
-              <td class="text-right"><span id="price_company">0</span></td>
-            </tr>
-            <tr>
-              <td class="text-center">2</td>
-              <td>รายจ่าย</td>
-              <td class="text-right"><span id="persen_taxi"><?=$data->commission_persent;?></span> %</td>
-              <td class="text-right"><span id="price_taxi">0</span></td>
-            </tr>
-<!--            <tr>
-              <td></td>
-              <td></td>
-              <td class="text-right"><strong class="text-lg text-support3">Total</strong></td>
-              <td class="text-right"><strong class="text-lg text-support3">$2,606.00</strong></td>
-            </tr>-->
-          </tbody>
+          <tr>
+            <td>ชื่อ-สกุล</td>
+            <td>ภาณุพงศ์ นิลหัต (นัท)</td>
+          </tr>
+          <tr>
+            <td>ทะเบียน</td>
+            <td>กขคง552. ภูเก็ต</td>
+          </tr>
+          <tr>
+            <td>ทะเบียน</td>
+            <td>กขคง552. ภูเก็ต</td>
+          </tr>
+          <tr>
+            <td>โทร</td>
+            <td>0954293062</td>
+          </tr>
         </table>
       </div>
     </div>
@@ -186,5 +182,38 @@ $res_com = $query->row();
       </div><!--end .box -->
     </div>
   </div>
-
+  
+  <div class="row" style="margin-top: 10px;">
+    <div class="col-md-6">
+      <div class="box box-outlined">
+        <div class="box-head">
+          <header><h4 class="text-light">รายรับ/รายจ่าย</h4></header>
+        </div>
+        <table class="table">
+          <thead>
+            <tr>
+              <th style="width:60px" class="text-center"></th>
+              <th class="text-left">รายการ</th>
+              <th style="width:140px" class="text-right">UNIT PRICE</th>
+              <th style="width:90px" class="text-right">TOTAL</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td class="text-center">1</td>
+              <td>รายรับ (บริษัท)</td>
+              <td class="text-right"><span id="persen_com"><?=$res_com->i_price;?></span> %</td>
+              <td class="text-right"><span id="price_company">0</span></td>
+            </tr>
+            <tr>
+              <td class="text-center">2</td>
+              <td>รายจ่าย (แท็กซี่)</td>
+              <td class="text-right"><span id="persen_taxi"><?=$data->commission_persent;?></span> %</td>
+              <td class="text-right"><span id="price_taxi">0</span></td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
 </div>
