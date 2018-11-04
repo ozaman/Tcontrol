@@ -31,6 +31,10 @@ $sql = "SELECT t4.s_topic_th, t4.i_price from shop_country_company as t1 left jo
 $query = $this->db->query($sql);
 $res_com = $query->row();
 //    echo $_GET[id];
+
+$sql_dv = "SELECT nickname, name FROM web_driver where id =".$data->drivername;
+$query_dv = $this->db->query($sql_dv);
+$res_dv = $query_dv->row();
 ?>
 <div class="card">
   <div class="row">
@@ -104,19 +108,19 @@ $res_com = $query->row();
         <table class="table">
           <tr>
             <td>ชื่อ-สกุล</td>
-            <td>ภาณุพงศ์ นิลหัต (นัท)</td>
+            <td><?=$res_dv->name;?> <?="(".$res_dv->nickname.")";?></td>
           </tr>
           <tr>
             <td>ทะเบียน</td>
-            <td>กขคง552. ภูเก็ต</td>
+            <td><?=$data->car_plate;?></td>
           </tr>
           <tr>
-            <td>ทะเบียน</td>
-            <td>กขคง552. ภูเก็ต</td>
+            <td>เบอร์โทร</td>
+            <td><?=$data->phone;?></td>
           </tr>
           <tr>
-            <td>โทร</td>
-            <td>0954293062</td>
+            <td>ข้อมูลบัญชี</td>
+            <td></td>
           </tr>
         </table>
       </div>
@@ -194,8 +198,8 @@ $res_com = $query->row();
             <tr>
               <th style="width:60px" class="text-center"></th>
               <th class="text-left">รายการ</th>
-              <th style="width:140px" class="text-right">UNIT PRICE</th>
-              <th style="width:90px" class="text-right">TOTAL</th>
+              <th style="width:140px" class="text-right">เปอร์เซ็น</th>
+              <th style="width:90px" class="text-right">รวม</th>
             </tr>
           </thead>
           <tbody>
