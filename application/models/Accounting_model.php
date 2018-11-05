@@ -22,7 +22,7 @@ class Accounting_model extends CI_Model {
 		$last_id = mysql_insert_id();
 		$return[last_id] = $last_id;
 		$return[data] = $data;
-        $return[upload] = move_uploaded_file($_FILES["idcard_upload"]["tmp_name"], "../../../../data/pic/driver/id_card/".$_GET[id]."_idcard.jpg");
+        $return[upload] = move_uploaded_file($_FILES["slip_trans"]["tmp_name"], "../data/fileupload/doc_pay_driver/slip/slip_".$last_id.".jpg");
 		return $return;
   }
   
