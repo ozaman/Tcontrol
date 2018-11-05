@@ -42,8 +42,11 @@ class Accounting extends CI_Controller {
   //////////////////////////// End
 
   public function complete_trans_shop() {
-    $data['res'] = $this->Accounting_model->complete_trans_shop();
-    echo json_encode($data['res']);
+//    $data['res'] = $this->Accounting_model->complete_trans_shop();
+//    echo json_encode($data['res']);
+      $data[data] = $_POST;
+      $data[file] = $_FILES;
+      echo json_encode($data);
   }
 
 }

@@ -3,25 +3,27 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 class Accounting_model extends CI_Model {
 	
 	 public function complete_trans_shop(){
-  
-	 	/*$bank[bank_name] = $_POST[bank_name];
-	 	$bank[bank_id] = $_POST[bank];
-	 	$bank[bank_number] = $_POST[bank_number];
-	 	$bank[bank_branch] = $_POST[bank_branch];
-	 	$bank[status] = 1;
-	 	$bank[post_date] = time();
-	 	$bank[last_update] = time();
-	 	$bank[driver_id] = $_GET[driver_id];
-	 	
-		$bank[result] = $this->db->insert('web_bank_driver', $bank);
-		$last_id_bank = mysql_insert_id();
-		$return[last_id] = $last_id_bank;
-		$return[data] = $bank;
-		$return[rand] = $_POST[rand];
-
-		$return[p] = rename("../data/pic/driver/book_bank/".$_POST[rand].".jpg", "../data/pic/driver/book_bank/".$last_id_bank.".jpg");
-		
-		return $return;*/
+        $data[order_id] = $_POST[order_id];
+        $data[invoice] = $_POST[invoice];
+        $data[plan_id] = $_POST[plan_id];
+        
+        $data[price_shopping] = $_POST[shop_cost];
+        $data[price_pay_driver_com] = $_POST[plan_id];
+        $data[price_income_company_com] = $_POST[plan_id];
+        $data[last_update] = time();
+        $data[posted] = "admin";
+        $data[pay_transfer] = 1;
+        $data[pay_transfer_date] = time();
+        $data[trans_hh] = $_POST[hour];
+        $data[trans_mm] = $_POST[minute];
+        $data[status] = 1;
+        
+		$data[result] = $this->db->insert('pay_history_driver_shopping', $data);
+		$last_id = mysql_insert_id();
+		$return[last_id] = $last_id;
+		$return[data] = $data;
+        $return[upload] = move_uploaded_file($_FILES["idcard_upload"]["tmp_name"], "../../../../data/pic/driver/id_card/".$_GET[id]."_idcard.jpg");
+		return $return;
   }
   
 }

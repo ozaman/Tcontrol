@@ -1,3 +1,28 @@
+function saveDataTransShop(){
+  var data = new FormData($('#form_acc_trans_shop')[0]);
+  data.append('slip_trans', $('#uploadfile')[0].files[0]);
+//  var data = $("#form_acc_trans_shop").serialize();
+  var url = base_url+"accounting/complete_trans_shop";
+
+  $.ajax({
+    url: url, // point to server-side PHP script 
+    dataType: 'json', // what to expect back from the PHP script, if anything
+    cache: false,
+    contentType: false,
+    processData: false,
+    data: data,
+    type: 'post',
+    success: function (res) {
+     console.log(res);
+
+    },
+    error: function (err) {
+      console.log(err);
+      //your code here
+    }
+  });
+}
+
 function filterShopList() {
   $.post(base_url + "accounting/load_shop_com", $('#search_form').serialize(), function (html) {
 //		console.log(html);
@@ -65,4 +90,7 @@ function calcost(cost) {
   console.log(total_price_com);
   $('#price_company').text(total_price_com);
   $('#price_taxi').text(total_price_taxi);
+  
+  $('#company_company').val(total_price_com);
+  $('#company_taxi').val(total_price_taxi);
 }
