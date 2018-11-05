@@ -35,6 +35,10 @@ $res_com = $query->row();
 $sql_dv = "SELECT nickname, name FROM web_driver where id =".$data->drivername;
 $query_dv = $this->db->query($sql_dv);
 $res_dv = $query_dv->row();
+
+$query_bank = $this->db->query("SELECT t1.*,t2.name_th as bank_list, t2.img as bank_img FROM web_bank_driver as t1 left join web_bank_list as t2 on t1.bank_id = t2.id where t1.id = '".$data->bank_taxi_id."' ");
+$data_bank = $query_bank->row();
+
 ?>
 <div class="card">
   <div class="row">

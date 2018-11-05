@@ -2,7 +2,7 @@
 defined('BASEPATH') OR exit('No direct script access allowed');
 class Accounting_model extends CI_Model {
 	
-	 public function add_bank(){
+	 public function complete_trans_shop(){
   
 	 	/*$bank[bank_name] = $_POST[bank_name];
 	 	$bank[bank_id] = $_POST[bank];
@@ -23,4 +23,5 @@ class Accounting_model extends CI_Model {
 		
 		return $return;*/
   }
+  
 }
