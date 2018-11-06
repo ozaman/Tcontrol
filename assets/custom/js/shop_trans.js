@@ -97,8 +97,8 @@ function calcost(cost) {
   $('#price_company').text(total_price_com);
   $('#price_taxi').text(total_price_taxi);
   
-  $('#company_company').val(total_price_com);
-  $('#company_taxi').val(total_price_taxi);
+  $('#company_cost').val(total_price_com);
+  $('#taxi_cost').val(total_price_taxi);
 }
 
 function checkedFilter(id){

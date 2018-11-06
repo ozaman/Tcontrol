@@ -8,8 +8,8 @@ class Accounting_model extends CI_Model {
         $data[plan_id] = $_POST[plan_id];
         
         $data[price_shopping] = $_POST[shop_cost];
-        $data[price_pay_driver_com] = $_POST[plan_id];
-        $data[price_income_company_com] = $_POST[plan_id];
+        $data[price_pay_driver_com] = $_POST[taxi_cost];
+        $data[price_income_company_com] = $_POST[company_cost];
         $data[last_update] = time();
         $data[posted] = "admin";
         $data[pay_transfer] = 1;

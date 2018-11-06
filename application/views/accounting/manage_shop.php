@@ -45,8 +45,8 @@ $data_bank = $query_bank->row();
     <input type="hidden" name="invoice" value="<?=$data->invoice;?>" />
     <input type="hidden" name="plan_id" value="<?=$data->plan_id;?>" />
     
-    <input type="hidden" name="company_cost" value="0" />
-    <input type="hidden" name="taxi_cost" value="0" />
+    <input type="hidden" name="company_cost" value="0" id="company_cost" />
+    <input type="hidden" name="taxi_cost" value="0" id="taxi_cost" />
     
     <div class="row">
       <div class="col-md-6">
