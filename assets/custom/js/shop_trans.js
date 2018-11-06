@@ -1,8 +1,8 @@
-function saveDataTransShop(){
+function saveDataTransShop() {
   var data = new FormData($('#form_acc_trans_shop')[0]);
   data.append('slip_trans', $('#uploadfile')[0].files[0]);
 //  var data = $("#form_acc_trans_shop").serialize();
-  var url = base_url+"accounting/complete_trans_shop";
+  var url = base_url + "accounting/complete_trans_shop";
 
   $.ajax({
     url: url, // point to server-side PHP script 
@@ -13,15 +13,25 @@ function saveDataTransShop(){
     data: data,
     type: 'post',
     success: function (res) {
-     console.log(res);
-        if(res.data.result==true){
-          toastr.success('บันทึกข้อมูลสำเร็จ', '', {"closeButton": true});
-          close_modal_custom('shop_manage');
-          filterShopList();
-          sendSocket(res.update.order_id);
-        }else{
-          toastr.error('ไม่สามารถบันทึกข้อมูลได้', '', {"closeButton": true});
-        }
+      console.log(res);
+      if (res.data.result == true) {
+        toastr.success('บันทึกข้อมูลสำเร็จ', '', {"closeButton": true});
+        close_modal_custom('shop_manage');
+        filterShopList();
+        sendSocket(res.update.order_id);
+
+        $.ajax({
+          url: "send_onesignal/transfer_shop_completed?id=" + res.update.order_id, // point to server-side PHP script 
+          dataType: 'json', // what to expect back from the PHP script, if anything
+          type: 'post',
+          success: function (res) {
+            console.log(res);
+          }
+        });
+
+      } else {
+        toastr.error('ไม่สามารถบันทึกข้อมูลได้', '', {"closeButton": true});
+      }
     },
     error: function (err) {
       console.log(err);
@@ -92,28 +102,28 @@ function calcost(cost) {
   var persen_com = parseInt($('#persen_com').text());
   var persen_taxi = parseInt($('#persen_taxi').text());
 //  console.log(persen_com);
-  var total_price_com = (parseInt(cost)*persen_com)/ 100;
-  var total_price_taxi = (parseInt(cost)*persen_taxi)/ 100;
+  var total_price_com = (parseInt(cost) * persen_com) / 100;
+  var total_price_taxi = (parseInt(cost) * persen_taxi) / 100;
   console.log(total_price_com);
   $('#price_company').text(total_price_com);
   $('#price_taxi').text(total_price_taxi);
-  
+
   $('#company_cost').val(total_price_com);
   $('#taxi_cost').val(total_price_taxi);
 }
 
-function checkedFilter(id){
+function checkedFilter(id) {
   $('.btn-checkbox-success-inverse').removeClass('active');
-  var type = $('#'+id+' input[type="checkbox"]').val();
+  var type = $('#' + id + ' input[type="checkbox"]').val();
   $('#filter_type').val(type);
 //  $('#'+id).addClass('active');
 }
 
 function sendSocket(id) {
-    console.log('Click ' + id);
-    //   var message = "";
-    var dataorder = {
-        order: parseInt(id),
-    };
-    socket.emit('sendchat', dataorder);
+  console.log('Click ' + id);
+  //   var message = "";
+  var dataorder = {
+    order: parseInt(id),
+  };
+  socket.emit('sendchat', dataorder);
 }
