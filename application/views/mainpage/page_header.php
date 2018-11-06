@@ -77,7 +77,7 @@
 <script src="<?=base_url();?>assets/custom/js/station.js?v=<?=time()?>"></script>
 <script src="<?=base_url();?>assets/custom/js/setting.js?v=<?=time()?>"></script>
 <script src="<?=base_url();?>assets/custom/js/shop_trans.js?v=<?=time()?>"></script>
-
+<script src="https://www.welovetaxi.com:3443/socket.io/socket.io.js?v=<?=time()?>"></script>
 		<!-- END STYLESHEETS -->
 
 

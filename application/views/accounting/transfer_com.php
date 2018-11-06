@@ -71,4 +71,5 @@
 </div>
 <script>
   filterShopList();
+  var socket = io.connect('https://www.welovetaxi.com:3443');
 </script>

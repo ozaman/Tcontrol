@@ -28,7 +28,7 @@ class Accounting_model extends CI_Model {
         $update_ob[transfer_money_date] = time();
         $this->db->where('id', $_POST[order_id]);
 		$update_ob[result] = $this->db->update('order_booking', $update_ob); 
-        
+        $update_ob[order_id] = $_POST[order_id];
         $return[update] = $update_ob;
         return $return;
   }

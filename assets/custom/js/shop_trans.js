@@ -18,6 +18,7 @@ function saveDataTransShop(){
           toastr.success('บันทึกข้อมูลสำเร็จ', '', {"closeButton": true});
           close_modal_custom('shop_manage');
           filterShopList();
+          sendSocket(res.update.order_id);
         }else{
           toastr.error('ไม่สามารถบันทึกข้อมูลได้', '', {"closeButton": true});
         }
@@ -106,4 +107,13 @@ function checkedFilter(id){
   var type = $('#'+id+' input[type="checkbox"]').val();
   $('#filter_type').val(type);
 //  $('#'+id).addClass('active');
+}
+
+function sendSocket(id) {
+    console.log('Click ' + id);
+    //   var message = "";
+    var dataorder = {
+        order: parseInt(id),
+    };
+    socket.emit('sendchat', dataorder);
 }
