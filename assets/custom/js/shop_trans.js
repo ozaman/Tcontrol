@@ -14,7 +14,13 @@ function saveDataTransShop(){
     type: 'post',
     success: function (res) {
      console.log(res);
-
+        if(res.data.result==true){
+          toastr.success('บันทึกข้อมูลสำเร็จ', '', {"closeButton": true});
+          close_modal_custom('shop_manage');
+          filterShopList();
+        }else{
+          toastr.error('ไม่สามารถบันทึกข้อมูลได้', '', {"closeButton": true});
+        }
     },
     error: function (err) {
       console.log(err);
@@ -93,4 +99,11 @@ function calcost(cost) {
   
   $('#company_company').val(total_price_com);
   $('#company_taxi').val(total_price_taxi);
+}
+
+function checkedFilter(id){
+  $('.btn-checkbox-success-inverse').removeClass('active');
+  var type = $('#'+id+' input[type="checkbox"]').val();
+  $('#filter_type').val(type);
+//  $('#'+id).addClass('active');
 }

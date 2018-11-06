@@ -23,7 +23,14 @@ class Accounting_model extends CI_Model {
 		$return[last_id] = $last_id;
 		$return[data] = $data;
         $return[upload] = move_uploaded_file($_FILES["slip_trans"]["tmp_name"], "../data/fileupload/doc_pay_driver/slip/slip_".$last_id.".jpg");
-		return $return;
+		
+        $update_ob[transfer_money] = 1;
+        $update_ob[transfer_money_date] = time();
+        $this->db->where('id', $_POST[order_id]);
+		$update_ob[result] = $this->db->update('order_booking', $update_ob); 
+        
+        $return[update] = $update_ob;
+        return $return;
   }
   
 }

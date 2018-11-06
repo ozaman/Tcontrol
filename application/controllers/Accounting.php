@@ -30,6 +30,11 @@ class Accounting extends CI_Controller {
     $where['check_tran_job'] = 1;
     $where['check_guest_register'] = 1;
     $where['transfer_date'] = $_POST[date];
+    if($_POST[filter_type]==1){
+      $where['transfer_money'] = 1;
+    }else if($_POST[filter_type]==2){
+      $where['transfer_money'] = 0;
+    }
     $data['order'] = $this->Main_model->fetch_data('','',"order_booking",$where,$_select,$_order);
     if ($data[order]) {
       $this->load->view('accounting/list_transfer_com',$data);

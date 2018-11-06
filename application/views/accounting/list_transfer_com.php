@@ -1,3 +1,21 @@
+<style>
+  .status-pass{
+    font-size: 18px;
+    background-color: #339933;
+    padding: 10px;
+    border-radius: 10px;
+    color: #fff;
+    text-align: center;
+  }
+  .status-nopass{
+    font-size: 18px;
+    background-color: #e51400;
+    padding: 10px;
+    border-radius: 10px;
+    color: #fff;
+    text-align: center;
+  }
+</style>
 <h3 style="margin-top: 0;padding-left:30px;padding-top: 5px;"> <?=count($order);?> รายการ </h3>
 <?php
 foreach ($order as $val) {
@@ -10,6 +28,14 @@ foreach ($order as $val) {
   $sql_country = "SELECT t2.s_country_code, t2.s_topic_th FROM shop_country_com_list_price_taxi as t1 left join shop_country_icon_taxi as t2 on t1.i_shop_country_icon = t2.id WHERE t1.i_shop_country_com_list='".$val->plan_id."'    ";
   $query_country = $this->db->query($sql_country);
   $res_country = $query_country->row();
+  
+  if($val->transfer_money==1){
+    $txt_status = "แจ้งโอนแล้ว";
+    $class_st = "status-pass";
+  }else{
+    $txt_status = "ยังไม่แจ้งโอน";
+    $class_st = "status-nopass";
+  }
   ?>
   <div onclick="openBook('<?=$val->id;?>', '<?=$val->invoice;?>');" style="border: 1px solid #ccc;padding: 10px 15px;cursor: pointer;">
     <!-- <a class="tile-content ink-reaction pd-top-bottom" href="invoice.php?order=70" target="_blank" >-->
@@ -73,23 +99,12 @@ foreach ($order as $val) {
               </tbody>
             </table>
           </td>
-          <!--<td>
-             <div class="box-code">
-                <table>
-                   <tbody>
-                      <tr>
-                         <td width="40">Code:</td>
-                         <td>
-                            <div class="btn-raised" style="border: 1px solid #eee; background: #eee; font-weight: 600; padding: 3px 7px;cursor: pointer;" onclick="showImgModal('1','70');"></div>
-                         </td>
-                      </tr>
-                   </tbody>
-                </table>
+          <td width="150">
+            <div class="box-code <?=$class_st;?>">
+                <?=$txt_status;?>
              </div>
-             <div>
-                <img src="../../data/pic/place/1_logo.jpg" width="150px" alt="" class="img_place">			                           
-             </div>
-          </td>-->
+            
+          </td>
         </tr>
       </tbody>
     </table>
