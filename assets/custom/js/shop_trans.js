@@ -21,7 +21,7 @@ function saveDataTransShop() {
         sendSocket(res.update.order_id);
 
         $.ajax({
-          url: "send_onesignal/transfer_shop_completed?id=" + res.update.order_id, // point to server-side PHP script 
+          url: base_url+"send_onesignal/transfer_shop_completed?id=" + res.update.order_id, // point to server-side PHP script 
           dataType: 'json', // what to expect back from the PHP script, if anything
           type: 'post',
           success: function (res) {
