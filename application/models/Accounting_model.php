@@ -22,10 +22,11 @@ class Accounting_model extends CI_Model {
 		$last_id = mysql_insert_id();
 		$return[last_id] = $last_id;
 		$return[data] = $data;
-        $return[upload] = move_uploaded_file($_FILES["slip_trans"]["tmp_name"], "../data/fileupload/doc_pay_driver/slip/slip_".$last_id.".jpg");
-		
+        $return[upload] = move_uploaded_file($_FILES["slip_trans"]["tmp_name"], "../data/fileupload/doc_pay_driver/slip/slip_".$_POST[order_id].".jpg");
+		$return[path] = "../data/fileupload/doc_pay_driver/slip/slip_".$_POST[order_id].".jpg";
         $update_ob[transfer_money] = 1;
         $update_ob[transfer_money_date] = time();
+        $update_ob[total_commission] = $_POST[taxi_cost];
         $this->db->where('id', $_POST[order_id]);
 		$update_ob[result] = $this->db->update('order_booking', $update_ob); 
         $update_ob[order_id] = $_POST[order_id];
