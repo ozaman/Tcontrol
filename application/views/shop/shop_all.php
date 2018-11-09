@@ -44,10 +44,10 @@
                     </a>
                   </td>
                   <td><span class="text-primary"><?=$val->topic_th; ?></span> / <span ><?=$val->topic_en; ?></span> / <span class="text-success"><?=$val->topic_cn; ?></span></td>
-                  <td><a href="<?=base_url(); ?>shop/categorie_sub?id=<?=$shop->main; ?>" class="head_title text-info"><?=$categories->topic_th; ?></a></td>
-                  <td><a href="<?=base_url(); ?>shop/shop_ordertype?id=<?=$shop->sub; ?>&sub=<?=$shop->main; ?>" class="head_title text-info"><?=$categories_sub->topic_th; ?></a></td>
+                  <td><a href="<?=base_url(); ?>shop/categorie_sub?id=<?=$val->main; ?>" class="head_title text-info"><?=$categories->topic_th; ?></a></td>
+                  <td><a href="<?=base_url(); ?>shop/shop_ordertype?id=<?=$val->sub; ?>&sub=<?=$val->main; ?>" class="head_title text-info"><?=$categories_sub->topic_th; ?></a></td>
 
-                  <td >
+                  <td align="right" >
                     <?php
                     if($val->status == 0) {
                       $text_status = 'ปิด';
