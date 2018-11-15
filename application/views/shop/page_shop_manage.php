@@ -451,7 +451,17 @@ $category = $this->Main_model->rowdata(TBL_SHOPPING_PRODUCT_MAIN,array('id' => $
                 </div>
                 <!-- ========================================================================================= -->
                 <div class="box-body no-padding">
+                  <div class="box-head" style="padding: 15px 10px;">
+                      <button type="button" class="btn btn-md btn-success btn-equal " onclick="open_commision('<?=$shop->id; ?>')"> 
+                        <i class="fa fa-plus " ></i>
+                      </button>
+                      <header style="cursor: pointer;" onclick="open_commision('<?=$shop->id; ?>')"><h4 class="text-light"> จัดการค่าตอบแทน </h4></header>
+                    </div>
+                </div>
+                <!-- ========================================================================================= -->
+                <div class="box-body no-padding">
 
+                  
                   <div class="box-head">
                     <header><h4 class="text-light"> ประเภทเปิดใช้งาน <strong></strong></h4></header>
                   </div>
@@ -488,12 +498,7 @@ $category = $this->Main_model->rowdata(TBL_SHOPPING_PRODUCT_MAIN,array('id' => $
                         <?php } ?>
                       </div>
                     </div>
-                    <div class="box-head" style="padding: 15px 0;">
-                      <button type="button" class="btn btn-md btn-success btn-equal " onclick="open_commision('<?=$shop->id; ?>')"> 
-                        <i class="fa fa-plus " ></i>
-                      </button>
-                      <header style="cursor: pointer;" onclick="open_commision('<?=$shop->id; ?>')"><h4 class="text-light"> ประเภทรายจ่าย </h4></header>
-                    </div>
+                    
                   </div>
 
                   <div class="col-md-12"> 
