@@ -215,6 +215,10 @@ class Shop extends CI_Controller{
     $data = $this->Main_model->updateStatus();
     echo json_encode($data);
   }
+  public function updateStatusSHOP(){
+      $data = $this->Main_model->updateStatusSHOP();
+      echo json_encode($data);
+  }
 
   public function get_plan_com(){
 

@@ -538,7 +538,39 @@ else{
 
 
 }
+public function updateStatusSHOP() {
+    ///////////// Time
+  $id = $this->input->post('id');
+  $status = $this->input->post('status');
+  
+  if ($status == 0) {
+    
+   $_where = array();
+    $_where['i_shop'] = $this->input->post('id');
+    $TAXI = $this->Main_model->num_row(TBL_SHOP_COUNTRY_TAXI,$_where);
+    if ($TAXI>0) {
+      $status = 1;
+    }
+    else{
+       return -1;
+    }
+    
+  } else {
+    $status = 0;
+  }
 
+  $table = $this->input->post('tbl');
+    // $chk = explode('_',$table);
+    // if ($chk[0] == 'tbl') {
+
+    // } else {
+    //   $table = 'tbl_'.$table;
+    // }
+  $this->status = $status;
+  $this->db->update($table,$this,array('id' => $id));
+    // $this->session->set_userdata(array('savedata' => 1));
+  return $status;
+}
 public function updateStatus() {
     ///////////// Time
   $id = $this->input->post('id');
@@ -558,7 +590,7 @@ public function updateStatus() {
   $this->status = $status;
   $this->db->update($table,$this,array('id' => $id));
     // $this->session->set_userdata(array('savedata' => 1));
-  return $id;
+  return $status;
 }
 
 public function rows($table,$arr_where) {

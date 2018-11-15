@@ -609,6 +609,97 @@ function get_plan_price_sub(id) {
       }
     });
   }
+  function updateStatusSHOP(id, status, table) {
+    var url = base_url + "shop/updateStatusSHOP?option="+option;
+    var ftable = '';
+    if (table == 'shopping_contact') {
+      ftable = table;
+    }
+    else{
+      ftable = table+option;
+      
+    }
+    // console.log(shop)
+    // console.log(id_shop_country)
+    var param = {
+      id: id,
+      tbl: ftable,
+      status: status
+    }
+    // $('#i_shop_country_com').val(id)
+    // param.i_shop_country_com = $('#id_shop_product').val();
+    // param.id_shop_country =  $('#id_country').val();
+    console.log(param)
+    $.ajax({
+      url: url,
+      data: param,
+      type: 'post',
+      error: function() {
+        console.log('Error Profile');
+      },
+      success: function(res) {
+        console.log(res);
+        if (res == 0) {
+          Command: toastr["warning"]("ปิดบริการแล้ว")
+          if (table == 'shop_country') {
+            $('#btn_status' + id).removeClass('btn-success')
+            $('#btn_status' + id).addClass('btn-warning')
+            $('#btn_status' + id).html('ปิด');
+            $('#btn_status' + id).attr("onclick", "updateStatus('" + id + "','0','" + table + "')");
+          } else {
+
+            $('#span_status' + id).removeClass('text-success')
+            $('#span_status' + id).addClass('text-danger')
+            $('#span_status' + id).html('ปิด');
+            $('#span_status' + id).attr("onclick", "updateStatus('" + id + "','0','" + table + "')");
+          }
+
+        }
+        else if(res == 1) {
+          Command: toastr["success"]("เปิดบริการแล้ว")
+          if (table == 'shop_country') {
+            $('#btn_status' + id).addClass('btn-success')
+            $('#btn_status' + id).removeClass('btn-warning')
+
+            $('#btn_status' + id).html('เปิด');
+            $('#btn_status' + id).attr("onclick", "updateStatus('" + id + "','1','" + table + "')");
+          } else {
+            $('#span_status' + id).addClass('text-success')
+            $('#span_status' + id).removeClass('text-danger')
+            $('#span_status' + id).html('เปิด');
+            $('#span_status' + id).attr("onclick", "updateStatus('" + id + "','1','" + table + "')");
+          }
+
+
+        }
+        else if(res < 0){
+          Command: toastr["warning"]("ยังไม่มีการตั้งค่าตอบแทนกรุณาตั้งค่าตอบแทน")
+          // $('#span_status' + id).removeClass('text-success')
+            // $('#span_status' + id).addClass('text-danger')
+            // $('#span_status' + id).html('ปิด');
+            // $('#span_status' + id).attr("onclick", "updateStatus('" + id + "','0','" + table + "')");
+          
+        }
+
+        toastr.options = {
+          "closeButton": true,
+          "debug": false,
+          "positionClass": "toast-top-right",
+          "onclick": null,
+          "showDuration": "1000",
+          "hideDuration": "1000",
+          "timeOut": "5000",
+          "extendedTimeOut": "1000",
+          "showEasing": "swing",
+          "hideEasing": "linear",
+          "showMethod": "fadeIn",
+          "hideMethod": "fadeOut"
+        }
+
+
+      }
+    });
+  }
 
   function updateStatus(id, status, table) {
     var url = base_url + "shop/updateStatus?option="+option;

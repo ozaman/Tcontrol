@@ -23,10 +23,11 @@
             <th width="50" align="center">
               <font >จัดการ</font>     
             </th>
+            <th width="60" align="center"><font >สถานะ</font></th>
+            
             <th height="30" align="center"><font >TH / EN / CN</font></th>
             <th width="120" align="center">หมวดหมู่</th>
             <th width="120" align="center">ประเภท</th>
-            <th width="60" align="center"><font >สถานะ</font></th>
             <th width="50" align="center"><font >ลบ</font></th>
             </tr>
             </thead>
@@ -43,11 +44,7 @@
                       <i class="fa fa-edit fa-lg" ></i>
                     </a>
                   </td>
-                  <td><span class="text-primary"><?=$val->topic_th; ?></span> / <span ><?=$val->topic_en; ?></span> / <span class="text-success"><?=$val->topic_cn; ?></span></td>
-                  <td><a href="<?=base_url(); ?>shop/categorie_sub?id=<?=$val->main; ?>" class="head_title text-info"><?=$categories->topic_th; ?></a></td>
-                  <td><a href="<?=base_url(); ?>shop/shop_ordertype?id=<?=$val->sub; ?>&sub=<?=$val->main; ?>" class="head_title text-info"><?=$categories_sub->topic_th; ?></a></td>
-
-                  <td align="right" >
+                   <td align="right" >
                     <?php
                     if($val->status == 0) {
                       $text_status = 'ปิด';
@@ -58,8 +55,13 @@
                       $s_class = 'text-success';
                     }
                     ?>
-                    <span id="span_status<?=$val->id; ?>" onclick="updateStatus('<?=$val->id; ?>', '<?=$val->status; ?>', '<?=TBL_SHOPPING_PRODUCT; ?>')" class="<?=$s_class; ?>" style="cursor: pointer;"><?=$text_status; ?></span>
+                    <span id="span_status<?=$val->id; ?>" onclick="updateStatusSHOP('<?=$val->id; ?>', '<?=$val->status; ?>', '<?=TBL_SHOPPING_PRODUCT; ?>')" class="<?=$s_class; ?>" style="cursor: pointer;"><?=$text_status; ?></span>
                   </td>
+                  <td><span class="text-primary"><?=$val->topic_th; ?></span> / <span ><?=$val->topic_en; ?></span> / <span class="text-success"><?=$val->topic_cn; ?></span></td>
+                  <td><a href="<?=base_url(); ?>shop/categorie_sub?id=<?=$val->main; ?>" class="head_title text-info"><?=$categories->topic_th; ?></a></td>
+                  <td><a href="<?=base_url(); ?>shop/shop_ordertype?id=<?=$val->sub; ?>&sub=<?=$val->main; ?>" class="head_title text-info"><?=$categories_sub->topic_th; ?></a></td>
+
+                 
                   <td>
                     <button onclick="firstDelete('<?=$val->topic_th; ?>/<?=$val->topic_en; ?>/<?=$val->topic_cn; ?>', '<?=$val->id; ?>', '<?=TBL_SHOPPING_PRODUCT; ?>')" type="button" class="btn btn-xs btn-danger btn-equal" data-toggle="modal" data-target="#deleteModal"><i class="fa fa-trash-o"></i></button>
                   </td>
