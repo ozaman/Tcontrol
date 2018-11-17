@@ -171,6 +171,32 @@ class Shop_model extends CI_Model{
       $data[i_shop_country_icon] = $_POST[i_country_icon_plan];
       $data[i_plan_price] = $_POST[i_price_plan];
       $data[s_topic_th] = $val->s_topic_th;
+      if ($_POST[i_price_plan] == 1 && $val->s_topic_th == 'ค่าจอด') {
+        $i_plan_product_price_name = 5;
+        $s_topic_en = 'park';
+      }
+      if ($_POST[i_price_plan] == 1 && $val->s_topic_th == 'ค่าหัว') {
+        $i_plan_product_price_name = 6;
+        $s_topic_en = 'person';
+
+      }
+      if ($_POST[i_price_plan] == 2 && $val->s_topic_th == 'ค่าจอด') {
+        $i_plan_product_price_name = 5;
+        $s_topic_en = 'park';
+
+      }
+      if ($_POST[i_price_plan] == 2 && $val->s_topic_th == 'ค่าคอม') {
+        $i_plan_product_price_name = 7;
+        $s_topic_en = 'comision';
+
+      }
+      if ($_POST[i_price_plan] == 5 ) {
+        $i_plan_product_price_name = 5;
+        $s_topic_en = 'park';
+        
+      }
+      $data[i_plan_product_price_name] = $i_plan_product_price_name;
+      $data[s_topic_en] = $s_topic_en;
       $data[i_price] = $_POST[$val->element];
       $data[s_payment] = $_POST[money_.$val->element];
       $result = $this->db->insert(TBL_SHOP_COUNTRY_COM_LIST_PRICE.$_GET[option],$data);
