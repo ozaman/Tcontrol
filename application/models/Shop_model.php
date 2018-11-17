@@ -396,7 +396,10 @@ class Shop_model extends CI_Model{
       return $data_loop;
     }
 
-
+    $gen_map1 = explode('<iframe src="',$_POST[map]);
+    
+    //$_POST[map] = 
+    
     if($_GET[op] == 'shop') {
       $data = array();
       $data[topic_cn] = $_POST[topic_cn];
@@ -406,6 +409,7 @@ class Shop_model extends CI_Model{
       $data[lat] = $_POST[lat_db];
       $data[lng] = $_POST[lng_db];
       $data[address] = $_POST[address];
+      $data[s_website] = $_POST[s_website];
       $data[phone] = $_POST[phone];
       $data[email] = $_POST[email];
       $data[province] = $_POST[province];
@@ -415,7 +419,9 @@ class Shop_model extends CI_Model{
       $data[main] = $_POST[main];
       $data[sub] = $_POST[sub];
       $this->db->where('id',$_GET[shop_id]);
-      $result = $this->db->update(TBL_SHOPPING_PRODUCT,$data);
+      $result[result] = $this->db->update(TBL_SHOPPING_PRODUCT,$data);
+      $result[id] = $_GET[shop_id];
+      $result[url] = base_url().'shop/shop_manage?sub='.$_POST[sub].'&main='.$_POST[main].'&id='.$_GET[shop_id];
       return $result;
     }
 
@@ -430,6 +436,7 @@ class Shop_model extends CI_Model{
       $data[lat] = $_POST[lat_db];
       $data[lng] = $_POST[lng_db];
       $data[address] = $_POST[address];
+      $data[s_website] = $_POST[s_website];
       $data[phone] = $_POST[phone];
       $data[email] = $_POST[email];
       $data[province] = $_POST[province];
@@ -438,6 +445,7 @@ class Shop_model extends CI_Model{
       $data[region] = $_POST[region];
       $data[main] = $_POST[main];
       $data[sub] = $_POST[sub];
+      /*
       $data[open_Sun] = $_POST[Sun];
       $data[open_Mon] = $_POST[Mon];
       $data[open_Tue] = $_POST[Tue];
@@ -445,6 +453,14 @@ class Shop_model extends CI_Model{
       $data[open_Thu] = $_POST[Thu];
       $data[open_Fri] = $_POST[Fri];
       $data[open_Sat] = $_POST[Sat];
+      //*/
+      $data[open_Sun] = 1;
+      $data[open_Mon] = 1;
+      $data[open_Tue] = 1;
+      $data[open_Wed] = 1;
+      $data[open_Thu] = 1;
+      $data[open_Fri] = 1;
+      $data[open_Sat] = 1;
       $result = $this->db->insert(TBL_SHOPPING_PRODUCT,$data);
       $last_id = mysql_insert_id();
       $data_return[product_id] = $last_id;
@@ -548,6 +564,8 @@ class Shop_model extends CI_Model{
         }
       }
       $data_return[result] = $result;
+      $data_return[id] = $last_id;
+      $data_return[url] = base_url().'shop/shop_manage?sub='.$_POST[sub].'&main='.$_POST[main].'&id='.$last_id;
       return $data_return;
     }
   }
@@ -607,6 +625,9 @@ class Shop_model extends CI_Model{
 
   public function save_document(){
     header('Content-Type: application/json');
+    
+      
+    
     // if ($_FILES["file"]["name"]) {
     $product_id = $_POST[product_id];
     $type_doc = $_POST[type_doc];
@@ -630,7 +651,15 @@ class Shop_model extends CI_Model{
 
     $doc_name = $type_doc.'_'.$product_id.'_'.$num.'.'.$type;
     $target_file = "../data/pic/document/place/".$doc_name;
-    if(in_array($type,array("jpg","jpeg","gif","png","PDF"))) {
+    $result[target_file] = $target_file;
+    if($_POST[type_doc] < 1){
+      $result[status] = false;
+      $result[msg] = 'กรุณาเลือกประเภท';
+    }elseif($_FILES[file_doc][name] == ''){
+      $result[status] = false;
+      $result[msg] = 'กรุณาเลือกไฟล์';
+    }
+    elseif(in_array($type,array("jpg","jpeg","gif","png","PDF"))) {
       // return  $type;
       if(is_uploaded_file($_FILES[file_doc][tmp_name])) {
         // return $target_file;
@@ -639,13 +668,30 @@ class Shop_model extends CI_Model{
           $data[product_id] = $product_id;
           $data[type] = $type_doc;
           $data[document_name] = $doc_name;
-          $data[start_expired] = $start_expired;
-          $data[end_expired] = $end_expired;
-          $data[day_alert] = $_POST[set_day_alert];
-          $data[alert_phone] = $_POST[alert_phone];
-          $data[alert_email] = $_POST[alert_email];
-          $data[email] = $_POST[email];
-          $data[phone] = $_POST[phone];
+          $data[s_name] = $_POST[s_name];
+          if($start_expired != ''){
+            $data[start_expired] = $start_expired;
+          }
+          if($end_expired != ''){
+            $data[end_expired] = $end_expired;
+          }
+          if($_POST[set_day_alert] != ''){
+            $data[day_alert] = $_POST[set_day_alert];
+          }
+          if($_POST[alert_phone] != ''){
+            $data[alert_phone] = $_POST[alert_phone];
+          }
+          if($_POST[alert_email] != ''){
+            $data[alert_email] = $_POST[alert_email];
+          }
+          if($_POST[email] != ''){
+            $data[email] = $_POST[email];
+          }
+          if($_POST[phone] != ''){
+            $data[phone] = $_POST[phone];
+          }
+
+          
 
           $add = $this->db->insert(TBL_PLACE_DOCUMENT_FILE,$data);
           $result[status] = $add;

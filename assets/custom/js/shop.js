@@ -970,8 +970,8 @@ function submit_data_plan_time(id, op) {
     },
     success: function (res) {
       console.log(res);
-
-      var url = base_url + "shop/box_plan_time?id=" + id;
+      
+        var url = base_url + "shop/box_plan_time?id=" + id;
       console.log(url)
       Command: toastr["success"]("บันทึกข้อมูลสำเร็จ")
 
@@ -979,6 +979,9 @@ function submit_data_plan_time(id, op) {
         // console.log(ele)
         $('#box_plan_time').html(ele);
       });
+      
+
+      
     }
   });
 }
@@ -1286,7 +1289,13 @@ function form_detail_shop(id, op) {
     },
     success: function (res) {
       console.log(res);
-      Command: toastr["success"]("บันทึกข้อมูลสำเร็จ")
+      if(res.id > 0){
+        Command: toastr["success"]("บันทึกข้อมูลสำเร็จ")
+        location.replace(res.url);
+      }else{
+        Command: toastr["error"]("บันทึกข้อมูลไม่สำเร็จ กรุณากรอกข้อมูลให้ครบด้วยค่ะ")
+      }
+      //Command: toastr["success"]("บันทึกข้อมูลสำเร็จ")
 
       // var url = base_url + "shop/box_plan_time?id="+id;
       // console.log(url)
@@ -1545,8 +1554,9 @@ $(document).ready(function () {
 });
 
 function _form_upload_file(id) {
+  
   var data_form = $('#form_upload_file').serialize();
-  var data_form = new FormData($('#form_upload_file')[0]);
+  var data_form = new FormData($('#form_shop_all')[0]);
   var url = base_url + "shop/save_document";
   console.log(data_form)
   $.ajax({

@@ -41,7 +41,7 @@ $category = $this->Main_model->rowdata(TBL_SHOPPING_PRODUCT_MAIN,array('id' => $
               <?php
               foreach($shop_ordertype as $key => $val) {
                 ?>
-                <tr>
+                <tr  id="tr_delete_typelist<?=$val->id;?>">
                   <td>#<?=$key + 1; ?></td>
                   <td>
 
@@ -72,7 +72,8 @@ $category = $this->Main_model->rowdata(TBL_SHOPPING_PRODUCT_MAIN,array('id' => $
   
                  
                   <td>
-                    <button onclick="firstDelete('<?=$val->topic_th; ?>/<?=$val->topic_en; ?>/<?=$val->topic_cn; ?>', '<?=$val->id; ?>', '<?=TBL_SHOPPING_PRODUCT; ?>')" type="button" class="btn btn-xs btn-danger btn-equal" data-toggle="modal" data-target="#deleteModal"><i class="fa fa-trash-o"></i></button>
+                    <!--<button onclick="firstDelete('<?=$val->topic_th; ?>/<?=$val->topic_en; ?>/<?=$val->topic_cn; ?>', '<?=$val->id; ?>', '<?=TBL_SHOPPING_PRODUCT; ?>')" type="button" class="btn btn-xs btn-danger btn-equal" data-toggle="modal" data-target="#deleteModal"><i class="fa fa-trash-o"></i></button>-->
+                    <button onclick="func_openFormDel('<?=$val->id;?>', '<?=TBL_SHOPPING_PRODUCT;?>', '<?=$val->topic_th;?> / <?=$val->topic_en;?> / <?=$val->topic_cn;?>', 'tr_delete_typelist')"  type="button" class="btn btn-xs btn-danger btn-equal" data-toggle="modal" data-target="#deleteModalBase"><i class="fa fa-trash-o"></i></button>
                   </td>
 
                 </tr>

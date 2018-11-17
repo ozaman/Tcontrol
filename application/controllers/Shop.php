@@ -121,7 +121,7 @@ class Shop extends CI_Controller{
 
   public function get_shop_map(){
     $_where = array();
-    $_where['id'] = 1;
+    $_where['id'] = $_POST[id];
     $_select = array('*');
     $data['map'] = $this->Main_model->rowdata(TBL_SHOPPING_PRODUCT,$_where,$_select);
     $this->load->view('shop/page_shop_map',$data);
@@ -306,6 +306,7 @@ class Shop extends CI_Controller{
   }
 
   public function submit_data_plan_time(){
+    //header('Content-Type: application/json');
     $data = $this->Shop_model->submit_data_plan_time();
     echo json_encode($data);
   }

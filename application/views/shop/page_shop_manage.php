@@ -1,10 +1,12 @@
-<form class="form-horizontal form-banded form-bordered"  id="form_shop_all"   >
+<form class="form-horizontal form-banded form-bordered"  id="form_shop_all"  enctype="multipart/form-data"  >
   <?php
   if ($_GET[state] == 'add') {
     $shop_page = 'เพิ่มร้านค่า';
+    $func_saveForm = 'add';
   }
   else {
     $shop_page = 'แก้ไขร้านค่า';
+    $func_saveForm = 'shop';
   }
   ?>
 
@@ -230,8 +232,15 @@
                       <label class="control-label">ที่อยู่</label>
                     </div>
                     <div class="col-md-10">
-                      <textarea name="address" rows="3" class="form-control" id="address" placeholder="ที่อยู่"><?=$shop->address;?>
-                      </textarea>
+                      <textarea name="address" rows="3" class="form-control" id="address" placeholder="ที่อยู่"><?=$shop->address;?></textarea>
+                    </div>
+                  </div>
+                  <div class="form-group form-group-md">
+                    <div class="col-md-2">
+                      <label class="control-label">เว็บไซต์</label>
+                    </div>
+                    <div class="col-md-10">
+                      <input type="text" class="form-control" value="<?=$shop->s_website;?>" name="s_website">
                     </div>
                   </div>
                   <div class="form-group form-group-md">
@@ -240,6 +249,7 @@
                     </div>
                     <div class="col-md-8">
                       <input type="text" class="form-control" value="<?=$shop->map;?>" name="map">
+                      
                     </div>
                     <div class="col-md-2">
                       <button type="button" class="btn btn-md" id="find_latlng_link"><strong>ค้นหา</strong></button>
@@ -250,8 +260,12 @@
                       <label class="control-label">แผนที่</label>
                     </div>
                     <div class="col-md-10">
-                      <input type="hidden" name="lat_db" value="<?=$shop->lat;?>" id="lat">
-                      <input type="hidden" name="lng_db" value="<?=$shop->lng;?>" id="lng">
+                      <?php
+                      $gen_map1 = explode('/@',$shop->map);
+                      $gen_map = explode(',',$gen_map1[1]);
+                      ?>
+                      <input type="hidden" name="lat_db" value="<?=$gen_map[0];?>" id="lat">
+                      <input type="hidden" name="lng_db" value="<?=$gen_map[1];?>" id="lng">
                       <div id="map_frame" style="">
                       </div>
                     </div>
@@ -278,7 +292,7 @@
                     </div>
                     <div class="col-md-2">
 
-                      <button type="button" class="btn btn-primary btn-md <?=$btn_none;?> " id="submit_data_1" onclick="form_detail_shop('<?=$_GET[id];?>', 'shop')"> <span id="txt_btn_save5" > บันทึกข้อมูล </span></button>
+                      <button type="button" class="btn btn-primary btn-md <?=$btn_none;?> " id="submit_data_1" onclick="form_detail_shop('<?=$_GET[id];?>', '<?=$func_saveForm;?>')"> <span id="txt_btn_save5" > บันทึกข้อมูล </span></button>
                     </div>
                   </div>
                 </div>
@@ -595,6 +609,9 @@
 
   </div>
 </form>
+<?php
+if ($shop->id > 0) {
+?>
 <script>
   setTimeout(function () {
     cal_map('<?=$shop->id;?>')
@@ -605,6 +622,7 @@
 
 
 </script>
+<?php } ?>
 
 
 
