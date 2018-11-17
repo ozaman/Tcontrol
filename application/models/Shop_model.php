@@ -13,6 +13,9 @@ class Shop_model extends CI_Model{
       case 'shopping_product_sub':
         $response = $this->func_Saveshopping_product_sub();
         break;
+      case 'shopping_product_sub_typelist':
+        $response = $this->func_Saveshopping_product_sub_typelist();
+        break;
       default :
         $response = $this->default_res();
     }
@@ -57,6 +60,32 @@ class Shop_model extends CI_Model{
       $params[topic_th] = $_POST[topic_th];
       $params[topic_cn] = $_POST[topic_cn];
       $params[main] = $_POST[i_main];
+      $params[i_update_utf] = 1;
+      if($_POST[id] == NULL){
+        $this->db->insert($_POST[tbl],$params);
+      }else{
+        $this->db->update($_POST[tbl],$params,array('id'=>$_POST[id]));
+      }
+      @setcookie('savedata', 1, 60); // 86400 = 1 day
+    }
+    return $response;
+  }
+  // ================================================================================================
+  public function func_Saveshopping_product_sub_typelist(){
+    $response = array();
+    $response[i_status] = 0;
+    $response[s_focus] = 'topic_en';
+    $response[s_msg] = 'กรุณากรอกประเภท EN ด้วยค่ะ';
+    if($_POST[topic_en] != '') {
+      $response[i_status] = 1;
+      $response[s_focus] = '';
+      $response[s_msg] = '';
+      $params = array();
+      $params[topic_en] = $_POST[topic_en];
+      $params[topic_th] = $_POST[topic_th];
+      $params[topic_cn] = $_POST[topic_cn];
+      $params[main] = $_POST[i_main];
+      $params[sub] = $_POST[sub];
       $params[i_update_utf] = 1;
       if($_POST[id] == NULL){
         $this->db->insert($_POST[tbl],$params);

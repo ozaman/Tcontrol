@@ -22,6 +22,9 @@ class Shop extends CI_Controller{
   public function func_openForm(){
     $this->load->view('shop/form/'.$_POST[tbl]);
   }
+  public function func_openList(){
+    $this->load->view('shop/list/'.$_POST[tbl]);
+  }
 
   public function func_SaveDataFormAction(){
     header('Content-Type: application/json');

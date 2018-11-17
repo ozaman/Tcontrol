@@ -89,6 +89,8 @@ define('TBL_PLACE_DETAIL_DOC_GROUP', 'place_detail_doc_group');
 // define('TBL_SHOPPING_OPEN_TIME', 'shopping_open_time');
 
 define('TBL_SHOPPING_PRODUCT_MAIN', 'shopping_product_main');
+define('TBL_SHOPPING_PRODUCT_MAIN_TYPELIST', 'shopping_product_main_typelist');
+define('TBL_SHOPPING_PRODUCT_SUB_TYPELIST', 'shopping_product_sub_typelist');
 define('TBL_SHOPPING_PRODUCT_SUB', 'shopping_product_sub');
 define('TBL_PLAN_PRODUCT_PRICE_NAME', 'plan_product_price_name');
 define('TBL_PLAN_PRODUCT_PRICE_SETTING', 'plan_product_price_setting');

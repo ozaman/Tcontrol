@@ -110,6 +110,7 @@
             <div class="modal-body">
                 <input type="hidden" name="" id="id_item_deleteBase" value="">
                 <input type="hidden" name="" id="tbl_item_deleteBase" value="">
+                <input type="hidden" name="" id="ele_item_deleteBase" value="">
                 <p >ว่าต้องการลบ <span class="text-danger" id="span_title_deleteBase"></span></p>
             </div>
             <div class="modal-footer">

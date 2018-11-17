@@ -21,10 +21,12 @@ $category = $this->Main_model->rowdata(TBL_SHOPPING_PRODUCT_MAIN,array('id' => $
             <thead>
               <tr>
                 <th width="50" height="25">#</th>
+                <th width="60" align="center" ><font >สถานะ</font></th>
                 <th width="50" align="center" >แก้ไข</th>
                 <th width="130" align="center" >จัดการสถานที่</th>
+                <th width="100" align="center" >ประเภทสินค้า</th>
                 <th height="30" align="center" ><font >TH</font> / <font >EN</font> / <font >CN</font></th>
-                <th width="60" align="center" ><font >สถานะ</font></th>
+                
                 <th width="50" align="center" ><font >ลบ</font></th>
               </tr>
             </thead>
@@ -32,20 +34,10 @@ $category = $this->Main_model->rowdata(TBL_SHOPPING_PRODUCT_MAIN,array('id' => $
               <?php
               foreach($categorie_bub as $key => $val) {
                 $count_sub = $this->Main_model->rows(TBL_SHOPPING_PRODUCT,array('sub' => $val->id));
+                $count_type_list = $this->Main_model->rows(TBL_SHOPPING_PRODUCT_SUB_TYPELIST,array('sub' => $val->id));
                 ?>
                 <tr  id="tr_delete<?=$val->id; ?>">
                   <td><?=$key + 1; ?></td>
-                  <td>
-                    <a style="cursor:pointer;" onclick="func_openForm('<?=$val->id; ?>', '<?=TBL_SHOPPING_PRODUCT_SUB; ?>', 'แก้ไขประเภท :: <?=$val->topic_th; ?> / <?=$val->topic_en; ?> / <?=$val->topic_cn; ?>', '<?=$val->main; ?>');" class="text-primary">
-                      <i class="fa fa-edit fa-lg" ></i>
-                    </a>
-                  </td>
-                  <td>
-                    <a style="cursor:pointer;" href="<?=base_url(); ?>shop/shop_ordertype?sub=<?=$_GET[id]; ?>&id=<?=$val->id; ?>"  class="text-warning">
-                      <i class="fa fa-gears fa-lg" ></i> [<?=$count_sub; ?>]
-                    </a>
-                  </td>
-                  <td><span class="text-primary"><?=$val->topic_th; ?></span> / <span ><?=$val->topic_en; ?></span> / <span class="text-success"><?=$val->topic_cn; ?></span></td>
                   <td>
                     <?php
                     if($val->status == 0) {
@@ -59,6 +51,23 @@ $category = $this->Main_model->rowdata(TBL_SHOPPING_PRODUCT_MAIN,array('id' => $
                     ?>
                     <span id="span_status<?=$val->id; ?>" onclick="updateStatus('<?=$val->id; ?>', '<?=$val->status; ?>', '<?=TBL_SHOPPING_PRODUCT_SUB; ?>')" class="<?=$s_class; ?>" style="cursor: pointer;"><?=$text_status; ?></span>
                   </td>
+                  <td>
+                    <a style="cursor:pointer;" onclick="func_openForm('<?=$val->id; ?>', '<?=TBL_SHOPPING_PRODUCT_SUB; ?>', 'แก้ไขประเภท :: <?=$val->topic_th; ?> / <?=$val->topic_en; ?> / <?=$val->topic_cn; ?>', '<?=$val->main; ?>');" class="text-primary">
+                      <i class="fa fa-edit fa-lg" ></i>
+                    </a>
+                  </td>
+                  <td>
+                    <a style="cursor:pointer;" href="<?=base_url(); ?>shop/shop_ordertype?sub=<?=$_GET[id]; ?>&id=<?=$val->id; ?>"  class="text-warning">
+                      <i class="fa fa-gears fa-lg" ></i> [<?=$count_sub; ?>]
+                    </a>
+                  </td>
+                  <td>
+                    <a style="cursor:pointer;" onclick="func_openForm('<?=$val->id;?>', '<?=TBL_SHOPPING_PRODUCT_SUB_TYPELIST; ?>','สินค้าในประเภท :: <?=$val->topic_th; ?> / <?=$val->topic_en; ?> / <?=$val->topic_cn; ?>');" class="text-success">
+                      <i class="fa fa-list fa-lg" ></i>  [<?=$count_type_list; ?>]
+                    </a>
+                  </td>
+                  <td><span class="text-primary"><?=$val->topic_th; ?></span> / <span ><?=$val->topic_en; ?></span> / <span class="text-success"><?=$val->topic_cn; ?></span></td>
+                  
                   <td>
                     <button onclick="func_openFormDel('<?=$val->id; ?>', '<?=TBL_SHOPPING_PRODUCT_SUB; ?>', '<?=$val->topic_th; ?> / <?=$val->topic_en; ?> / <?=$val->topic_cn; ?>')" type="button" class="btn btn-xs btn-danger btn-equal" data-toggle="modal" data-target="#deleteModalBase"><i class="fa fa-trash-o"></i></button>
                   </td>
