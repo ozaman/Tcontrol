@@ -1412,6 +1412,29 @@ function submit_detail_contact(id, op) {
   console.log($('#form_contact').serialize());
   console.log(id)
   console.log(op)
+  
+  var contact_admintype = $('#contact_admintype').val();
+  if(contact_admintype == ''){
+    toastr.error( 'กรุณาเลือกผู้ดูแล','บันทึกข้อมูลไม่สำเร็จ', {"closeButton": true});
+    return false;
+  }
+  var contact_usertype = $('#contact_usertype').val();
+  if(contact_usertype == ''){
+    toastr.error( 'กรุณาเลือกตำแหน่ง','บันทึกข้อมูลไม่สำเร็จ', {"closeButton": true});
+    return false;
+  }
+  var contact_name = $('#contact_name').val();
+  if(contact_name == ''){
+    toastr.error( 'กรุณากรอกชื่อ','บันทึกข้อมูลไม่สำเร็จ', {"closeButton": true});
+    return false;
+  }
+  var contact_phone = $('#contact_phone').val();
+  if(contact_phone == ''){
+    toastr.error( 'กรุณากรอกเบอร์โทรศัพท์','บันทึกข้อมูลไม่สำเร็จ', {"closeButton": true});
+    return false;
+  }
+  
+  
   var ss = $('#form_contact').serialize();
   console.log(JSON.stringify(ss));
   var url = base_url + "shop/submit_submit_detail_contact?op=" + op;

@@ -50,7 +50,7 @@ if ($_GET[op] == 'edit') {
 
           <div class="col-md-10">
            <select  class="form-control" name="contact_admintype" id="admintype" style="" >
-            <option value="0" > เลือกผู้ดูแล </option>
+            <option value="" > ---- กรุณาเลือก ---- </option>
             <?php
             $_where = array();
             $_where['status'] = 1;
@@ -82,7 +82,7 @@ if ($_GET[op] == 'edit') {
 
         <div class="col-md-10" id="data_select_category">
          <select  class="form-control" name="contact_usertype" id="usertype" style="" >
-           <option value="">เลือกตำแหน่ง </option>
+           <option value="">---- กรุณาเลือก ---- </option>
            <?php
            $_where = array();
            $_where['status'] = 1;
@@ -107,7 +107,7 @@ if ($_GET[op] == 'edit') {
 
 
 
-          <? }
+          <?php }
           ?>
         </select>
         <!-- <input name="sub" type="hidden" id="sub"  value="1"> -->
