@@ -568,6 +568,7 @@ function save_region_sub() {
 
 function save_plan_price() {
   var url = base_url + "shop/save_plan_price?option=" + option;
+  console.log(url)
   console.log($('#plan_com_price').serialize())
   console.log(param_plan_price)
   $.ajax({
@@ -586,7 +587,7 @@ function save_plan_price() {
         commision($('#manage_com').val())
         $('#box_plan_com').html('');
         _box_plan_comision();
-        box_price_plan();
+      box_price_plan();
       }
 
 
