@@ -548,6 +548,9 @@ class Shop_model extends CI_Model{
         }
       }
       $data_return[result] = $result;
+      $data_return[day_row_other] = $day_row_other;
+      $data_return[data] = $data;
+      $data_return[post] = $_POST;
       return $data_return;
     }
   }
