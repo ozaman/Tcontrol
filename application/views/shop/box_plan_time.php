@@ -44,7 +44,7 @@ for($i=0;$i<=11;$i++){
               </select> .
 
               <select style="height: 30px; border: 1px solid #ccc;  border-radius: 2px;" name="time_open_default" id="time_open_default">
-                <? foreach($time as $value){ 
+                <?php foreach($time as $value){ 
                   if($arr[open_mon]->start_m ==$value){
                     $selected = "selected";
                   }else{
@@ -52,11 +52,11 @@ for($i=0;$i<=11;$i++){
                   }?>
 
                   <option <?=$selected;?> value="<?=$value?>"><?=$value?></option>
-                <?   } ?> 
+                <?php   } ?> 
               </select> น.</td>
               <td width="50">ปิด&nbsp;</td>
               <td> <select style="height: 30px; border: 1px solid #ccc;  border-radius: 2px;" name="hour_close_default" id="hour_close_default">
-                <? foreach($hour as $value){ 
+                <?php foreach($hour as $value){ 
                   if($arr[open_mon]->finish_h==$value){
                     $selected = "selected";
                   }else{
@@ -64,10 +64,10 @@ for($i=0;$i<=11;$i++){
                   }?>
 
                   <option <?=$selected;?> value="<?=$value?>"><?=$value?></option>
-                <?   } ?> 
+                <?php   } ?> 
               </select> .
               <select style="height: 30px; border: 1px solid #ccc;  border-radius: 2px;" name="time_close_default" id="time_close_default">
-                <? foreach($time as $value){ 
+                <?php foreach($time as $value){ 
                   if($arr[open_mon]->finish_m==$value){
                     $selected = "selected";
                   }else{
@@ -75,7 +75,7 @@ for($i=0;$i<=11;$i++){
                   }?>
 
                   <option <?=$selected;?> value="<?=$value?>"><?=$value?></option>
-                <?   } ?> 
+                <?php   } ?> 
               </select> น.</td>
               <td align="right" onclick="default_time()"><button type="button" class="btn btn-md btn-info" id="default_time" ><strong>ค่าเริ่มต้น</strong></button></td>
             </tr>
@@ -423,7 +423,7 @@ for($i=0;$i<=11;$i++){
                     <?php   } ?> 
                   </select> .
                   <select style="height: 30px; border: 1px solid #ccc; border-radius: 2px;" name="time_open_<?=$value_d;?>_2" id="time_open_<?=$value_d;?>_2">
-                    <? foreach($time as $value){ 
+                    <?php foreach($time as $value){ 
                       if($query_timeother_show->start_m==$value){
                         $selected = 'selected';
                       }else{

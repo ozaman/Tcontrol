@@ -1,5 +1,5 @@
 <?php
-$datas = $this->Main_model->fetch_data('','',$_POST[tbl],array('sub' => $_POST['sub']),'','');
+$datas = $this->Main_model->fetch_data('','',$_POST[tbl],array('sub' => $_POST['sub']),'',array('topic_th'=>'asc'));
 ?>
 <table class="table table-hover table-striped no-margin" id="table_typelist">
   <thead>

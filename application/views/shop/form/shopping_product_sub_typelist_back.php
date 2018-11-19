@@ -1,6 +1,6 @@
 <?php
-$data = $this->Main_model->rowdata(TBL_SHOPPING_PRODUCT_MAIN,array('id' => $_POST['id']));
-$datas = $this->Main_model->fetch_data('','',$_POST[tbl],array('main'=>$_POST['id']),'',array('topic_th'=>'asc'));
+$data = $this->Main_model->rowdata(TBL_SHOPPING_PRODUCT_SUB,array('id' => $_POST['id']));
+$datas = $this->Main_model->fetch_data('','',$_POST[tbl],array('sub'=>$_POST['id']),'',array('topic_th'=>'asc'));
 ?>
 <div class="box box-outlined">
   <div class="box-body table-responsive">
@@ -28,7 +28,8 @@ $datas = $this->Main_model->fetch_data('','',$_POST[tbl],array('main'=>$_POST['i
           <button class="btn btn-danger" type="button" onclick="func_CancelForm();"><i class="fa fa-times"></i> ยกเลิก</button>
         </div>
       </div>
-      <input type="hidden" name="main" id="main" value="<?=$data->id;?>" />
+      <input type="hidden" name="sub" id="sub" value="<?=$data->id;?>" />
+      <input type="hidden" name="main" id="main" value="<?=$data->main;?>" />
       <input type="hidden" name="id" id="id" value="" />
       <input type="hidden" name="tbl" id="tbl" value="<?=$_POST[tbl];?>" />
     </form>
