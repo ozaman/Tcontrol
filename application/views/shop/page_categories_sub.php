@@ -34,7 +34,7 @@ $category = $this->Main_model->rowdata(TBL_SHOPPING_PRODUCT_MAIN,array('id' => $
               <?php
               foreach($categorie_bub as $key => $val) {
                 $count_sub = $this->Main_model->rows(TBL_SHOPPING_PRODUCT,array('sub' => $val->id));
-                $count_type_list = $this->Main_model->rows(TBL_SHOPPING_PRODUCT_SUB_TYPELIST,array('sub' => $val->id));
+                $count_type_list = $this->Main_model->rows(TBL_SHOPPING_PRODUCT_SUB_TYPELIST,array('sub' => $val->id,'i_status'=>1));
                 ?>
                 <tr  id="tr_delete<?=$val->id; ?>">
                   <td><?=$key + 1; ?></td>

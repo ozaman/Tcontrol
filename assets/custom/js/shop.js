@@ -124,6 +124,33 @@ function func_SaveDeleteBase() {
     }
   });
 }
+
+// ========================================================================================
+function func_UpdateSubTypelist(i_main_typelist, main, sub, i_count) {
+  var url = base_url + "shop/func_UpdateSubTypelist";
+  var param = {
+    i_main_typelist: i_main_typelist,
+    main: main,
+    sub: sub,
+    i_count: i_count
+  }
+  console.log(param);
+  $.ajax({
+    url: url,
+    data: param,
+    type: 'post',
+    dataType: 'json',
+    error: function () {
+      console.log('Error Profile');
+    },
+    success: function (res) {
+      if (res == true) {
+        console.log(res);
+        toastr.success('บันทึกข้อมูลสำเร็จ', '', {"closeButton": true});
+      }
+    }
+  });
+}
 // ========================================================================================
 function func_withholding(i_id, s_where, s_col, s_tbl, s_id) {
   if ($('#i_withholding' + s_id).prop("checked") === true) {
@@ -142,6 +169,49 @@ function func_withholding_rate(s_val, i_id, s_where, s_col, s_tbl, s_id) {
   func_withholding_update(s_val, i_id, s_where, s_col, s_tbl);
 }
 function func_withholding_update(s_val, i_id, s_where, s_col, s_tbl) {
+  var url = base_url + "shop/func_withholding_update";
+  var param = {
+    s_val: s_val,
+    i_id: i_id,
+    s_where: s_where,
+    s_col: s_col,
+    s_tbl: s_tbl
+  }
+  $.ajax({
+    url: url,
+    data: param,
+    type: 'post',
+    dataType: 'json',
+    error: function () {
+      console.log('Error Profile');
+    },
+    success: function (res) {
+      if (res == true) {
+        console.log(res);
+        toastr.success('บันทึกข้อมูลสำเร็จ', '', {"closeButton": true});
+      }
+    }
+  });
+}
+// ========================================================================================
+// ========================================================================================
+function func_TypeListPercent(i_shop,i_list_price,i_main_typelist,i_main,i_shop) {
+  if ($('#i_withholding' + i_list_price).prop("checked") === true) {
+    $('#i_withholding' + i_list_price).prop("checked", false);
+    $('#div_i_withholding_rate' + i_list_price).hide();
+    var s_val = 0;
+    func_withholding_update(i_shop,i_list_price,i_main_typelist,i_main,i_shop);
+  } else {
+    $('#i_withholding' + s_id).prop("checked", true);
+    $('#div_i_withholding_rate' + s_id).show();
+    var s_val = 1;
+    func_withholding_update(i_shop,i_list_price,i_main_typelist,i_main,i_shop);
+  }
+}
+function func_UpdateTypeListPercent_rate(i_shop,i_list_price,i_main_typelist,i_main,i_shop) {
+  func_withholding_update(i_shop,i_list_price,i_main_typelist,i_main,i_shop);
+}
+function func_UpdateTypeListPercent(i_shop,i_list_price,i_main_typelist,i_main,i_shop,s_col) {
   var url = base_url + "shop/func_withholding_update";
   var param = {
     s_val: s_val,
