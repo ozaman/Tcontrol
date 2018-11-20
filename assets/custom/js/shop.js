@@ -588,7 +588,7 @@ function save_plan_price() {
         commision($('#manage_com').val())
         $('#box_plan_com').html('');
         _box_plan_comision();
-      box_price_plan();
+      _box_price_plan();
       }
 
 
@@ -946,13 +946,15 @@ function finalDelete() {
         commision($('#manage_com').val())
         // _box_plan_comision();
         // _box_region_icon();
-      } else if (table_delete != 'shop_country' + option || table_delete != 'shop_country_com_list' + option || table_delete != 'place_document_file') {
+      } if (table_delete != 'shop_country' + option || table_delete != 'shop_country_com_list' + option || table_delete != 'place_document_file') {
         _box_region_icon();
         _box_plan_comision();
       }
       // }
       // else{
-      // if (table_delete == 'shop_country_icon_company' || table_delete == 'shop_country_com_list_company') {
+      if (table_delete == 'shop_country_icon_company' || table_delete == 'shop_country_com_list_company') {
+         _box_plan_comision();
+         _box_price_plan()
       //   commision_company($('#manage_com').val())
       //   _box_plan_comision_company();
       //   _box_region_icon_company();
@@ -960,7 +962,7 @@ function finalDelete() {
       //   _box_region_icon_company();
       //   _box_plan_comision_company();
       // }
-      // }
+      }
 
     }
 
