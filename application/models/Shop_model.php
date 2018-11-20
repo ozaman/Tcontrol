@@ -193,73 +193,25 @@ class Shop_model extends CI_Model{
 
     $result = $this->db->insert(TBL_SHOP_COUNTRY_COM_LIST.$_GET[option],$plan);
     $last_id = mysql_insert_id();
-     
+
     foreach($plan_com as $val) {
       $data = array();
       $data[i_shop_country_com_list] = $last_id;
       $data[i_shop_country_icon] = $_POST[i_country_icon_plan];
       $data[i_plan_price] = $_POST[i_price_plan];
       $data[s_topic_th] = $val->s_topic_th;
-      if ($_POST[i_price_plan] == 1 && $val->s_topic_th == 'ค่าจอด') {
-        $i_plan_product_price_name = 5;
+      if ($val->i_plan_com == 5 ) {
         $s_topic_en = 'park';
       }
-      if ($_POST[i_price_plan] == 1 && $val->s_topic_th == 'ค่าหัว') {
-        $i_plan_product_price_name = 6;
+      if ($val->i_plan_com == 6 ) {
         $s_topic_en = 'person';
 
       }
-      if ($_POST[i_price_plan] == 2 && $val->s_topic_th == 'ค่าจอด') {
-        $i_plan_product_price_name = 5;
-        $s_topic_en = 'park';
-
-      }
-      if ($_POST[i_price_plan] == 2 && $val->s_topic_th == 'ค่าคอม') {
-        $i_plan_product_price_name = 7;
+      if ($val->i_plan_com == 7) {
         $s_topic_en = 'comision';
 
       }
-      if ($_POST[i_price_plan] == 3 && $val->s_topic_th == 'ค่าหัว') {
-        $i_plan_product_price_name = 6;
-        $s_topic_en = 'person';
-
-      }
-      if ($_POST[i_price_plan] == 3 && $val->s_topic_th == 'ค่าคอม') {
-        $i_plan_product_price_name = 7;
-        $s_topic_en = 'comision';
-
-      }
-      if ($_POST[i_price_plan] == 4 && $val->s_topic_th == 'ค่าจอด') {
-        $i_plan_product_price_name = 5;
-        $s_topic_en = 'park';
-
-      }
-      if ($_POST[i_price_plan] == 4 && $val->s_topic_th == 'ค่าหัว') {
-        $i_plan_product_price_name = 6;
-        $s_topic_en = 'person';
-
-      }
-      if ($_POST[i_price_plan] == 4 && $val->s_topic_th == 'ค่าคอม') {
-        $i_plan_product_price_name = 7;
-        $s_topic_en = 'comision';
-
-      }
-      if ($_POST[i_price_plan] == 5 ) {
-        $i_plan_product_price_name = 5;
-        $s_topic_en = 'park';
-        
-      }
-      if ($_POST[i_price_plan] == 6 ) {
-        $i_plan_product_price_name = 6;
-        $s_topic_en = 'person';
-        
-      }
-      if ($_POST[i_price_plan] == 7 ) {
-        $i_plan_product_price_name = 7;
-        $s_topic_en = 'commision';
-        
-      }
-      $data[i_plan_product_price_name] = $i_plan_product_price_name;
+      $data[i_plan_product_price_name] = $val->i_plan_com;
       $data[s_topic_en] = $s_topic_en;
       $data[i_price] = $_POST[$val->element];
       $data[s_payment] = $_POST[money_.$val->element];
@@ -271,6 +223,7 @@ class Shop_model extends CI_Model{
      $res[last_id] =  $last_id;
      $res[i_plan_price] = $_POST[i_price_plan];
      $res[plan_com] = $plan_com;
+     $res[option] =$_GET[option];
     return  $res;
     // return $result;
   }

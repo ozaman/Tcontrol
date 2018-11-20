@@ -114,13 +114,13 @@ define('TBL_SHOP_PAYMENT_CHANNEL','shop_payment_channel');
 define('TBL_SHOP_COUNTRY_TAXI', 'shop_country_taxi');
 define('TBL_SHOP_COUNTRY_COM_TAXI', 'shop_country_com_taxi');
 define('TBL_SHOP_COUNTRY_COM_LIST_TAXI', 'shop_country_com_list_taxi');
-define('TBL_SHOP_COUNTRY_COM_LIST_PRICE_TAXI', '	shop_country_com_list_price_taxi');
+define('TBL_SHOP_COUNTRY_COM_LIST_PRICE_TAXI', 'shop_country_com_list_price_taxi');
 define('TBL_SHOP_COUNTRY_ICON_TAXI', 'shop_country_icon_taxi');
 
 define('TBL_SHOP_COUNTRY_COMPANY', 'shop_country_company');
 define('TBL_SHOP_COUNTRY_COM_COMPANY', 'shop_country_com_company');
 define('TBL_SHOP_COUNTRY_COM_LIST_COMPANY', 'shop_country_com_list_company');
-define('TBL_SHOP_COUNTRY_COM_LIST_PRICE_COMPANY', '	shop_country_com_list_price_company');
+define('TBL_SHOP_COUNTRY_COM_LIST_PRICE_COMPANY', 'shop_country_com_list_price_company');
 define('TBL_SHOP_COUNTRY_ICON_COMPANY', 'shop_country_icon_company');
 
 define('TBL_SHOP_COUNTRY_GUI', 'shop_country_gui');
@@ -132,14 +132,14 @@ define('TBL_SHOP_COUNTRY_ICON_GUI', 'shop_country_icon_gui');
 define('TBL_SHOP_COUNTRY_TOURIST', 'shop_country_tourist');
 define('TBL_SHOP_COUNTRY_COM_TOURIST', 'shop_country_com_tourist');
 define('TBL_SHOP_COUNTRY_COM_LIST_TOURIST', 'shop_country_com_list_tourist');
-define('TBL_SHOP_COUNTRY_COM_LIST_PRICE_TOURIST', '	shop_country_com_list_price_tourist');
+define('TBL_SHOP_COUNTRY_COM_LIST_PRICE_TOURIST', 'shop_country_com_list_price_tourist');
 define('TBL_SHOP_COUNTRY_ICON_TOURIST', 'shop_country_icon_tourist');
 
 //default
 define('TBL_SHOP_COUNTRY', 'shop_country');
 define('TBL_SHOP_COUNTRY_COM', 'shop_country_com');
 define('TBL_SHOP_COUNTRY_COM_LIST', 'shop_country_com_list');
-define('TBL_SHOP_COUNTRY_COM_LIST_PRICE', '	shop_country_com_list_price');
+define('TBL_SHOP_COUNTRY_COM_LIST_PRICE', 'shop_country_com_list_price');
 define('TBL_SHOP_COUNTRY_ICON', 'shop_country_icon');
 define('TBL_SHOP_EXPENDITURE_TYPE', 'shop_expenditure_type');
 define('TBL_SHOP_COMPENSATION_TYPE', 'shop_compensation_type');
