@@ -583,6 +583,7 @@ function save_plan_price() {
       if (res == '') {
         Command: toastr["warning"]("กรุณาเลือกช่องทางการจ่ายเงิน")
       } else {
+        Command: toastr["success"]("เพิม่ค่าตอบแทนสำเร็จ")
         $('#btn_save_price_plann').hide();
         commision($('#manage_com').val())
         $('#box_plan_com').html('');
