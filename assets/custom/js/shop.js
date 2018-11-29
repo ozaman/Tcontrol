@@ -195,31 +195,34 @@ function func_withholding_update(s_val, i_id, s_where, s_col, s_tbl) {
 }
 // ========================================================================================
 // ========================================================================================
-function func_TypeListPercent(i_shop,i_list_price,i_main_typelist,i_main,i_shop) {
-  if ($('#i_withholding' + i_list_price).prop("checked") === true) {
-    $('#i_withholding' + i_list_price).prop("checked", false);
-    $('#div_i_withholding_rate' + i_list_price).hide();
+function func_TypeListPercent(i_shop,i_list_price,i_main_typelist,i_main,i_sub,s_col) {
+  if ($('#i_checkbox' + i_list_price+''+i_main_typelist).prop("checked") === true) {
+    $('#i_checkbox' + i_list_price+''+i_main_typelist).prop("checked", false);
+    $('.td_percent' + i_list_price+''+i_main_typelist).hide();
     var s_val = 0;
-    func_withholding_update(i_shop,i_list_price,i_main_typelist,i_main,i_shop);
+    func_UpdateTypeListPercent(i_shop,i_list_price,i_main_typelist,i_main,i_sub,s_col,s_val);
   } else {
-    $('#i_withholding' + s_id).prop("checked", true);
-    $('#div_i_withholding_rate' + s_id).show();
+    $('#i_checkbox' + i_list_price+''+i_main_typelist).prop("checked", true);
+    $('.td_percent' + i_list_price+''+i_main_typelist).show();
     var s_val = 1;
-    func_withholding_update(i_shop,i_list_price,i_main_typelist,i_main,i_shop);
+    func_UpdateTypeListPercent(i_shop,i_list_price,i_main_typelist,i_main,i_sub,s_col,s_val);
   }
 }
-function func_UpdateTypeListPercent_rate(i_shop,i_list_price,i_main_typelist,i_main,i_shop) {
-  func_withholding_update(i_shop,i_list_price,i_main_typelist,i_main,i_shop);
+function func_UpdateTypeListPercent_rate(i_shop,i_list_price,i_main_typelist,i_main,i_sub,s_col,s_val) {
+  func_UpdateTypeListPercent(i_shop,i_list_price,i_main_typelist,i_main,i_sub,s_col,s_val);
 }
-function func_UpdateTypeListPercent(i_shop,i_list_price,i_main_typelist,i_main,i_shop,s_col) {
-  var url = base_url + "shop/func_withholding_update";
+function func_UpdateTypeListPercent(i_shop,i_list_price,i_main_typelist,i_main,i_sub,s_col,s_val) {
+  var url = base_url + "shop/func_UpdateTypeListPercent";
   var param = {
-    s_val: s_val,
-    i_id: i_id,
-    s_where: s_where,
-    s_col: s_col,
-    s_tbl: s_tbl
+    product: i_shop,
+    i_list_price: i_list_price,
+    i_main_typelist: i_main_typelist,
+    i_main: i_main,
+    i_sub: i_sub,
+    s_col:s_col,
+    s_val:s_val
   }
+  console.log(param);
   $.ajax({
     url: url,
     data: param,
@@ -229,8 +232,9 @@ function func_UpdateTypeListPercent(i_shop,i_list_price,i_main_typelist,i_main,i
       console.log('Error Profile');
     },
     success: function (res) {
-      if (res == true) {
-        console.log(res);
+      console.log(res);
+      if (res.data == true) {
+        
         toastr.success('บันทึกข้อมูลสำเร็จ', '', {"closeButton": true});
       }
     }
@@ -588,7 +592,7 @@ function save_plan_price() {
         commision($('#manage_com').val())
         $('#box_plan_com').html('');
         _box_plan_comision();
-      box_price_plan();
+      _box_price_plan();
       }
 
 
@@ -946,13 +950,15 @@ function finalDelete() {
         commision($('#manage_com').val())
         // _box_plan_comision();
         // _box_region_icon();
-      } else if (table_delete != 'shop_country' + option || table_delete != 'shop_country_com_list' + option || table_delete != 'place_document_file') {
+      } if (table_delete != 'shop_country' + option || table_delete != 'shop_country_com_list' + option || table_delete != 'place_document_file') {
         _box_region_icon();
         _box_plan_comision();
       }
       // }
       // else{
-      // if (table_delete == 'shop_country_icon_company' || table_delete == 'shop_country_com_list_company') {
+      if (table_delete == 'shop_country_icon_company' || table_delete == 'shop_country_com_list_company') {
+         _box_plan_comision();
+         _box_price_plan()
       //   commision_company($('#manage_com').val())
       //   _box_plan_comision_company();
       //   _box_region_icon_company();
@@ -960,7 +966,7 @@ function finalDelete() {
       //   _box_region_icon_company();
       //   _box_plan_comision_company();
       // }
-      // }
+      }
 
     }
 

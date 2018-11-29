@@ -15,10 +15,10 @@ $categories_sub = $this->Main_model->rowdata(TBL_SHOPPING_PRODUCT_SUB,array('id'
 $category = $this->Main_model->rowdata(TBL_SHOPPING_PRODUCT_MAIN,array('id' => $_GET[main]));
 ?>
 <ol class="breadcrumb">
-  <li class="head_title"><a href="<?=base_url(); ?>shop/data_shop_categorie" class="head_title">หมวดหมู่ทั้งหมด</a></li>
-  <li class="head_title"><a href="<?=base_url(); ?>shop/categorie_sub?id=<?=$shop->sub; ?>" class="head_title">หมวดหมู่<?=$category->topic_th; ?></a></li>
-  <li class="head_title_sub"><a  href="<?=base_url(); ?>shop/shop_ordertype?id=<?=$shop->sub; ?>&sub=<?=$shop->main; ?>">ประเภท<?=$categories_sub->topic_th; ?></a></li>
-  <li class="head_title_sub_4" style="display: nones;"><?=$shop->topic_th; ?></li>
+  <li class="head_title"><a href="<?=base_url();?>shop/data_shop_categorie" class="head_title">หมวดหมู่ทั้งหมด</a></li>
+    <li class="head_title"><a href="<?=base_url();?>shop/categorie_sub?id=<?=$_GET[main];?>" class="head_title">หมวดหมู่<?=$category->topic_th;?></a></li>
+    <li class="head_title_sub"><a  href="<?=base_url();?>shop/shop_ordertype?id=<?=$_GET[sub];?>&sub=<?=$_GET[main];?>">ประเภท<?=$categories_sub->topic_th;?></a></li>
+    <li class="head_title_sub_4" style="display: nones;"><?=$shop->topic_th;?></li>
 </ol>
   <div class="section-body ">
     <input type="hidden" name="" id="manage_com" value="<?=$_GET[id]; ?>">
@@ -27,13 +27,13 @@ $category = $this->Main_model->rowdata(TBL_SHOPPING_PRODUCT_MAIN,array('id' => $
     -->
     <?php
     $_where = array();
-    $_where['main'] = $_GET[sub];
+    $_where['main'] = $_GET[main];
     $_select = array('*');
     $_order = array();
     $_order['topic_en'] = 'asc';
     $arr[sub] = $this->Main_model->fetch_data('','',TBL_SHOPPING_PRODUCT_SUB,$_where,$_select,$_order);
     $_where = array();
-    $_where['id'] = $arr[sub]->main;
+    //$_where['id'] = $arr[sub]->main;
     $_select = array('*');
     $_order = array();
     $_order['topic_en'] = 'asc';
@@ -98,7 +98,7 @@ $category = $this->Main_model->rowdata(TBL_SHOPPING_PRODUCT_MAIN,array('id' => $
                         <option value="">เลือกหมวดหมู่ </option>
                         <?php
                         foreach($arr[main] as $key => $main) {
-                          if($shop->main == $main->id) {
+                          if($_GET[main] == $main->id) {
                             $selected_sub = "selected";
                           }
                           else {
@@ -120,7 +120,7 @@ $category = $this->Main_model->rowdata(TBL_SHOPPING_PRODUCT_MAIN,array('id' => $
                         <option value="">เลือกประเภท</option>
                         <?php
                         foreach($arr[sub] as $key => $sub) {
-                          if($shop->sub == $sub->id) {
+                          if($_GET[sub] == $sub->id) {
                             $selected_sub = "selected";
                           }
                           else {
