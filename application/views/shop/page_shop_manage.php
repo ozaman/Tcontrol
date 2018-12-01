@@ -164,7 +164,7 @@ $category = $this->Main_model->rowdata(TBL_SHOPPING_PRODUCT_MAIN,array('id' => $
                     </div>
 
                     <div class="col-md-10">
-                      <select class="form-control" name="region" id="region" onclick="_region(this.value)">
+                      <select class="form-control" name="region" id="region" onchange="_region(this.value)">
                         <option value="">เลือกภูมิภาค </option>
                         <?php
                         foreach($arr[region] as $key => $region) {
