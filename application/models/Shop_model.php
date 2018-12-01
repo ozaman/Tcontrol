@@ -619,7 +619,7 @@ class Shop_model extends CI_Model{
       $data[product_id] = $_POST[contact_product_id];
       $result = $this->db->insert(TBL_SHOPPING_CONTACT,$data);
       $last_id = mysql_insert_id();
-      $data_return[id] = $last_id;
+      $data_return[id] = $_POST[contact_product_id];//$last_id;
       $data_return[result] = $result;
       return $data_return;
     }

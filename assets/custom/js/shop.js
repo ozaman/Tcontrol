@@ -950,7 +950,7 @@ function finalDelete() {
         commision($('#manage_com').val())
         // _box_plan_comision();
         // _box_region_icon();
-      } if (table_delete != 'shop_country' + option || table_delete != 'shop_country_com_list' + option || table_delete != 'place_document_file') {
+      } if (table_delete != 'shopping_contact' || table_delete != 'shop_country' + option || table_delete != 'shop_country_com_list' + option || table_delete != 'place_document_file') {
         _box_region_icon();
         _box_plan_comision();
       }
@@ -1589,6 +1589,8 @@ function add_contact(id) {
   // commision(id)
 }
 function _box_contact(id) {
+  console.log('*********** box_contact')
+  console.log(id)
   var url = base_url + "shop/box_contact?id=" + id;
   console.log(url)
   $.post(url, function (ele) {
@@ -1812,7 +1814,7 @@ function _submit_detail_pay() {
         $('#modal_custom').hide()
 
         Command: toastr["success"]("เพิ่มข้อมูลผู้ติดต่อสำเร็จ")
-        // _box_contact(res.id);
+         // _box_contact(res.id);
 
 
       }
