@@ -57,6 +57,38 @@ class Shop extends CI_Controller {
     echo json_encode($data);
   }
   // ================================================================================================
+  public function func_UpdateTypeListPercent() {
+    $_where = array();
+    $_where[i_main_typelist] = $_POST[i_main_typelist];
+    $_where[main] = $_POST[i_main];
+    $_where[sub] = $_POST[i_sub];
+    $_where[product] = $_POST[product];
+    $_where[i_list_price] = $_POST[i_list_price];
+    $sub_type_list = $this->Main_model->rowdata(TBL_SHOPPING_PRODUCT_TYPELIST_PERCENT,$_where);
+    if ($sub_type_list->id == null) {
+      $params = array();
+      $params[product] = $_POST[product];
+      $params[i_main_typelist] = $_POST[i_main_typelist];
+      $params[main] = $_POST[i_main];
+      $params[sub] = $_POST[i_sub];
+      $params[i_list_price] = $_POST[i_list_price];
+      $params[i_status] = 1;
+      $data = $this->db->insert(TBL_SHOPPING_PRODUCT_TYPELIST_PERCENT,$params);
+    }
+    else {
+      if($_POST[s_col] == 'i_status'){
+        $params[$_POST[s_col]] = ($sub_type_list->i_status == 1)?0:1;
+      }else{
+        $params[$_POST[s_col]] = $_POST[s_val];
+      }
+      $data = $this->db->update(TBL_SHOPPING_PRODUCT_TYPELIST_PERCENT,$params,$_where);
+    }
+    $data_j[where] = $_where;
+    $data_j[params] = $params;
+    $data_j[data] = $data;
+    echo json_encode($data_j);
+  }
+  // ================================================================================================
   // ================================================================================================
   public function func_withholding_update() {
     $s_tbl = $_POST[s_tbl];

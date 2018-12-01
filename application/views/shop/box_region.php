@@ -110,6 +110,11 @@
                       ?>
                       <div  class="form-group ">
                         <table>
+                          <tr>
+                            <td style=" font-weight: bold;">รายการ</td>
+                            <td style="font-weight: bold;width: 100px;">ถอด Vat %</td>
+                            <td style="font-weight: bold;width: 100px;">ค่าคอม %</td>
+                          </tr>
                           <?php
                           $_where = array();
                           $sub_typelist = $this->Main_model->fetch_data('','',TBL_SHOPPING_PRODUCT_SUB_TYPELIST,array('sub' => $shop->sub,'i_status' => 1));
@@ -124,16 +129,17 @@
                             $sub_type_list = $this->Main_model->rowdata(TBL_SHOPPING_PRODUCT_TYPELIST_PERCENT,$_where);
                             $chk_box = ($sub_type_list->i_status > 0) ? 'checked' : '';
                             $chk_box_active = ($sub_type_list->i_status > 0) ? 'active' : '';
-                            $td_percent = ($sub_type_list->i_status > 0) ? 'block' : 'none';
+                            $td_percent = ($sub_type_list->i_status > 0) ? '' : 'none';
                             ?>
                             <tr>
                               <td>
-                                <div data-toggle="buttons"  onclick="func_TypeListPercent('<?=$shop->id;?>', '<?=$val2->id;?>', '<?=$dataTL->i_main_typelist;?>','<?=$shop->main;?>','<?=$shop->sub;?>');">
+                                <div data-toggle="buttons"  onclick="func_TypeListPercent('<?=$shop->id;?>', '<?=$val2->id;?>', '<?=$dataTL->i_main_typelist;?>', '<?=$shop->main;?>', '<?=$shop->sub;?>', 'i_status');">
                                   <label class="btn checkbox-inline btn-checkbox-success-inverse <?=$chk_box_active;?> "><?=$s_sub_typelist->topic_th;?>
-                                    <input type="checkbox" value="1" id="i_checkbox<?=$val2->id;?>" name="i_checkbox<?=$val2->id;?>" <?=$chk_box;?>> </label>
+                                    <input type="checkbox" value="1" id="i_checkbox<?=$val2->id;?><?=$dataTL->i_main_typelist;?>" name="i_checkbox<?=$val2->id;?><?=$dataTL->i_main_typelist;?>" <?=$chk_box;?>> </label>
                                 </div>
                               </td>
-                              <td style="display:<?=$td_percent;?>;" id="td_percent<?=$val2->id;?>"><input  type="number" class="form-control" value="<?=$sub_type_list->i_percent;?> <?=$curen;?>" ></td>
+                              <td style="display:<?=$td_percent;?>;" class="td_percent<?=$val2->id;?><?=$dataTL->i_main_typelist;?>"><input style="width: 80%;" onkeyup="func_UpdateTypeListPercent_rate('<?=$shop->id;?>', '<?=$val2->id;?>', '<?=$dataTL->i_main_typelist;?>', '<?=$shop->main;?>', '<?=$shop->sub;?>', 'f_discount', this.value);"  type="number" class="form-control" value="<?=$sub_type_list->f_discount;?>" ></td>
+                              <td style="display:<?=$td_percent;?>;" class="td_percent<?=$val2->id;?><?=$dataTL->i_main_typelist;?>"><input style="width: 80%;" onkeyup="func_UpdateTypeListPercent_rate('<?=$shop->id;?>', '<?=$val2->id;?>', '<?=$dataTL->i_main_typelist;?>', '<?=$shop->main;?>', '<?=$shop->sub;?>', 'f_percent', this.value);" type="number" class="form-control" value="<?=$sub_type_list->f_percent;?>" ></td>
                             </tr>
                           <?php }?>
 

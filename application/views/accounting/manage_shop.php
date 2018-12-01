@@ -27,7 +27,7 @@ $res_country = $query_country->row();
 $sql = "SELECT t4.s_topic_th, t4.i_price from shop_country_company as t1 left join shop_country_icon_company as t2 on t1.id = i_shop_country "
         ." left join shop_country_com_list_company as t3 on t2.id = t3.i_shop_country_icon"
         ." left join shop_country_com_list_price_company as t4 on t3.id = t4.i_shop_country_com_list"
-        ." where t1.i_shop = 1 ";
+        ." where t1.i_shop = ".$data->program;
 $query = $this->db->query($sql);
 $res_com = $query->row();
 //    echo $_GET[id];
