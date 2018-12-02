@@ -1106,5 +1106,25 @@ class Shop_model extends CI_Model{
 
     return $result;
   }
+   public function deleteimg(){
+    $result = array();
+    $_where = array();
+    $_where['id'] = $_GET[id];
+    $_select = array('*');
+    $FILE_IMG = $this->Main_model->rowdata(TBL_SHOP_DOCUMENT_FILE_IMG,$_where,$_select);
+
+    $doc_name = $FILE_IMG->s_name;
+
+    $target_file = "../data/pic/place/".$doc_name;
+    unlink($target_file);
+    $this->db->where('id',$_GET[id]);
+    $query = $this->db->delete(TBL_SHOP_DOCUMENT_FILE_IMG);
+     $result[status] = $query;
+          $result[s_name] = $doc_name;
+          $result[msg] = 'ลบไฟล์สำเร็จ';
+          $result[i_shop] = $FILE_IMG->product_id;
+          return $result;
+
+  }
 
 }

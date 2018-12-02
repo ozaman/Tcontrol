@@ -50,6 +50,32 @@ function func_SaveDataFormAction() {
     }
   });
 }
+function func_deleteimg(id) {
+  var url = base_url + "shop/deleteimg?id="+id;
+  
+  $.ajax({
+    url: url,
+    // data: dataForm,
+    type: 'post',
+    error: function () {
+      console.log('Error Profile');
+    },
+    success: function (res) {
+      console.log(res);
+      if (res.status == true) {
+        // $('#modal_custom').hide();
+        toastr.success(res.msg, '', {"closeButton": true});
+        _box_img_book(res.i_shop)
+        // setTimeout(function () {
+        //   location.reload();
+        // }, 300);
+      } else {
+        toastr.error('ลบไม่สำเร็จ', res.s_msg, {"closeButton": true});
+      }
+
+    }
+  });
+}
 function func_EditForm(id, topic_en, topic_th, topic_cn) {
   $('#topic_en').val(topic_en);
   $('#topic_th').val(topic_th);

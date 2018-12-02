@@ -34,7 +34,7 @@ $PRODUCT = $this->Main_model->rowdata(TBL_SHOPPING_PRODUCT,$_where,$_select);
 									<div class=" uploadProfile" onclick="editProfile('<?=$_GET[id];?>','logo')">
 										<a  style="cursor: pointer;">
 											<i class="fa  fa-camera take-photo-icon"></i>
-											<span>เลือกโบรชัวร์ 1</span>
+											<span>โลโก้</span>
 										</a>
 										<?php 
 										if ($PRODUCT->pic_logo != '') {
@@ -64,7 +64,7 @@ $PRODUCT = $this->Main_model->rowdata(TBL_SHOPPING_PRODUCT,$_where,$_select);
 					</div>
 					<div class="col-md-10">
 
-						<div id="box_img_book" onload="_box_img_book(<?=$_GET[id];?>)"></div>
+						<div id="box_img_book" onload="//_box_img_book(<?=$_GET[id];?>)"></div>
 						
 
 					

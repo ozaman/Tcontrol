@@ -401,6 +401,11 @@ class Shop extends CI_Controller {
     $data = $this->Shop_model->submit_detail_pay();
     echo json_encode($data);
   }
+  public function deleteimg() {
+    header('Content-Type: application/json');
+    $data = $this->Shop_model->deleteimg();
+    echo json_encode($data);
+  }
   ################################ SHOP #################################
 }
 
