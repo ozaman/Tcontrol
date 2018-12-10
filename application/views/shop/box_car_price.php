@@ -7,6 +7,39 @@
 
       <!-- start comision -->
       <div class="row">
+        <div class="col-md-4 " >
+                    <div class="form-group ">
+                      <div class="input-group">
+                        <span class="input-group-addon" style="width: 65px"> ค่าจอด </span>
+                        <input type="number" id="default_price_car" class="form-control" >
+                        <!-- <span class="input-group-addon" style="width: 65px">โอน  </span> -->
+                      </div>
+                    </div>
+                    <div class="form-group ">
+                      <div class="input-group">
+                        <span class="input-group-addon" style="width: 65px"> ค่าคอม </span>
+                        <input type="number" id="default_price_car_com" class="form-control" >
+                        <!-- <span class="input-group-addon" style="width: 65px">โอน  </span> -->
+                      </div>
+                    </div>
+                                      </div>
+        <!-- <div class="col-md-3">
+          <div class="input-group"><input style="width: 80%;margin: 5px 0; border-radius: 5px;" type="number" class="form-control" value="" >
+                                </div>
+        </div> -->
+        <div class="col-md-3">
+          <div class="form-group ">
+          <button type="button" class="btn btn-md btn-info" id="default_price" onclick="default_price('<?=$_POST[i_shop];?>',
+          $('#default_price_car').val(), $('#default_price_car_com').val(),'park')"><strong>ค่าเริ่มต้นทั้งหมด</strong></button>
+        </div>
+        <div class="form-group ">
+          <button type="button" class="btn btn-md btn-info" id="default_price" onclick="default_price('<?=$_POST[i_shop];?>',
+          $('#default_price_car').val(), $('#default_price_car_com').val(),'com')"><strong>ค่าเริ่มต้นทั้งหมด</strong></button>
+        </div>
+        </div>
+        
+      </div>
+      <div class="row">
         <div class="form-group form-group-md">
             <div  class="form-group ">
               <div class="col-md-11">
@@ -15,6 +48,8 @@
                           <tr>
                             <td style=" font-weight: bold;">รายการ</td>
                             <!-- <td style="font-weight: bold;width: 100px;"></td> -->
+                            <td style="font-weight: bold;width: 100px;">ค่าจอด</td>
+
                             <td style="font-weight: bold;width: 100px;">ค่าคอม %</td>
                           </tr>
                           <?php
@@ -26,9 +61,9 @@
                             $_where[i_shop] = $_POST[i_shop];
                             $_where[i_car_type] = $dataTL->id;
 
-                            $CAR_PRICE = $this->Main_model->rowdata(TBL_SHOP_CAR_PRICE,$_where);
+                            $CAR_PRICE = $this->Main_model->rowdata(TBL_SHOP_CAR_PRICE.$_GET[option],$_where);
                             $chk_box = ($CAR_PRICE->i_status > 0) ? 'checked' : '';
-                            // $chk_box_active = ($sub_type_list->i_status > 0) ? 'active' : '';
+                            $chk_box_active = ($CAR_PRICE->i_price_park > 0) ? 'active' : '';
                             // $td_percent = ($sub_type_list->i_status > 0) ? '' : 'none';
                             if ($CAR_PRICE != null) {
                               # code...
@@ -37,13 +72,16 @@
                             <tr>
                               <td>
                                 <div data-toggle="buttons"  onclick="func_TypeListcar('<?=$_POST[i_shop];?>', '<?=$dataTL->id;?>', 'i_status');">
-                                  <label class="btn checkbox-inline btn-checkbox-success-inverse <?=$chk_box_active;?> "><?=$dataTL->name_th;?>
+                                  <label class="btn checkbox-inline btn-checkbox-success-inverse <?=$chk_box_active;?> " id="l_checkbox<?=$dataTL->id;?>"><?=$dataTL->name_th;?>
                                     <input type="checkbox" value="1" id="i_checkbox<?=$dataTL->id;?>" name="i_checkbox<?=$dataTL->id;?>" <?=$chk_box;?>> </label>
                                 </div>
                               </td>
                               <!-- <td style="display:<?=$td_percent;?>;" class="td_percent<?=$val2->id;?><?=$dataTL->i_main_typelist;?>"><input style="width: 80%;" onkeyup="func_UpdateTypeListPercent_rate('<?=$_POST[i_shop];?>', '<?=$val2->id;?>', '<?=$dataTL->i_main_typelist;?>', '<?=$shop->main;?>', '<?=$shop->sub;?>', 'f_discount', this.value);"  type="number" class="form-control" value="<?=$sub_type_list->f_discount;?>" ></td> --> 
                               <td  class="td_percent<?=$val2->id;?>">
-                                <div class="input-group"><input style="width: 80%;margin: 5px 0; border-radius: 5px;" onkeyup="func_UpdateCar_rat('<?=$_POST[i_shop];?>', '<?=$dataTL->id;?>', this.value);" type="number" class="form-control" value="" >
+                                <div class="input-group"><input style="width: 80%;margin: 5px 0; border-radius: 5px;" onkeyup="func_UpdateCar_rat('<?=$_POST[i_shop];?>', '<?=$dataTL->id;?>', this.value,'park');" type="number" class="form-control" value="<?=$CAR_PRICE->i_price_park;?>" >
+                                </div></td>
+                                <td  class="td_percent<?=$val2->id;?>">
+                                <div class="input-group"><input style="width: 80%;margin: 5px 0; border-radius: 5px;" onkeyup="func_UpdateCar_rat('<?=$_POST[i_shop];?>', '<?=$dataTL->id;?>', this.value,'com');" type="number" class="form-control" value="<?=$CAR_PRICE->i_price_com;?>" >
                                 </div></td>
                             </tr>
                           <?php }?>

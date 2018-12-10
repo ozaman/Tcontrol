@@ -1880,3 +1880,19 @@ function _submit_detail_pay() {
 //     }
 //   });
 // }
+
+
+// function func_TypeListPercent(i_shop,i_list_price,i_main_typelist,i_main,i_sub,s_col) {
+//   if ($('#i_checkbox' + i_list_price+''+i_main_typelist).prop("checked") === true) {
+//     $('#i_checkbox' + i_list_price+''+i_main_typelist).prop("checked", false);
+//     $('.td_percent' + i_list_price+''+i_main_typelist).hide();
+//     var s_val = 0;
+//     func_Updatecar(i_shop,i_list_price,i_main_typelist,i_main,i_sub,s_col,s_val);
+//   } else {
+//     $('#i_checkbox' + i_list_price+''+i_main_typelist).prop("checked", true);
+//     $('.td_percent' + i_list_price+''+i_main_typelist).show();
+//     var s_val = 1;
+//     func_Updatecar(i_shop,i_list_price,i_main_typelist,i_main,i_sub,s_col,s_val);
+//   }
+// }
+

@@ -1,50 +1,50 @@
 
 <!--  -->
-	<div class="box box-outlined">
-        <div class="col-lg-12">
-		<div class="box-head">
-			<header><h4 class="text-light">เพิ่มสัญชาติที่ให้บริการ</h4></header>
-			<input type="hidden" name="" id="id_shop_product" value="<?=$_POST[id];?>">
-		</div>
-		<div class="box-body ">
-			
+<div class="box box-outlined">
+    <div class="col-lg-12">
+      <div class="box-head">
+         <header><h4 class="text-light">เพิ่มสัญชาติที่ให้บริการ</h4></header>
+         <input type="hidden" name="" id="id_shop_product" value="<?=$_POST[id];?>">
+     </div>
+     <div class="box-body ">
 
 
-			<div class="form-group form-group-md">
-				
 
-				<div class="col-md-12">
-					<!-- <form class="form-horizontal form-banded form-bordered" id="form_region" > -->
-						<!-- <div class="col-md-12"> -->
-							<div class="row">
+         <div class="form-group form-group-md">
+
+
+            <div class="col-md-12">
+               <!-- <form class="form-horizontal form-banded form-bordered" id="form_region" > -->
+                  <!-- <div class="col-md-12"> -->
+                     <div class="row">
                                 <!-- <div class="col-md-2">
                                     
                                 </div> -->
                                 <div class="col-md-11">
                                     <div class="input-group" >
                                         <span class="input-group-addon">เลือกสัญชาติ</span>
-                                   <select name="select_country" class="form-control" id="select_country" onchange="change_region(this.value)">
-                                      <option value="">- เลือกสัญชาติ -</option>
+                                        <select name="select_country" class="form-control" id="select_country" onchange="change_region(this.value)">
+                                          <option value="">- เลือกสัญชาติ -</option>
 
-                                      <?php
+                                          <?php
 
 
-                                      foreach($country as $key=>$val){
-                                        
+                                          foreach($country as $key=>$val){
+
 
 				                  // if($shop->main == $main->id ){
 				                  //   $selected_sub = "selected";
 				                  // }else{
 				                  //   $selected_sub = "";
 				                  // }
-                                         ?>
+                                           ?>
 
-                                         <option value="<?=$key;?>" ><?=$val->name_th;?></option>
-                                     <?php } ?>
-                                 </select>
-                             </div>
-                             </div>
-                             <div class="col-md-1" align="right">
+                                           <option value="<?=$key;?>" ><?=$val->name_th;?></option>
+                                       <?php } ?>
+                                   </select>
+                               </div>
+                           </div>
+                           <div class="col-md-1" align="right">
 									<!-- <input name="region_id" type="hidden" id="sub"  value="1">
             						<input name="region_country_code" type="hidden" id="main" value="1">
             						<input name="region_country_code" type="hidden" id="main" value="1"> -->
@@ -70,19 +70,19 @@
                                     <header><h4 class="text-light">จัดการค่าตอบแทนตามประเภทรถ</h4></header>
                                 </div>
                                 <div class="col-md-12">
-                                    
+
                                     <div id="box_car_add">
-                                        
+
                                     </div>
                                 </div>
                             </div>
-            				<!-- </form> -->
-            			</div>
+                            <!-- </form> -->
+                        </div>
 
-            		</div>
+                    </div>
 
-            		<!-- </form> -->
-            	</div><!--end .box-body -->
+                    <!-- </form> -->
+                </div><!--end .box-body -->
             </div><!--end .box -->
         </div>
         <script>
@@ -111,20 +111,20 @@
         		}
                 console.log('************************************')
                 console.log(url2)
-        		$.ajax({
-        			url: url2,
-        			data: param,
-        			type: 'post',
-        			error: function() {
-        				console.log('Error Profile');
-        			},
-        			success: function(ele) {
+                $.ajax({
+                 url: url2,
+                 data: param,
+                 type: 'post',
+                 error: function() {
+                    console.log('Error Profile');
+                },
+                success: function(ele) {
         				// console.log(ele);
         				$('#box_com_add').html(ele);
 
         			}
         		});
-                var url3 = base_url+ "shop/get_car_price";
+                var url3 = base_url+ "shop/get_car_price?option="+options;
 
                 $.ajax({
                     url: url3,
@@ -139,7 +139,94 @@
 
                     }
                 });
-        	}
+            }
+            function func_UpdateCar_rat(i_shop,i_car_type,i_price,op) {
+              func_Updatecar(i_shop,i_car_type,i_price,op);
+          }
+          function func_Updatecar(i_shop,i_car_type,i_price,op) {
+            var url = base_url + "shop/func_Updatecar?option="+"<?=$_GET[option];?>";
+            var param = {
+                product: i_shop,
+                i_car_type: i_car_type,
+                i_price: i_price,
+                op : op
+
+            }
+            console.log(param);
+            $.ajax({
+                url: url,
+                data: param,
+                type: 'post',
+                dataType: 'json',
+                error: function () {
+                  console.log('Error Profile');
+              },
+              success: function (res) {
+                  console.log(res);
+                  if (res.data == true) {
+                    console.log($('#i_checkbox' + i_car_type).prop("checked"))
+                    $('#i_checkbox' + i_car_type).prop("checked", false);
+                    $('#l_checkbox' + i_car_type).addClass('active');
+                    var s_val = 0;
+
+                    toastr.success('บันทึกข้อมูลสำเร็จ', '', {"closeButton": true});
+                }
+                else{
+                  $('#l_checkbox' + i_car_type).removeClass('active');
+
+                  $('#i_checkbox' + i_car_type).prop("checked", true);
+                  var s_val = 1;
+              }
+          }
+      });
+        }
+        function default_price(i_shop,i_price_park,i_price_com,op) {
+          var url = base_url + "shop/default_price?option="+"<?=$_GET[option];?>";
+
+          var param = {
+            i_shop: i_shop,
+            i_price_park: i_price_park,
+            i_price_com: i_price_com,
+            op: op,
+
+        }
+        console.log(param);
+        $.ajax({
+            url: url,
+            data: param,
+            type: 'post',
+            dataType: 'json',
+            error: function () {
+              console.log('Error Profile');
+          },
+          success: function (res) {
+              console.log(res);
+              if (res.data == true) {
+                $('#box_car_add').html('')
+                var param = {
+                    i_shop: i_shop
+                }
+                var url3 = base_url+ "shop/get_car_price?option="+"<?=$_GET[option];?>"
+                $.ajax({
+                    url: url3,
+                    data: param,
+                    type: 'post',
+                    error: function() {
+                        console.log('Error Profile');
+                    },
+                    success: function(ele) {
+                        // console.log(ele);
+                        $('#box_car_add').html(ele);
+
+                    }
+                });
+                toastr.success('บันทึกข้อมูลสำเร็จ', '', {"closeButton": true});
+            }
+            else{
+            }
+        }
+    });
+    }
 
 
-        </script>
+</script>

@@ -409,6 +409,123 @@ class Shop extends CI_Controller {
   public function get_car_price() {
     $this->load->view('shop/box_car_price');
   }
+  public function func_Updatecar() {
+    $_where = array();
+    $_where[i_car_type] = $_POST[i_car_type];
+    $_where[i_shop] = $_POST[product];
+    // $_where[i_price] = $_POST[i_sub];
+    // $_where[d_date] = $_POST[product];
+    // $_where[d_update] = $_POST[i_list_price];
+    // $_where[i_status] = $_POST[i_list_price];
+    $CAR_PRICE = $this->Main_model->rowdata(TBL_SHOP_CAR_PRICE.$_GET[option],$_where);
+    if ($CAR_PRICE == null) {
+
+      $params = array();
+      $params[i_car_type] = $_POST[i_car_type];
+      $params[i_shop] = $_POST[product];
+      if ($_POST[op] == 'park') {
+        $params[i_price_park] = $_POST[i_price];
+
+      }
+      else{
+
+        $params[i_price_com] = $_POST[i_price];
+      }
+      $params[d_date] = time();
+      $params[d_update] = time();
+      $params[i_status] = 1;
+      $data = $this->db->insert(TBL_SHOP_CAR_PRICE.$_GET[option],$params);
+    }
+    else {
+      if ($_GET[option] == 'check') {
+        // $_where = array();
+      // $_where[i_shop] = $_POST[product];
+
+        $params[i_status] = ($CAR_PRICE->i_status == 1)?0:1;
+        $data = $this->db->update(TBL_SHOP_CAR_PRICE.$_GET[option],$params,$_where);
+
+      }
+      else{
+        // $_where = array();
+      // $_where[i_shop] = $_POST[product];
+      if ($_POST[op] == 'park') {
+        $params[i_price_park] = $_POST[i_price];
+        # code...
+      }
+      else{
+
+        $params[i_price_com] = $_POST[i_price];
+      }
+      $params[d_update] = time();
+
+      $data = $this->db->update(TBL_SHOP_CAR_PRICE.$_GET[option],$params,$_where);
+
+      }
+
+    }
+    $data_j[res] = $CAR_PRICE;
+    $data_j[where] = $_where;
+    $data_j[params] = $params;
+    $data_j[data] = $data;
+    echo json_encode($data_j);
+  }
+
+  public function default_price() {
+    $_where = array();
+    $USE_TYPE = $this->Main_model->fetch_data('','',TBL_WEB_CAR_USE_TYPE,array('status' => 1));
+    foreach ($USE_TYPE as  $value) {
+      $_where = array();
+    $_where[i_car_type] = $value->id;
+    $_where[i_shop] = $_POST[i_shop];
+    // $_where[i_price] = $_POST[i_sub];
+    // $_where[d_date] = $_POST[product];
+    // $_where[d_update] = $_POST[i_list_price];
+    // $_where[i_status] = $_POST[i_list_price];
+    $CAR_PRICE = $this->Main_model->rowdata(TBL_SHOP_CAR_PRICE.$_GET[option],$_where);
+
+
+    if ($CAR_PRICE == null) {
+  // $_where = array();
+  // $_where[i_shop] = $_POST[i_shop];
+      $params = array();
+      $params[i_car_type] = $value->id;
+      $params[i_shop] = $_POST[i_shop];
+      if ($_POST[op] == 'park' ) {
+      $params[i_price_park] = $_POST[i_price_park];
+        # code...
+      }
+      else{
+      $params[i_price_com] = $_POST[i_price_com];
+
+      }
+      $params[d_date] = time();
+      $params[d_update] = time();
+      $params[i_status] = 1;
+      $data = $this->db->insert(TBL_SHOP_CAR_PRICE.$_GET[option],$params);
+    }
+    else {
+       // $_where = array();
+       // $_where[i_shop] = $_POST[i_shop];
+      // /$_where[i_car_type] = $value->i_car_type;
+      if ($_POST[op] == 'park' ) {
+      $params[i_price_park] = $_POST[i_price_park];
+       
+      }
+      else{
+      $params[i_price_com] = $_POST[i_price_com];
+
+      }
+      $params[d_update] = time();
+      $data = $this->db->update(TBL_SHOP_CAR_PRICE.$_GET[option],$params,$_where);
+    }
+  }
+    $data_j[restype] = $USE_TYPE;
+    $data_j[res] = $CAR_PRICE;
+    $data_j[where] = $_where;
+    $data_j[params] = $params;
+    $data_j[data] = $data;
+    echo json_encode($data_j);
+  }
   ################################ SHOP #################################
 }
 
