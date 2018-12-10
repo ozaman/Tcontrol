@@ -406,6 +406,9 @@ class Shop extends CI_Controller {
     $data = $this->Shop_model->deleteimg();
     echo json_encode($data);
   }
+  public function get_car_price() {
+    $this->load->view('shop/box_car_price');
+  }
   ################################ SHOP #################################
 }
 

@@ -65,6 +65,17 @@
             						</div>
             					</div>
             				</div>
+                            <div class="row">
+                                <div class="box-head">
+                                    <header><h4 class="text-light">จัดการค่าตอบแทนตามประเภทรถ</h4></header>
+                                </div>
+                                <div class="col-md-12">
+                                    
+                                    <div id="box_car_add">
+                                        
+                                    </div>
+                                </div>
+                            </div>
             				<!-- </form> -->
             			</div>
 
@@ -113,6 +124,21 @@
 
         			}
         		});
+                var url3 = base_url+ "shop/get_car_price";
+
+                $.ajax({
+                    url: url3,
+                    data: param,
+                    type: 'post',
+                    error: function() {
+                        console.log('Error Profile');
+                    },
+                    success: function(ele) {
+                        // console.log(ele);
+                        $('#box_car_add').html(ele);
+
+                    }
+                });
         	}
 
 

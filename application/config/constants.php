@@ -144,6 +144,10 @@ define('TBL_SHOP_COUNTRY_ICON', 'shop_country_icon');
 define('TBL_SHOP_EXPENDITURE_TYPE', 'shop_expenditure_type');
 define('TBL_SHOP_COMPENSATION_TYPE', 'shop_compensation_type');
 define('TBL_SHOP_DETAIL_PAY', 'shop_detail_pay');
+define('TBL_WEB_CAR_USE_TYPE', 'web_car_use_type');
+define('TBL_SHOP_CAR_PRICE', 'shop_car_price');
+
+
 
 
 

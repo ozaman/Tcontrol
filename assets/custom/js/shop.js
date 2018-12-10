@@ -402,6 +402,7 @@ function manage_shop_ordertype(item) {
   });
 }
 
+
 function open_commision(id) {
   // body...
   $('#modal_custom').show()
@@ -1859,3 +1860,23 @@ function _submit_detail_pay() {
 
   // body...
 }
+// function open_car_price(item) {
+//   var url = base_url + "shop/open_car_price"
+//   var param = {
+//     id: item
+//   }
+//   $('#modal_custom').show()
+//    $.ajax({
+//     url: url,
+//     data: param,
+//     type: 'post',
+//     error: function () {
+//       console.log('Error Profile');
+//     },
+//     success: function (ele) {
+//       console.log('Success Profile');
+//       $('#dody_modal_custom').html(ele);
+
+//     }
+//   });
+// }
