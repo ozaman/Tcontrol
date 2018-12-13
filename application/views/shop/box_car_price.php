@@ -1,104 +1,108 @@
 
-<!-- <form class="form-horizontal form-banded form-bordered" id="form_region" > -->
-<!-- <div class="col-md-12"> -->
-
-      <!-- <select name="select_country" class="form-control" id="select_country" onchange="change_region(this.value)"> -->
-    <!-- <option value="">- เลือกสัญชาติ -</option> -->
-
-      <!-- start comision -->
-      <div class="row">
-        <div class="col-md-4 " >
-                    <div class="form-group ">
-                      <div class="input-group">
-                        <span class="input-group-addon" style="width: 65px"> ค่าจอด </span>
-                        <input type="number" id="default_price_car" class="form-control" >
-                        <!-- <span class="input-group-addon" style="width: 65px">โอน  </span> -->
-                      </div>
-                    </div>
-                    <div class="form-group ">
-                      <div class="input-group">
-                        <span class="input-group-addon" style="width: 65px"> ค่าคอม </span>
-                        <input type="number" id="default_price_car_com" class="form-control" >
-                        <!-- <span class="input-group-addon" style="width: 65px">โอน  </span> -->
-                      </div>
-                    </div>
-                                      </div>
-        <!-- <div class="col-md-3">
-          <div class="input-group"><input style="width: 80%;margin: 5px 0; border-radius: 5px;" type="number" class="form-control" value="" >
-                                </div>
-        </div> -->
-        <div class="col-md-3">
-          <div class="form-group ">
-          <button type="button" class="btn btn-md btn-info" id="default_price" onclick="default_price('<?=$_POST[i_shop];?>',
-          $('#default_price_car').val(), $('#default_price_car_com').val(),'park')"><strong>ค่าเริ่มต้นทั้งหมด</strong></button>
-        </div>
-        <div class="form-group ">
-          <button type="button" class="btn btn-md btn-info" id="default_price" onclick="default_price('<?=$_POST[i_shop];?>',
-          $('#default_price_car').val(), $('#default_price_car_com').val(),'com')"><strong>ค่าเริ่มต้นทั้งหมด</strong></button>
-        </div>
-        </div>
-        
+<div class="box box-outlined">
+  <div class="col-lg-12">
+    <!-- <div class="box-head">
+     <header><h4 class="text-light">ค่าตอบแทนตามประเภทรถ</h4></header>
+     <input type="hidden" name="" id="id_shop_product" value="1">
+   </div> -->
+   <div class="box-body ">
+    <?php
+    $_where = array();
+    $_where['i_shop_country_com_list'] = $_POST[list_plan];
+    $_select = array('*');
+    $_order = array();
+    $_order['id'] = 'asc';
+    $data['list_price'] = $this->Main_model->fetch_data('','',TBL_SHOP_COUNTRY_COM_LIST_PRICE.$_GET[option],$_where,$_select,$_order);
+    ?>
+    <div  class="form-group ">
+      <div class="col-md-1">
+        <span class="pull-right">  </span>
       </div>
-      <div class="row">
-        <div class="form-group form-group-md">
-            <div  class="form-group ">
-              <div class="col-md-11">
-                      <div  class="form-group ">
-                        <table>
-                          <tr>
-                            <td style=" font-weight: bold;">รายการ</td>
-                            <!-- <td style="font-weight: bold;width: 100px;"></td> -->
-                            <td style="font-weight: bold;width: 100px;">ค่าจอด</td>
-
-                            <td style="font-weight: bold;width: 100px;">ค่าคอม %</td>
-                          </tr>
-                          <?php
-                          $_where = array();
-                          $USE_TYPE = $this->Main_model->fetch_data('','',TBL_WEB_CAR_USE_TYPE,array('status' => 1));
-                          foreach ($USE_TYPE as $dataTL) {
-
-                            $_where = array();
-                            $_where[i_shop] = $_POST[i_shop];
-                            $_where[i_car_type] = $dataTL->id;
-
-                            $CAR_PRICE = $this->Main_model->rowdata(TBL_SHOP_CAR_PRICE.$_GET[option],$_where);
-                            $chk_box = ($CAR_PRICE->i_status > 0) ? 'checked' : '';
-                            $chk_box_active = ($CAR_PRICE->i_price_park > 0) ? 'active' : '';
-                            // $td_percent = ($sub_type_list->i_status > 0) ? '' : 'none';
-                            if ($CAR_PRICE != null) {
-                              # code...
-                            }
-                            ?>
-                            <tr>
-                              <td>
-                                <div data-toggle="buttons"  onclick="func_TypeListcar('<?=$_POST[i_shop];?>', '<?=$dataTL->id;?>', 'i_status');">
-                                  <label class="btn checkbox-inline btn-checkbox-success-inverse <?=$chk_box_active;?> " id="l_checkbox<?=$dataTL->id;?>"><?=$dataTL->name_th;?>
-                                    <input type="checkbox" value="1" id="i_checkbox<?=$dataTL->id;?>" name="i_checkbox<?=$dataTL->id;?>" <?=$chk_box;?>> </label>
-                                </div>
-                              </td>
-                              <!-- <td style="display:<?=$td_percent;?>;" class="td_percent<?=$val2->id;?><?=$dataTL->i_main_typelist;?>"><input style="width: 80%;" onkeyup="func_UpdateTypeListPercent_rate('<?=$_POST[i_shop];?>', '<?=$val2->id;?>', '<?=$dataTL->i_main_typelist;?>', '<?=$shop->main;?>', '<?=$shop->sub;?>', 'f_discount', this.value);"  type="number" class="form-control" value="<?=$sub_type_list->f_discount;?>" ></td> --> 
-                              <td  class="td_percent<?=$val2->id;?>">
-                                <div class="input-group"><input style="width: 80%;margin: 5px 0; border-radius: 5px;" onkeyup="func_UpdateCar_rat('<?=$_POST[i_shop];?>', '<?=$dataTL->id;?>', this.value,'park');" type="number" class="form-control" value="<?=$CAR_PRICE->i_price_park;?>" >
-                                </div></td>
-                                <td  class="td_percent<?=$val2->id;?>">
-                                <div class="input-group"><input style="width: 80%;margin: 5px 0; border-radius: 5px;" onkeyup="func_UpdateCar_rat('<?=$_POST[i_shop];?>', '<?=$dataTL->id;?>', this.value,'com');" type="number" class="form-control" value="<?=$CAR_PRICE->i_price_com;?>" >
-                                </div></td>
-                            </tr>
-                          <?php }?>
-
-                        </table>
-
-                      </div>
-              
-             
-              </div>
+      <div class="col-md-12">
+       <?php
+       foreach ($data['list_price'] as $key => $val2) {
+        if ($val2->s_topic_en == 'comision') {
+          $curen = '%';
+        }
+        else {
+          $curen = '';
+        }
+        ?>
+        <div  class="col-md-3 " style="margin-right: 5px">
+          <div  class="form-group ">
+            <div class="input-group">
+              <span  class="input-group-addon" style="width: 65px"><?=$val2->s_topic_th;?>  </span>
+              <input  type="text" class="form-control" value="<?=$val2->i_price;?> <?=$curen;?>" disabled>
+              <span  class="input-group-addon" style="width: 65px"><?=$val2->s_payment;?>  </span>
             </div>
-          
+          </div>
+        </div>
+      <?php }?>
+    </div>
+    <div class="box-head">
+     <header><h4 class="text-light">ค่าตอบแทนตามประเภทรถ</h4></header>
+     <input type="hidden" name="" id="id_shop_product" value="1">
+   </div>
+   <?php
+   foreach ($data['list_price'] as $key => $val2) {
+    ?>
+    <div class="col-md-12">
+     <div class="col-md-4 " >
+      <div class="form-group ">
+        <div class="input-group">
+          <span class="input-group-addon" style="width: 65px"> <?=$val2->s_topic_th;?> </span>
+          <input type="number" id="default_price_car" class="form-control" >
         </div>
       </div>
-    
-<!-- </div> -->
-<div class="row">
+    </div>
+    <div class="col-md-3">
+      <div class="form-group ">
+        <button type="button" class="btn btn-md btn-info" id="default_price" onclick="func_default_price('<?=$_POST[i_shop];?>',
+        $('#default_price_car').val(),'<?=$val2->i_plan_product_price_name;?>','<?=$_GET[option];?>','<?=$_POST[list_plan];?>','<?=$_POST[country];?>','<?=$_POST[list_plan];?>')"><strong>ค่าเริ่มต้นทั้งหมด</strong></button>
+      </div>
+    </div>
+  </div>
+  <?php
+}
+?>
 </div>
-<!-- </form> -->
-<!-- </div>
+<div  class="form-group ">
+  <div class="col-md-11">
+    <div  class="form-group ">
+      <div id="box_com_usecar">
+     
+      </div>
+      </div>
+    </div>
+  </div>
+</div>
+</div>
+</div>
+<script type="text/javascript">
+  // $_POST[list_plan]  ==  i_plan_price
+  initusetype('<?=$_POST[i_shop];?>','<?=$_GET[option];?>','<?=$_POST[list_plan];?>','<?=$_POST[country];?>')
+          function initusetype(shop,options,list_plan,country) {
+            var url2 = base_url+ "shop/get_com_usecar?option="+options;
+            var param = {
+              i_shop: shop,
+              option : options,
+              i_plan_price : list_plan,
+              country : country
+            }
+                // console.log('************************************')
+                // console.log(url2)
+                $.ajax({
+                 url: url2,
+                 data: param,
+                 type: 'post',
+                 error: function() {
+                    console.log('Error');
+                },
+                success: function(ele) {
+                // console.log(ele);
+                $('#box_com_usecar').html(ele);
+
+              }
+            });
+              }
+</script>

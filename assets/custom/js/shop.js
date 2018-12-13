@@ -1895,4 +1895,68 @@ function _submit_detail_pay() {
 //     func_Updatecar(i_shop,i_list_price,i_main_typelist,i_main,i_sub,s_col,s_val);
 //   }
 // }
+// 
+function func_comUsetypecar(list_plan,country,shop) {
+  console.log(list_plan)
+  console.log(shop)
+  console.log(country)
+  console.log(option)
+  $('#modal_custom_2').show()
+  $('#title_add_region_sub').html('จัดการค่าตอบแทนตามประเภทรถ')
+  // var url = base_url + "shop/get_region_sub?option=" + option;
+  var param = {
+    country: country,
+    i_shop: shop,
+    list_plan: list_plan
+
+  }
+  var url = base_url+ "shop/get_car_price?option="+option;
+  $.ajax({
+    url: url,
+    data: param,
+    type: 'post',
+    error: function () {
+      console.log('Error Profile');
+    },
+    success: function (ele) {
+      // console.log(ele);
+      $('#dody_modal_custom_2').html(ele);
+      // $('#id_country').val(id);
+      // $('#btn_region_sub'+id).attr('onclick','save_region_sub('+id+')');
+
+    }
+  });
+}
+function func_default_price(i_shop,i_price,op,options,list_price,country,list_plan) {
+          var url = base_url + "shop/default_price?option="+options;
+
+          var param = {
+            i_shop: i_shop,
+            i_price: i_price,
+            list_price: list_price,
+            op: op,
+            country : country,
+            list_plan : list_plan
+
+        }
+        console.log(param);
+        $.ajax({
+            url: url,
+            data: param,
+            type: 'post',
+            dataType: 'json',
+            error: function () {
+              console.log('Error Profile');
+          },
+          success: function (res) {
+              console.log(res);
+              if (res.data == true) {
+                initusetype(i_shop,options,list_price,country)
+                toastr.success('บันทึกข้อมูลสำเร็จ', '', {"closeButton": true});
+            }
+            else{
+            }
+        }
+    });
+    }
 

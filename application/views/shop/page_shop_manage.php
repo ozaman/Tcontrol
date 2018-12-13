@@ -514,14 +514,14 @@ $category = $this->Main_model->rowdata(TBL_SHOPPING_PRODUCT_MAIN,array('id' => $
                   </div>
 
                 </div>
-                 <div class="box-body no-padding">
+                 <!-- <div class="box-body no-padding">
                   <div class="box-head" style="padding: 15px 10px;">
                       <button type="button" class="btn btn-md btn-success btn-equal " onclick="open_commision('<?=$shop->id; ?>')"> 
                         <i class="fa fa-plus "></i>
                       </button>
                       <header style="cursor: pointer;" onclick="open_commision('<?=$shop->id; ?>')"><h4 class="text-light"> จัดการค่าตอบแทนตามประเภทรถ </h4></header>
                     </div>
-                 </div>
+                 </div> -->
               </div>
               <!-- T_SHARE - NETWORK ============================================================================================== -->
               <?php

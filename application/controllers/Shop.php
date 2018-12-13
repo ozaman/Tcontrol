@@ -477,25 +477,33 @@ class Shop extends CI_Controller {
       $_where = array();
     $_where[i_car_type] = $value->id;
     $_where[i_shop] = $_POST[i_shop];
-    // $_where[i_price] = $_POST[i_sub];
-    // $_where[d_date] = $_POST[product];
+    $_where[i_list_price] = $_POST[list_price];
+    $_where[i_country] = $_POST[country];
     // $_where[d_update] = $_POST[i_list_price];
     // $_where[i_status] = $_POST[i_list_price];
     $CAR_PRICE = $this->Main_model->rowdata(TBL_SHOP_CAR_PRICE.$_GET[option],$_where);
 
 
     if ($CAR_PRICE == null) {
-  // $_where = array();
-  // $_where[i_shop] = $_POST[i_shop];
       $params = array();
       $params[i_car_type] = $value->id;
       $params[i_shop] = $_POST[i_shop];
-      if ($_POST[op] == 'park' ) {
-      $params[i_price_park] = $_POST[i_price_park];
+      $params[i_country] = $_POST[country];
+      $params[i_list_price] = $_POST[list_price];
+      $params[i_com_list] = $_POST[list_plan];
+
+      if ($_POST[op] == 5 ) {
+      $params[i_price_park] = $_POST[i_price];
         # code...
       }
-      else{
-      $params[i_price_com] = $_POST[i_price_com];
+      if ($_POST[op] == 6 ) {
+      $params[i_price_person] = $_POST[i_price];
+        # code...
+      }
+      else if ($_POST[op] == 7) {
+        # code...
+      
+      $params[i_price_com] = $_POST[i_price];
 
       }
       $params[d_date] = time();
@@ -507,12 +515,15 @@ class Shop extends CI_Controller {
        // $_where = array();
        // $_where[i_shop] = $_POST[i_shop];
       // /$_where[i_car_type] = $value->i_car_type;
-      if ($_POST[op] == 'park' ) {
-      $params[i_price_park] = $_POST[i_price_park];
-       
+      if ($_POST[op] == 5 ) {
+      $params[i_price_park] = $_POST[i_price];
+        # code...
       }
-      else{
-      $params[i_price_com] = $_POST[i_price_com];
+      if ($_POST[op] == 6 ) {
+      $params[i_price_person] = $_POST[i_price];
+      }
+      else if ($_POST[op] == 7) {
+      $params[i_price_com] = $_POST[i_price];
 
       }
       $params[d_update] = time();
@@ -525,6 +536,9 @@ class Shop extends CI_Controller {
     $data_j[params] = $params;
     $data_j[data] = $data;
     echo json_encode($data_j);
+  }
+  public function get_com_usecar() {
+    $this->load->view('shop/box_com_usecar');
   }
   ################################ SHOP #################################
 }

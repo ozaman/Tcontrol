@@ -74,9 +74,9 @@
           $_order = array();
           $_order['id'] = 'asc';
           $data['list_plan'] = $this->Main_model->fetch_data('','',TBL_SHOP_COUNTRY_COM_LIST.$_GET[option],$_where,$_select,$_order);
-          foreach ($data['list_plan'] as $key => $val) {
+          foreach ($data['list_plan'] as $key => $list_plan) {
             $_where = array();
-            $_where['i_shop_country_com_list'] = $val->id;
+            $_where['i_shop_country_com_list'] = $list_plan->id;
             $_select = array('*');
             $_order = array();
             $_order['id'] = 'asc';
@@ -86,24 +86,29 @@
               <div class="col-md-1">
                 <span class="pull-right">  </span> 
               </div>
-              <div class="col-md-11">
+              
+              <div class="col-md-11" style="margin-bottom: 15px;">
+                <div  class="col-md-1 " style="margin-right: 5px">
+                    <button type="button" class="btn btn-primary btn-md" onclick="func_comUsetypecar('<?=$list_plan->id;?>','<?=$val->id;?>','<?=$_POST[i_shop];?>')"> <span id="txt_btn_save5"> ตามประเภทรถ </span></button>
+                  </div>
                 <?php
                 foreach ($data['list_price'] as $key => $val2) {
-                  if ($val2->s_payment == 'โอน') {
+                  if ($val2->s_topic_en == 'comision') {
                     $curen = '%';
                   }
                   else {
                     $curen = '';
                   }
                   ?>
+                  
                   <div  class="col-md-3 " style="margin-right: 5px">
-                    <div  class="form-group ">
+                    <!-- <div  class="form-group "> -->
                       <div class="input-group">
                         <span  class="input-group-addon" style="width: 65px"><?=$val2->s_topic_th;?>  </span>
                         <input  type="text" class="form-control" value="<?=$val2->i_price;?> <?=$curen;?>" disabled>
                         <span  class="input-group-addon" style="width: 65px"><?=$val2->s_payment;?>  </span>
                       </div>
-                    </div>
+                    <!-- </div> -->
                     <?php
                     if ($val2->i_plan_price == 7) {
                       //echo TBL_SHOPPING_PRODUCT_TYPELIST_PERCENT;

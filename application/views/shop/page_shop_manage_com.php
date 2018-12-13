@@ -65,7 +65,7 @@
             						</div>
             					</div>
             				</div>
-                            <div class="row">
+                           <!--  <div class="row">
                                 <div class="box-head">
                                     <header><h4 class="text-light">จัดการค่าตอบแทนตามประเภทรถ</h4></header>
                                 </div>
@@ -75,7 +75,7 @@
 
                                     </div>
                                 </div>
-                            </div>
+                            </div> -->
                             <!-- </form> -->
                         </div>
 
@@ -124,21 +124,21 @@
 
         			}
         		});
-                var url3 = base_url+ "shop/get_car_price?option="+options;
+                // var url3 = base_url+ "shop/get_car_price?option="+options;
 
-                $.ajax({
-                    url: url3,
-                    data: param,
-                    type: 'post',
-                    error: function() {
-                        console.log('Error Profile');
-                    },
-                    success: function(ele) {
-                        // console.log(ele);
-                        $('#box_car_add').html(ele);
+                // $.ajax({
+                //     url: url3,
+                //     data: param,
+                //     type: 'post',
+                //     error: function() {
+                //         console.log('Error Profile');
+                //     },
+                //     success: function(ele) {
+                //         // console.log(ele);
+                //         $('#box_car_add').html(ele);
 
-                    }
-                });
+                //     }
+                // });
             }
             function func_UpdateCar_rat(i_shop,i_car_type,i_price,op) {
               func_Updatecar(i_shop,i_car_type,i_price,op);
@@ -180,53 +180,7 @@
           }
       });
         }
-        function default_price(i_shop,i_price_park,i_price_com,op) {
-          var url = base_url + "shop/default_price?option="+"<?=$_GET[option];?>";
 
-          var param = {
-            i_shop: i_shop,
-            i_price_park: i_price_park,
-            i_price_com: i_price_com,
-            op: op,
-
-        }
-        console.log(param);
-        $.ajax({
-            url: url,
-            data: param,
-            type: 'post',
-            dataType: 'json',
-            error: function () {
-              console.log('Error Profile');
-          },
-          success: function (res) {
-              console.log(res);
-              if (res.data == true) {
-                $('#box_car_add').html('')
-                var param = {
-                    i_shop: i_shop
-                }
-                var url3 = base_url+ "shop/get_car_price?option="+"<?=$_GET[option];?>"
-                $.ajax({
-                    url: url3,
-                    data: param,
-                    type: 'post',
-                    error: function() {
-                        console.log('Error Profile');
-                    },
-                    success: function(ele) {
-                        // console.log(ele);
-                        $('#box_car_add').html(ele);
-
-                    }
-                });
-                toastr.success('บันทึกข้อมูลสำเร็จ', '', {"closeButton": true});
-            }
-            else{
-            }
-        }
-    });
-    }
 
 
 </script>
