@@ -28,7 +28,7 @@ $data['list_price'] = $this->Main_model->fetch_data('','',TBL_SHOP_COUNTRY_COM_L
           // $_where[i_car_type] = $dataTL->id;
 
     $CAR_PRICE = $this->Main_model->rowdata(TBL_SHOP_CAR_PRICE.$_GET[option],$_where);
-    // print_r(json_encode($_where));
+    print_r(json_encode($CAR_PRICE));
     $chk_box = ($CAR_PRICE->i_status > 0) ? 'checked' : '';
     foreach ($data['list_price'] as $key => $list_price) {
       if ($list_price->i_plan_price == 5 ) {
