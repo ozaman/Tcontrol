@@ -107,7 +107,7 @@
 														<?php
 
 														foreach($data['list_price'] as $key=>$val2){
-															if ($val2->s_payment == 'โอน') {
+															if ($val2->s_topic_en == 'comision') {
 																$curen = '%';
 															}
 															else{
