@@ -140,46 +140,6 @@
                 //     }
                 // });
             }
-            function func_UpdateCar_rat(i_shop,i_car_type,i_price,op) {
-              func_Updatecar(i_shop,i_car_type,i_price,op);
-          }
-          function func_Updatecar(i_shop,i_car_type,i_price,op) {
-            var url = base_url + "shop/func_Updatecar?option="+"<?=$_GET[option];?>";
-            var param = {
-                product: i_shop,
-                i_car_type: i_car_type,
-                i_price: i_price,
-                op : op
-
-            }
-            console.log(param);
-            $.ajax({
-                url: url,
-                data: param,
-                type: 'post',
-                dataType: 'json',
-                error: function () {
-                  console.log('Error Profile');
-              },
-              success: function (res) {
-                  console.log(res);
-                  if (res.data == true) {
-                    console.log($('#i_checkbox' + i_car_type).prop("checked"))
-                    $('#i_checkbox' + i_car_type).prop("checked", false);
-                    $('#l_checkbox' + i_car_type).addClass('active');
-                    var s_val = 0;
-
-                    toastr.success('บันทึกข้อมูลสำเร็จ', '', {"closeButton": true});
-                }
-                else{
-                  $('#l_checkbox' + i_car_type).removeClass('active');
-
-                  $('#i_checkbox' + i_car_type).prop("checked", true);
-                  var s_val = 1;
-              }
-          }
-      });
-        }
 
 
 

@@ -412,7 +412,9 @@ class Shop extends CI_Controller {
   public function func_Updatecar() {
     $_where = array();
     $_where[i_car_type] = $_POST[i_car_type];
-    $_where[i_shop] = $_POST[product];
+    $_where[i_shop] = $_POST[i_shop];
+    $_where[i_list_price] = $_POST[list_price];
+    $_where[i_country_icon] = $_POST[country];
     // $_where[i_price] = $_POST[i_sub];
     // $_where[d_date] = $_POST[product];
     // $_where[d_update] = $_POST[i_list_price];
@@ -422,14 +424,23 @@ class Shop extends CI_Controller {
 
       $params = array();
       $params[i_car_type] = $_POST[i_car_type];
-      $params[i_shop] = $_POST[product];
-      if ($_POST[op] == 'park') {
-        $params[i_price_park] = $_POST[i_price];
-
+      $params[i_shop] = $_POST[i_shop];
+      $params[i_country_icon] = $_POST[country];
+      $params[i_list_price] = $_POST[list_price];
+      $params[i_plan_product_price_name] = $_POST[op];
+      if ($_POST[op] == 5 ) {
+      $params[i_price_park] = $_POST[i_price];
+        # code...
       }
-      else{
+      if ($_POST[op] == 6 ) {
+      $params[i_price_person] = $_POST[i_price];
+        # code...
+      }
+      else if ($_POST[op] == 7) {
+        # code...
+      
+      $params[i_price_com] = $_POST[i_price];
 
-        $params[i_price_com] = $_POST[i_price];
       }
       $params[d_date] = time();
       $params[d_update] = time();
@@ -446,18 +457,24 @@ class Shop extends CI_Controller {
 
       }
       else{
-        // $_where = array();
+        $_where = array();
       // $_where[i_shop] = $_POST[product];
-      if ($_POST[op] == 'park') {
-        $params[i_price_park] = $_POST[i_price];
+      if ($_POST[op] == 5 ) {
+      $params[i_price_park] = $_POST[i_price];
         # code...
       }
-      else{
+      if ($_POST[op] == 6 ) {
+      $params[i_price_person] = $_POST[i_price];
+        # code...
+      }
+      else if ($_POST[op] == 7) {
+        # code...
+      
+      $params[i_price_com] = $_POST[i_price];
 
-        $params[i_price_com] = $_POST[i_price];
       }
       $params[d_update] = time();
-
+      $_where[id] = $_POST[i_car_price];
       $data = $this->db->update(TBL_SHOP_CAR_PRICE.$_GET[option],$params,$_where);
 
       }
@@ -478,7 +495,7 @@ class Shop extends CI_Controller {
     $_where[i_car_type] = $value->id;
     $_where[i_shop] = $_POST[i_shop];
     $_where[i_list_price] = $_POST[list_price];
-    $_where[i_country] = $_POST[country];
+    $_where[i_country_icon] = $_POST[country];
     // $_where[d_update] = $_POST[i_list_price];
     // $_where[i_status] = $_POST[i_list_price];
     $CAR_PRICE = $this->Main_model->rowdata(TBL_SHOP_CAR_PRICE.$_GET[option],$_where);
@@ -488,9 +505,9 @@ class Shop extends CI_Controller {
       $params = array();
       $params[i_car_type] = $value->id;
       $params[i_shop] = $_POST[i_shop];
-      $params[i_country] = $_POST[country];
+      $params[i_country_icon] = $_POST[country];
       $params[i_list_price] = $_POST[list_price];
-      $params[i_com_list] = $_POST[list_plan];
+      $params[i_plan_product_price_name] = $_POST[op];
 
       if ($_POST[op] == 5 ) {
       $params[i_price_park] = $_POST[i_price];

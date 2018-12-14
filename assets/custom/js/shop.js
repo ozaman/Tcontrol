@@ -406,6 +406,22 @@ function manage_shop_ordertype(item) {
 function open_commision(id) {
   // body...
   $('#modal_custom').show()
+   console.log(option)
+  var head;
+  // $('#modal_custom_2').show()
+  if (option == '_company') {
+    head = 'shop';
+  }
+   if (option == '_taxi') {
+    head = 'Taxi';
+  }
+  if (option == '_gui') {
+    head = 'Guide';
+  }
+  if (option == '_tourist') {
+    head = 'Tourist';
+  }
+  $('#formModalLabel').html('จัดการประเภทรายจ่าย (Tshare - '+head+')')
   console.log('--------------------------------------')
   console.log(id)
   commision(id)
@@ -1901,8 +1917,21 @@ function func_comUsetypecar(list_plan,country,shop) {
   console.log(shop)
   console.log(country)
   console.log(option)
+  var head;
   $('#modal_custom_2').show()
-  $('#title_add_region_sub').html('จัดการค่าตอบแทนตามประเภทรถ')
+  if (option == '_company') {
+    head = 'shop';
+  }
+   if (option == '_taxi') {
+    head = 'Taxi';
+  }
+  if (option == '_gui') {
+    head = 'Guide';
+  }
+  if (option == '_tourist') {
+    head = 'Tourist';
+  }
+  $('#title_add_region_sub').html('จัดการค่าตอบแทนตามประเภทรถ (Tshare - '+head+')')
   // var url = base_url + "shop/get_region_sub?option=" + option;
   var param = {
     country: country,
@@ -1927,7 +1956,8 @@ function func_comUsetypecar(list_plan,country,shop) {
     }
   });
 }
-function func_default_price(i_shop,i_price,op,options,list_price,country,list_plan) {
+function func_default_price(i_shop,i_price,op,options,list_price,country) {
+
           var url = base_url + "shop/default_price?option="+options;
 
           var param = {
@@ -1936,7 +1966,7 @@ function func_default_price(i_shop,i_price,op,options,list_price,country,list_pl
             list_price: list_price,
             op: op,
             country : country,
-            list_plan : list_plan
+
 
         }
         console.log(param);
@@ -1959,4 +1989,59 @@ function func_default_price(i_shop,i_price,op,options,list_price,country,list_pl
         }
     });
     }
+
+          //   function func_UpdateCar_rat(i_shop,i_car_type,i_price,op,list_price,country,options,i_car_price) {
+          //     var timer;
+          //      clearTimeout(timer);
+          //       timer = setTimeout(function () {
+          //         console.log('in aaa')
+          //     func_Updatecar(i_shop,i_car_type,i_price,op,list_price,country,options,i_car_price);
+          //     }, 300);
+          // }
+          function func_UpdateCar_rat(i_shop,i_car_type,i_price,op,list_price,country,options,i_car_price) {
+            var url = base_url + "shop/func_Updatecar?option="+options;
+            var param = {
+                i_shop : i_shop,
+                i_car_type: i_car_type,
+                i_price: i_price,
+                op : op,
+                list_price : list_price,
+                country : country,
+                option : options,
+                i_car_price : i_car_price
+
+            }
+            console.log(param);
+             var timer;
+               clearTimeout(timer);
+                timer = setTimeout(function () {
+                  console.log('in aaa')
+            $.ajax({
+                url: url,
+                data: param,
+                type: 'post',
+                dataType: 'json',
+                error: function () {
+                  console.log('Error Profile');
+              },
+              success: function (res) {
+                  console.log(res);
+                  if (res.data == true) {
+                    console.log($('#i_checkbox' + i_car_type).prop("checked"))
+                    $('#i_checkbox' + i_car_type).prop("checked", false);
+                    $('#l_checkbox' + i_car_type).addClass('active');
+                    var s_val = 0;
+
+                    toastr.success('บันทึกข้อมูลสำเร็จ', '', {"closeButton": true});
+                }
+                else{
+                  $('#l_checkbox' + i_car_type).removeClass('active');
+
+                  $('#i_checkbox' + i_car_type).prop("checked", true);
+                  var s_val = 1;
+              }
+          }
+      });
+             }, 200);
+        }
 

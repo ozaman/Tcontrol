@@ -51,14 +51,14 @@
       <div class="form-group ">
         <div class="input-group">
           <span class="input-group-addon" style="width: 65px"> <?=$val2->s_topic_th;?> </span>
-          <input type="number" id="default_price_car" class="form-control" >
+          <input type="number" id="default_price_car_<?=$val2->id;?>" class="form-control" >
         </div>
       </div>
     </div>
     <div class="col-md-3">
       <div class="form-group ">
-        <button type="button" class="btn btn-md btn-info" id="default_price" onclick="func_default_price('<?=$_POST[i_shop];?>',
-        $('#default_price_car').val(),'<?=$val2->i_plan_product_price_name;?>','<?=$_GET[option];?>','<?=$_POST[list_plan];?>','<?=$_POST[country];?>','<?=$_POST[list_plan];?>')"><strong>ค่าเริ่มต้นทั้งหมด</strong></button>
+        <button type="button" class="btn btn-md btn-info"  onclick="func_default_price('<?=$_POST[i_shop];?>',
+        $('#default_price_car_<?=$val2->id;?>').val(),'<?=$val2->i_plan_product_price_name;?>','<?=$_GET[option];?>','<?=$_POST[list_plan];?>','<?=$_POST[country];?>')"><strong>ค่าเริ่มต้นทั้งหมด</strong></button>
       </div>
     </div>
   </div>
