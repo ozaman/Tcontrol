@@ -7,12 +7,12 @@ $_order = array();
 $_order['id'] = 'asc';
 $data['list_price'] = $this->Main_model->fetch_data('','',TBL_SHOP_COUNTRY_COM_LIST_PRICE.$_GET[option],$_where,$_select,$_order);
 ?>
-<table>
+<table width="100%">
   <tr>
-    <td style=" font-weight: bold;">รายการ</td>
+    <td width="100" style=" font-weight: bold;">รายการ</td>
     <?php
     foreach ($data['list_price'] as $key => $list_price) {
-       if ($list_price->i_plan_product_price_name != 7) {
+       if ($list_price->i_plan_product_price_name == 5) {
       ?>
       <td style="font-weight: bold;width: 100px;"><?=$list_price->s_topic_th;?></td>
     <?php }
@@ -64,7 +64,7 @@ $data['list_price'] = $this->Main_model->fetch_data('','',TBL_SHOP_COUNTRY_COM_L
     </td>
     <?php
     foreach ($data['list_price'] as $row) {
-       if ($row->i_plan_product_price_name != 7) {
+       if ($row->i_plan_product_price_name == 5) {
      
       if ($row->i_plan_product_price_name == 5) {
         $price = $CAR_PRICE->i_price_park;

@@ -30,12 +30,12 @@
         
         if ($val2->i_plan_product_price_name == 7) {
           ?>
-          <div class="col-md-12">
+          <!-- <div class="col-md-12"> -->
             <div class="row">
              <header><h4 class="text-light">ค่าคอมตามสินค้า</h4></header>
              <input type="hidden" name="" id="id_shop_product" value="1">
            </div>
-         </div>
+         <!-- </div> -->
        <?php } ?>
        <div class="col-md-12">
         <?php 
@@ -106,7 +106,7 @@
 
 <div class="col-md-12">
   <div class="row">
-   <header><h4 class="text-light">ค่าตอบแทนตามประเภทรถ</h4></header>
+   <header><h4 class="text-light">ค่าจอดตามประเภทรถ</h4></header>
    <input type="hidden" name="" id="id_shop_product" value="1">
  </div>
 </div>
@@ -122,7 +122,7 @@
     ?>
     <div class="col-md-12">
       <?php 
-      if ($val2->i_plan_product_price_name != 7) {
+      if ($val2->i_plan_product_price_name == 5) {
         ?>
         <div  class="form-group ">
           <div class="input-group">
@@ -137,7 +137,7 @@
 </div>
 <?php
 foreach ($data['list_price'] as $key => $val2) {
-  if ($val2->i_plan_product_price_name != 7) {
+  if ($val2->i_plan_product_price_name == 5) {
    ?>
    <div class="col-md-12">
      <div class="col-md-4 " >
