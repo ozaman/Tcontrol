@@ -407,7 +407,14 @@ class Shop extends CI_Controller {
     echo json_encode($data);
   }
   public function get_car_price() {
-    $this->load->view('shop/box_car_price');
+     $_where = array();
+    $_where['i_shop'] = $_POST[i_shop];
+    $_select = array('*');
+    $_order = array();
+    $_order['id'] = 'asc';
+    $data['region'] = $this->Main_model->fetch_data('','',TBL_SHOP_COUNTRY.$_GET[option],$_where,$_select,$_order);
+    $data['shop'] = $this->Main_model->rowdata(TBL_SHOPPING_PRODUCT,array('id'=>$_POST[i_shop]));
+    $this->load->view('shop/box_car_price',$data);
   }
   public function func_Updatecar() {
     $_where = array();
@@ -555,7 +562,19 @@ class Shop extends CI_Controller {
     echo json_encode($data_j);
   }
   public function get_com_usecar() {
+    
+   
     $this->load->view('shop/box_com_usecar');
+  }
+  public function get_comUsetypepro() {
+    $_where = array();
+    $_where['i_shop'] = $_POST[i_shop];
+    $_select = array('*');
+    $_order = array();
+    $_order['id'] = 'asc';
+    $data['region'] = $this->Main_model->fetch_data('','',TBL_SHOP_COUNTRY.$_GET[option],$_where,$_select,$_order);
+    $data['shop'] = $this->Main_model->rowdata(TBL_SHOPPING_PRODUCT,array('id'=>$_POST[i_shop]));
+    $this->load->view('shop/box_com_usepro',$data);
   }
   ################################ SHOP #################################
 }

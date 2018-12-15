@@ -1931,7 +1931,7 @@ function func_comUsetypecar(list_plan,country,shop) {
   if (option == '_tourist') {
     head = 'Tourist';
   }
-  $('#title_add_region_sub').html('จัดการค่าตอบแทนตามประเภทรถ (Tshare - '+head+')')
+  $('#title_add_region_sub').html('จัดการค่าตอบแทนตามประเภท (Tshare - '+head+')')
   // var url = base_url + "shop/get_region_sub?option=" + option;
   var param = {
     country: country,
@@ -2044,4 +2044,47 @@ function func_default_price(i_shop,i_price,op,options,list_price,country) {
       });
              }, 200);
         }
+function func_comUsetypepro(list_plan,country,shop) {
+  console.log(list_plan)
+  console.log(shop)
+  console.log(country)
+  console.log(option)
+  var head;
+  $('#modal_custom_2').show()
+  if (option == '_company') {
+    head = 'shop';
+  }
+   if (option == '_taxi') {
+    head = 'Taxi';
+  }
+  if (option == '_gui') {
+    head = 'Guide';
+  }
+  if (option == '_tourist') {
+    head = 'Tourist';
+  }
+  $('#title_add_region_sub').html('จัดการค่าตอบแทนตามสินค้า (Tshare - '+head+')')
+  // var url = base_url + "shop/get_region_sub?option=" + option;
+  var param = {
+    country: country,
+    i_shop: shop,
+    list_plan: list_plan
 
+  }
+  var url = base_url+ "shop/get_comUsetypepro?option="+option;
+  $.ajax({
+    url: url,
+    data: param,
+    type: 'post',
+    error: function () {
+      console.log('Error Profile');
+    },
+    success: function (ele) {
+      // console.log(ele);
+      $('#dody_modal_custom_2').html(ele);
+      // $('#id_country').val(id);
+      // $('#btn_region_sub'+id).attr('onclick','save_region_sub('+id+')');
+
+    }
+  });
+}

@@ -12,9 +12,11 @@ $data['list_price'] = $this->Main_model->fetch_data('','',TBL_SHOP_COUNTRY_COM_L
     <td style=" font-weight: bold;">รายการ</td>
     <?php
     foreach ($data['list_price'] as $key => $list_price) {
+       if ($list_price->i_plan_product_price_name != 7) {
       ?>
       <td style="font-weight: bold;width: 100px;"><?=$list_price->s_topic_th;?></td>
-    <?php } ?>
+    <?php }
+    } ?>
   </tr>
   <?php
   $_where = array();
@@ -62,6 +64,8 @@ $data['list_price'] = $this->Main_model->fetch_data('','',TBL_SHOP_COUNTRY_COM_L
     </td>
     <?php
     foreach ($data['list_price'] as $row) {
+       if ($row->i_plan_product_price_name != 7) {
+     
       if ($row->i_plan_product_price_name == 5) {
         $price = $CAR_PRICE->i_price_park;
       }
@@ -75,7 +79,8 @@ $data['list_price'] = $this->Main_model->fetch_data('','',TBL_SHOP_COUNTRY_COM_L
       <td  class="td_percent<?=$dataTL->id;?>">
         <div class="input-group"><input style="width: 80%;margin: 5px 0; border-radius: 5px;" onchange="func_UpdateCar_rat('<?=$_POST[i_shop];?>', '<?=$dataTL->id;?>', this.value,'<?=$row->i_plan_product_price_name;?>','<?=$row->id;?>','<?=$_POST[country];?>','<?=$_POST[option];?>','<?=$CAR_PRICE->id;?>');" type="number" class="form-control" value="<?=$price;?>" >
         </div></td>
-      <?php } ?>
+      <?php }
+      } ?>
     </tr>
   <?php } ?>
 </table>

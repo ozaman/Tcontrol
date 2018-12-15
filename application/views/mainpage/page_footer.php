@@ -63,7 +63,7 @@
             </div>
 
             <form class="form-horizontal" >
-                <div class="modal-body contain-lg">
+                <div class="modal-body ">
                     <div class="box ">
                         <div id=dody_modal_custom_2>
 
