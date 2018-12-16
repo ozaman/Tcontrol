@@ -15,6 +15,7 @@ $categories_sub = $this->Main_model->rowdata(TBL_SHOPPING_PRODUCT_SUB,array('id'
 $category = $this->Main_model->rowdata(TBL_SHOPPING_PRODUCT_MAIN,array('id' => $_GET[main]));
 ?>
 <ol class="breadcrumb">
+  <input type="hidden" name="" id="i_shop_topice" value="<?=$shop->topic_th;?>">
   <li class="head_title"><a href="<?=base_url();?>shop/data_shop_categorie" class="head_title">หมวดหมู่ทั้งหมด</a></li>
     <li class="head_title"><a href="<?=base_url();?>shop/categorie_sub?id=<?=$_GET[main];?>" class="head_title">หมวดหมู่<?=$category->topic_th;?></a></li>
     <li class="head_title_sub"><a  href="<?=base_url();?>shop/shop_ordertype?id=<?=$_GET[sub];?>&sub=<?=$_GET[main];?>">ประเภท<?=$categories_sub->topic_th;?></a></li>

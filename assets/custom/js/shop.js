@@ -411,18 +411,27 @@ function open_commision(id) {
   var head;
   // $('#modal_custom_2').show()
   if (option == '_company') {
-    head = 'shop';
+    head = $('#i_shop_topice').val();
+  $('#formModalLabel').html('จัดการประเภทรายจ่าย ('+head+' >> Tshare)')
+
   }
    if (option == '_taxi') {
     head = 'Taxi';
+  $('#formModalLabel').html('จัดการประเภทรายจ่าย (Tshare >> '+head+')')
+
   }
   if (option == '_gui') {
     head = 'Guide';
+  $('#formModalLabel').html('จัดการประเภทรายจ่าย (Tshare >> '+head+')')
+  
+
   }
   if (option == '_tourist') {
     head = 'Tourist';
+  $('#formModalLabel').html('จัดการประเภทรายจ่าย (Tshare >> '+head+')')
+  
+
   }
-  $('#formModalLabel').html('จัดการประเภทรายจ่าย (Tshare - '+head+')')
   console.log('--------------------------------------')
   console.log(id)
   commision(id)
@@ -1920,19 +1929,27 @@ function func_comUsetypecar(list_plan,country,shop) {
   console.log(option)
   var head;
   $('#modal_custom_2').show()
+  // $('#modal_custom_2').show()
   if (option == '_company') {
-    head = 'shop';
+    head = $('#i_shop_topice').val();
+  $('#title_add_region_sub').html('จัดการค่าตอบแทนตามสินค้า ( '+head+' >> '+ 'Tshare)')
+
   }
    if (option == '_taxi') {
     head = 'Taxi';
+  $('#title_add_region_sub').html('จัดการค่าตอบแทนตามสินค้า (Tshare >> '+head+')')
+
   }
   if (option == '_gui') {
     head = 'Guide';
+  $('#title_add_region_sub').html('จัดการค่าตอบแทนตามสินค้า (Tshare >> '+head+')')
+
   }
   if (option == '_tourist') {
     head = 'Tourist';
+  $('#title_add_region_sub').html('จัดการค่าตอบแทนตามสินค้า (Tshare >> '+head+')')
+
   }
-  $('#title_add_region_sub').html('จัดการค่าตอบแทนตามประเภท (Tshare - '+head+')')
   // var url = base_url + "shop/get_region_sub?option=" + option;
   var param = {
     country: country,
@@ -2054,18 +2071,25 @@ function func_comUsetypepro(list_plan,country,shop) {
   var head;
   $('#modal_custom_2').show()
   if (option == '_company') {
-    head = 'shop';
+    head = $('#i_shop_topice').val();
+  $('#title_add_region_sub').html('จัดการค่าตอบแทนตามสินค้า ( '+head+' >> '+ 'Tshare)')
+
   }
    if (option == '_taxi') {
     head = 'Taxi';
+  $('#title_add_region_sub').html('จัดการค่าตอบแทนตามสินค้า (Tshare >> '+head+')')
+
   }
   if (option == '_gui') {
     head = 'Guide';
+  $('#title_add_region_sub').html('จัดการค่าตอบแทนตามสินค้า (Tshare >> '+head+')')
+
   }
   if (option == '_tourist') {
     head = 'Tourist';
+  $('#title_add_region_sub').html('จัดการค่าตอบแทนตามสินค้า (Tshare >> '+head+')')
+
   }
-  $('#title_add_region_sub').html('จัดการค่าตอบแทนตามสินค้า (Tshare - '+head+')')
   // var url = base_url + "shop/get_region_sub?option=" + option;
   var param = {
     country: country,
