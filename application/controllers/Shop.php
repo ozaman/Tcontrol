@@ -64,7 +64,7 @@ class Shop extends CI_Controller {
     $_where[sub] = $_POST[i_sub];
     $_where[product] = $_POST[product];
     $_where[i_list_price] = $_POST[i_list_price];
-    $sub_type_list = $this->Main_model->rowdata(TBL_SHOPPING_PRODUCT_TYPELIST_PERCENT,$_where);
+    $sub_type_list = $this->Main_model->rowdata(TBL_SHOPPING_PRODUCT_TYPELIST_PERCENT.$_GET[option],$_where);
     if ($sub_type_list->id == null) {
       $params = array();
       $params[product] = $_POST[product];
@@ -73,7 +73,7 @@ class Shop extends CI_Controller {
       $params[sub] = $_POST[i_sub];
       $params[i_list_price] = $_POST[i_list_price];
       $params[i_status] = 1;
-      $data = $this->db->insert(TBL_SHOPPING_PRODUCT_TYPELIST_PERCENT,$params);
+      $data = $this->db->insert(TBL_SHOPPING_PRODUCT_TYPELIST_PERCENT.$_GET[option],$params);
     }
     else {
       if($_POST[s_col] == 'i_status'){
@@ -81,7 +81,7 @@ class Shop extends CI_Controller {
       }else{
         $params[$_POST[s_col]] = $_POST[s_val];
       }
-      $data = $this->db->update(TBL_SHOPPING_PRODUCT_TYPELIST_PERCENT,$params,$_where);
+      $data = $this->db->update(TBL_SHOPPING_PRODUCT_TYPELIST_PERCENT.$_GET[option],$params,$_where);
     }
     $data_j[where] = $_where;
     $data_j[params] = $params;

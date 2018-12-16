@@ -1,7 +1,7 @@
 
 <?php
 $_where = array();
-$_where['i_shop_country_com_list'] = $_POST[i_plan_price];
+$_where['i_shop_country_com_list'] = $_POST[list_plan];
 $_select = array('*');
 $_order = array();
 $_order['id'] = 'asc';
@@ -25,7 +25,7 @@ $data['list_price'] = $this->Main_model->fetch_data('','',TBL_SHOP_COUNTRY_COM_L
     $_where = array();
     $_where[i_shop] = $_POST[i_shop];
     $_where[i_car_type] = $dataTL->id;
-    $_where[i_list_price] = $_POST[i_plan_price];
+    $_where[i_list_price] = $_POST[list_price];
     // $_where[i_country] = $_POST[country];
           // $_where[i_car_type] = $dataTL->id;
 
@@ -63,6 +63,7 @@ $data['list_price'] = $this->Main_model->fetch_data('','',TBL_SHOP_COUNTRY_COM_L
       </div>
     </td>
     <?php
+    // print_r(json_encode($CAR_PRICE));
     foreach ($data['list_price'] as $row) {
        if ($row->i_plan_product_price_name == 5) {
      

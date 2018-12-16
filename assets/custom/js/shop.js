@@ -238,7 +238,8 @@ function func_UpdateTypeListPercent_rate(i_shop,i_list_price,i_main_typelist,i_m
   func_UpdateTypeListPercent(i_shop,i_list_price,i_main_typelist,i_main,i_sub,s_col,s_val);
 }
 function func_UpdateTypeListPercent(i_shop,i_list_price,i_main_typelist,i_main,i_sub,s_col,s_val) {
-  var url = base_url + "shop/func_UpdateTypeListPercent";
+  var url = base_url + "shop/func_UpdateTypeListPercent?option=" + option;
+  console.log(url)
   var param = {
     product: i_shop,
     i_list_price: i_list_price,
@@ -1956,13 +1957,14 @@ function func_comUsetypecar(list_plan,country,shop) {
     }
   });
 }
-function func_default_price(i_shop,i_price,op,options,list_price,country) {
+function func_default_price(i_shop,i_price,op,options,list_plan,country,list_price) {
 
           var url = base_url + "shop/default_price?option="+options;
 
           var param = {
             i_shop: i_shop,
             i_price: i_price,
+            list_plan: list_plan,
             list_price: list_price,
             op: op,
             country : country,
@@ -1981,7 +1983,7 @@ function func_default_price(i_shop,i_price,op,options,list_price,country) {
           success: function (res) {
               console.log(res);
               if (res.data == true) {
-                initusetype(i_shop,options,list_price,country)
+                initusetype(i_shop,options,list_plan,country,list_price)
                 toastr.success('บันทึกข้อมูลสำเร็จ', '', {"closeButton": true});
             }
             else{
@@ -2088,3 +2090,29 @@ function func_comUsetypepro(list_plan,country,shop) {
     }
   });
 }
+function initusetype(shop,options,list_plan,country,list_price) {
+    var url2 = base_url+ "shop/get_com_usecar?option="+options;
+    var param = {
+      i_shop: shop,
+      option : options,
+      list_plan : list_plan,
+      country : country,
+      list_price : list_price
+    }
+    console.log(param)
+                // console.log('************************************')
+                // console.log(url2)
+                $.ajax({
+                 url: url2,
+                 data: param,
+                 type: 'post',
+                 error: function() {
+                  console.log('Error');
+                },
+                success: function(ele) {
+                // console.log(ele);
+                $('#box_com_usecar').html(ele);
+
+              }
+            });
+              }

@@ -16,73 +16,91 @@
     foreach ($data['list_price'] as $val2) {
       ?>
       <div  class="col-md-12 " style="margin-right: 5px">
-          <div  class="form-group ">
-            <div class="input-group">
-              <span  class="input-group-addon" style="width: 65px"><?=$val2->s_topic_th;?>  </span>
-              <input  type="text" class="form-control" value="<?=$val2->i_price;?> <?=$curen;?>" disabled>
-              <span  class="input-group-addon" style="width: 65px"><?=$val2->s_payment;?>  </span>
-            </div>
+        <div  class="form-group ">
+          <div class="input-group">
+            <span  class="input-group-addon" style="width: 65px"><?=$val2->s_topic_th;?>  </span>
+            <input  type="text" class="form-control" value="<?=$val2->i_price;?> <?=$curen;?>" disabled>
+            <span  class="input-group-addon" style="width: 65px"><?=$val2->s_payment;?>  </span>
           </div>
         </div>
-        <div class="col-md-12">
-          
-      
+      </div>
+      <div class="col-md-12">
+
+
         <?php
 
-                    if ($val2->i_plan_price == 7) {
+        if ($val2->i_plan_price == 7) {
                       //echo TBL_SHOPPING_PRODUCT_TYPELIST_PERCENT;
-                      ?>
-                      <div  class="form-group ">
-                        <table>
-                          <tr>
-                            <td style=" font-weight: bold;">รายการ</td>
-                            <td style="font-weight: bold;width: 100px;">ถอด Vat %</td>
-                            <td style="font-weight: bold;width: 100px;">ค่าคอม %</td>
-                          </tr>
-                          <?php
-                          $_where = array();
-                          $sub_typelist = $this->Main_model->fetch_data('','',TBL_SHOPPING_PRODUCT_SUB_TYPELIST,array('sub' => $shop->sub,'i_status' => 1));
-                          foreach ($sub_typelist as $dataTL) {
-                            $s_sub_typelist = $this->Main_model->rowdata(TBL_SHOPPING_PRODUCT_MAIN_TYPELIST,array('id' => $dataTL->i_main_typelist));
-                            $_where = array();
-                            $_where[product] = $shop->id;
-                            $_where[i_list_price] = $val2->id;
-                            $_where[i_main_typelist] = $dataTL->i_main_typelist;
-                            $_where[main] = $shop->main;
-                            $_where[sub] = $shop->sub;
-                            $sub_type_list = $this->Main_model->rowdata(TBL_SHOPPING_PRODUCT_TYPELIST_PERCENT,$_where);
-                            $chk_box = ($sub_type_list->i_status > 0) ? 'checked' : '';
-                            $chk_box_active = ($sub_type_list->i_status > 0) ? 'active' : '';
-                            $td_percent = ($sub_type_list->i_status > 0) ? '' : 'none';
-                            ?>
-                            <tr>
-                              <td>
-                                <div data-toggle="buttons"  onclick="func_TypeListPercent('<?=$shop->id;?>', '<?=$val2->id;?>', '<?=$dataTL->i_main_typelist;?>', '<?=$shop->main;?>', '<?=$shop->sub;?>', 'i_status');">
-                                  <label class="btn checkbox-inline btn-checkbox-success-inverse <?=$chk_box_active;?> "><?=$s_sub_typelist->topic_th;?>
-                                    <input type="checkbox" value="1" id="i_checkbox<?=$val2->id;?><?=$dataTL->i_main_typelist;?>" name="i_checkbox<?=$val2->id;?><?=$dataTL->i_main_typelist;?>" <?=$chk_box;?>> </label>
-                                </div>
-                              </td>
-                              <td style="display:<?=$td_percent;?>;" class="td_percent<?=$val2->id;?><?=$dataTL->i_main_typelist;?>"><input style="width: 80%;" onkeyup="func_UpdateTypeListPercent_rate('<?=$shop->id;?>', '<?=$val2->id;?>', '<?=$dataTL->i_main_typelist;?>', '<?=$shop->main;?>', '<?=$shop->sub;?>', 'f_discount', this.value);"  type="number" class="form-control" value="<?=$sub_type_list->f_discount;?>" ></td>
-                              <td style="display:<?=$td_percent;?>;" class="td_percent<?=$val2->id;?><?=$dataTL->i_main_typelist;?>"><input style="width: 80%;" onkeyup="func_UpdateTypeListPercent_rate('<?=$shop->id;?>', '<?=$val2->id;?>', '<?=$dataTL->i_main_typelist;?>', '<?=$shop->main;?>', '<?=$shop->sub;?>', 'f_percent', this.value);" type="number" class="form-control" value="<?=$sub_type_list->f_percent;?>" ></td>
-                            </tr>
-                          <?php }?>
+          ?>
+          <div  class="form-group ">
+            <table>
+              <tr>
+                <td style=" font-weight: bold;">รายการ</td>
+                <?php 
+                if ($_GET[option] == '_company') {
+                  ?>
+                  <td style="font-weight: bold;width: 100px;">ถอด Vat %</td>
 
-                        </table>
+                  <?php
+                }
+                ?>
+                <td style="font-weight: bold;width: 100px;">ค่าคอม %</td>
 
-                      </div>
-                    <?php }
-                    ?>
+                <td style="font-weight: bold;width: 150px;">ภาษี ณ ที่จ่าย</td>
+              </tr>
+              <?php
+              $_where = array();
+              $sub_typelist = $this->Main_model->fetch_data('','',TBL_SHOPPING_PRODUCT_SUB_TYPELIST,array('sub' => $shop->sub,'i_status' => 1));
+              foreach ($sub_typelist as $dataTL) {
+                $s_sub_typelist = $this->Main_model->rowdata(TBL_SHOPPING_PRODUCT_MAIN_TYPELIST,array('id' => $dataTL->i_main_typelist));
+                $_where = array();
+                $_where[product] = $shop->id;
+                $_where[i_list_price] = $val2->id;
+                $_where[i_main_typelist] = $dataTL->i_main_typelist;
+                $_where[main] = $shop->main;
+                $_where[sub] = $shop->sub;
+                $sub_type_list = $this->Main_model->rowdata(TBL_SHOPPING_PRODUCT_TYPELIST_PERCENT.$_GET[option],$_where);
+                $chk_box = ($sub_type_list->i_status > 0) ? 'checked' : '';
+                $chk_box_active = ($sub_type_list->i_status > 0) ? 'active' : '';
+                $td_percent = ($sub_type_list->i_status > 0) ? '' : 'none';
+                ?>
+                <tr>
+                  <td>
+                    <div data-toggle="buttons"  onclick="func_TypeListPercent('<?=$shop->id;?>', '<?=$val2->id;?>', '<?=$dataTL->i_main_typelist;?>', '<?=$shop->main;?>', '<?=$shop->sub;?>', 'i_status');">
+                      <label class="btn checkbox-inline btn-checkbox-success-inverse <?=$chk_box_active;?> "><?=$s_sub_typelist->topic_th;?>
+                      <input type="checkbox" value="1" id="i_checkbox<?=$val2->id;?><?=$dataTL->i_main_typelist;?>" name="i_checkbox<?=$val2->id;?><?=$dataTL->i_main_typelist;?>" <?=$chk_box;?>> </label>
                     </div>
-                    <?php
+                  </td>
+                  <?php
+                   if ($_GET[option] == '_company') {
+                  ?>
+                 <td style="display:<?=$td_percent;?>;" class="td_percent<?=$val2->id;?><?=$dataTL->i_main_typelist;?>"><input style="width: 80%;" onkeyup="func_UpdateTypeListPercent_rate('<?=$shop->id;?>', '<?=$val2->id;?>', '<?=$dataTL->i_main_typelist;?>', '<?=$shop->main;?>', '<?=$shop->sub;?>', 'f_discount', this.value);"  type="number" class="form-control" value="<?=$sub_type_list->f_discount;?>" ></td>
 
-                  }?>
+                  <?php
+                }
+                ?>
+                  
+                  <td style="display:<?=$td_percent;?>;" class="td_percent<?=$val2->id;?><?=$dataTL->i_main_typelist;?>"><input style="width: 80%;" onkeyup="func_UpdateTypeListPercent_rate('<?=$shop->id;?>', '<?=$val2->id;?>', '<?=$dataTL->i_main_typelist;?>', '<?=$shop->main;?>', '<?=$shop->sub;?>', 'f_percent', this.value);" type="number" class="form-control" value="<?=$sub_type_list->f_percent;?>" ></td>
+                  <td style="display:<?=$td_percent;?>;" class="td_percent<?=$val2->id;?><?=$dataTL->i_main_typelist;?>"><input style="width: 80%;" onkeyup="func_UpdateTypeListPercent_rate('<?=$shop->id;?>', '<?=$val2->id;?>', '<?=$dataTL->i_main_typelist;?>', '<?=$shop->main;?>', '<?=$shop->sub;?>', 'f_percent', this.value);" type="number" class="form-control" value="<?=$sub_type_list->i_withholding;?>" ></td>
+                </tr>
+              <?php }?>
+
+            </table>
+
+          </div>
+        <?php }
+        ?>
+      </div>
+      <?php
+
+    }?>
     
 
-</div>
+  </div>
 </div>
 </div>
 
 
- 
+
 
 

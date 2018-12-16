@@ -58,10 +58,19 @@
             <div  class="form-group ">
               <table>
                 <tr>
-                  <td style=" font-weight: bold;">รายการ</td>
+                <td style=" font-weight: bold;">รายการ</td>
+                <?php 
+                if ($_GET[option] == '_company') {
+                  ?>
                   <td style="font-weight: bold;width: 100px;">ถอด Vat %</td>
-                  <td style="font-weight: bold;width: 100px;">ค่าคอม %</td>
-                </tr>
+
+                  <?php
+                }
+                ?>
+                <td style="font-weight: bold;width: 100px;">ค่าคอม %</td>
+
+                <td style="font-weight: bold;width: 150px;">ภาษี ณ ที่จ่าย</td>
+              </tr>
                 <?php
                 $_where = array();
                 $sub_typelist = $this->Main_model->fetch_data('','',TBL_SHOPPING_PRODUCT_SUB_TYPELIST,array('sub' => $shop->sub,'i_status' => 1));
@@ -73,21 +82,30 @@
                   $_where[i_main_typelist] = $dataTL->i_main_typelist;
                   $_where[main] = $shop->main;
                   $_where[sub] = $shop->sub;
-                  $sub_type_list = $this->Main_model->rowdata(TBL_SHOPPING_PRODUCT_TYPELIST_PERCENT,$_where);
+                  $sub_type_list = $this->Main_model->rowdata(TBL_SHOPPING_PRODUCT_TYPELIST_PERCENT.$_GET[option],$_where);
                   $chk_box = ($sub_type_list->i_status > 0) ? 'checked' : '';
                   $chk_box_active = ($sub_type_list->i_status > 0) ? 'active' : '';
                   $td_percent = ($sub_type_list->i_status > 0) ? '' : 'none';
                   ?>
-                  <tr>
-                    <td>
-                      <div data-toggle="buttons"  onclick="func_TypeListPercent('<?=$shop->id;?>', '<?=$val2->id;?>', '<?=$dataTL->i_main_typelist;?>', '<?=$shop->main;?>', '<?=$shop->sub;?>', 'i_status');">
-                        <label class="btn checkbox-inline btn-checkbox-success-inverse <?=$chk_box_active;?> "><?=$s_sub_typelist->topic_th;?>
-                        <input type="checkbox" value="1" id="i_checkbox<?=$val2->id;?><?=$dataTL->i_main_typelist;?>" name="i_checkbox<?=$val2->id;?><?=$dataTL->i_main_typelist;?>" <?=$chk_box;?>> </label>
-                      </div>
-                    </td>
-                    <td style="display:<?=$td_percent;?>;" class="td_percent<?=$val2->id;?><?=$dataTL->i_main_typelist;?>"><input style="width: 80%;" onkeyup="func_UpdateTypeListPercent_rate('<?=$shop->id;?>', '<?=$val2->id;?>', '<?=$dataTL->i_main_typelist;?>', '<?=$shop->main;?>', '<?=$shop->sub;?>', 'f_discount', this.value);"  type="number" class="form-control" value="<?=$sub_type_list->f_discount;?>" ></td>
-                    <td style="display:<?=$td_percent;?>;" class="td_percent<?=$val2->id;?><?=$dataTL->i_main_typelist;?>"><input style="width: 80%;" onkeyup="func_UpdateTypeListPercent_rate('<?=$shop->id;?>', '<?=$val2->id;?>', '<?=$dataTL->i_main_typelist;?>', '<?=$shop->main;?>', '<?=$shop->sub;?>', 'f_percent', this.value);" type="number" class="form-control" value="<?=$sub_type_list->f_percent;?>" ></td>
-                  </tr>
+                 <tr>
+                  <td>
+                    <div data-toggle="buttons"  onclick="func_TypeListPercent('<?=$shop->id;?>', '<?=$val2->id;?>', '<?=$dataTL->i_main_typelist;?>', '<?=$shop->main;?>', '<?=$shop->sub;?>', 'i_status');">
+                      <label class="btn checkbox-inline btn-checkbox-success-inverse <?=$chk_box_active;?> "><?=$s_sub_typelist->topic_th;?>
+                      <input type="checkbox" value="1" id="i_checkbox<?=$val2->id;?><?=$dataTL->i_main_typelist;?>" name="i_checkbox<?=$val2->id;?><?=$dataTL->i_main_typelist;?>" <?=$chk_box;?>> </label>
+                    </div>
+                  </td>
+                  <?php
+                   if ($_GET[option] == '_company') {
+                  ?>
+                 <td style="display:<?=$td_percent;?>;" class="td_percent<?=$val2->id;?><?=$dataTL->i_main_typelist;?>"><input style="width: 80%;" onkeyup="func_UpdateTypeListPercent_rate('<?=$shop->id;?>', '<?=$val2->id;?>', '<?=$dataTL->i_main_typelist;?>', '<?=$shop->main;?>', '<?=$shop->sub;?>', 'f_discount', this.value);"  type="number" class="form-control" value="<?=$sub_type_list->f_discount;?>" ></td>
+
+                  <?php
+                }
+                ?>
+                  
+                  <td style="display:<?=$td_percent;?>;" class="td_percent<?=$val2->id;?><?=$dataTL->i_main_typelist;?>"><input style="width: 80%;" onkeyup="func_UpdateTypeListPercent_rate('<?=$shop->id;?>', '<?=$val2->id;?>', '<?=$dataTL->i_main_typelist;?>', '<?=$shop->main;?>', '<?=$shop->sub;?>', 'f_percent', this.value);" type="number" class="form-control" value="<?=$sub_type_list->f_percent;?>" ></td>
+                  <td style="display:<?=$td_percent;?>;" class="td_percent<?=$val2->id;?><?=$dataTL->i_main_typelist;?>"><input style="width: 80%;" onkeyup="func_UpdateTypeListPercent_rate('<?=$shop->id;?>', '<?=$val2->id;?>', '<?=$dataTL->i_main_typelist;?>', '<?=$shop->main;?>', '<?=$shop->sub;?>', 'f_percent', this.value);" type="number" class="form-control" value="<?=$sub_type_list->i_withholding;?>" ></td>
+                </tr>
                 <?php }?>
 
               </table>
@@ -138,7 +156,11 @@
 <?php
 foreach ($data['list_price'] as $key => $val2) {
   if ($val2->i_plan_product_price_name == 5) {
+
    ?>
+   <script type="text/javascript">
+      initusetype('<?=$_POST[i_shop];?>','<?=$_GET[option];?>','<?=$_POST[list_plan];?>','<?=$_POST[country];?>','<?=$val2->id;?>')
+   </script>
    <div class="col-md-12">
      <div class="col-md-4 " >
       <div class="form-group ">
@@ -151,7 +173,7 @@ foreach ($data['list_price'] as $key => $val2) {
     <div class="col-md-3">
       <div class="form-group ">
         <button type="button" class="btn btn-md btn-info"  onclick="func_default_price('<?=$_POST[i_shop];?>',
-        $('#default_price_car_<?=$val2->id;?>').val(),'<?=$val2->i_plan_product_price_name;?>','<?=$_GET[option];?>','<?=$_POST[list_plan];?>','<?=$_POST[country];?>')"><strong>ค่าเริ่มต้นทั้งหมด</strong></button>
+        $('#default_price_car_<?=$val2->id;?>').val(),'<?=$val2->i_plan_product_price_name;?>','<?=$_GET[option];?>','<?=$_POST[list_plan];?>','<?=$_POST[country];?>','<?=$val2->id;?>')"><strong>ค่าเริ่มต้นทั้งหมด</strong></button>
       </div>
     </div>
   </div>
@@ -178,29 +200,6 @@ foreach ($data['list_price'] as $key => $val2) {
 </div>
 <script type="text/javascript">
   // $_POST[list_plan]  ==  i_plan_price
-  initusetype('<?=$_POST[i_shop];?>','<?=$_GET[option];?>','<?=$_POST[list_plan];?>','<?=$_POST[country];?>')
-  function initusetype(shop,options,list_plan,country) {
-    var url2 = base_url+ "shop/get_com_usecar?option="+options;
-    var param = {
-      i_shop: shop,
-      option : options,
-      i_plan_price : list_plan,
-      country : country
-    }
-                // console.log('************************************')
-                // console.log(url2)
-                $.ajax({
-                 url: url2,
-                 data: param,
-                 type: 'post',
-                 error: function() {
-                  console.log('Error');
-                },
-                success: function(ele) {
-                // console.log(ele);
-                $('#box_com_usecar').html(ele);
-
-              }
-            });
-              }
+ 
+  
             </script>
