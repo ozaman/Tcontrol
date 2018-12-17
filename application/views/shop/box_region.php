@@ -92,15 +92,15 @@
 
                   if ($list_plan->i_plan_price != 7) {
                     ?>
-                    <div  class="col-xs-2 " style="margin-right: 5px">
-                    <button type="button" class="btn btn-primary btn-md" style="width: 140px;" onclick="func_comUsetypecar('<?=$list_plan->id;?>','<?=$val->id;?>','<?=$_POST[i_shop];?>')"> <span id="txt_btn_save5"> ค่าจอดตามประเภทรถ </span></button>
+                    <div  class="col-xs-3 " style="margin-right: 5px">
+                    <button type="button" class="btn btn-primary btn-md" style="width: 180px;" onclick="func_comUsetypecar('<?=$list_plan->id;?>','<?=$val->id;?>','<?=$_POST[i_shop];?>')"><i class="fa fa-cogs" aria-hidden="true"></i> <span id="txt_btn_save5"> ตั้งค่าค่าจอดตามประเภทรถ </span></button>
                   </div>
                     <?php
                   }
                   else{
                     ?>
-                    <div  class="col-xs-2 " style="margin-right: 5px">
-                    <button type="button" class="btn btn-primary btn-md" style="width: 140px;" onclick="func_comUsetypepro('<?=$list_plan->id;?>','<?=$val->id;?>','<?=$_POST[i_shop];?>')"> <span id="txt_btn_save5"> ค่าคอมตามสินค้า </span></button>
+                    <div  class="col-xs-3 " style="margin-right: 5px">
+                    <button type="button" class="btn btn-primary btn-md" style="width: 180px;" onclick="func_comUsetypepro('<?=$list_plan->id;?>','<?=$val->id;?>','<?=$_POST[i_shop];?>')"><i class="fa fa-cogs" aria-hidden="true"></i> <span id="txt_btn_save5"> ตั้งค่าค่าคอมตามสินค้า </span></button>
                   </div>
                     <?php
                   }
@@ -114,11 +114,11 @@
                   }
                   ?>
                   
-                  <div  class="col-md-3 " style="margin-right: 5px">
+                  <div  class="col-md-2 " style="margin-right: 5px">
                     <!-- <div  class="form-group "> -->
                       <div class="input-group">
                         <span  class="input-group-addon" style="width: 65px"><?=$val2->s_topic_th;?>  </span>
-                        <input  type="text" class="form-control" value="<?=$val2->i_price;?> <?=$curen;?>" disabled>
+                        <!-- <input  type="text" class="form-control" value="<?=$val2->i_price;?> <?=$curen;?>" disabled> -->
                         <span  class="input-group-addon" style="width: 65px"><?=$val2->s_payment;?>  </span>
                       </div>
                     <!-- </div> -->

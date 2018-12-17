@@ -46,7 +46,7 @@
             <div  class="form-group ">
               <div class="input-group">
                 <span  class="input-group-addon" style="width: 65px"><?=$val2->s_topic_th;?>  </span>
-                <input  type="text" class="form-control" value="<?=$val2->i_price;?> <?=$curen;?>" disabled>
+                <!-- <input  type="text" class="form-control" value="<?=$val2->i_price;?> <?=$curen;?>" disabled> -->
                 <span  class="input-group-addon" style="width: 65px"><?=$val2->s_payment;?>  </span>
               </div>
             </div>

@@ -36,8 +36,7 @@
 								<div class="input-group">
 									<span  class="input-group-addon" style="width: 64px;"><?=$val2->s_topic_th;?>  </span>
 									
-									<input  type="text" class="form-control input_<?=$val->id;?>" name="input_<?=$val->id;?>_<?=$val2->id;?>"
-									 value="<?=$val2->i_price;?>" id="input_<?=$val->id;?>_<?=$val2->id;?>" disabled>
+									<!-- <input  type="text" class="form-control input_<?=$val->id;?>" name="input_<?=$val->id;?>_<?=$val2->id;?>" value="<?=$val2->i_price;?>" id="input_<?=$val->id;?>_<?=$val2->id;?>" disabled> -->
 									<span  class="input-group-addon" style="width: 64px;"><?=$val2->s_payment;?>  </span>
 								</div>
 

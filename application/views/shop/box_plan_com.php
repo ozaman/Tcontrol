@@ -29,12 +29,13 @@
 									</span>
 
 								</div> -->
-								<div class="col-md-5">
+								<div class="col-md-1">
 									<div class="form-group ">
 										<div class="input-group" style="width: 100%">
-											<span class="input-group-addon " style="width: 65px;" ><?=$val->s_topic_th;?></span>
+											<!-- <span class="input-group-addon " style="width: 65px;" ><?=$val->s_topic_th;?></span> -->
+											<span class=" "  ><?=$val->s_topic_th;?></span>
 
-											<input type="text" class="form-control input-title" name="<?=$val->element;?>" value="">
+											<input type="hidden" class="form-control input-title" name="<?=$val->element;?>" value="">
 										</div>
 									</div>
 								</div>
