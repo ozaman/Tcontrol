@@ -261,7 +261,7 @@ function func_UpdateTypeListPercent(i_shop,i_list_price,i_main_typelist,i_main,i
     success: function (res) {
       console.log(res);
       if (res.data == true) {
-        
+
         toastr.success('บันทึกข้อมูลสำเร็จ', '', {"closeButton": true});
       }
     }
@@ -271,11 +271,15 @@ function func_UpdateTypeListPercent(i_shop,i_list_price,i_main_typelist,i_main,i
 
 // callinit();
 var param_plan_price,
-        day, obj_day;
+day, obj_day;
 var option = '';
 // shop('categorie')
 // box_region_show()
+var chk = false;
 function _box_region_show(item, options) {
+  ckt = false;
+      $('.box_region_show').html('');
+
   console.log(item)
   console.log(options)
   $('#section_state').val(options)
@@ -407,29 +411,29 @@ function manage_shop_ordertype(item) {
 function open_commision(id) {
   // body...
   $('#modal_custom').show()
-   console.log(option)
+  console.log(option)
   var head;
   // $('#modal_custom_2').show()
   if (option == '_company') {
     head = $('#i_shop_topice').val();
-  $('#formModalLabel').html('จัดการประเภทรายจ่าย ('+head+' >> Tshare)')
+    $('#formModalLabel').html('จัดการประเภทรายจ่าย ('+head+' >> Tshare)')
 
   }
-   if (option == '_taxi') {
+  if (option == '_taxi') {
     head = 'Taxi';
-  $('#formModalLabel').html('จัดการประเภทรายจ่าย (Tshare >> '+head+')')
+    $('#formModalLabel').html('จัดการประเภทรายจ่าย (Tshare >> '+head+')')
 
   }
   if (option == '_gui') {
     head = 'Guide';
-  $('#formModalLabel').html('จัดการประเภทรายจ่าย (Tshare >> '+head+')')
-  
+    $('#formModalLabel').html('จัดการประเภทรายจ่าย (Tshare >> '+head+')')
+
 
   }
   if (option == '_tourist') {
     head = 'Tourist';
-  $('#formModalLabel').html('จัดการประเภทรายจ่าย (Tshare >> '+head+')')
-  
+    $('#formModalLabel').html('จัดการประเภทรายจ่าย (Tshare >> '+head+')')
+
 
   }
   console.log('--------------------------------------')
@@ -645,7 +649,7 @@ function save_plan_price() {
         commision($('#manage_com').val())
         $('#box_plan_com').html('');
         _box_plan_comision();
-      _box_price_plan();
+        _box_price_plan();
       }
 
 
@@ -991,16 +995,16 @@ function finalDelete() {
       console.log(res);
       // console.log($('#section_state').val())
       // if ($('#section_state').val() == 1) {
-      if (table_delete == 'shopping_contact') {
-        _box_contact($('#manage_com').val())
-        Command: toastr["success"]("ลบผู้ติดต่อสำเร็จ")
+        if (table_delete == 'shopping_contact') {
+          _box_contact($('#manage_com').val())
+          Command: toastr["success"]("ลบผู้ติดต่อสำเร็จ")
 
-      }
-      if (table_delete == 'place_document_file') {
-        _box_document($('#manage_com').val())
-      }
-      if (table_delete == 'shop_country' + option || table_delete == 'shop_country_com_list' + option) {
-        commision($('#manage_com').val())
+        }
+        if (table_delete == 'place_document_file') {
+          _box_document($('#manage_com').val())
+        }
+        if (table_delete == 'shop_country' + option || table_delete == 'shop_country_com_list' + option) {
+          commision($('#manage_com').val())
         // _box_plan_comision();
         // _box_region_icon();
       } if (table_delete != 'shopping_contact' || table_delete != 'shop_country' + option || table_delete != 'shop_country_com_list' + option || table_delete != 'place_document_file') {
@@ -1009,7 +1013,7 @@ function finalDelete() {
       }
       // }
       // else{
-      if (table_delete == 'shop_country_icon_company' || table_delete == 'shop_country_com_list_company') {
+        if (table_delete == 'shop_country_icon_company' || table_delete == 'shop_country_com_list_company') {
          _box_plan_comision();
          _box_price_plan()
       //   commision_company($('#manage_com').val())
@@ -1019,11 +1023,11 @@ function finalDelete() {
       //   _box_region_icon_company();
       //   _box_plan_comision_company();
       // }
-      }
-
     }
 
-  });
+  }
+
+});
 }
 
 function cal_map(id) {
@@ -1102,7 +1106,7 @@ function submit_data_plan_time(id, op) {
     success: function (res) {
       console.log(res);
       
-        var url = base_url + "shop/box_plan_time?id=" + id;
+      var url = base_url + "shop/box_plan_time?id=" + id;
       console.log(url)
       Command: toastr["success"]("บันทึกข้อมูลสำเร็จ")
 
@@ -1343,15 +1347,15 @@ function closeDay(day) {
 
   } else {
     //        if($('#open_alway_'+day).is(":checked")){
-    $('#hour_open_' + day).attr("disabled", true);
-    $('#hour_open_' + day).css("background-color", '#ddd');
-    $('#time_open_' + day).attr("disabled", true);
-    $('#time_open_' + day).css("background-color", '#ddd');
+      $('#hour_open_' + day).attr("disabled", true);
+      $('#hour_open_' + day).css("background-color", '#ddd');
+      $('#time_open_' + day).attr("disabled", true);
+      $('#time_open_' + day).css("background-color", '#ddd');
 
-    $('#hour_close_' + day).attr("disabled", true);
-    $('#hour_close_' + day).css("background-color", '#ddd');
-    $('#time_close_' + day).attr("disabled", true);
-    $('#time_close_' + day).css("background-color", '#ddd');
+      $('#hour_close_' + day).attr("disabled", true);
+      $('#hour_close_' + day).css("background-color", '#ddd');
+      $('#time_close_' + day).attr("disabled", true);
+      $('#time_close_' + day).css("background-color", '#ddd');
     //      }
 
   }
@@ -1403,7 +1407,7 @@ function default_time_other() {
       }, 2000);
     }
 //                  console.log(value+" : "+hour_open_default);
-  });
+});
 }
 
 function form_detail_shop(id, op) {
@@ -1687,7 +1691,7 @@ $(document).ready(function () {
 });
 
 function _form_upload_file(id) {
-  
+
   var data_form = $('#form_upload_file').serialize();
   var data_form = new FormData($('#form_shop_all')[0]);
   var url = base_url + "shop/save_document";
@@ -1790,8 +1794,8 @@ function upfile_submit() {
     },
     error: function (data) {
 //            $("#file").val("");
-    }
-  });
+}
+});
 }
 function _box_img_book(id) {
   // alert(id)
@@ -1870,7 +1874,7 @@ function _submit_detail_pay() {
          // _box_contact(res.id);
 
 
-      }
+       }
       // if (res.result == true) {
       //   location.href = base_url+'shop/shop_manage?sub='+res.sub+'&id='+res.product_id;
       // }
@@ -1932,22 +1936,22 @@ function func_comUsetypecar(list_plan,country,shop) {
   // $('#modal_custom_2').show()
   if (option == '_company') {
     head = $('#i_shop_topice').val();
-  $('#title_add_region_sub').html('จัดการค่าตอบแทนตามสินค้า ( '+head+' >> '+ 'Tshare)')
+    $('#title_add_region_sub').html('จัดการค่าตอบแทนตามสินค้า ( '+head+' >> '+ 'Tshare)')
 
   }
-   if (option == '_taxi') {
+  if (option == '_taxi') {
     head = 'Taxi';
-  $('#title_add_region_sub').html('จัดการค่าตอบแทนตามสินค้า (Tshare >> '+head+')')
+    $('#title_add_region_sub').html('จัดการค่าตอบแทนตามสินค้า (Tshare >> '+head+')')
 
   }
   if (option == '_gui') {
     head = 'Guide';
-  $('#title_add_region_sub').html('จัดการค่าตอบแทนตามสินค้า (Tshare >> '+head+')')
+    $('#title_add_region_sub').html('จัดการค่าตอบแทนตามสินค้า (Tshare >> '+head+')')
 
   }
   if (option == '_tourist') {
     head = 'Tourist';
-  $('#title_add_region_sub').html('จัดการค่าตอบแทนตามสินค้า (Tshare >> '+head+')')
+    $('#title_add_region_sub').html('จัดการค่าตอบแทนตามสินค้า (Tshare >> '+head+')')
 
   }
   // var url = base_url + "shop/get_region_sub?option=" + option;
@@ -1976,38 +1980,38 @@ function func_comUsetypecar(list_plan,country,shop) {
 }
 function func_default_price(i_shop,i_price,op,options,list_plan,country,list_price) {
 
-          var url = base_url + "shop/default_price?option="+options;
+  var url = base_url + "shop/default_price?option="+options;
 
-          var param = {
-            i_shop: i_shop,
-            i_price: i_price,
-            list_plan: list_plan,
-            list_price: list_price,
-            op: op,
-            country : country,
+  var param = {
+    i_shop: i_shop,
+    i_price: i_price,
+    list_plan: list_plan,
+    list_price: list_price,
+    op: op,
+    country : country,
 
 
-        }
-        console.log(param);
-        $.ajax({
-            url: url,
-            data: param,
-            type: 'post',
-            dataType: 'json',
-            error: function () {
-              console.log('Error Profile');
-          },
-          success: function (res) {
-              console.log(res);
-              if (res.data == true) {
-                initusetype(i_shop,options,list_plan,country,list_price)
-                toastr.success('บันทึกข้อมูลสำเร็จ', '', {"closeButton": true});
-            }
-            else{
-            }
-        }
-    });
+  }
+  console.log(param);
+  $.ajax({
+    url: url,
+    data: param,
+    type: 'post',
+    dataType: 'json',
+    error: function () {
+      console.log('Error Profile');
+    },
+    success: function (res) {
+      console.log(res);
+      if (res.data == true) {
+        initusetype(i_shop,options,list_plan,country,list_price)
+        toastr.success('บันทึกข้อมูลสำเร็จ', '', {"closeButton": true});
+      }
+      else{
+      }
     }
+  });
+}
 
           //   function func_UpdateCar_rat(i_shop,i_car_type,i_price,op,list_price,country,options,i_car_price) {
           //     var timer;
@@ -2020,30 +2024,30 @@ function func_default_price(i_shop,i_price,op,options,list_plan,country,list_pri
           function func_UpdateCar_rat(i_shop,i_car_type,i_price,op,list_price,country,options,i_car_price) {
             var url = base_url + "shop/func_Updatecar?option="+options;
             var param = {
-                i_shop : i_shop,
-                i_car_type: i_car_type,
-                i_price: i_price,
-                op : op,
-                list_price : list_price,
-                country : country,
-                option : options,
-                i_car_price : i_car_price
+              i_shop : i_shop,
+              i_car_type: i_car_type,
+              i_price: i_price,
+              op : op,
+              list_price : list_price,
+              country : country,
+              option : options,
+              i_car_price : i_car_price
 
             }
             console.log(param);
-             var timer;
-               clearTimeout(timer);
-                timer = setTimeout(function () {
-                  console.log('in aaa')
-            $.ajax({
+            var timer;
+            clearTimeout(timer);
+            timer = setTimeout(function () {
+              console.log('in aaa')
+              $.ajax({
                 url: url,
                 data: param,
                 type: 'post',
                 dataType: 'json',
                 error: function () {
                   console.log('Error Profile');
-              },
-              success: function (res) {
+                },
+                success: function (res) {
                   console.log(res);
                   if (res.data == true) {
                     console.log($('#i_checkbox' + i_car_type).prop("checked"))
@@ -2052,44 +2056,44 @@ function func_default_price(i_shop,i_price,op,options,list_plan,country,list_pri
                     var s_val = 0;
 
                     toastr.success('บันทึกข้อมูลสำเร็จ', '', {"closeButton": true});
+                  }
+                  else{
+                    $('#l_checkbox' + i_car_type).removeClass('active');
+
+                    $('#i_checkbox' + i_car_type).prop("checked", true);
+                    var s_val = 1;
+                  }
                 }
-                else{
-                  $('#l_checkbox' + i_car_type).removeClass('active');
-
-                  $('#i_checkbox' + i_car_type).prop("checked", true);
-                  var s_val = 1;
-              }
+              });
+            }, 200);
           }
-      });
-             }, 200);
-        }
-function func_comUsetypepro(list_plan,country,shop) {
-  console.log(list_plan)
-  console.log(shop)
-  console.log(country)
-  console.log(option)
-  var head;
-  $('#modal_custom_2').show()
-  if (option == '_company') {
-    head = $('#i_shop_topice').val();
-  $('#title_add_region_sub').html('จัดการค่าตอบแทนตามสินค้า ( '+head+' >> '+ 'Tshare)')
+          function func_comUsetypepro(list_plan,country,shop) {
+            console.log(list_plan)
+            console.log(shop)
+            console.log(country)
+            console.log(option)
+            var head;
+            $('#modal_custom_2').show()
+            if (option == '_company') {
+              head = $('#i_shop_topice').val();
+              $('#title_add_region_sub').html('จัดการค่าตอบแทนตามสินค้า ( '+head+' >> '+ 'Tshare)')
 
-  }
-   if (option == '_taxi') {
-    head = 'Taxi';
-  $('#title_add_region_sub').html('จัดการค่าตอบแทนตามสินค้า (Tshare >> '+head+')')
+            }
+            if (option == '_taxi') {
+              head = 'Taxi';
+              $('#title_add_region_sub').html('จัดการค่าตอบแทนตามสินค้า (Tshare >> '+head+')')
 
-  }
-  if (option == '_gui') {
-    head = 'Guide';
-  $('#title_add_region_sub').html('จัดการค่าตอบแทนตามสินค้า (Tshare >> '+head+')')
+            }
+            if (option == '_gui') {
+              head = 'Guide';
+              $('#title_add_region_sub').html('จัดการค่าตอบแทนตามสินค้า (Tshare >> '+head+')')
 
-  }
-  if (option == '_tourist') {
-    head = 'Tourist';
-  $('#title_add_region_sub').html('จัดการค่าตอบแทนตามสินค้า (Tshare >> '+head+')')
+            }
+            if (option == '_tourist') {
+              head = 'Tourist';
+              $('#title_add_region_sub').html('จัดการค่าตอบแทนตามสินค้า (Tshare >> '+head+')')
 
-  }
+            }
   // var url = base_url + "shop/get_region_sub?option=" + option;
   var param = {
     country: country,
@@ -2115,28 +2119,28 @@ function func_comUsetypepro(list_plan,country,shop) {
   });
 }
 function initusetype(shop,options,list_plan,country,list_price) {
-    var url2 = base_url+ "shop/get_com_usecar?option="+options;
-    var param = {
-      i_shop: shop,
-      option : options,
-      list_plan : list_plan,
-      country : country,
-      list_price : list_price
-    }
-    console.log(param)
-                // console.log('************************************')
-                // console.log(url2)
-                $.ajax({
-                 url: url2,
-                 data: param,
-                 type: 'post',
-                 error: function() {
-                  console.log('Error');
-                },
-                success: function(ele) {
-                // console.log(ele);
-                $('#box_com_usecar').html(ele);
+  var url2 = base_url+ "shop/get_com_usecar?option="+options;
+  var param = {
+    i_shop: shop,
+    option : options,
+    list_plan : list_plan,
+    country : country,
+    list_price : list_price
+  }
+  console.log(param)
 
-              }
-            });
-              }
+  $.ajax({
+   url: url2,
+   data: param,
+   type: 'post',
+   error: function() {
+    console.log('Error');
+  },
+  success: function(ele) {
+
+    $('#box_com_usecar').html(ele);
+
+  }
+});
+}
+
