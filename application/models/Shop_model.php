@@ -178,7 +178,7 @@ class Shop_model extends CI_Model{
     return $result;
   }
 
-  public function save_plan_price(){
+  public function save_plan_price($msg){
     $res= array();
     $_where = array();
     $_where['i_plan_price'] = $_POST[i_price_plan];
@@ -186,9 +186,14 @@ class Shop_model extends CI_Model{
     $_order = array();
     $_order['id'] = 'asc';
     $plan_com = $this->Main_model->fetch_data('','',TBL_SHOP_PLAN_COM,$_where,$_select,$_order);
+    
+    if ($msg == '') {
+    
     $plan = array();
     $plan[i_shop_country_icon] = $_POST[i_country_icon_plan];
     $plan[i_plan_price] = $_POST[i_price_plan];
+    
+    
 
 
     $result = $this->db->insert(TBL_SHOP_COUNTRY_COM_LIST.$_GET[option],$plan);
@@ -213,19 +218,44 @@ class Shop_model extends CI_Model{
       }
       $data[i_plan_product_price_name] = $val->i_plan_com;
       $data[s_topic_en] = $s_topic_en;
+      if ($val->i_plan_product_price_name == 6) {
       $data[i_price] = $_POST[$val->element];
+        
+      }
+      else{
+      $data[i_price] = 0;
+
+      }
+      
       $data[s_payment] = $_POST[money_.$val->element];
+      $data[i_type_pay] = $_POST[typepark];
+
       $result = $this->db->insert(TBL_SHOP_COUNTRY_COM_LIST_PRICE.$_GET[option],$data);
     }
     $res[post] = $_POST;
      $res[data] =  $data;
      $res[insert] =  $result;
      $res[last_id] =  $last_id;
+     $res[typepark] =  $_POST[typepark];
+
+     $res[i_plan_price] = $_POST[i_price_plan];
+     $res[plan_com] = $plan_com;
+     $res[option] =$_GET[option];
+      $res[status] = true;
+     $res[msg] = $msg;
+    return  $res;
+  }
+  else{
+    $res[post] = $_POST;
+     $res[status] = false;
+     $res[msg] = $msg;
+     $res[typepark] =  $_POST[typepark];
      $res[i_plan_price] = $_POST[i_price_plan];
      $res[plan_com] = $plan_com;
      $res[option] =$_GET[option];
     return  $res;
-    // return $result;
+  }
+
   }
 
   public function save_edit_com(){
@@ -237,7 +267,13 @@ class Shop_model extends CI_Model{
     $arr['plan_com'] = $this->Main_model->fetch_data('','',TBL_SHOP_COUNTRY_COM_LIST_PRICE.$_GET[option],$_where,$_select,$_order);
     foreach($arr['plan_com'] as $val) {
       $this->db->where('id',$val->id);
+      if ($val->i_plan_product_price_name == 5) {
+      $data[i_type_pay] = $_POST[typepark.'_'.$val->id];
+
+        
+      }
       $data[i_price] = $_POST[input_.$_GET[i_shop_country_com_list]._.$val->id];
+
       $result = $this->db->update(TBL_SHOP_COUNTRY_COM_LIST_PRICE.$_GET[option],$data);
     }
 

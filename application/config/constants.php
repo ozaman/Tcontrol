@@ -146,6 +146,11 @@ define('TBL_SHOP_COMPENSATION_TYPE', 'shop_compensation_type');
 define('TBL_SHOP_DETAIL_PAY', 'shop_detail_pay');
 define('TBL_WEB_CAR_USE_TYPE', 'web_car_use_type');
 define('TBL_SHOP_CAR_PRICE', 'shop_car_price');
+define('TBL_SHOP_TYPE_PAY', 'shop_type_pay');
+define('TBL_SHOP_TYPE_PAY_LIST', 'shop_type_pay_list');
+// define('TBL_SHOP_TYPE_PAY_list', 'shop_type_pay_list');
+define('TBL_SHOP_TYPE_PAY_LIST_PERCENT', 'shop_type_pay_list_percent');
+
 
 
 

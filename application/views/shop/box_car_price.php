@@ -33,7 +33,7 @@
           <!-- <div class="col-md-12"> -->
             <div class="row">
              <header><h4 class="text-light">ค่าคอมตามสินค้า</h4></header>
-             <input type="hidden" name="" id="id_shop_product" value="1">
+             <input type="hidden" name="" id="id_shop_product" value="1"> 
            </div>
          <!-- </div> -->
        <?php } ?>
@@ -145,10 +145,22 @@
         <div  class="form-group ">
           <div class="input-group">
             <span  class="input-group-addon" style="width: 65px"><?=$val2->s_topic_th;?>  </span>
-            <input  type="text" class="form-control" value="<?=$val2->i_price;?> <?=$curen;?>" disabled>
+            <!-- <input  type="text" class="form-control" value="<?=$val2->i_price;?> <?=$curen;?>" disabled> -->
             <span  class="input-group-addon" style="width: 65px"><?=$val2->s_payment;?>  </span>
           </div>
         </div>
+        <?php
+        $TYPE_PAY = $this->Main_model->rowdata(TBL_SHOP_TYPE_PAY,array('id'=>$val2->i_type_pay));
+  
+                 
+                  ?>
+                  <div  class="form-group ">
+                    <div class="input-group" >
+                      <span class=" " style="width: 65px;" >จ่ายเงินตาม</span>:
+                      <span class=" " style="width: 65px;" ><?=$TYPE_PAY->s_topic_th;?></span>
+                     
+                    </div>
+                </div>
       <?php } ?>
     </div>
   <?php } ?>
@@ -156,9 +168,12 @@
 <?php
 foreach ($data['list_price'] as $key => $val2) {
   if ($val2->i_plan_product_price_name == 5) {
-
-   ?>
-   <script type="text/javascript">
+    
+    
+   
+    if ($val2->i_type_pay == 1) {
+     ?>
+     <script type="text/javascript">
       initusetype('<?=$_POST[i_shop];?>','<?=$_GET[option];?>','<?=$_POST[list_plan];?>','<?=$_POST[country];?>','<?=$val2->id;?>')
    </script>
    <div class="col-md-12">
@@ -177,9 +192,61 @@ foreach ($data['list_price'] as $key => $val2) {
       </div>
     </div>
   </div>
-  <?php
+   <?php 
+ }else{
+  ?>
+                 
+
+
+          <div class="col-md-12">
+
+            <div  class="form-group ">
+              <table>
+                 <tr>
+                <td style=" font-weight: bold;">รายการ</td>
+                
+               
+                <!-- <td style="font-weight: bold;width: 100px;">จำนวนคน</td> -->
+
+              </tr>
+                <?php
+                $_where = array();
+                $sub_typelist = $this->Main_model->fetch_data('','',TBL_SHOP_TYPE_PAY_LIST,array('i_status' => 1));
+                foreach ($sub_typelist as $dataTL) {
+                 
+                  $_where = array();
+
+
+                  $_where[product] = $shop->id;
+                  $_where[i_list_price] = $val2->id;
+                  $_where[i_type_pay_list] = $dataTL->id;
+                  $_where[i_type_pay] = $val2->i_type_pay;
+                 
+                  $sub_type_list = $this->Main_model->rowdata(TBL_SHOP_TYPE_PAY_LIST_PERCENT.$_GET[option],$_where);
+                  $chk_box_type = ($sub_type_list->i_status > 0) ? 'checked' : '';
+                  $chk_box_type_active = ($sub_type_list->i_status > 0) ? 'active' : '';
+                  $td_percent = ($sub_type_list->i_status > 0) ? '' : 'none';
+                  ?>
+                 <tr>
+                  <td>
+                    <div data-toggle="buttons" onclick="func_UpdateType_pay('<?=$shop->id;?>', '<?=$val2->id;?>', '<?=$dataTL->id;?>', 'i_status','<?=$val2->i_type_pay;?>');">
+                      <label class="btn checkbox-inline btn-checkbox-success-inverse <?=$chk_box_type_active;?> "><?=$dataTL->topic_th;?>
+                      <input type="checkbox" value="1" id="i_check_type_<?=$val2->id;?>_park" name="i_check_type<?=$val2->id;?>_park" <?=$chk_box_type;?>> </label>
+                    </div>
+                  </td>
+                </tr>
+                <?php }?>
+
+              </table>
+
+            </div>
+          </div>
+   <?php }
+
+  
 
 }
+
 
 }
 // print_r(json_encode($shop));

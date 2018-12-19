@@ -28,6 +28,13 @@
 					<?php
 
 					foreach($data['list_price'] as $key2=>$val2){
+						if ($val2->i_plan_product_price_name == 6) {
+							$i_price = $val2->i_price;
+						}
+						else{
+							$i_price = '';
+
+						}
 						?>
 
 						<div  class="col-md-4 " >
@@ -35,12 +42,45 @@
 							<div  class="form-group ">
 								<div class="input-group">
 									<span  class="input-group-addon" style="width: 64px;"><?=$val2->s_topic_th;?>  </span>
-									
-									<!-- <input  type="text" class="form-control input_<?=$val->id;?>" name="input_<?=$val->id;?>_<?=$val2->id;?>" value="<?=$val2->i_price;?>" id="input_<?=$val->id;?>_<?=$val2->id;?>" disabled> -->
+
+									<input  type="text" class="form-control input_<?=$val->id;?>" name="input_<?=$val->id;?>_<?=$val2->id;?>" value="<?=$i_price;?>" id="input_<?=$val->id;?>_<?=$val2->id;?>" disabled>
 									<span  class="input-group-addon" style="width: 64px;"><?=$val2->s_payment;?>  </span>
 								</div>
 
 							</div>
+								<?php if ($val2->i_plan_product_price_name == 5 ) {
+									$data['shop'] = $this->Main_model->rowdata(TBL_SHOP_TYPE_PAY,array('id'=>$val->i_type_pay));
+									$_where = array();
+	$_where['i_status'] = 1;
+	$_select = array('*');
+
+	$_order = array();
+	$_order['id'] = 'asc';
+	$TYPE_PAY = $this->Main_model->fetch_data('','',TBL_SHOP_TYPE_PAY,$_where,$_select,$_order);
+									?>
+									<div class="form-group">
+										<div class="input-group" style="width: 100%">
+											<span class="input-group-addon " style="width: 65px;" >จ่ายเงินตาม</span>
+											<select name="typepark_<?=$val2->id;?>" class="form-control" id="typepark_<?=$val->id;?>" disabled>
+												<option value="">- เลือกจ่ายเงินตามประเถท -</option>
+
+												<?php
+												foreach($TYPE_PAY as $row){
+													if($val2->i_type_pay == $row->id) {
+                            $selected_pay = "selected";
+                          }
+                          else {
+                            $selected_pay = "";
+                          }
+													?>
+													<option value="<?=$row->id;?>" <?=$selected_pay;?>><?=$row->s_topic_th;?></option>
+												<?php } ?>
+											</select>
+										</div>
+								</div>
+									<?php
+								}
+								?>
 
 
 							

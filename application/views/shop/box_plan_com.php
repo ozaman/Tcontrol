@@ -14,6 +14,15 @@
 	
 
 	foreach($plan_com as $key=>$val){
+		if ($val->i_plan_com == 6 ) {
+		$disabled = '';	
+		$type = 'number';
+		}
+		else{
+		$disabled = 'disabled';	
+		$type = 'hidden';
+
+		}
 		?>
 		<!-- <div class="form-group"> -->
 						<!-- <div class="col-md-1">
@@ -29,13 +38,13 @@
 									</span>
 
 								</div> -->
-								<div class="col-md-1">
+								<div class="col-md-2">
 									<div class="form-group ">
 										<div class="input-group" style="width: 100%">
-											<!-- <span class="input-group-addon " style="width: 65px;" ><?=$val->s_topic_th;?></span> -->
-											<span class=" "  ><?=$val->s_topic_th;?></span>
+											<span class="input-group-addon " style="width: 65px;" ><?=$val->s_topic_th;?></span>
+											<!-- <span class=" "  ><?=$val->s_topic_th;?></span> -->
 
-											<input type="hidden" class="form-control input-title" name="<?=$val->element;?>" value="">
+											<input type="number" class="form-control input-title" name="<?=$val->element;?>" value="" <?=$disabled;?>>
 										</div>
 									</div>
 								</div>
@@ -44,7 +53,7 @@
 							<div class="row"> -->
 								<div class="col-md-1">
 								</div>
-								<div class="col-md-5" >
+								<div class="col-md-4" >
 									<div class="form-group ">
 										<div class="input-group" style="width: 100%">
 											<span class="input-group-addon " style="width: 65px;" >จ่ายเงิน</span>
@@ -60,6 +69,33 @@
 										</div>
 									</div>
 								</div>
+								<?php if ($val->i_plan_com == 5 ) {
+									$_where = array();
+	$_where['i_status'] = 1;
+	$_select = array('*');
+
+	$_order = array();
+	$_order['id'] = 'asc';
+	$TYPE_PAY = $this->Main_model->fetch_data('','',TBL_SHOP_TYPE_PAY,$_where,$_select,$_order);
+									?>
+									<div class="col-md-5">
+										<div class="input-group" style="width: 100%">
+											<span class="input-group-addon " style="width: 65px;" >จ่ายเงินตาม</span>
+											<select name="typepark" class="form-control" id="typepark" >
+												<option value="">- เลือกจ่ายเงินตามประเถท -</option>
+
+												<?php
+												foreach($TYPE_PAY as $key=>$val2){
+													?>
+													<option value="<?=$val2->id;?>" ><?=$val2->s_topic_th;?></option>
+												<?php } ?>
+											</select>
+										</div>
+								</div>
+									<?php
+								}
+								?>
+								
 							</div>
 						</div>
 					<!-- </div> -->

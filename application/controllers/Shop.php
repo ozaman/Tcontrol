@@ -274,23 +274,49 @@ class Shop extends CI_Controller {
     $this->load->view('shop/box_plan_com',$data);
   }
   public function save_plan_price() {
+    header('Content-Type: application/json');
+
     $_where = array();
     $_where['i_plan_price'] = $_POST[i_price_plan];
     $_select = array('*');
     $_order = array();
     $_order['id'] = 'asc';
     $data['plan_com'] = $this->Main_model->fetch_data('','',TBL_SHOP_PLAN_COM,$_where,$_select,$_order);
-    $chk = 1;
+
+    $msg = '';
     foreach ($data['plan_com'] as $val) {
-      if ($_POST[money_.$val->element] == '') {
-        $chk = 0;
+      if ($_POST[money_.$val->element] != '') {
+         
+      
+      if ($val->i_plan_com == 5) {
+        if ($_POST[typepark] == '') {
+
+           $msg = 'เลือกจ่ายเงินตามประเถท';
+        }
+
+      }
+      if ($val->i_plan_com == 6) {
+           $msg = 'กรุณาป้อนค่าหัว';
+
       }
     }
-    if ($chk == 1) {
-      $data = $this->Shop_model->save_plan_price();
-      $this->load->view('shop/box_plan_com');
-      echo json_encode($data);
+    else{
+      // if ($_POST[money_.$val->element] == '') {
+           $msg = 'เลือกช่องทางการจ่ายเงิน';
+          
+
+      // }
     }
+
+
+
+    }
+    // if ($chk == 1) {
+      $data = $this->Shop_model->save_plan_price($msg);
+
+      // $this->load->view('shop/box_plan_com');
+      echo json_encode($data);
+    // }
   }
   public function box_plan_comision() {
     $this->load->view('shop/box_plan_comision');
@@ -575,6 +601,36 @@ class Shop extends CI_Controller {
     $data['region'] = $this->Main_model->fetch_data('','',TBL_SHOP_COUNTRY.$_GET[option],$_where,$_select,$_order);
     $data['shop'] = $this->Main_model->rowdata(TBL_SHOPPING_PRODUCT,array('id'=>$_POST[i_shop]));
     $this->load->view('shop/box_com_usepro',$data);
+  }
+  public function func_UpdateType_pay() {
+    $_where = array();
+    $_where[i_list_price] = $_POST[i_list_price];
+    $_where[i_type_pay_list] = $_POST[i_typelist];
+    $_where[product] = $_POST[product];
+    $_where[i_type_pay] = $_POST[i_type_pay];
+    $sub_type_list = $this->Main_model->rowdata(TBL_SHOP_TYPE_PAY_LIST_PERCENT.$_GET[option],$_where);
+    if ($sub_type_list->id == null) {
+      $params = array();
+      $params[i_list_price] = $_POST[i_list_price];
+      $params[i_type_pay_list] = $_POST[i_typelist];
+      $params[product] = $_POST[product];
+      $params[i_type_pay] = $_POST[i_type_pay];
+     
+      $params[i_status] = 1;
+      $data = $this->db->insert(TBL_SHOP_TYPE_PAY_LIST_PERCENT.$_GET[option],$params);
+    }
+    else {
+      if($_POST[s_col] == 'i_status'){
+        $params[$_POST[s_col]] = ($sub_type_list->i_status == 1)?0:1;
+      }else{
+        $params[$_POST[s_col]] = $_POST[s_val];
+      }
+      $data = $this->db->update(TBL_SHOP_TYPE_PAY_LIST_PERCENT.$_GET[option],$params,$_where);
+    }
+    $data_j[where] = $_where;
+    $data_j[params] = $params;
+    $data_j[data] = $data;
+    echo json_encode($data_j);
   }
   ################################ SHOP #################################
 }

@@ -122,19 +122,19 @@
 																		<span  class="input-group-addon" style="width: 64px"><?=$val2->s_topic_th;?>  </span>
 																		<?php
 																		if ($val2->i_plan_product_price_name == 6) {
-																		?>
-																		<input  type="text" class="form-control" value="<?=$val2->i_price;?> <?=$curen;?>" disabled>
+																			?>
+																			<input  type="text" class="form-control" value="<?=$val2->i_price;?> <?=$curen;?>" disabled>
 
-																	<?php } ?>
+																		<?php } ?>
 																		<span  class="input-group-addon" style="width: 64px"><?=$val2->s_payment;?>  </span>
-																	<!-- <i class="fa fa-chevron-up" aria-hidden="true" onclick="carusepark('<?$row->id;?>')"></i> -->
-																	<?php
+																		<!-- <i class="fa fa-chevron-up" aria-hidden="true" onclick="carusepark('<?$row->id;?>')"></i> -->
+																		<?php
 																		if ($val2->i_plan_product_price_name != 6) {
-																		?>
-																	<button type="button" class="btn btn-md btn-default btn-equal pull-right" onclick="carusepark('<?=$val2->id;?>','<?=$_GET[option];?>')"> 
-                        <i class="fa fa-chevron-up btn_use<?=$_GET[option];?>_<?=$val2->id;?>"  ></i>
-                      </button>
-                  <?php } ?>
+																			?>
+																			<button type="button" class="btn btn-md btn-default btn-equal pull-right" onclick="carusepark('<?=$val2->id;?>','<?=$_GET[option];?>')"> 
+																				<i class="fa fa-chevron-up btn_use<?=$_GET[option];?>_<?=$val2->id;?>"  ></i>
+																			</button>
+																		<?php } ?>
 																	</div>
 																	
 
@@ -142,92 +142,158 @@
 
 
 																</div>
+																<?php
+																if ($val2->i_plan_product_price_name == 5) {
+																$TYPE_PAY = $this->Main_model->rowdata(TBL_SHOP_TYPE_PAY,array('id'=>$val2->i_type_pay));
+  
+                 
+                  ?>
+                  <div  class="form-group ">
+                    <div class="input-group" >
+                      <span class=" " style="width: 65px;" >จ่ายเงินตาม</span>:
+                      <span class=" " style="width: 65px;" ><?=$TYPE_PAY->s_topic_th;?></span>
+                     
+                    </div>
+                </div>
+                <?php } ?>
 																<div  class="form-group caruse<?=$_GET[option];?>_<?=$val2->id;?>">
-																<div style="margin-left: 15px">
-
-																	<?php
-																	if ($val2->i_plan_product_price_name == 7) {
-																		?>
-																		<table width="100%">
-
-																			<tr>
-																				<td style=" font-weight: bold;">รายการ</td>
-																				<td style="font-weight: bold;width: 100px;">ค่าคอม (%)</td>
-																			</tr>
-																			<?php
-																			$_where = array();
-																			$_where[product] = $_POST[id];
-																			$_where[i_list_price] = $val2->id;
-																			$_select = array('*');
-																			$_order = array();
-																			$_order['id'] = 'asc';
-																			$PERCENT_TAXI = $this->Main_model->fetch_data('','',TBL_SHOPPING_PRODUCT_TYPELIST_PERCENT.$_GET[option],$_where,$_select,$_order);
-
-
-																			foreach ($PERCENT_TAXI as $dataTL) {
-																				$s_sub_typelist = $this->Main_model->rowdata(TBL_SHOPPING_PRODUCT_MAIN_TYPELIST,array('id' => $dataTL->i_main_typelist));
-
-																				?>
-																				<tr>
-
-																					<td width="150">
-
-																						<label class="btn checkbox-inline btn-checkbox-success-inverse active "><?=$s_sub_typelist->topic_th;?>
-																					</label>
-
-																				</td>
-																				<td  class="td_percent"><?=$dataTL->f_percent;?> </td>
-																			</tr>
-																		<?php }?>
-
-
-																	</table>
-																<?php  }
-																else if ($val2->i_plan_product_price_name == 5) {
-																	?>
-																	<table width="100%" class="tb_<?=$row->id;?>" >
-																		<tr>
-																			<td width="100" style=" font-weight: bold;">รายการ</td>
-																			<td style="font-weight: bold;width: 100px;">ค่าจอด (บ.)</td>
-																		</tr>
+																	<div style="margin-left: 15px">
 
 																		<?php
-																		$_where = array();
-																		$_where[i_list_price] = $val2->id;
-																		$_where[i_status] = 1;
-																		$_select = array('*');
-																		$_order = array();
-																		$_order['id'] = 'asc';
-																		$USE_TYPE = $this->Main_model->fetch_data('','',TBL_SHOP_CAR_PRICE.$_GET[option],$_where,$_select,$_order);
-																		// print_r(json_encode($USE_TYPE));
-																		foreach ($USE_TYPE as $row) {
-																			$_where = array();
-																			$_where[id] = $row->i_car_type;
-
-																			$CAR_USE = $this->Main_model->rowdata(TBL_WEB_CAR_USE_TYPE,$_where);
+																		if ($val2->i_plan_product_price_name == 7) {
 																			?>
-																			<tr>
-																				<td>
-																					<div data-toggle="buttons"  >
-																						<label class="btn checkbox-inline btn-checkbox-success-inverse active"><?=$CAR_USE->name_th;?>
-																						<input type="checkbox"  checked> </label>
-																					</div>
-																				</td>
+																			<table width="100%">
 
-																				<td  class="td_percent">
-																					<div class="input-group">
-																						<label class="btn "><?=$row->i_price_park;?>
-																					</label>
+																				<tr>
+																					<td style=" font-weight: bold;">รายการ</td>
+																					<td style="font-weight: bold;width: 100px;">ค่าคอม (%)</td>
+																				</tr>
+																				<?php
+																				$_where = array();
+																				$_where[product] = $_POST[id];
+																				$_where[i_list_price] = $val2->id;
+																				$_select = array('*');
+																				$_order = array();
+																				$_order['id'] = 'asc';
+																				$PERCENT_TAXI = $this->Main_model->fetch_data('','',TBL_SHOPPING_PRODUCT_TYPELIST_PERCENT.$_GET[option],$_where,$_select,$_order);
 
-																				</div></td>
 
-																			</tr>
-																		<?php } ?>
-																	</table>
+																				foreach ($PERCENT_TAXI as $dataTL) {
+																					$s_sub_typelist = $this->Main_model->rowdata(TBL_SHOPPING_PRODUCT_MAIN_TYPELIST,array('id' => $dataTL->i_main_typelist));
 
-																<?php } ?>
+																					?>
+																					<tr>
+
+																						<td width="150">
+
+																							<label class="btn checkbox-inline btn-checkbox-success-inverse active "><?=$s_sub_typelist->topic_th;?>
+																						</label>
+
+																					</td>
+																					<td  class="td_percent"><?=$dataTL->f_percent;?> </td>
+																				</tr>
+																			<?php }?>
+
+
+																		</table>
+																	<?php  }
+																	else if ($val2->i_plan_product_price_name == 5) {
+																		if ($val2->i_type_pay == 1) {
+																			
+
+        ?>
+      
+																			<table width="100%" class="tb_<?=$row->id;?>" >
+																				<tr>
+																					<td width="100" style=" font-weight: bold;">รายการ</td>
+																					<td style="font-weight: bold;width: 100px;">ค่าจอด (บ.)</td>
+																				</tr>
+
+																				<?php
+																				$_where = array();
+																				$_where[i_list_price] = $val2->id;
+																				$_where[i_status] = 1;
+																				$_select = array('*');
+																				$_order = array();
+																				$_order['id'] = 'asc';
+																				$USE_TYPE = $this->Main_model->fetch_data('','',TBL_SHOP_CAR_PRICE.$_GET[option],$_where,$_select,$_order);
+																		// print_r(json_encode($USE_TYPE));
+																				foreach ($USE_TYPE as $row) {
+																					$_where = array();
+																					$_where[id] = $row->i_car_type;
+
+																					$CAR_USE = $this->Main_model->rowdata(TBL_WEB_CAR_USE_TYPE,$_where);
+																					?>
+																					<tr>
+																						<td>
+																							<div data-toggle="buttons"  >
+																								<label class="btn checkbox-inline btn-checkbox-success-inverse active"><?=$CAR_USE->name_th;?>
+																								<input type="checkbox"  checked> </label>
+																							</div>
+																						</td>
+
+																						<td  class="td_percent">
+																							<div class="input-group">
+																								<label class="btn "><?=$row->i_price_park;?>
+																							</label>
+
+																						</div></td>
+
+																					</tr>
+																				<?php } ?>
+																			</table>
+																		<?php }
+																		else{
+
+																			?>
+																			<!-- <div class="col-md-12"> -->
+
+																				<div  class="form-group ">
+																					<table>
+																						<tr>
+																							<td style=" font-weight: bold;">รายการ</td>
+
+
+																							<!-- <td style="font-weight: bold;width: 100px;">จำนวนคน</td> -->
+
+																						</tr>
+																						<?php
+																						$_where = array();
+																						$sub_typelist = $this->Main_model->fetch_data('','',TBL_SHOP_TYPE_PAY_LIST,array('i_status' => 1));
+																						foreach ($sub_typelist as $dataTL) {
+
+																							$_where = array();
+
+
+																							$_where[product] = $_POST[id];
+																							$_where[i_list_price] = $val2->id;
+																							$_where[i_type_pay_list] = $dataTL->id;
+																							$_where[i_type_pay] = $val2->i_type_pay;
+
+																							$sub_type_list = $this->Main_model->rowdata(TBL_SHOP_TYPE_PAY_LIST_PERCENT.$_GET[option],$_where);
+																							// print_r(json_encode($_where));
+																							$chk_box_type = ($sub_type_list->i_status > 0) ? 'checked' : '';
+																							$chk_box_type_active = ($sub_type_list->i_status > 0) ? 'active' : '';
+																							$td_percent = ($sub_type_list->i_status > 0) ? '' : 'none';
+																							?>
+																							<tr>
+																								<td>
+																									<div data-toggle="buttons" >
+																										<label class="btn checkbox-inline btn-checkbox-success-inverse <?=$chk_box_type_active;?> "><?=$dataTL->topic_th;?>
+																										<input type="checkbox" value="1" id="i_check_type_<?=$val2->id;?>_park" name="i_check_type<?=$val2->id;?>_park" <?=$chk_box_type;?>> </label>
+																									</div>
+																								</td>
+																							</tr>
+																						<?php }?>
+
+																					</table>
+
+																				</div>
+																			<!-- </div> -->
+																		<?php }
+																	} ?>
+																</div>
 															</div>
-														</div>
 
 
 
@@ -258,30 +324,30 @@
 				</div>
 				<script type="text/javascript">
 					
-function carusepark(item,option) {
-  console.log('.caruse'+option+'_'+item)
-  console.log('.btn_use'+option+'_'+item)
-  console.log(item)
-  console.log(ckt)
-  console.log(option)
-  if (ckt == false) {
-    console.log('in != ')
-    ck = item;
-  $('.caruse'+option+'_'+item).hide()
-  $('.caruse'+option+'_'+item).css('display','none')
-  $('.btn_use'+option+'_'+item).removeClass('fa-chevron-up')
-  $('.btn_use'+option+'_'+item).addClass('fa-chevron-down')
-ckt = true;
-    
-  }
-  else{
-    console.log('in == ')
-ckt = false;
+					function carusepark(item,option) {
+						console.log('.caruse'+option+'_'+item)
+						console.log('.btn_use'+option+'_'+item)
+						console.log(item)
+						console.log(ckt)
+						console.log(option)
+						if (ckt == false) {
+							console.log('in != ')
+							ck = item;
+							$('.caruse'+option+'_'+item).hide()
+							$('.caruse'+option+'_'+item).css('display','none')
+							$('.btn_use'+option+'_'+item).removeClass('fa-chevron-up')
+							$('.btn_use'+option+'_'+item).addClass('fa-chevron-down')
+							ckt = true;
 
-  $('.caruse'+option+'_'+item).show()
-  $('.btn_use'+option+'_'+item).addClass('fa-chevron-up')
-  $('.btn_use'+option+'_'+item).removeClass('fa-chevron-down')
+						}
+						else{
+							console.log('in == ')
+							ckt = false;
 
-  }
-}
+							$('.caruse'+option+'_'+item).show()
+							$('.btn_use'+option+'_'+item).addClass('fa-chevron-up')
+							$('.btn_use'+option+'_'+item).removeClass('fa-chevron-down')
+
+						}
+					}
 				</script>

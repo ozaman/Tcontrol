@@ -238,6 +238,7 @@ function func_UpdateTypeListPercent_rate(i_shop,i_list_price,i_main_typelist,i_m
   func_UpdateTypeListPercent(i_shop,i_list_price,i_main_typelist,i_main,i_sub,s_col,s_val);
 }
 function func_UpdateTypeListPercent(i_shop,i_list_price,i_main_typelist,i_main,i_sub,s_col,s_val) {
+
   var url = base_url + "shop/func_UpdateTypeListPercent?option=" + option;
   console.log(url)
   var param = {
@@ -267,6 +268,35 @@ function func_UpdateTypeListPercent(i_shop,i_list_price,i_main_typelist,i_main,i
     }
   });
 }
+function func_UpdateType_pay(i_shop,i_list_price,i_typelist,s_col,i_type_pay) {
+   $('#i_check_type_' + i_list_price+'_park').prop("checked", false);
+  var url = base_url + "shop/func_UpdateType_pay?option=" + option;
+  console.log(url)
+  var param = {
+    product: i_shop,
+    i_list_price: i_list_price,
+    i_typelist: i_typelist,
+    s_col:s_col,
+    i_type_pay : i_type_pay
+  }
+  console.log(param);
+  $.ajax({
+    url: url,
+    data: param,
+    type: 'post',
+    dataType: 'json',
+    error: function () {
+      console.log('Error Profile');
+    },
+    success: function (res) {
+      console.log(res);
+      if (res.data == true) {
+
+        toastr.success('บันทึกข้อมูลสำเร็จ', '', {"closeButton": true});
+      }
+    }
+  });
+}
 // ========================================================================================
 
 // callinit();
@@ -275,11 +305,8 @@ day, obj_day;
 var option = '';
 // shop('categorie')
 // box_region_show()
-var chk = false;
 function _box_region_show(item, options) {
   ckt = false;
-      $('.box_region_show').html('');
-
   console.log(item)
   console.log(options)
   $('#section_state').val(options)
@@ -641,16 +668,37 @@ function save_plan_price() {
     },
     success: function (res) {
       console.log(res)
-      if (res == '') {
-        Command: toastr["warning"]("กรุณาเลือกช่องทางการจ่ายเงิน")
-      } else {
-        Command: toastr["success"]("เพิม่ค่าตอบแทนสำเร็จ")
-        $('#btn_save_price_plann').hide();
+       if (res.status == true) {
+
+        toastr.success('บันทึกข้อมูลสำเร็จ', res.msg, {"closeButton": true});
+       $('#btn_save_price_plann').hide();
         commision($('#manage_com').val())
         $('#box_plan_com').html('');
         _box_plan_comision();
         _box_price_plan();
+
       }
+      else{
+        
+toastr.error('บันทึกข้อมูลไม่สำเร็จ', res.msg, {"closeButton": true});
+
+        
+
+ $('.box_region_show').html(res);
+      }
+      //console.log(ele);
+
+    
+      // if (res == '') {
+      //   Command: toastr["warning"]("กรุณาเลือกช่องทางการจ่ายเงิน")
+      // } else {
+      //   Command: toastr["success"]("เพิม่ค่าตอบแทนสำเร็จ")
+      //   $('#btn_save_price_plann').hide();
+      //   commision($('#manage_com').val())
+      //   $('#box_plan_com').html('');
+      //   _box_plan_comision();
+      //   _box_price_plan();
+      // }
 
 
 
@@ -1059,6 +1107,8 @@ function edit_plan_com_price(id) {
   $('#btn_' + id).addClass('show')
 
   $(".input_" + id).prop('disabled', false);
+      $("#typepark_" + id).removeAttr('disabled');
+
 
 }
 
@@ -1085,6 +1135,8 @@ function save_edit_com(id) {
       $('#btn_' + id).hide()
 
       $(".input_" + id).prop('disabled', true);
+
+      $("#typepark_" + id).attr('disabled','disabled'); 
 
 
     }
