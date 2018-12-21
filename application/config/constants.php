@@ -150,6 +150,9 @@ define('TBL_SHOP_TYPE_PAY', 'shop_type_pay');
 define('TBL_SHOP_TYPE_PAY_LIST', 'shop_type_pay_list');
 // define('TBL_SHOP_TYPE_PAY_list', 'shop_type_pay_list');
 define('TBL_SHOP_TYPE_PAY_LIST_PERCENT', 'shop_type_pay_list_percent');
+define('TBL_SHOP_TYPE_PAY_LIST_PARK_PERSION', 'shop_type_pay_list_park_persion');
+define('TBL_SHOP_TYPE_PAY_LIST_PARK_PERSION_PRICE', 'shop_type_pay_list_park_persion_price');
+
 
 
 
