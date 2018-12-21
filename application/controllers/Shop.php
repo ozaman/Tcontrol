@@ -286,103 +286,103 @@ class Shop extends CI_Controller {
     $msg = '';
     foreach ($data['plan_com'] as $val) {
       if ($_POST[money_.$val->element] != '') {
-         
-      
-      if ($val->i_plan_com == 5) {
-        if ($_POST[typepark] == '') {
+
+
+        if ($val->i_plan_com == 5) {
+          if ($_POST[typepark] == '') {
 
            $msg = 'เลือกจ่ายเงินตามประเถท';
-        }
+         }
 
-      }
-      if ($val->i_plan_com == 6) {
-           $msg = 'กรุณาป้อนค่าหัว';
+       }
+       if ($val->i_plan_com == 6) {
+         $msg = 'กรุณาป้อนค่าหัว';
 
-      }
-    }
-    else{
+       }
+     }
+     else{
       // if ($_POST[money_.$val->element] == '') {
-           $msg = 'เลือกช่องทางการจ่ายเงิน';
-          
+       $msg = 'เลือกช่องทางการจ่ายเงิน';
+
 
       // }
-    }
+     }
 
 
 
-    }
+   }
     // if ($chk == 1) {
-      $data = $this->Shop_model->save_plan_price($msg);
+   $data = $this->Shop_model->save_plan_price($msg);
 
       // $this->load->view('shop/box_plan_com');
-      echo json_encode($data);
+   echo json_encode($data);
     // }
-  }
-  public function box_plan_comision() {
-    $this->load->view('shop/box_plan_comision');
-  }
-  public function box_plan_time() {
-    $this->load->view('shop/box_plan_time');
-  }
-  public function box_region_icon() {
-    $this->load->view('shop/box_region_icon');
-  }
-  public function box_price_plan() {
-    $this->load->view('shop/box_price_plan');
-  }
-  public function box_select_region_icon() {
-    $this->load->view('shop/box_select_region_icon');
-  }
-  public function delete() {
-    $id = $this->input->post('id');
-    $table = $this->input->post('tbl');
+ }
+ public function box_plan_comision() {
+  $this->load->view('shop/box_plan_comision');
+}
+public function box_plan_time() {
+  $this->load->view('shop/box_plan_time');
+}
+public function box_region_icon() {
+  $this->load->view('shop/box_region_icon');
+}
+public function box_price_plan() {
+  $this->load->view('shop/box_price_plan');
+}
+public function box_select_region_icon() {
+  $this->load->view('shop/box_select_region_icon');
+}
+public function delete() {
+  $id = $this->input->post('id');
+  $table = $this->input->post('tbl');
 
-    $data = $this->Main_model->delete($id,$table);
-    echo json_encode($data);
-  }
-  public function box_region_show() {
+  $data = $this->Main_model->delete($id,$table);
+  echo json_encode($data);
+}
+public function box_region_show() {
     // $tbl = '';
-    $_where = array();
-    $_where['i_shop'] = $_POST[id];
+  $_where = array();
+  $_where['i_shop'] = $_POST[id];
     // $_where['i_shop'] = 1;
-    $_select = array('*');
-    $_order = array();
-    $_order['id'] = 'asc';
-    $data['region'] = $this->Main_model->fetch_data('','',TBL_SHOP_COUNTRY.$_GET[option],$_where,$_select,$_order);
-    $this->load->view('shop/box_region_show',$data);
+  $_select = array('*');
+  $_order = array();
+  $_order['id'] = 'asc';
+  $data['region'] = $this->Main_model->fetch_data('','',TBL_SHOP_COUNTRY.$_GET[option],$_where,$_select,$_order);
+  $this->load->view('shop/box_region_show',$data);
     // echo json_encode(TBL_SHOP_COUNTRY.$_GET[option]);
-  }
-  public function save_edit_com() {
-    $data = $this->Shop_model->save_edit_com();
-    echo json_encode($data);
-  }
-  public function submit_data_plan_time() {
+}
+public function save_edit_com() {
+  $data = $this->Shop_model->save_edit_com();
+  echo json_encode($data);
+}
+public function submit_data_plan_time() {
     //header('Content-Type: application/json');
-    $data = $this->Shop_model->submit_data_plan_time();
-    echo json_encode($data);
+  $data = $this->Shop_model->submit_data_plan_time();
+  echo json_encode($data);
+}
+public function select_type() {
+  header('Content-Type: application/json');
+  $_where = array();
+  $_order = array();
+  if ($_GET[table] == 'shop_sub') {
+    $table = TBL_SHOPPING_PRODUCT_SUB;
+    $_where['main'] = $_GET[id_sub];
+    $_order['topic_en'] = 'asc';
   }
-  public function select_type() {
-    header('Content-Type: application/json');
-    $_where = array();
-    $_order = array();
-    if ($_GET[table] == 'shop_sub') {
-      $table = TBL_SHOPPING_PRODUCT_SUB;
-      $_where['main'] = $_GET[id_sub];
-      $_order['topic_en'] = 'asc';
-    }
-    if ($_GET[table] == 'province') {
-      $table = TBL_WEB_PROVINCE;
-      $_where['area'] = $_GET[id_sub];
-      $_order['name_th'] = 'asc';
-    }
-    if ($_GET[table] == 'amphur') {
-      $table = TBL_WEB_AMPHUR;
-      $_where['PROVINCE_ID'] = $_GET[id_sub];
-      $this->db->where('name_th<>','');
-      $_order['name_th'] = 'asc';
-    }
-    $_select = array('*');
-    $arr = $this->Main_model->fetch_data('','',$table,$_where,$_select,$_order);
+  if ($_GET[table] == 'province') {
+    $table = TBL_WEB_PROVINCE;
+    $_where['area'] = $_GET[id_sub];
+    $_order['name_th'] = 'asc';
+  }
+  if ($_GET[table] == 'amphur') {
+    $table = TBL_WEB_AMPHUR;
+    $_where['PROVINCE_ID'] = $_GET[id_sub];
+    $this->db->where('name_th<>','');
+    $_order['name_th'] = 'asc';
+  }
+  $_select = array('*');
+  $arr = $this->Main_model->fetch_data('','',$table,$_where,$_select,$_order);
     echo json_encode($arr); // $this->load->view('shop/select/select_type');
   }
   public function updatetype() {
@@ -433,98 +433,98 @@ class Shop extends CI_Controller {
     echo json_encode($data);
   }
   public function get_car_price() {
-     $_where = array();
-    $_where['i_shop'] = $_POST[i_shop];
-    $_select = array('*');
-    $_order = array();
-    $_order['id'] = 'asc';
-    $data['region'] = $this->Main_model->fetch_data('','',TBL_SHOP_COUNTRY.$_GET[option],$_where,$_select,$_order);
-    $data['shop'] = $this->Main_model->rowdata(TBL_SHOPPING_PRODUCT,array('id'=>$_POST[i_shop]));
-    $this->load->view('shop/box_car_price',$data);
-  }
-  public function func_Updatecar() {
-    $_where = array();
-    $_where[i_car_type] = $_POST[i_car_type];
-    $_where[i_shop] = $_POST[i_shop];
-    $_where[i_list_price] = $_POST[list_price];
-    $_where[i_country_icon] = $_POST[country];
+   $_where = array();
+   $_where['i_shop'] = $_POST[i_shop];
+   $_select = array('*');
+   $_order = array();
+   $_order['id'] = 'asc';
+   $data['region'] = $this->Main_model->fetch_data('','',TBL_SHOP_COUNTRY.$_GET[option],$_where,$_select,$_order);
+   $data['shop'] = $this->Main_model->rowdata(TBL_SHOPPING_PRODUCT,array('id'=>$_POST[i_shop]));
+   $this->load->view('shop/box_car_price',$data);
+ }
+ public function func_Updatecar() {
+  $_where = array();
+  $_where[i_car_type] = $_POST[i_car_type];
+  $_where[i_shop] = $_POST[i_shop];
+  $_where[i_list_price] = $_POST[list_price];
+  $_where[i_country_icon] = $_POST[country];
     // $_where[i_price] = $_POST[i_sub];
     // $_where[d_date] = $_POST[product];
     // $_where[d_update] = $_POST[i_list_price];
     // $_where[i_status] = $_POST[i_list_price];
-    $CAR_PRICE = $this->Main_model->rowdata(TBL_SHOP_CAR_PRICE.$_GET[option],$_where);
-    if ($CAR_PRICE == null) {
+  $CAR_PRICE = $this->Main_model->rowdata(TBL_SHOP_CAR_PRICE.$_GET[option],$_where);
+  if ($CAR_PRICE == null) {
 
-      $params = array();
-      $params[i_car_type] = $_POST[i_car_type];
-      $params[i_shop] = $_POST[i_shop];
-      $params[i_country_icon] = $_POST[country];
-      $params[i_list_price] = $_POST[list_price];
-      $params[i_plan_product_price_name] = $_POST[op];
-      if ($_POST[op] == 5 ) {
+    $params = array();
+    $params[i_car_type] = $_POST[i_car_type];
+    $params[i_shop] = $_POST[i_shop];
+    $params[i_country_icon] = $_POST[country];
+    $params[i_list_price] = $_POST[list_price];
+    $params[i_plan_product_price_name] = $_POST[op];
+    if ($_POST[op] == 5 ) {
       $params[i_price_park] = $_POST[i_price];
         # code...
-      }
-      if ($_POST[op] == 6 ) {
+    }
+    if ($_POST[op] == 6 ) {
       $params[i_price_person] = $_POST[i_price];
         # code...
-      }
-      else if ($_POST[op] == 7) {
+    }
+    else if ($_POST[op] == 7) {
         # code...
-      
+
       $params[i_price_com] = $_POST[i_price];
 
-      }
-      $params[d_date] = time();
-      $params[d_update] = time();
-      $params[i_status] = 1;
-      $data = $this->db->insert(TBL_SHOP_CAR_PRICE.$_GET[option],$params);
     }
-    else {
-      if ($_GET[option] == 'check') {
+    $params[d_date] = time();
+    $params[d_update] = time();
+    $params[i_status] = 1;
+    $data = $this->db->insert(TBL_SHOP_CAR_PRICE.$_GET[option],$params);
+  }
+  else {
+    if ($_GET[option] == 'check') {
         // $_where = array();
       // $_where[i_shop] = $_POST[product];
 
-        $params[i_status] = ($CAR_PRICE->i_status == 1)?0:1;
-        $data = $this->db->update(TBL_SHOP_CAR_PRICE.$_GET[option],$params,$_where);
+      $params[i_status] = ($CAR_PRICE->i_status == 1)?0:1;
+      $data = $this->db->update(TBL_SHOP_CAR_PRICE.$_GET[option],$params,$_where);
 
-      }
-      else{
-        $_where = array();
+    }
+    else{
+      $_where = array();
       // $_where[i_shop] = $_POST[product];
       if ($_POST[op] == 5 ) {
-      $params[i_price_park] = $_POST[i_price];
+        $params[i_price_park] = $_POST[i_price];
         # code...
       }
       if ($_POST[op] == 6 ) {
-      $params[i_price_person] = $_POST[i_price];
+        $params[i_price_person] = $_POST[i_price];
         # code...
       }
       else if ($_POST[op] == 7) {
         # code...
-      
-      $params[i_price_com] = $_POST[i_price];
+
+        $params[i_price_com] = $_POST[i_price];
 
       }
       $params[d_update] = time();
       $_where[id] = $_POST[i_car_price];
       $data = $this->db->update(TBL_SHOP_CAR_PRICE.$_GET[option],$params,$_where);
 
-      }
-
     }
-    $data_j[res] = $CAR_PRICE;
-    $data_j[where] = $_where;
-    $data_j[params] = $params;
-    $data_j[data] = $data;
-    echo json_encode($data_j);
-  }
 
-  public function default_price() {
+  }
+  $data_j[res] = $CAR_PRICE;
+  $data_j[where] = $_where;
+  $data_j[params] = $params;
+  $data_j[data] = $data;
+  echo json_encode($data_j);
+}
+
+public function default_price() {
+  $_where = array();
+  $USE_TYPE = $this->Main_model->fetch_data('','',TBL_WEB_CAR_USE_TYPE,array('status' => 1));
+  foreach ($USE_TYPE as  $value) {
     $_where = array();
-    $USE_TYPE = $this->Main_model->fetch_data('','',TBL_WEB_CAR_USE_TYPE,array('status' => 1));
-    foreach ($USE_TYPE as  $value) {
-      $_where = array();
     $_where[i_car_type] = $value->id;
     $_where[i_shop] = $_POST[i_shop];
     $_where[i_list_price] = $_POST[list_price];
@@ -543,17 +543,17 @@ class Shop extends CI_Controller {
       $params[i_plan_product_price_name] = $_POST[op];
 
       if ($_POST[op] == 5 ) {
-      $params[i_price_park] = $_POST[i_price];
+        $params[i_price_park] = $_POST[i_price];
         # code...
       }
       if ($_POST[op] == 6 ) {
-      $params[i_price_person] = $_POST[i_price];
+        $params[i_price_person] = $_POST[i_price];
         # code...
       }
       else if ($_POST[op] == 7) {
         # code...
-      
-      $params[i_price_com] = $_POST[i_price];
+
+        $params[i_price_com] = $_POST[i_price];
 
       }
       $params[d_date] = time();
@@ -566,72 +566,100 @@ class Shop extends CI_Controller {
        // $_where[i_shop] = $_POST[i_shop];
       // /$_where[i_car_type] = $value->i_car_type;
       if ($_POST[op] == 5 ) {
-      $params[i_price_park] = $_POST[i_price];
+        $params[i_price_park] = $_POST[i_price];
         # code...
       }
       if ($_POST[op] == 6 ) {
-      $params[i_price_person] = $_POST[i_price];
+        $params[i_price_person] = $_POST[i_price];
       }
       else if ($_POST[op] == 7) {
-      $params[i_price_com] = $_POST[i_price];
+        $params[i_price_com] = $_POST[i_price];
 
       }
       $params[d_update] = time();
       $data = $this->db->update(TBL_SHOP_CAR_PRICE.$_GET[option],$params,$_where);
     }
   }
-    $data_j[restype] = $USE_TYPE;
-    $data_j[res] = $CAR_PRICE;
-    $data_j[where] = $_where;
-    $data_j[params] = $params;
-    $data_j[data] = $data;
-    echo json_encode($data_j);
+  $data_j[restype] = $USE_TYPE;
+  $data_j[res] = $CAR_PRICE;
+  $data_j[where] = $_where;
+  $data_j[params] = $params;
+  $data_j[data] = $data;
+  echo json_encode($data_j);
+}
+public function get_com_usecar() {
+
+
+  $this->load->view('shop/box_com_usecar');
+}
+public function get_comUsetypepro() {
+  $_where = array();
+  $_where['i_shop'] = $_POST[i_shop];
+  $_select = array('*');
+  $_order = array();
+  $_order['id'] = 'asc';
+  $data['region'] = $this->Main_model->fetch_data('','',TBL_SHOP_COUNTRY.$_GET[option],$_where,$_select,$_order);
+  $data['shop'] = $this->Main_model->rowdata(TBL_SHOPPING_PRODUCT,array('id'=>$_POST[i_shop]));
+  $this->load->view('shop/box_com_usepro',$data);
+}
+public function func_UpdateType_pay() {
+  $_where = array();
+  $_where[i_list_price] = $_POST[i_list_price];
+  $_where[i_type_pay_list] = $_POST[i_typelist];
+  $_where[product] = $_POST[product];
+  $_where[i_type_pay] = $_POST[i_type_pay];
+  $sub_type_list = $this->Main_model->rowdata(TBL_SHOP_TYPE_PAY_LIST_PERCENT.$_GET[option],$_where);
+  if ($sub_type_list->id == null) {
+    $params = array();
+    $params[i_list_price] = $_POST[i_list_price];
+    $params[i_type_pay_list] = $_POST[i_typelist];
+    $params[product] = $_POST[product];
+    $params[i_type_pay] = $_POST[i_type_pay];
+
+    $params[i_status] = 1;
+    $data = $this->db->insert(TBL_SHOP_TYPE_PAY_LIST_PERCENT.$_GET[option],$params);
   }
-  public function get_com_usecar() {
-    
-   
-    $this->load->view('shop/box_com_usecar');
-  }
-  public function get_comUsetypepro() {
-    $_where = array();
-    $_where['i_shop'] = $_POST[i_shop];
-    $_select = array('*');
-    $_order = array();
-    $_order['id'] = 'asc';
-    $data['region'] = $this->Main_model->fetch_data('','',TBL_SHOP_COUNTRY.$_GET[option],$_where,$_select,$_order);
-    $data['shop'] = $this->Main_model->rowdata(TBL_SHOPPING_PRODUCT,array('id'=>$_POST[i_shop]));
-    $this->load->view('shop/box_com_usepro',$data);
-  }
-  public function func_UpdateType_pay() {
-    $_where = array();
-    $_where[i_list_price] = $_POST[i_list_price];
-    $_where[i_type_pay_list] = $_POST[i_typelist];
-    $_where[product] = $_POST[product];
-    $_where[i_type_pay] = $_POST[i_type_pay];
-    $sub_type_list = $this->Main_model->rowdata(TBL_SHOP_TYPE_PAY_LIST_PERCENT.$_GET[option],$_where);
-    if ($sub_type_list->id == null) {
-      $params = array();
-      $params[i_list_price] = $_POST[i_list_price];
-      $params[i_type_pay_list] = $_POST[i_typelist];
-      $params[product] = $_POST[product];
-      $params[i_type_pay] = $_POST[i_type_pay];
-     
-      $params[i_status] = 1;
-      $data = $this->db->insert(TBL_SHOP_TYPE_PAY_LIST_PERCENT.$_GET[option],$params);
-    }
-    else {
-      if($_POST[s_col] == 'i_status'){
-        $params[$_POST[s_col]] = ($sub_type_list->i_status == 1)?0:1;
-      }else{
-        $params[$_POST[s_col]] = $_POST[s_val];
-      }
-      $data = $this->db->update(TBL_SHOP_TYPE_PAY_LIST_PERCENT.$_GET[option],$params,$_where);
-    }
-    $data_j[where] = $_where;
-    $data_j[params] = $params;
-    $data_j[data] = $data;
-    echo json_encode($data_j);
-  }
+  else {
+    if($_POST[s_col] == 'i_status'){
+     $_where = array();
+     $_where[i_list_price] = $_POST[i_list_price];
+
+     $_where[product] = $_POST[product];
+     $_where[i_type_pay] = $_POST[i_type_pay];
+     $_select = array('*');
+     $_order = array();
+     $_order['id'] = 'asc';
+     $LIST_PERCENT = $this->Main_model->fetch_data('','',TBL_SHOP_TYPE_PAY_LIST_PERCENT.$_GET[option],$_where,$_select,$_order);
+     foreach ($LIST_PERCENT as  $value) {
+      if ($value->i_type_pay_list == $_POST[i_typelist]) {
+       $_where = array();
+       $params[$_POST[s_col]] = 1;
+       $_where[id] = $value->id;
+
+       $data = $this->db->update(TBL_SHOP_TYPE_PAY_LIST_PERCENT.$_GET[option],$params,$_where);
+
+     }
+     else{
+       $_where = array();
+       $params[$_POST[s_col]] = 0;
+       $_where[id] = $value->id;
+       $data = $this->db->update(TBL_SHOP_TYPE_PAY_LIST_PERCENT.$_GET[option],$params,$_where);
+
+     }
+
+   }
+
+ }else{
+  $params[$_POST[s_col]] = $_POST[s_val];
+  $data = $this->db->update(TBL_SHOP_TYPE_PAY_LIST_PERCENT.$_GET[option],$params,$_where);
+
+}
+}
+$data_j[where] = $_where;
+$data_j[params] = $params;
+$data_j[data] = $data;
+echo json_encode($data_j);
+}
   ################################ SHOP #################################
 }
 

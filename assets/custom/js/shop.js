@@ -268,8 +268,28 @@ function func_UpdateTypeListPercent(i_shop,i_list_price,i_main_typelist,i_main,i
     }
   });
 }
-function func_UpdateType_pay(i_shop,i_list_price,i_typelist,s_col,i_type_pay) {
-   $('#i_check_type_' + i_list_price+'_park').prop("checked", false);
+function func_UpdateType_payfirst(i_shop,i_list_price,i_typelist,s_col,i_type_pay,value) {
+   console.log($('#i_checkbox' + i_list_price+i_typelist).prop("checked"))
+  // if ($('#i_checkbox' + i_list_price+i_typelist).prop("checked") === true) {
+    $('.i_check_type').removeClass("active");
+  // 
+    $('#i_check_type' + i_list_price+i_typelist).addClass("active");
+    // $('.td_percent' + i_list_price+i_typelist).hide();
+    var s_val = 0;
+    func_UpdateType_pay(i_shop,i_list_price,i_typelist,s_col,i_type_pay,value);
+  // } else {
+  //   $('#i_checkbox' + i_list_price+i_typelist).prop("checked", true);
+  //   $('.td_percent' + i_list_price+i_typelist).show();
+  //   var s_val = 1;
+  //  func_UpdateType_pay(i_shop,i_list_price,i_typelist,s_col,i_type_pay,value)
+  // }
+}
+function func_UpdateType_payvalue(argument) {
+  func_UpdateType_pay(i_shop,i_list_price,i_typelist,s_col,i_type_pay,value);
+}
+function func_UpdateType_pay(i_shop,i_list_price,i_typelist,s_col,i_type_pay,value) {
+ 
+   // $('#i_check_type_' + i_list_price+'_park').prop("checked", false);
   var url = base_url + "shop/func_UpdateType_pay?option=" + option;
   console.log(url)
   var param = {
@@ -277,7 +297,8 @@ function func_UpdateType_pay(i_shop,i_list_price,i_typelist,s_col,i_type_pay) {
     i_list_price: i_list_price,
     i_typelist: i_typelist,
     s_col:s_col,
-    i_type_pay : i_type_pay
+    i_type_pay : i_type_pay,
+    s_val: value
   }
   console.log(param);
   $.ajax({
