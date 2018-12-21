@@ -7,8 +7,8 @@
 						<!-- <option value="">- เลือกสัญชาติ -</option> -->
 
 						<?php
-						
-						
+
+
 						// print_r(json_encode($region));
 						foreach($region as $key=>$val){
 
@@ -33,12 +33,12 @@
 									<div class="col-md-1">
 										<div class="form-group form-group-md">
 											<span class="btn btn-support3 btn-rounded btn-outline btn-equal"><?=$key+1;?></span>
-											
+
 										</div>
 									</div>
 									<div class="col-md-11 ">
-										
-										
+
+
 										<?php
 
 										foreach($arr[region] as $key=>$val2){
@@ -66,7 +66,7 @@
 
 										<!-- <div class="col-md-12">
 												<div class="box_sub_region<?=$val->id;?>">
-													
+
 												</div>
 
 											</div> -->
@@ -78,7 +78,7 @@
 
 									<div class="row">
 										<div class="form-group form-group-md">
-											
+
 											<?php
 											$_where = array();
 											$_where['i_shop_country_icon'] = $val->id;
@@ -136,26 +136,20 @@
 																			</button>
 																		<?php } ?>
 																	</div>
-																	
-
-
-
-
 																</div>
 																<?php
 																if ($val2->i_plan_product_price_name == 5) {
-																$TYPE_PAY = $this->Main_model->rowdata(TBL_SHOP_TYPE_PAY,array('id'=>$val2->i_type_pay));
-  
-                 
-                  ?>
-                  <div  class="form-group ">
-                    <div class="input-group" >
-                      <span class=" " style="width: 65px;" >จ่ายเงินตาม</span>:
-                      <span class=" " style="width: 65px;" ><?=$TYPE_PAY->s_topic_th;?></span>
-                     
-                    </div>
-                </div>
-                <?php } ?>
+																	$TYPE_PAY = $this->Main_model->rowdata(TBL_SHOP_TYPE_PAY,array('id'=>$val2->i_type_pay));
+
+																	?>
+																	<div  class="form-group ">
+																		<div class="input-group" >
+																			<span class=" " style="width: 65px;" >จ่ายเงินตาม</span>:
+																			<span class=" " style="width: 65px;" ><?=$TYPE_PAY->s_topic_th;?></span>
+
+																		</div>
+																	</div>
+																<?php } ?>
 																<div  class="form-group caruse<?=$_GET[option];?>_<?=$val2->id;?>">
 																	<div style="margin-left: 15px">
 
@@ -201,8 +195,8 @@
 																		if ($val2->i_type_pay == 1) {
 																			
 
-        ?>
-      
+																			?>
+
 																			<table width="100%" class="tb_<?=$row->id;?>" >
 																				<tr>
 																					<td width="100" style=" font-weight: bold;">รายการ</td>
@@ -289,65 +283,65 @@
 																					</table>
 
 																				</div>
-																			<!-- </div> -->
-																		<?php }
-																	} ?>
+																				<!-- </div> -->
+																			<?php }
+																		} ?>
+																	</div>
 																</div>
+
+
+
 															</div>
 
 
+														<?php }?>
+													</div>
 
-														</div>
 
-
-													<?php }?>
 												</div>
+												<?php
 
-
-											</div>
-											<?php
-
-										} ?>
+											} ?>
+										</div>
 									</div>
-								</div>
-								<!-- end comision -->
-								<!-- <option value="<?=$key;?>" ><?=$val->name_th;?></option> -->
-							<?php } ?>
-							<!-- </select> -->
+									<!-- end comision -->
+									<!-- <option value="<?=$key;?>" ><?=$val->name_th;?></option> -->
+								<?php } ?>
+								<!-- </select> -->
+							</div>
+
 						</div>
 
+						<!-- </div> -->
+
+						<!-- </form> -->
 					</div>
+					<script type="text/javascript">
 
-					<!-- </div> -->
+						function carusepark(item,option) {
+							console.log('.caruse'+option+'_'+item)
+							console.log('.btn_use'+option+'_'+item)
+							console.log(item)
+							console.log(ckt)
+							console.log(option)
+							if (ckt == false) {
+								console.log('in != ')
+								ck = item;
+								$('.caruse'+option+'_'+item).hide()
+								$('.caruse'+option+'_'+item).css('display','none')
+								$('.btn_use'+option+'_'+item).removeClass('fa-chevron-up')
+								$('.btn_use'+option+'_'+item).addClass('fa-chevron-down')
+								ckt = true;
 
-					<!-- </form> -->
-				</div>
-				<script type="text/javascript">
-					
-					function carusepark(item,option) {
-						console.log('.caruse'+option+'_'+item)
-						console.log('.btn_use'+option+'_'+item)
-						console.log(item)
-						console.log(ckt)
-						console.log(option)
-						if (ckt == false) {
-							console.log('in != ')
-							ck = item;
-							$('.caruse'+option+'_'+item).hide()
-							$('.caruse'+option+'_'+item).css('display','none')
-							$('.btn_use'+option+'_'+item).removeClass('fa-chevron-up')
-							$('.btn_use'+option+'_'+item).addClass('fa-chevron-down')
-							ckt = true;
+							}
+							else{
+								console.log('in == ')
+								ckt = false;
 
+								$('.caruse'+option+'_'+item).show()
+								$('.btn_use'+option+'_'+item).addClass('fa-chevron-up')
+								$('.btn_use'+option+'_'+item).removeClass('fa-chevron-down')
+
+							}
 						}
-						else{
-							console.log('in == ')
-							ckt = false;
-
-							$('.caruse'+option+'_'+item).show()
-							$('.btn_use'+option+'_'+item).addClass('fa-chevron-up')
-							$('.btn_use'+option+'_'+item).removeClass('fa-chevron-down')
-
-						}
-					}
-				</script>
+					</script>
