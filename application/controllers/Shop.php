@@ -348,6 +348,7 @@ public function box_region_show() {
   $_select = array('*');
   $_order = array();
   $_order['id'] = 'asc';
+//  echo $_GET[option];
   $data['region'] = $this->Main_model->fetch_data('','',TBL_SHOP_COUNTRY.$_GET[option],$_where,$_select,$_order);
   $this->load->view('shop/box_region_show',$data);
     // echo json_encode(TBL_SHOP_COUNTRY.$_GET[option]);
