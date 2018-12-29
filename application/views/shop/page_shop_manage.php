@@ -11,6 +11,8 @@
   ?>
  
   <?php
+  session_start();
+  if($_SESSION[level]>=8){
 $categories_sub = $this->Main_model->rowdata(TBL_SHOPPING_PRODUCT_SUB,array('id' => $_GET[sub]));
 $category = $this->Main_model->rowdata(TBL_SHOPPING_PRODUCT_MAIN,array('id' => $_GET[main]));
 ?>
@@ -21,6 +23,11 @@ $category = $this->Main_model->rowdata(TBL_SHOPPING_PRODUCT_MAIN,array('id' => $
     <li class="head_title_sub"><a  href="<?=base_url();?>shop/shop_ordertype?id=<?=$_GET[sub];?>&sub=<?=$_GET[main];?>">ประเภท<?=$categories_sub->topic_th;?></a></li>
     <li class="head_title_sub_4" style="display: nones;"><?=$shop->topic_th;?></li>
 </ol>
+  <?php }else{ ?>
+  <ol class="breadcrumb">
+    <li class="head_title_sub_4" style="display: nones;"><?=$shop->topic_th;?></li>
+    </ol>
+  <?php } ?>
   <div class="section-body ">
     <input type="hidden" name="" id="manage_com" value="<?=$_GET[id]; ?>">
     <!-- 1 T-SHARE - SHOP
@@ -626,45 +633,3 @@ if ($shop->id > 0) {
 
 </script>
 <?php } ?>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
