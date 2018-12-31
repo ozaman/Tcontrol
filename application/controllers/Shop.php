@@ -713,6 +713,12 @@ class Shop extends CI_Controller {
     $data_j[data] = $data;
     echo json_encode($data_j);
   }
+  public function submit_planpack() {
+    header('Content-Type: application/json');
+
+    $data = $this->Shop_model->submit_planpack();
+    echo json_encode($data);
+  }
 
   ################################ SHOP #################################
 }

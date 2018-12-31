@@ -323,7 +323,7 @@ function func_UpdateType_pay(i_shop,i_list_price,i_typelist,s_col,i_type_pay,val
 // callinit();
 var param_plan_price,
 day, obj_day;
-var option = '';
+var option = '_company';
 // shop('categorie')
 // box_region_show()
 function _box_region_show(item, options) {
@@ -2217,3 +2217,60 @@ function initusetype(shop,options,list_plan,country,list_price) {
 });
 }
 
+
+
+/*********************new **************/
+function submit_planpack(shop,user) {
+  console.log(shop)
+  console.log(user)
+  console.log($('#select_type_com').val())
+  console.log($('#select_country').val())
+  var plan = $('#select_type_com').val(),
+  country = $('#select_country').val(),
+  i_partner_group =  $('#partner_group').val(),
+  pay_type =  $('#pay_type').val(),
+
+   url = base_url + "shop/submit_planpack",
+ param = {
+    i_shop: shop,
+    i_user : user,
+    i_plan : plan,
+    i_country : country,
+    i_partner_group: i_partner_group,
+    i_pay_type : pay_type
+
+  };
+  if (plan == '') {
+    toastr.warning('บันทึกข้อมูลไม่สำเร็จ', 'กรุณาเลือกประเภทค่าตอบแทน', {"closeButton": true});
+    return false;
+  }
+  if (country == '') {
+    toastr.warning('บันทึกข้อมูลไม่สำเร็จ', 'กรุณาเลือกสัญชาติ', {"closeButton": true});
+    return false;
+
+  }
+  $.ajax({
+    url: url,
+    data: param,
+    type: 'post',
+    error: function () {
+      console.log('Error Profile');
+    },
+    success: function (res) {
+      console.log(res);
+      if (res.i_status == true) {
+        // $('#modal_custom').hide();
+        toastr.success('บันทึกข้อมูลสำเร็จ', '', {"closeButton": true});
+        // setTimeout(function () {
+        //   // location.reload();
+        // }, 300);
+      } else {
+        toastr.error('บันทึกข้อมูลไม่สำเร็จ', res.s_msg, {"closeButton": true});
+      }
+
+    }
+  });
+        // toastr.success('บันทึกข้อมูลสำเร็จ', '', {"closeButton": true});
+
+  // body...
+}
