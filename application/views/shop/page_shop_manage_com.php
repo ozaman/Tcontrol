@@ -1,4 +1,11 @@
-
+<?php
+    $_where = array();
+    $_where['i_status'] = 1;
+    $_select = array('*');
+    $_order = array();
+    $_order['id'] = 'asc';
+    $PLAN_MAIN = $this->Main_model->fetch_data('','',TBL_PLAN_MAIN,$_where,$_select,$_order);
+    ?>
 <!--  -->
 <div class="box box-outlined">
     <div class="col-lg-12">
@@ -7,6 +14,7 @@
          <input type="hidden" name="" id="id_shop_product" value="<?=$_POST[id];?>">
      </div>
      <div class="box-body ">
+     
 
 
 
@@ -16,12 +24,38 @@
             <div class="col-md-12">
                <!-- <form class="form-horizontal form-banded form-bordered" id="form_region" > -->
                   <!-- <div class="col-md-12"> -->
-                     <div class="row">
-                                <!-- <div class="col-md-2">
-                                    
-                                </div> -->
-                                <div class="col-md-11">
+                      <div class="row">
+                      <div class="box-head">
+                        <header><h4 class="text-light">จัดการค่าตอบแทน</h4></header>
+                      </div>
+                      <div class="col-md-12">
+                         <div class="col-md-11">
+                          <div class="form-group">
                                     <div class="input-group" >
+                                        <span class="input-group-addon">เลือกประเภทค่าตอบแทน</span>
+                                        <select name="select_country" class="form-control" id="select_type_com" onchange="change_type_com(this.value)">
+                                          <option value="">- ค่าตอบแทน -</option>
+
+                                          <?php
+
+
+                                          foreach($PLAN_MAIN as $key=>$val){
+
+
+                          // if($shop->main == $main->id ){
+                          //   $selected_sub = "selected";
+                          // }else{
+                          //   $selected_sub = "";
+                          // }
+                                           ?>
+
+                                           <option value="<?=$key;?>" ><?=$val->s_topic;?></option>
+                                       <?php } ?>
+                                   </select>
+                               </div>
+                             </div>
+<div class="form-group">
+                               <div class="input-group" >
                                         <span class="input-group-addon">เลือกสัญชาติ</span>
                                         <select name="select_country" class="form-control" id="select_country" onchange="change_region(this.value)">
                                           <option value="">- เลือกสัญชาติ -</option>
@@ -32,11 +66,36 @@
                                           foreach($country as $key=>$val){
 
 
-				                  // if($shop->main == $main->id ){
-				                  //   $selected_sub = "selected";
-				                  // }else{
-				                  //   $selected_sub = "";
-				                  // }
+                          // if($shop->main == $main->id ){
+                          //   $selected_sub = "selected";
+                          // }else{
+                          //   $selected_sub = "";
+                          // }
+                                           ?>
+
+                                           <option value="<?=$key;?>" ><?=$val->name_th;?></option>
+                                       <?php } ?>
+                                   </select>
+                               </div>
+                             </div>
+                           </div>
+                        <!-- <div id="box_com_add"> -->
+                          
+                        <!-- </div> -->
+                      </div>
+                    </div>
+                   <!--   <div class="row">
+                              
+                                <div class="col-md-11">
+                                    <div class="input-group" >
+                                        <span class="input-group-addon">เลือกสัญชาติ</span>
+                                        <select name="select_country" class="form-control" id="select_country" onchange="change_region(this.value)">
+                                          <option value="">- เลือกสัญชาติ -</option>
+
+                                          <?php
+
+
+                                          foreach($country as $key=>$val){
                                            ?>
 
                                            <option value="<?=$key;?>" ><?=$val->name_th;?></option>
@@ -45,12 +104,9 @@
                                </div>
                            </div>
                            <div class="col-md-1" align="right">
-									<!-- <input name="region_id" type="hidden" id="sub"  value="1">
-            						<input name="region_country_code" type="hidden" id="main" value="1">
-            						<input name="region_country_code" type="hidden" id="main" value="1"> -->
             						<button type="button" class="btn btn-primary btn-md"   onclick="submit_region('<?=$_POST[id];?>')" style="width: 100%"> <span id="txt_btn_save5"> เพิ่ม </span></button>
             					</div>
-            				</div>
+            				</div> -->
 
 
             				<!-- </div> -->

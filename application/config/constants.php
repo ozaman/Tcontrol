@@ -154,6 +154,19 @@ define('TBL_SHOP_TYPE_PAY_LIST_PARK_PERSION', 'shop_type_pay_list_park_persion')
 define('TBL_SHOP_TYPE_PAY_LIST_PARK_PERSION_PRICE', 'shop_type_pay_list_park_persion_price');
 
 
+define('TBL_PARNER', 'tbl_partner');
+define('TBL_PARNER_CONTROL', 'tbl_partner_control');
+define('TBL_PARNER_GROUP', 'tbl_partner_group');
+define('TBL_PAY_TYPE', 'tbl_pay_type');
+define('TBL_PLAN_MAIN', 'tbl_plan_main');
+define('TBL_PLAN_MAIN_LIST', 'tbl_plan_main_list');
+define('TBL_PLAN_PACK', 'tbl_plan_pack');
+define('TBL_PLAN_PACK_LIST', 'tbl_plan_pack_list');
+define('TBL_PLAN_PRICE_LIST_', 'tbl_plan_price_list');
+define('TBL_UNIT_TYPE', 'tbl_unit_type');
+
+
+
 
 
 
