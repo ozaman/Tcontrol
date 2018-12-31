@@ -625,7 +625,7 @@ if ($shop->id > 0) {
 <script>
   setTimeout(function () {
     cal_map('<?=$shop->id; ?>')
-    _box_region_show($('#manage_com').val(), '_company')
+//    _box_region_show($('#manage_com').val(), '_company')
     _box_contact('<?=$shop->id; ?>')
     // _box_document('<?=$shop->id; ?>')
   }, 1000);

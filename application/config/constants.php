@@ -153,7 +153,17 @@ define('TBL_SHOP_TYPE_PAY_LIST_PERCENT', 'shop_type_pay_list_percent');
 define('TBL_SHOP_TYPE_PAY_LIST_PARK_PERSION', 'shop_type_pay_list_park_persion');
 define('TBL_SHOP_TYPE_PAY_LIST_PARK_PERSION_PRICE', 'shop_type_pay_list_park_persion_price');
 
-
+//===================================== New Table ==============================================//
+define('NEW_TBL_PARTNER', 'tbl_partner');
+define('NEW_TBL_PARTNER_CONTROL', 'tbl_partner_control');
+define('NEW_TBL_PARTNER_GROUP', 'tbl_partner_group');
+define('NEW_TBL_PAY_TYPE', 'tbl_pay_type');
+define('NEW_TBL_PLAN_MAIN', 'tbl_plan_main');
+define('NEW_TBL_PLAN_MAIN_LIST', 'tbl_plan_main_list');
+define('NEW_TBL_PLAN_PACK', 'tbl_plan_pack');
+define('NEW_TBL_PLAN_PACK_LIST', 'tbl_plan_pack_list');
+define('NEW_TBL_PLAN_PRICE_LIST', 'tbl_plan_price_list');
+define('NEW_TBL_UNIT_TYPE', 'tbl_unit_type');
 
 
 
