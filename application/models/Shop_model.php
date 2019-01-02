@@ -1119,7 +1119,51 @@ class Shop_model extends CI_Model{
     // $this->session->set_userdata(array('savedata' => 1));
     return $result;
   }
+  
+  public function updatetype2(){
+    ///////////// Time
+    $id = $_POST[id];
+    $status = $_POST[status];
+    $compensation = $_POST[i_icompensation];
+    if($status == 0) {
+      $status = 1;
+    }
+    else {
+      $status = 0;
+    }
+    $field = $this->input->post('field');
 
+    $_where = array();
+//    $_where['i_shop'] = $id;
+    $_where['id'] = $compensation;
+    $this->db->select('*');
+    $qr_pg = $this->db->get_where(TBL_PARNER_CONTROL,$_where);
+    $num_row = $qr_pg->num_rows();
+    if($num_row==0){
+      $type = "insert";
+      $data[i_status] = $status;
+      $data[i_partner_group] = $_POST[partner_group];
+      $data[i_shop] = $_POST[id];
+      $result = $this->db->insert(TBL_PARNER_CONTROL, $data);
+    }else{
+      $type = "update";
+      $data[i_status] = $status;
+//      $data[i_partner_group] = $_POST[i_partner_group];
+//      $data[i_shop] = $_POST[id];
+      $_where = array();
+      $_where[id] = $compensation;
+      $result = $this->db->update(TBL_PARNER_CONTROL,$data,$_where);
+      $data[id] = $compensation;
+    }
+    $return[result] = $result;
+    $return[data] = $data;
+    $return[type] = $type;
+    $return[post] = $_POST;
+    $return[num_rows] = $num_row;
+    
+    return $return;
+  }
+  
   public function submit_detail_pay(){
     $i_shop = $_POST[i_shop];
     $s_masage = $_POST[s_masage];

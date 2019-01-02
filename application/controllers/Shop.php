@@ -164,12 +164,13 @@ class Shop extends CI_Controller {
 
   public function shop_manage() {
     session_start();
+    $this->db->select('id,main,sub,product_id,i_partner');
+    $where = array();
+    $where[id] = $_SESSION['admin_use'];
+    $query = $this->db->get_where(TBL_WEB_ADMIN,$where);
+    $admin = $query->row();
     if ($_SESSION['level'] < 8) {
-      $this->db->select('id,main,sub,product_id');
-      $where = array();
-      $where[id] = $_SESSION['admin_use'];
-      $query = $this->db->get_where(TBL_WEB_ADMIN,$where);
-      $admin = $query->row();
+
       if ($admin->product_id != $_GET[id] or $admin->sub != $_GET[sub] or $admin->main != $_GET[main]) {
         header("Location: ".base_url()."shop/shop_manage?sub=".$admin->sub."&main=".$admin->main."&id=".$admin->product_id,true,301);
         exit();
@@ -185,6 +186,7 @@ class Shop extends CI_Controller {
     $_where['id'] = $_GET[id];
     $_select = array('*');
     $data['shop'] = $this->Main_model->rowdata(TBL_SHOPPING_PRODUCT,$_where,$_select);
+    $data['admin'] = $admin;
     $menu[menu] = 'shop';
     $this->load->view('mainpage/page_header',$menu);
     $this->load->view('shop/page_shop_manage',$data);
@@ -433,7 +435,7 @@ class Shop extends CI_Controller {
   }
 
   public function updatetype() {
-    $data = $this->Shop_model->updatetype();
+    $data = $this->Shop_model->updatetype2();
     echo json_encode($data);
   }
 
