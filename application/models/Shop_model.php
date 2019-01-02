@@ -1137,14 +1137,14 @@ class Shop_model extends CI_Model{
 //    $_where['i_shop'] = $id;
     $_where['id'] = $compensation;
     $this->db->select('*');
-    $qr_pg = $this->db->get_where(TBL_PARNER_CONTROL,$_where);
+    $qr_pg = $this->db->get_where(TBL_PARTNER_CONTROL,$_where);
     $num_row = $qr_pg->num_rows();
     if($num_row==0){
       $type = "insert";
       $data[i_status] = $status;
       $data[i_partner_group] = $_POST[partner_group];
       $data[i_shop] = $_POST[id];
-      $result = $this->db->insert(TBL_PARNER_CONTROL, $data);
+      $result = $this->db->insert(TBL_PARTNER_CONTROL, $data);
     }else{
       $type = "update";
       $data[i_status] = $status;
@@ -1152,7 +1152,7 @@ class Shop_model extends CI_Model{
 //      $data[i_shop] = $_POST[id];
       $_where = array();
       $_where[id] = $compensation;
-      $result = $this->db->update(TBL_PARNER_CONTROL,$data,$_where);
+      $result = $this->db->update(TBL_PARTNER_CONTROL,$data,$_where);
       $data[id] = $compensation;
     }
     $return[result] = $result;

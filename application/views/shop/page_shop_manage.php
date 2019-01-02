@@ -367,7 +367,7 @@
       $where = array();
       $this->db->select('s_topic');
       $where[id] = $admin->i_partner;
-      $partner_main = $this->db->get_where(TBL_PARNER,$where);
+      $partner_main = $this->db->get_where(TBL_PARTNER,$where);
       $partner_main = $partner_main->row();
       ?>
 
@@ -387,18 +387,18 @@
                 $this->db->select('*');
                 $where[i_shop] = $shop->id;
                 $where[i_status] = 1;
-                $partner_ctr = $this->db->get_where(TBL_PARNER_CONTROL,$where);
+                $partner_ctr = $this->db->get_where(TBL_PARTNER_CONTROL,$where);
                 foreach ($partner_ctr->result() as $val) {
                   $where = array();
                   $this->db->select('*');
                   $where[id] = $val->i_partner_group;
-                  $partner_gp = $this->db->get_where(TBL_PARNER_GROUP,$where);
+                  $partner_gp = $this->db->get_where(TBL_PARTNER_GROUP,$where);
                   $partner_gp = $partner_gp->row();
 
                   $where = array();
                   $this->db->select('*');
                   $where[id] = $partner_gp->i_to;
-                  $partner = $this->db->get_where(TBL_PARNER,$where);
+                  $partner = $this->db->get_where(TBL_PARTNER,$where);
                   $partner = $partner->row();
                   ?>
                   <li class="" onclick="_box_region_show('<?=$_GET[id];?>', '<?=$type->s_db;?>')">
@@ -464,20 +464,20 @@
                         $where = array();
                         $this->db->select('*');
                         $where[i_from] = $admin->i_partner;
-                        $partner_g = $this->db->get_where(TBL_PARNER_GROUP,$where);
+                        $partner_g = $this->db->get_where(TBL_PARTNER_GROUP,$where);
                         foreach ($partner_g->result() as $val) {
 //                          echo $val->i_to;
                           $where = array();
                           $this->db->select('s_topic,id');
                           $where[id] = $val->i_to;
-                          $partner = $this->db->get_where(TBL_PARNER,$where);
+                          $partner = $this->db->get_where(TBL_PARTNER,$where);
                           $partner = $partner->row();
 
                           $where = array();
                           $this->db->select('*');
                           $where[i_partner_group] = $val->id;
                           $where[i_shop] = $shop->id;
-                          $partner_ctr = $this->db->get_where(TBL_PARNER_CONTROL,$where);
+                          $partner_ctr = $this->db->get_where(TBL_PARTNER_CONTROL,$where);
                           $partner_ctr = $partner_ctr->row();
                           if ($partner_ctr == null) {
                             $set_value = 0;
