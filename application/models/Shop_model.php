@@ -1206,5 +1206,42 @@ class Shop_model extends CI_Model{
           return $result;
 
   }
+  public function submit_planpack() {
+
+    $_where = array();
+    $_where[id] = $_POST[i_user];
+    $_select = array('i_partner');
+    $WEB_ADMIN = $this->Main_model->rowdata(TBL_WEB_ADMIN,$_where,$_select);
+    $_where = array();
+    $_where[id] = $_POST[i_plan];
+    $_select = array('s_topic');
+    $PLAN_MAIN = $this->Main_model->rowdata(TBL_PLAN_MAIN,$_where,$_select);
+
+    $i_shop = $_POST[i_shop];
+    $i_plan = $_POST[i_plan];
+    $i_country = $_POST[i_country];
+    if ($_POST[i_partner_group] == '') {
+      $i_partner_group = 1;
+    }
+    else{
+      $i_partner_group = $_POST[i_partner_group];
+      
+    }
+
+    
+      $data = array();
+      $data[i_shop] = $i_shop;
+      $data[i_country] = $i_country;
+      $data[i_partner] = $WEB_ADMIN->i_partner;
+      $data[i_partner_group] = $i_partner_group;
+      $data[s_topic] = $PLAN_MAIN->s_topic;
+      $result[status] = $this->db->insert(TBL_PLAN_PACK,$data);
+      $result[data] = $data;
+        
+          $result[msg] = 'ลบไฟล์สำเร็จ';
+          
+          return $result;
+       return $result;
+  }
 
 }
