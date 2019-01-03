@@ -8,19 +8,19 @@ class Shop_model extends CI_Model{
   public function func_SaveDataFormAction() {
     switch ($_POST[tbl]) {
       case 'shopping_product_main':
-        $response = $this->func_Saveshopping_product_main();
-        break;
+      $response = $this->func_Saveshopping_product_main();
+      break;
       case 'shopping_product_sub':
-        $response = $this->func_Saveshopping_product_sub();
-        break;
+      $response = $this->func_Saveshopping_product_sub();
+      break;
       case 'shopping_product_main_typelist':
-        $response = $this->func_Saveshopping_product_main_typelist();
-        break;
+      $response = $this->func_Saveshopping_product_main_typelist();
+      break;
       case 'shopping_product_sub_typelist':
-        $response = $this->func_Saveshopping_product_sub_typelist();
-        break;
+      $response = $this->func_Saveshopping_product_sub_typelist();
+      break;
       default :
-        $response = $this->default_res();
+      $response = $this->default_res();
     }
     return $response;
   }
@@ -188,73 +188,73 @@ class Shop_model extends CI_Model{
     $plan_com = $this->Main_model->fetch_data('','',TBL_SHOP_PLAN_COM,$_where,$_select,$_order);
     
     if ($msg == '') {
-    
-    $plan = array();
-    $plan[i_shop_country_icon] = $_POST[i_country_icon_plan];
-    $plan[i_plan_price] = $_POST[i_price_plan];
-    
-    
+
+      $plan = array();
+      $plan[i_shop_country_icon] = $_POST[i_country_icon_plan];
+      $plan[i_plan_price] = $_POST[i_price_plan];
 
 
-    $result = $this->db->insert(TBL_SHOP_COUNTRY_COM_LIST.$_GET[option],$plan);
-    $last_id = mysql_insert_id();
 
-    foreach($plan_com as $val) {
-      $data = array();
-      $data[i_shop_country_com_list] = $last_id;
-      $data[i_shop_country_icon] = $_POST[i_country_icon_plan];
-      $data[i_plan_price] = $_POST[i_price_plan];
-      $data[s_topic_th] = $val->s_topic_th;
-      if ($val->i_plan_com == 5 ) {
-        $s_topic_en = 'park';
+
+      $result = $this->db->insert(TBL_SHOP_COUNTRY_COM_LIST.$_GET[option],$plan);
+      $last_id = mysql_insert_id();
+
+      foreach($plan_com as $val) {
+        $data = array();
+        $data[i_shop_country_com_list] = $last_id;
+        $data[i_shop_country_icon] = $_POST[i_country_icon_plan];
+        $data[i_plan_price] = $_POST[i_price_plan];
+        $data[s_topic_th] = $val->s_topic_th;
+        if ($val->i_plan_com == 5 ) {
+          $s_topic_en = 'park';
+        }
+        if ($val->i_plan_com == 6 ) {
+          $s_topic_en = 'person';
+
+        }
+        if ($val->i_plan_com == 7) {
+          $s_topic_en = 'comision';
+
+        }
+        $data[i_plan_product_price_name] = $val->i_plan_com;
+        $data[s_topic_en] = $s_topic_en;
+        if ($val->i_plan_product_price_name == 6) {
+          $data[i_price] = $_POST[$val->element];
+
+        }
+        else{
+          $data[i_price] = 0;
+
+        }
+
+        $data[s_payment] = $_POST[money_.$val->element];
+        $data[i_type_pay] = $_POST[typepark];
+
+        $result = $this->db->insert(TBL_SHOP_COUNTRY_COM_LIST_PRICE.$_GET[option],$data);
       }
-      if ($val->i_plan_com == 6 ) {
-        $s_topic_en = 'person';
+      $res[post] = $_POST;
+      $res[data] =  $data;
+      $res[insert] =  $result;
+      $res[last_id] =  $last_id;
+      $res[typepark] =  $_POST[typepark];
 
-      }
-      if ($val->i_plan_com == 7) {
-        $s_topic_en = 'comision';
-
-      }
-      $data[i_plan_product_price_name] = $val->i_plan_com;
-      $data[s_topic_en] = $s_topic_en;
-      if ($val->i_plan_product_price_name == 6) {
-      $data[i_price] = $_POST[$val->element];
-        
-      }
-      else{
-      $data[i_price] = 0;
-
-      }
-      
-      $data[s_payment] = $_POST[money_.$val->element];
-      $data[i_type_pay] = $_POST[typepark];
-
-      $result = $this->db->insert(TBL_SHOP_COUNTRY_COM_LIST_PRICE.$_GET[option],$data);
-    }
-    $res[post] = $_POST;
-     $res[data] =  $data;
-     $res[insert] =  $result;
-     $res[last_id] =  $last_id;
-     $res[typepark] =  $_POST[typepark];
-
-     $res[i_plan_price] = $_POST[i_price_plan];
-     $res[plan_com] = $plan_com;
-     $res[option] =$_GET[option];
+      $res[i_plan_price] = $_POST[i_price_plan];
+      $res[plan_com] = $plan_com;
+      $res[option] =$_GET[option];
       $res[status] = true;
-     $res[msg] = $msg;
-    return  $res;
-  }
-  else{
-    $res[post] = $_POST;
-     $res[status] = false;
-     $res[msg] = $msg;
-     $res[typepark] =  $_POST[typepark];
-     $res[i_plan_price] = $_POST[i_price_plan];
-     $res[plan_com] = $plan_com;
-     $res[option] =$_GET[option];
-    return  $res;
-  }
+      $res[msg] = $msg;
+      return  $res;
+    }
+    else{
+      $res[post] = $_POST;
+      $res[status] = false;
+      $res[msg] = $msg;
+      $res[typepark] =  $_POST[typepark];
+      $res[i_plan_price] = $_POST[i_price_plan];
+      $res[plan_com] = $plan_com;
+      $res[option] =$_GET[option];
+      return  $res;
+    }
 
   }
 
@@ -268,7 +268,7 @@ class Shop_model extends CI_Model{
     foreach($arr['plan_com'] as $val) {
       $this->db->where('id',$val->id);
       if ($val->i_plan_product_price_name == 5) {
-      $data[i_type_pay] = $_POST[typepark.'_'.$val->id];
+        $data[i_type_pay] = $_POST[typepark.'_'.$val->id];
 
         
       }
@@ -691,7 +691,7 @@ class Shop_model extends CI_Model{
   public function save_document(){
     header('Content-Type: application/json');
     
-      
+
     
     // if ($_FILES["file"]["name"]) {
     $product_id = $_POST[product_id];
@@ -941,11 +941,11 @@ class Shop_model extends CI_Model{
     $queryData = array('message' => $message);
     $queryData = http_build_query($queryData,'','&');
     $headerOptions = array(
-        'http' => array(
-            'method' => 'POST',
-            'header' => "Content-Type: application/x-www-form-urlencoded\r\n"."Authorization: Bearer ".$token."\r\n"."Content-Length: ".strlen($queryData)."\r\n",
-            'content' => $queryData
-        ),
+      'http' => array(
+        'method' => 'POST',
+        'header' => "Content-Type: application/x-www-form-urlencoded\r\n"."Authorization: Bearer ".$token."\r\n"."Content-Length: ".strlen($queryData)."\r\n",
+        'content' => $queryData
+      ),
     );
     $context = stream_context_create($headerOptions);
     $result = file_get_contents(LINE_API,FALSE,$context);
@@ -1142,7 +1142,7 @@ class Shop_model extends CI_Model{
 
     return $result;
   }
-   public function deleteimg(){
+  public function deleteimg(){
     $result = array();
     $_where = array();
     $_where['id'] = $_GET[id];
@@ -1155,11 +1155,11 @@ class Shop_model extends CI_Model{
     unlink($target_file);
     $this->db->where('id',$_GET[id]);
     $query = $this->db->delete(TBL_SHOP_DOCUMENT_FILE_IMG);
-     $result[status] = $query;
-          $result[s_name] = $doc_name;
-          $result[msg] = 'ลบไฟล์สำเร็จ';
-          $result[i_shop] = $FILE_IMG->product_id;
-          return $result;
+    $result[status] = $query;
+    $result[s_name] = $doc_name;
+    $result[msg] = 'ลบไฟล์สำเร็จ';
+    $result[i_shop] = $FILE_IMG->product_id;
+    return $result;
 
   }
   public function submit_planpack() {
@@ -1176,28 +1176,37 @@ class Shop_model extends CI_Model{
     $i_shop = $_POST[i_shop];
     $i_plan = $_POST[i_plan];
     $i_country = $_POST[i_country];
+    $i_pay_type = $_POST[i_pay_type];
+
     if ($_POST[i_partner_group] == '') {
       $i_partner_group = 1;
     }
     else{
       $i_partner_group = $_POST[i_partner_group];
-      
+
     }
 
-    
-      $data = array();
-      $data[i_shop] = $i_shop;
-      $data[i_country] = $i_country;
-      $data[i_partner] = $WEB_ADMIN->i_partner;
-      $data[i_partner_group] = $i_partner_group;
-      $data[s_topic] = $PLAN_MAIN->s_topic;
-      $result[status] = $this->db->insert(TBL_PLAN_PACK,$data);
-      $result[data] = $data;
-        
-          $result[msg] = 'ลบไฟล์สำเร็จ';
-          
-          return $result;
-       return $result;
+
+    $data = array();
+    $data[i_shop] = $i_shop;
+    $data[i_country] = $i_country;
+    $data[i_partner] = $WEB_ADMIN->i_partner;
+    $data[i_partner_group] = $i_partner_group;
+    $data[s_topic] = $PLAN_MAIN->s_topic;
+    $result[status] = $this->db->insert(TBL_PLAN_PACK,$data);
+
+    $last_id = mysql_insert_id();
+    $data2 = array();
+    $data[i_plan_main] = $i_plan;
+    $data[i_plan_pack] = $last_id;
+    $data[i_pay_type] = $i_pay_type;
+
+    $result[status] = $this->db->insert(TBL_PLAN_PACK_LIST,$data2);
+    $result[msg] = '์สำเร็จ';
+    $result[data] = $data;
+    $result[data2] = $data2;
+
+    return $result;
   }
 
 }

@@ -2249,6 +2249,10 @@ function submit_planpack(shop,user) {
     return false;
 
   }
+  if (pay_type == '') {
+    toastr.warning('บันทึกข้อมูลไม่สำเร็จ', 'กรุณาเลือกช่องทางการจ่ายเงิน', {"closeButton": true});
+    return false;
+  }
   $.ajax({
     url: url,
     data: param,
