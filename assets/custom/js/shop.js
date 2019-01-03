@@ -804,14 +804,14 @@ function save_plan_price_sub(id) {
   });
   // body...
 }
-function updatetype(id, values, op, icom) {
+function updatetype(id, values, op, icom, partner_group) {
 
   var url = base_url + "shop/updatetype?option=" + option;
 
   console.log(url)
-  console.log(id)
-  console.log(values)
-  console.log(op)
+//  console.log(id)
+//  console.log(values)
+//  console.log(op)
   console.log($('#i_' + op).prop('checked'))
   if (op == 'company') {
     $('#l_company').addClass('active')
@@ -832,7 +832,8 @@ function updatetype(id, values, op, icom) {
     id: id,
     field: op,
     status: values,
-    i_icompensation: icom
+    i_icompensation: icom,
+    partner_group : partner_group
   }
   // $('#i_shop_country_com').val(id)
   // param.i_shop_country_com = $('#id_shop_product').val();
@@ -848,7 +849,7 @@ function updatetype(id, values, op, icom) {
     },
     success: function (res) {
       console.log(res);
-      if (res == true) {
+      if (res.result == true) {
         location.reload();
       }
 
