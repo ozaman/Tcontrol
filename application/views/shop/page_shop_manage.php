@@ -379,7 +379,7 @@
                 <header><h4 class="text-light"><i class="fa fa-pencil fa-fw"> </i><strong> ข้อมูลจัการค่าตอบแทน </strong></h4></header>
               </div>
               <ul class="nav nav-tabs" data-toggle="tabs" >
-                <li class="<?=$active_shop;?> active" onclick="_box_region_show('<?=$_GET[id];?>', '_company')">
+                <li class="<?=$active_shop;?> active" onclick="_box_region_show('<?=$_GET[id];?>', '_company', 1)">
                   <a href="#section_shop"> <?=$shop->topic_th;?> >> <?=$partner_main->s_topic;?></a>
                 </li> 
                 <?php
@@ -388,7 +388,13 @@
                 $where[i_shop] = $shop->id;
                 $where[i_status] = 1;
                 $partner_ctr = $this->db->get_where(TBL_PARTNER_CONTROL,$where);
+//                echo "<pre>";
+//                print_r($partner_ctr->result());
+//                echo "</pre>";
                 foreach ($partner_ctr->result() as $val) {
+                  if ($val->i_partner_group == 1) {
+                    continue;
+                  }
                   $where = array();
                   $this->db->select('*');
                   $where[id] = $val->i_partner_group;
@@ -401,7 +407,7 @@
                   $partner = $this->db->get_where(TBL_PARTNER,$where);
                   $partner = $partner->row();
                   ?>
-                  <li class="" onclick="_box_region_show('<?=$_GET[id];?>', '<?=$type->s_db;?>')">
+                  <li class="" onclick="_box_region_show('<?=$_GET[id];?>', '<?=$type->s_db;?>', '<?=$partner_gp->id;?>')">
                     <a href="#section_<?=$type->s_field;?>"> <?=$partner_main->s_topic;?> >> <span style="text-transform:capitalize;"><?=$partner->s_topic;?></span></a>
                   </li>
                   <?php
@@ -505,11 +511,6 @@
                     </div>
 
                   </div>
-
-                  <div class="col-md-12"> 
-                    <div  class="box_region_show"></div>
-                  </div>
-
                 </div>
 
                 <!-- ========================================================================================= -->
@@ -543,101 +544,19 @@
                 <!-- ========================================================================================= -->
                 <div class="box-body no-padding">
                   <div class="box-head" style="padding: 15px 10px;">
-                    <button type="button" class="btn btn-md btn-success btn-equal " onclick="open_commision('<?=$shop->id;?>')"> 
+                    <button type="button" class="btn btn-md btn-success btn-equal open_mg" onclick="open_commision('<?=$shop->id;?>', 1)"> 
                       <i class="fa fa-plus " ></i>
                     </button>
-                    <header style="cursor: pointer;" onclick="open_commision('<?=$shop->id;?>')"><h4 class="text-light"> จัดการค่าตอบแทน </h4></header>
+                    <header style="cursor: pointer;" class="open_mg" onclick="open_commision('<?=$shop->id;?>', 1)"><h4 class="text-light"> จัดการค่าตอบแทน </h4></header>
                   </div>
                 </div>
-
-                <!-- <div class="box-body no-padding">
-                 <div class="box-head" style="padding: 15px 10px;">
-                     <button type="button" class="btn btn-md btn-success btn-equal " onclick="open_commision('<?=$shop->id;?>')"> 
-                       <i class="fa fa-plus "></i>
-                     </button>
-                     <header style="cursor: pointer;" onclick="open_commision('<?=$shop->id;?>')"><h4 class="text-light"> จัดการค่าตอบแทนตามประเภทรถ </h4></header>
-                   </div>
-                </div> -->
+                
+                <div class="col-md-12"> 
+                  <div  class="box_region_show"></div>
+                </div>
+                
               </div>
               <!-- T_SHARE - NETWORK ============================================================================================== -->
-              <?php
-              foreach ($arr[COMPENSATION] as $val) {
-                $_where = array();
-                $_where['i_shop'] = $_GET[id];
-                $_where['i_compensation'] = $val->id;
-                $_select = array('*');
-                $type = $this->Main_model->rowdata(TBL_SHOP_EXPENDITURE_TYPE,$_where,$_select);
-                if ($type == null) {
-                  $set_value = 0;
-                  $isactive = '';
-                }
-                else {
-                  if ($type->i_status == 1) {
-                    ?>
-                    <div class="tab-pane " id="section_<?=$type->s_field;?>">
-                      <!-- ========================================================================================= -->
-                      <?php
-                      $chk_withholding = ($type->i_withholding == 1) ? 'checked' : '';
-                      $chk_withholding_active = ($type->i_withholding == 1) ? 'active' : '';
-                      ?>
-                      <div class="box-body no-padding">
-                        <div class="box-head">
-                          <header><h4 class="text-light"> หักภาษี ณ ที่จ่าย <strong></strong></h4></header>
-                        </div>
-                        <div class="col-md-12">
-                          <div class="col-md-12" style="background: #f2f2f2;padding: 10px;">
-                            <div class="col-md-4">
-                              <div data-toggle="buttons"  onclick="func_withholding('<?=$type->id;?>', 'id', 'i_withholding', 'shop_expenditure_type', '<?=$type->id;?>');">
-                                <label class="btn checkbox-inline btn-checkbox-success-inverse <?=$chk_withholding_active;?> ">รวมหักภาษี ณ ที่จ่าย
-                                  <input type="checkbox" value="1" id="i_withholding<?=$type->id;?>" name="i_withholding<?=$type->id;?>" <?=$chk_withholding;?>> </label>
-                              </div>
-                            </div>
-                            <div class="col-md-8">
-                              <div class="form-group ">
-                                <div class="input-group"  id="div_i_withholding_rate<?=$type->id;?>" style="display:none<?=$chk_withholding_active;?>;">
-                                  <span class="input-group-addon" style="width: 64px">เปอร์เซนต์  </span>
-                                  <input type="number" class="form-control" value="<?=$type->i_withholding_rate;?>" id="i_withholding_rate<?=$type->id;?>" onkeyup="func_withholding_rate(this.value, '<?=$type->id;?>', 'id', 'i_withholding_rate', 'shop_expenditure_type', '<?=$type->id;?>')">
-                                </div>
-                              </div>
-                            </div>
-                          </div>
-                        </div>
-                      </div>
-                      <!-- ========================================================================================= -->
-                      <div class="col-md-12">
-                        <div class="box-head" style="padding: 15px 0;">
-                          <button type="button" class="btn btn-md btn-success btn-equal " onclick="open_commision('<?=$shop->id;?>')"> <i class="fa fa-plus " ></i>
-                          </button>
-                          <header style="cursor: pointer;" onclick="open_commision('<?=$shop->id;?>')"><h4 class="text-light">ประเภทรายจ่าย </h4></header>
-                        </div>
-                        <div class="box-body no-padding">
-                          <div  class="box_region_show"></div>
-                        </div>
-                        <?php
-                        if ($type->s_field == 'taxi') {
-                          ?>
-                          <!-- <div class="col-md-12"> -->
-                          <div class="box-head" style="padding: 15px 0;">
-                            <button type="button" class="btn btn-md btn-success btn-equal " onclick="open_detail_pay('<?=$shop->id;?>', '<?=$type->s_field;?>')"> <i class="fa fa-plus " ></i>
-                            </button>
-                            <header style="cursor: pointer;" onclick="open_detail_pay('<?=$shop->id;?>', '<?=$type->s_field;?>')"><h4 class="text-light">รายละเอียดการโอน(ค่าคอม)  </h4></header>
-                          </div>
-                          <div class="box-body no-padding">
-                            <div style="background: #f2f2f2;padding: 10px;">
-                              <div  class="box_detail_pay"></div>
-                            </div>
-                          </div>
-                          <!-- </div> -->
-                          <?php
-                        }
-                        ?>
-                      </div>
-                    </div>
-                    <?php
-                  }
-                }
-              }
-              ?>
 
             </div>
           </div>
@@ -652,9 +571,9 @@ if ($shop->id > 0) {
   ?>
   <script>
     setTimeout(function () {
-      cal_map('<?=$shop->id;?>')
-  //    _box_region_show($('#manage_com').val(), '_company')
-      _box_contact('<?=$shop->id;?>')
+      cal_map('<?=$shop->id;?>');
+      _box_region_show('<?=$_GET[id];?>', '_company', 1);
+      _box_contact('<?=$shop->id;?>');
       // _box_document('<?=$shop->id;?>')
     }, 1000);
 

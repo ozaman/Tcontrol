@@ -394,6 +394,9 @@ class Shop extends CI_Controller {
     $_order['id'] = 'asc';
 //  echo $_GET[option];
     $data['region'] = $this->Main_model->fetch_data('','',TBL_SHOP_COUNTRY.$_GET[option],$_where,$_select,$_order);
+    
+    
+//    partner_g
     $this->load->view('shop/box_region_show',$data);
     // echo json_encode(TBL_SHOP_COUNTRY.$_GET[option]);
   }
@@ -715,13 +718,122 @@ class Shop extends CI_Controller {
     $data_j[data] = $data;
     echo json_encode($data_j);
   }
-  public function submit_planpack() {
-    header('Content-Type: application/json');
 
+  public function submit_planpack() {
     $data = $this->Shop_model->submit_planpack();
     echo json_encode($data);
   }
 
+  public function view_box_manage_com() {
+    $_where = array();
+    $_where[i_shop] = $_GET[shop_id];
+    $_where[i_partner_group] = $_GET[partner_g];
+    $this->db->select('*');
+    $query = $this->db->get_where(TBL_PLAN_PACK,$_where);
+    $planpack = $query->result();
+    $data[planpack] = $planpack;
+    $this->load->view('shop/view_box_manage_com',$data);
+    
+  }
+ 
+  /******
+   * 
+   * NEW
+   * 
+   */
+  public function view_condition() {
+    $_where = array();
+    $_where[id] = $_GET[pack_id];
+//    $_where[i_partner_group] = $_GET[partner_g];
+    $this->db->select('*');
+    $query = $this->db->get_where(TBL_PLAN_PACK,$_where);
+    $planpack = $query->result();
+    $data[planpack] = $planpack;
+    if($_GET[partner_g]==1){
+      $this->load->view('shop/condition/view_condition_shop',$data);
+    }else{
+      $this->load->view('shop/condition/view_condition_tshare',$data);
+    }
+    
+    
+  }
+  
+  public function save_condition(){
+    $data = $this->Shop_model->save_condition();
+    echo json_encode($data);
+  }
+  
+  public function select_con(){
+    $data = $this->Shop_model->select_con();
+    echo json_encode($data);
+  }
+  
+  public function save_con_each_person(){
+    $data = $this->Shop_model->save_con_each_person();
+    echo json_encode($data);
+  }
+  
+  public function select_each_car(){
+    $data = $this->Shop_model->select_each_car();
+    echo json_encode($data);
+  }
+  
+  public function save_con_each_car(){
+    $data = $this->Shop_model->save_con_each_car();
+    echo json_encode($data);
+  }
+  
+  public function add_data_regis_only(){
+    $data = $this->Shop_model->add_data_regis_only();
+    echo json_encode($data);
+  }
+ 
+  public function deleted_regis_only(){
+    $data = $this->Shop_model->deleted_regis_only();
+    echo json_encode($data);
+  }
+  
+  public function save_con_regis_only(){
+    $data = $this->Shop_model->save_con_regis_only();
+    echo json_encode($data);
+  }
+  public function select_com_product_type(){
+    $data = $this->Shop_model->select_com_product_type();
+    echo json_encode($data);
+  }
+  
+  public function save_con_product_type(){
+    $data = $this->Shop_model->save_con_product_type();
+    echo json_encode($data);
+  }
+  
+  public function ele_checkbox_plan(){
+    $this->load->view('shop/ele_checkbox_plan');
+  }
+  
+  public function box_pack_list() {
+    $_where = array();
+    $_where[i_shop] = $_POST[id];
+    $_where[i_partner_group] = $_GET[partner_g];
+    $this->db->select('*');
+    $query = $this->db->get_where(TBL_PLAN_PACK,$_where);
+    $planpack = $query->result();
+    $data[planpack] = $planpack;
+//    print_r($planpack);
+//    exit();
+    $this->load->view('shop/box_pack_list',$data);
+    // echo json_encode(TBL_SHOP_COUNTRY.$_GET[option]);
+  }
+
+  public function del_plan_pack(){
+    $data = $this->Shop_model->del_plan_pack();
+    echo json_encode($data);
+  }
+  
+  public function check_duplicate_pack(){
+    $data = $this->Shop_model->check_duplicate_pack();
+    echo json_encode($data);
+  }
   ################################ SHOP #################################
 }
 
