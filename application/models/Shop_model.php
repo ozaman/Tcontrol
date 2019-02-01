@@ -1480,7 +1480,7 @@ class Shop_model extends CI_Model {
     return $data;
   }
 
-  public function add_data_regis_only($param) {
+  public function add_data_regis_only() {
 
     $data[i_con_type] = 4;
     $data[i_plan_pack] = $_POST[pack_id];
@@ -1494,11 +1494,33 @@ class Shop_model extends CI_Model {
 
     return $data;
   }
+  
+  public function add_data_each_person() {
+
+    $data[i_con_type] = 1;
+    $data[i_plan_pack] = $_POST[pack_id];
+    $data[i_plan_main] = $_POST[plan_main];
+//    $data[i_num_regis] = $_POST[i_num_regis];
+    $data[d_last_update] = date('Y-m-d H:i:s');
+    $data[d_post_date] = date('Y-m-d H:i:s');
+    $data[result] = $this->db->insert(TBL_CON_EACH_PERSON,$data);
+    $data[type] = "insert";
+    $data[last_id] = $this->db->insert_id();
+
+    return $data;
+  }
 
   public function deleted_regis_only() {
 
     $this->db->where('id',$_GET[id]);
     $result = $this->db->delete(TBL_CON_PS_ONLY_REGIS);
+    return $result;
+  }
+  
+  public function deleted_each_person() {
+
+    $this->db->where('id',$_GET[id]);
+    $result = $this->db->delete(TBL_CON_EACH_PERSON);
     return $result;
   }
 

@@ -73,43 +73,45 @@ $query = $this->db->get_where(TBL_PLAN_MAIN_LIST,$_where);
               <input <?=$selected;?> type="radio" name="condition_type" value="<?=$val->id;?>" onclick="selectOptionSet('<?=$val->id;?>');" class="radio-check">
               <span class="checkmark"></span>
             </label>
-
+            <button type="button" class="btn btn-support3" onclick="plusRowEachPerson();"><i class="fa fa-plus" aria-hidden="true"></i> เพิ่มแถว</button>
             <div class="row outbox" id="box_set_<?=$val->id;?>" style="<?=$open_box;?>">
               <div class="col-md-12">
                 <form id="each_person_form">
                   <table class="tb-pad" width="100%">
                     <tr>
                       <td></td>
-                      <td align="center"><b style="font-size: 16px;">คนละ</b></td>
                       <td></td>
-                      <td align="center" width="220px"><b style="font-size: 16px;">ถอด vat%</b></td>
-                      <td></td>
+                      <td align="center"><b style="font-size: 16px;">จำนวน</b></td>
+                      <td align="center" ><b style="font-size: 16px;">ถอด vat%</b></td>
                       <td align="center"><b style="font-size: 16px;">ภาษี ณ ที่จ่าย</b></td>
                     </tr>
-                    <tr>
-                      <td>
-                        
-                      </td>
-                      <td>
-<!--                        <div class="input-group">
-                          <span class="input-group-addon">จำนวน</span>
-                          <input class="form-control" type="number" name="f_price" id="each_f_price" value="<?=$con->f_price;?>" />
-                        </div>-->
-                        <input class="form-control" type="number" name="f_price" id="each_f_price" value="<?=$con->f_price;?>" />
-                      </td>
-                      <td width="30"></td>
-                      <td>
-                        <input class="form-control" type="number" name="f_vat" id="each_f_vat" value="<?=$con->f_vat;?>" />
-                      </td>
-                      <td width="30"></td>
-                      <td>
-                        <input class="form-control" type="number" name="f_wht" id="each_f_wht" value="<?=$con->f_wht;?>" />
-                      </td>
-<!--                      <td>
-                        <button type="button" class="btn btn-success button-cus" onclick="saveEachPerson();"><i class="fa fa-floppy-o" aria-hidden="true"></i>
-                        </button>
-                      </td>-->
-                    </tr>
+                    <?php foreach ($query_con_tb->result() as $key => $con) { ?>
+                      <tr class="tr_ms_clone" id="id_tr_each_ps_<?=$val->id;?>">
+                        <td  align="center">
+                          <div class="input-group">
+                            <span class="input-group-addon">จำนวนคน</span>
+                            <input class="form-control" type="number" name="i_person" id="i_person_<?=$con->id;?>" value="" style="width:90%;" onkeyup="saveDataKeyupEachps(<?=$con->id;?>);" />
+                          </div>
+                        </td>
+                        <td><span style="">ขึ้นไป</span></td>
+                        <td align="center">
+                          <input class="form-control" type="number" name="f_price" id="each_f_price_<?=$con->id;?>" value="<?=$con->f_price;?>" style="width:80%;" onkeyup="saveDataKeyupEachps(<?=$con->id;?>);" />
+                        </td>
+                        <td align="center">
+                          <input class="form-control" type="number" name="f_vat" id="each_f_vat_<?=$con->id;?>" value="<?=$con->f_vat;?>" style="width:80%;" onkeyup="saveDataKeyupEachps(<?=$con->id;?>);" />
+                        </td>
+                        <td align="center">
+                          <input class="form-control" type="number" name="f_wht" id="each_f_wht_<?=$con->id;?>" value="<?=$con->f_wht;?>" style="width:80%;" onkeyup="saveDataKeyupEachps(<?=$con->id;?>);" />
+                        </td>
+                        <td>
+                          <button type="button" class="btn btn-danger button-cus del-row" onclick="deletedRowEachPerson(<?=$con->id;?>);">
+                            <i class="fa fa-trash-o" aria-hidden="true"></i>
+                          </button>
+                        </td>
+                      </tr>
+                      <?php
+                    }
+                    ?>
                     <tr>
                   </table>
                 </form>
@@ -287,7 +289,7 @@ $query = $this->db->get_where(TBL_PLAN_MAIN_LIST,$_where);
                   }
 //                }
                   ?>
-                                                                                                    <!--<input type="hidden" value="<?=$i;?>" id="val_num_row" />-->
+                                                                                                                        <!--<input type="hidden" value="<?=$i;?>" id="val_num_row" />-->
                 </table>
               </form>
             </div>
@@ -409,6 +411,32 @@ $query = $this->db->get_where(TBL_PLAN_MAIN_LIST,$_where);
     </td>
     <td>
       <button type="button" class="btn btn-danger button-cus del-row" onclick="deletedRowRegisOnly();">
+        <i class="fa fa-trash-o" aria-hidden="true"></i>
+      </button>
+    </td>
+  </tr>
+</table>
+
+<table class="tb_each_person">
+  <tr class="tr_ms_clone" style="display: none;">
+    <td  align="center">
+      <div class="input-group">
+        <span class="input-group-addon">จำนวนคน</span>
+        <input class="form-control" type="number" name="i_person" id="i_person" value="" style="width:90%;" />
+      </div>
+    </td>
+    <td><span style="">ขึ้นไป</span></td>
+    <td align="center">
+      <input class="form-control" type="number" name="f_price" id="each_f_price" value="" style="width:80%;" />
+    </td>
+    <td align="center">
+      <input class="form-control" type="number" name="f_vat" id="each_f_vat" value="" style="width:80%;" />
+    </td>
+    <td align="center">
+      <input class="form-control" type="number" name="f_wht" id="each_f_wht" value="" style="width:80%;" />
+    </td>
+    <td>
+      <button type="button" class="btn btn-danger button-cus del-row" onclick="deletedRowEachPerson();">
         <i class="fa fa-trash-o" aria-hidden="true"></i>
       </button>
     </td>

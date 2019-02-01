@@ -2327,7 +2327,7 @@ function editCondition(id, topic, plan_main, i_country) {
   $('#modal_custom_2').show();
   $('#title_add_region_sub').html('ตั้งค่าเงื่อนไข ' + topic)
   var shop = $('#id_shop_product').val();
-  var url = base_url + "shop/view_condition?pack_id=" + id + "&plan_main=" + plan_main + "&shop_id=" + shop+"&partner_g="+$('#partner_g').val()+"&i_country="+i_country;
+  var url = base_url + "shop/view_condition?pack_id=" + id + "&plan_main=" + plan_main + "&shop_id=" + shop + "&partner_g=" + $('#partner_g').val() + "&i_country=" + i_country;
   console.log(url);
 //  return;
   $.ajax({
@@ -2561,6 +2561,56 @@ function plusRowRegisOnly() {
   });
 }
 
+function plusRowEachPerson() {
+  var count_ele = $("#each_person_form").find('.tr_ms_clone').length;
+  console.log(count_ele);
+  if (count_ele > 0) {
+    $('#each_person_form').find('.tr_ms_clone').last().clone().appendTo("#each_person_form table");
+  } else {
+    $('.tb_each_person').find('.tr_ms_clone').last().clone().appendTo("#each_person_form table");
+    $('#each_person_form').find('.tr_ms_clone').last().show();
+  }
+  var data = {
+    pack_id: $('#pack_id').val(),
+    plan_main: $('#plan_main').val()
+  };
+  var url = base_url + "shop/add_data_each_person";
+  $.ajax({
+    url: url,
+    data: data,
+    dataType: "json",
+    type: 'post',
+    error: function () {
+      console.log('Error Profile');
+    },
+    success: function (res) {
+      console.log(res);
+      if (res.result == true) {
+        toastr.success('บันทึกข้อมูลสำเร็จ', '', {"closeButton": true});
+        var vat_ele = $('#each_person_form').find('.tr_ms_clone').last().find('input[name="f_vat"]');
+        var price_ele = $('#each_person_form').find('.tr_ms_clone').last().find('input[name="f_price"]');
+        var wht_ele = $('#each_person_form').find('.tr_ms_clone').last().find('input[name="f_wht"]');
+        var person_ele = $('#each_person_form').find('.tr_ms_clone').last().find('input[name="i_person"]');
+
+        vat_ele.attr('id', 'each_person_f_vat_' + res.last_id);
+        price_ele.attr('id', 'each_person_f_price_' + res.last_id);
+        wht_ele.attr('id', 'each_person_f_wht_' + res.last_id);
+        person_ele.attr('id', 'each_person_i_person_' + res.last_id);
+
+        vat_ele.attr('onkeyup', 'saveDataKeyupEachps(' + res.last_id + ')');
+        price_ele.attr('onkeyup', 'saveDataKeyupEachps(' + res.last_id + ')');
+        wht_ele.attr('onkeyup', 'saveDataKeyupEachps(' + res.last_id + ')');
+        person_ele.attr('onkeyup', 'saveDataKeyupEachps(' + res.last_id + ')');
+        $('#each_person_form').find('.tr_ms_clone').last().attr('id', 'id_tr_each_ps_' + res.last_id);
+        $('#each_person_form').find('.tr_ms_clone').last().find('.del-row').attr('onclick', 'deletedRowEachPerson(' + res.last_id + ')');
+      } else {
+        toastr.error('บันทึกข้อมูลไม่สำเร็จ', '', {"closeButton": true});
+      }
+    }
+  });
+
+}
+
 function deletedRowRegisOnly(id) {
   console.log(id);
 
@@ -2583,6 +2633,66 @@ function deletedRowRegisOnly(id) {
       }
     }
   });
+}
+
+function deletedRowEachPerson(id) {
+  console.log(id);
+
+  var url = base_url + "shop/deleted_each_person?id=" + id;
+  $.ajax({
+    url: url,
+//    data: data,
+    dataType: "json",
+    type: 'post',
+    error: function () {
+      console.log('Error Profile');
+    },
+    success: function (res) {
+      console.log(res);
+      if (res == true) {
+        $('#id_tr_each_ps_' + id).remove();
+        toastr.success('ลบข้อมูลสำเร็จ', '', {"closeButton": true});
+      } else {
+        toastr.error('ลบข้อมูลไม่สำเร็จ', '', {"closeButton": true});
+      }
+    }
+  });
+}
+
+var timer1;
+function saveDataKeyupEachps(id) {
+  clearTimeout(timer1);
+  timer1 = setTimeout(function validate() {
+    console.log(id);
+    var shop_id = $('#id_shop_product').val();
+    var url = base_url + "shop/save_con_each_person?shop_id=" + shop_id;
+    console.log(url);
+    var data = {
+      f_price: $('#each_person_f_price_' + id).val(),
+      f_vat: $('#each_person_f_vat_' + id).val(),
+      f_wht: $('#each_person_f_wht_' + id).val(),
+      pack_id: $('#pack_id').val(),
+      plan_main: $('#plan_main').val(),
+      id: id
+    };
+    $.ajax({
+      url: url,
+      data: data,
+      dataType: "json",
+      type: 'post',
+      error: function () {
+        console.log('Error Profile');
+      },
+      success: function (res) {
+        console.log(res);
+        if (res.result == true) {
+          toastr.success('บันทึกข้อมูลสำเร็จ', '', {"closeButton": true});
+        } else {
+          toastr.error('บันทึกข้อมูลไม่สำเร็จ', '', {"closeButton": true});
+        }
+      }
+    });
+  }, 1000);
 }
 
 var timer2;

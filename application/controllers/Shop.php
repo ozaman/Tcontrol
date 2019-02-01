@@ -767,12 +767,7 @@ class Shop extends CI_Controller {
     $data = $this->Shop_model->select_con();
     echo json_encode($data);
   }
-  
-  public function save_con_each_person(){
-    $data = $this->Shop_model->save_con_each_person();
-    echo json_encode($data);
-  }
-  
+    
   public function select_each_car(){
     $data = $this->Shop_model->select_each_car();
     echo json_encode($data);
@@ -787,9 +782,19 @@ class Shop extends CI_Controller {
     $data = $this->Shop_model->add_data_regis_only();
     echo json_encode($data);
   }
+  
+  public function add_data_each_person(){
+    $data = $this->Shop_model->add_data_each_person();
+    echo json_encode($data);
+  }
  
   public function deleted_regis_only(){
     $data = $this->Shop_model->deleted_regis_only();
+    echo json_encode($data);
+  }
+  
+  public function deleted_each_person(){
+    $data = $this->Shop_model->deleted_each_person();
     echo json_encode($data);
   }
   
@@ -797,6 +802,12 @@ class Shop extends CI_Controller {
     $data = $this->Shop_model->save_con_regis_only();
     echo json_encode($data);
   }
+  
+  public function save_con_each_person(){
+    $data = $this->Shop_model->save_con_regis_only();
+    echo json_encode($data);
+  }
+  
   public function select_com_product_type(){
     $data = $this->Shop_model->select_com_product_type();
     echo json_encode($data);
