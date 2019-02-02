@@ -1272,6 +1272,20 @@ class Shop_model extends CI_Model {
         $pack_list[i_plan_main] = $key;
         $pack_list[i_plan_pack] = $i_plan_pack;
         $pack_list[i_pay_type] = 2;
+        
+        $_where = array();
+        $_where['t2.i_plan_main'] = $key;
+        $_where['t1.i_shop'] = $_POST[i_shop];
+        $_where['t1.i_partner_group'] = 1;
+        
+        $this->db->select('*');
+        $this->db->where($_where);
+        $this->db->from(TBL_PLAN_PACK." as t1");
+        $this->db->join(TBL_PLAN_PACK_LIST." as t2",'t1.id = t2.i_plan_pack');
+        $query2 = $this->db->get();
+        $con = $query2->row();
+
+        $pack_list[i_con_plan_main_list] = $con->i_con_plan_main_list;
         $pack_list[result] = $this->db->insert(TBL_PLAN_PACK_LIST,$pack_list);
         $array_packlist[$key] = $pack_list;
       }
@@ -1285,7 +1299,7 @@ class Shop_model extends CI_Model {
       $data[pack_list] = $array_packlist;
       $data[result] = $result;
     }
-
+    $data[post] = $_POST;
     return $data;
   }
 
@@ -1398,15 +1412,17 @@ class Shop_model extends CI_Model {
     $data[f_price] = $_POST[f_price];
     $data[f_vat] = $_POST[f_vat];
     $data[f_wht] = $_POST[f_wht];
+    $data[i_person_up] = $_POST[i_person];
     $data[i_plan_main] = $_POST[plan_main];
     $data[i_plan_pack] = $_POST[pack_id];
-    $data[i_con_type] = $type;
+    $data[i_con_type] = 1;
     $data[d_post_date] = date('Y-m-d H:i:s');
     $data[d_last_update] = date('Y-m-d H:i:s');
     if ($check > 0) {
       $_where = array();
-      $_where[i_plan_main] = $_POST[plan_main];
-      $_where[i_plan_pack] = $_POST[pack_id];
+//      $_where[i_plan_main] = $_POST[plan_main];
+//      $_where[i_plan_pack] = $_POST[pack_id];
+      $_where[id] = $_POST[id];
       $data[result] = $this->db->update(TBL_CON_EACH_PERSON,$data,$_where);
       $data[type] = "update";
     }
@@ -1414,6 +1430,7 @@ class Shop_model extends CI_Model {
       $data[result] = $this->db->insert(TBL_CON_EACH_PERSON,$data);
       $data[type] = "insert";
     }
+    $data[post] = $_POST;
 //    $return[data] = $data;
     return $data;
   }
@@ -1494,7 +1511,7 @@ class Shop_model extends CI_Model {
 
     return $data;
   }
-  
+
   public function add_data_each_person() {
 
     $data[i_con_type] = 1;
@@ -1516,7 +1533,7 @@ class Shop_model extends CI_Model {
     $result = $this->db->delete(TBL_CON_PS_ONLY_REGIS);
     return $result;
   }
-  
+
   public function deleted_each_person() {
 
     $this->db->where('id',$_GET[id]);
@@ -1664,12 +1681,11 @@ class Shop_model extends CI_Model {
         $query = $this->db->get_where(TBL_PLAN_PACK_LIST,$_where);
         $check = $query->num_rows();
         $res_chk = false; // ture = duplicate, false = unique
-        if($check>0){
+        if ($check > 0) {
           $res_chk = true;
         }
 //        $chk[$key2] = $res_chk;
       }
-      
     }
     $pack_list[chk] = $res_chk;
     $pack_list[post] = $_POST;

@@ -27,6 +27,10 @@
             <div class="col-md-9">
               <?php
               foreach ($query_list->result() as $key2 => $val2) {
+//                echo "<pre>";
+//                print_r($val2);
+//                echo "</pre>";
+                
                 $_where = array();
                 $_where[id] = $val2->i_plan_main;
                 $this->db->select('id,s_topic');

@@ -14,7 +14,8 @@ $_where = array();
 $_where[i_plan_main] = $_GET[plan_main];
 $this->db->select('*');
 $query = $this->db->get_where(TBL_PLAN_MAIN_LIST,$_where);
-
+//echo $_GET[plan_main];
+//exit();
 //echo "<pre>";
 //print_r($query->result());
 //echo "</pre>"; 
@@ -35,6 +36,7 @@ $query = $this->db->get_where(TBL_PLAN_MAIN_LIST,$_where);
     $con_pack = $querys->row();
 
     $person = 0;
+    
     foreach ($query->result() as $key => $val) {
       $tbl = $val->s_tbl;
       $_where = array();
@@ -90,18 +92,18 @@ $query = $this->db->get_where(TBL_PLAN_MAIN_LIST,$_where);
                         <td  align="center">
                           <div class="input-group">
                             <span class="input-group-addon">จำนวนคน</span>
-                            <input class="form-control" type="number" name="i_person" id="i_person_<?=$con->id;?>" value="" style="width:90%;" onkeyup="saveDataKeyupEachps(<?=$con->id;?>);" />
+                            <input class="form-control" type="number" name="i_person" id="each_person_i_person_<?=$con->id;?>" value="<?=$con->i_person_up;?>" style="width:90%;" onkeyup="saveDataKeyupEachps(<?=$con->id;?>);" />
                           </div>
                         </td>
                         <td><span style="">ขึ้นไป</span></td>
                         <td align="center">
-                          <input class="form-control" type="number" name="f_price" id="each_f_price_<?=$con->id;?>" value="<?=$con->f_price;?>" style="width:80%;" onkeyup="saveDataKeyupEachps(<?=$con->id;?>);" />
+                          <input class="form-control" type="number" name="f_price" id="each_person_f_price_<?=$con->id;?>" value="<?=$con->f_price;?>" style="width:80%;" onkeyup="saveDataKeyupEachps(<?=$con->id;?>);" />
                         </td>
                         <td align="center">
-                          <input class="form-control" type="number" name="f_vat" id="each_f_vat_<?=$con->id;?>" value="<?=$con->f_vat;?>" style="width:80%;" onkeyup="saveDataKeyupEachps(<?=$con->id;?>);" />
+                          <input class="form-control" type="number" name="f_vat" id="each_person_f_vat_<?=$con->id;?>" value="<?=$con->f_vat;?>" style="width:80%;" onkeyup="saveDataKeyupEachps(<?=$con->id;?>);" />
                         </td>
                         <td align="center">
-                          <input class="form-control" type="number" name="f_wht" id="each_f_wht_<?=$con->id;?>" value="<?=$con->f_wht;?>" style="width:80%;" onkeyup="saveDataKeyupEachps(<?=$con->id;?>);" />
+                          <input class="form-control" type="number" name="f_wht" id="each_person_f_wht_<?=$con->id;?>" value="<?=$con->f_wht;?>" style="width:80%;" onkeyup="saveDataKeyupEachps(<?=$con->id;?>);" />
                         </td>
                         <td>
                           <button type="button" class="btn btn-danger button-cus del-row" onclick="deletedRowEachPerson(<?=$con->id;?>);">

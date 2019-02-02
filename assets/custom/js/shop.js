@@ -2265,7 +2265,9 @@ function submit_planpack(shop, user, partner_g) {
     return false;
 
   }
+
   if (partner_g > 1) {
+
     var url = base_url + "shop/check_duplicate_pack";
     $.ajax({
       url: url,
@@ -2276,7 +2278,7 @@ function submit_planpack(shop, user, partner_g) {
         console.log('Error Profile');
       },
       success: function (res) {
-        console.log(res);
+
         if (res.chk == true) {
           toastr.error('บันทึกข้อมูลไม่สำเร็จ', "ค่าตอบแทนซ้ำ", {"closeButton": true});
           return;
@@ -2295,6 +2297,7 @@ function submit_planpack(shop, user, partner_g) {
               if (res.result == true) {
                 toastr.success('บันทึกข้อมูลสำเร็จ', '', {"closeButton": true});
                 load_box_manage_com(shop, i_partner_group);
+                _box_region_show(shop, '_company', i_partner_group);
               } else {
                 toastr.error('บันทึกข้อมูลไม่สำเร็จ', '', {"closeButton": true});
               }
@@ -2304,6 +2307,28 @@ function submit_planpack(shop, user, partner_g) {
       }
     });
 
+  } else {
+    var url = base_url + "shop/submit_planpack";
+    $.ajax({
+      url: url,
+      data: param,
+      type: 'post',
+      dataType: 'json',
+      error: function () {
+        console.log('Error Profile');
+      },
+      success: function (res) {
+        console.log(res);
+        if (res.result == true) {
+          toastr.success('บันทึกข้อมูลสำเร็จ', '', {"closeButton": true});
+          load_box_manage_com(shop, i_partner_group);function name(parameters) {
+            _box_region_show(shop, '_company', i_partner_group);
+          }
+        } else {
+          toastr.error('บันทึกข้อมูลไม่สำเร็จ', '', {"closeButton": true});
+        }
+      }
+    });
   }
 
 }
@@ -2671,10 +2696,12 @@ function saveDataKeyupEachps(id) {
       f_price: $('#each_person_f_price_' + id).val(),
       f_vat: $('#each_person_f_vat_' + id).val(),
       f_wht: $('#each_person_f_wht_' + id).val(),
+      i_person: $('#each_person_i_person_' + id).val(),
       pack_id: $('#pack_id').val(),
       plan_main: $('#plan_main').val(),
       id: id
     };
+    console.log(data);
     $.ajax({
       url: url,
       data: data,

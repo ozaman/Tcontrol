@@ -16,9 +16,7 @@ $_where[i_plan_main] = $_GET[plan_main];
 $this->db->select('*');
 $query = $this->db->get_where(TBL_PLAN_MAIN_LIST,$_where);
 
-//echo "<pre>";
-//print_r($query->result());
-//echo "</pre>"; 
+
 ?>
 <div class="row">
   <form id="form_condition">
@@ -49,13 +47,17 @@ $query = $this->db->get_where(TBL_PLAN_MAIN_LIST,$_where);
 
     $person = 0;
     foreach ($query->result() as $key => $val) {
+      echo $con_pack->i_con_plan_main_list." ++++ ".$_GET[pack_id];
+      echo "<pre>";
+      print_r($val);
+      echo "</pre>";
       $tbl = $val->s_tbl;
       $_where = array();
       $_where[i_plan_pack] = $_GET[pack_id];
       $this->db->select('*');
       $query_con_tb = $this->db->get_where($tbl,$_where);
       $con = $query_con_tb->row();
-
+      
       if ($con_pack->i_con_plan_main_list == $val->id) {
         $selected = "checked";
         $open_box = "";
@@ -64,13 +66,13 @@ $query = $this->db->get_where(TBL_PLAN_MAIN_LIST,$_where);
       else {
         $selected = "";
         $open_box = "display:none;";
-
         $box_other = "display:none;";
       }
       ?>
       <div style="padding: 5px 0px 15px 0px; ">
         <?php
         if ($val->id == 1) {
+          
           ?>
           <div style="<?=$box_other;?>">
             <label class="container-rd"><?=$val->s_topic;?>

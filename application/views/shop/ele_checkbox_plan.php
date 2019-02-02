@@ -56,10 +56,21 @@ else {
 //                  echo "<pre>";
 //                  print_r($query->result());
 //                  echo "</pre>";
-  foreach ($query->result() as $val) {
+  foreach ($query->result() as $val_pack) {
+  $_where = array();
+  $_where[i_plan_pack] = $val_pack->id;
+  $this->db->select('i_plan_main');
+  $query_list = $this->db->get_where(TBL_PLAN_PACK_LIST,$_where);
+  $data_list = $query_list->row();
+  
+  $_where = array();
+  $_where[id] = $data_list->i_plan_main;
+  $this->db->select('*');
+  $query_main = $this->db->get_where(TBL_PLAN_MAIN,$_where);
+  $val = $query_main->row();
     ?>
     <div data-toggle="buttons">
-      <label class="btn checkbox-inline btn-checkbox-default-inverse "><?=$val->s_topic;?>
+      <label class="btn checkbox-inline btn-checkbox-default-inverse "><?=$val->s_topic;?>..<?=$val->id;?>
         <input type="checkbox" value="<?=$val->id;?>" id="pack_<?=$val->id;?>" name="plan_pack[]" <?=$chk_withholding;?> role="<?=$val->s_topic;?>" > </label>
     </div>
     <?php

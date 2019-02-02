@@ -804,7 +804,7 @@ class Shop extends CI_Controller {
   }
   
   public function save_con_each_person(){
-    $data = $this->Shop_model->save_con_regis_only();
+    $data = $this->Shop_model->save_con_each_person();
     echo json_encode($data);
   }
   
@@ -842,8 +842,9 @@ class Shop extends CI_Controller {
   }
   
   public function check_duplicate_pack(){
-    $data = $this->Shop_model->check_duplicate_pack();
-    echo json_encode($data);
+//    $data = $this->Shop_model->check_duplicate_pack();
+//    echo json_encode($data);
+    echo 52555;
   }
   ################################ SHOP #################################
 }
