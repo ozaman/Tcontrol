@@ -50,7 +50,7 @@
                   $txt_btn_add = 'เพิ่ม';
                 }
                 ?>
-                <button class="btn btn-default" style="font-size: 14px;"><?=$main->s_topic;?></button>
+                <button class="btn btn-default" style="font-size: 14px;"><?=$main->s_topic." | ".$val2->i_plan_main;?></button>
                 <button class="btn btn-primary" onclick="editCondition('<?=$val->id;?>', '<?=$val->s_topic;?>', '<?=$main->id;?>', '<?=$val->i_country;?>');">
                   <?=$icon_btn_add;?>
                   <span id="txt_mainlist_<?=$val->id;?>"><?=$txt_btn_add;?></span>

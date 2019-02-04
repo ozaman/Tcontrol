@@ -15,8 +15,6 @@ $_where = array();
 $_where[i_plan_main] = $_GET[plan_main];
 $this->db->select('*');
 $query = $this->db->get_where(TBL_PLAN_MAIN_LIST,$_where);
-
-
 ?>
 <div class="row">
   <form id="form_condition">
@@ -44,20 +42,20 @@ $query = $this->db->get_where(TBL_PLAN_MAIN_LIST,$_where);
     $this->db->where($_where);
     $con_ref = $this->db->get();
     $con_ref = $con_ref->row();
-
+//     echo "<pre>";
+//      print_r($con_ref);
+//      echo "</pre>";
     $person = 0;
     foreach ($query->result() as $key => $val) {
-      echo $con_pack->i_con_plan_main_list." ++++ ".$_GET[pack_id];
-      echo "<pre>";
-      print_r($val);
-      echo "</pre>";
+//      echo $con_pack->i_con_plan_main_list." ++++ ".$_GET[pack_id];
+     
       $tbl = $val->s_tbl;
       $_where = array();
       $_where[i_plan_pack] = $_GET[pack_id];
       $this->db->select('*');
       $query_con_tb = $this->db->get_where($tbl,$_where);
       $con = $query_con_tb->row();
-      
+
       if ($con_pack->i_con_plan_main_list == $val->id) {
         $selected = "checked";
         $open_box = "";
@@ -72,45 +70,57 @@ $query = $this->db->get_where(TBL_PLAN_MAIN_LIST,$_where);
       <div style="padding: 5px 0px 15px 0px; ">
         <?php
         if ($val->id == 1) {
-          
           ?>
           <div style="<?=$box_other;?>">
             <label class="container-rd"><?=$val->s_topic;?>
               <input <?=$selected;?> type="radio" name="condition_type" value="<?=$val->id;?>" onclick="selectOptionSet('<?=$val->id;?>');" class="radio-check">
               <span class="checkmark"></span>
             </label>
-
+            <!--<button type="button" class="btn btn-support3" onclick="plusRowEachPerson();"><i class="fa fa-plus" aria-hidden="true"></i> เพิ่มแถว</button>-->
             <div class="row outbox" id="box_set_<?=$val->id;?>" style="<?=$open_box;?>">
               <div class="col-md-12">
                 <form id="each_person_form">
+                  <?php
+                  $_where = array();
+                  $_where[i_plan_main] = $con_ref->i_plan_main;
+                  $this->db->select('*');
+                  $query_data_ep = $this->db->get_where(TBL_CON_EACH_PERSON,$_where);
+                  ?>
                   <table class="tb-pad" width="100%">
                     <tr>
-                      <td align="center"><b style="font-size: 16px;">คนละ</b></td>
                       <td></td>
-                      <td align="center" width="220px"><b style="font-size: 16px;">ถอด vat%</b></td>
                       <td></td>
+                      <td align="center"><b style="font-size: 16px;">จำนวน</b></td>
+                      <td align="center" ><b style="font-size: 16px;">ถอด vat%</b></td>
                       <td align="center"><b style="font-size: 16px;">ภาษี ณ ที่จ่าย</b></td>
                     </tr>
-                    <tr>
-                      <td>
-                        <div class="input-group">
-                          <span class="input-group-addon">จำนวน</span>
-                          <input class="form-control" type="number" name="f_price" id="each_f_price" value="<?=$con->f_price;?>" />
-                        </div>
-                      </td>
-                      <td width="30"></td>
-                      <td>
-                        <input class="form-control" type="number" name="f_vat" id="each_f_vat" value="<?=$con->f_vat;?>" />
-                      </td>
-                      <td width="30"></td>
-                      <td>
-                        <input class="form-control" type="number" name="f_wht" id="each_f_wht" value="<?=$con->f_wht;?>" />
-                      </td>
-                      <td>
-                        <button type="button" class="btn btn-success button-cus" onclick="saveEachPerson();"><i class="fa fa-floppy-o" aria-hidden="true"></i>
-                        </button>
-                      </td>
-                    </tr>
+                    <?php foreach ($query_data_ep->result() as $key => $con) {?>
+                      <tr class="tr_ms_clone" id="id_tr_each_ps_<?=$val->id;?>">
+                        <td  align="center">
+                          <div class="input-group">
+                            <span class="input-group-addon">จำนวนคน</span>
+                            <input class="form-control" type="number" name="i_person" id="each_person_i_person_<?=$con->id;?>" value="<?=$con->i_person_up;?>" style="width:90%;" onkeyup="saveDataKeyupEachps(<?=$con->id;?>);" />
+                          </div>
+                        </td>
+                        <td><span style="">ขึ้นไป</span></td>
+                        <td align="center">
+                          <input class="form-control" type="number" name="f_price" id="each_person_f_price_<?=$con->id;?>" value="<?=$con->f_price;?>" style="width:80%;" onkeyup="saveDataKeyupEachps(<?=$con->id;?>);" />
+                        </td>
+                        <td align="center">
+                          <input class="form-control" type="number" name="f_vat" id="each_person_f_vat_<?=$con->id;?>" value="<?=$con->f_vat;?>" style="width:80%;" onkeyup="saveDataKeyupEachps(<?=$con->id;?>);" />
+                        </td>
+                        <td align="center">
+                          <input class="form-control" type="number" name="f_wht" id="each_person_f_wht_<?=$con->id;?>" value="<?=$con->f_wht;?>" style="width:80%;" onkeyup="saveDataKeyupEachps(<?=$con->id;?>);" />
+                        </td>
+                        <td>
+                          <button type="button" class="btn btn-danger button-cus del-row" onclick="deletedRowEachPerson(<?=$con->id;?>);">
+                            <i class="fa fa-trash-o" aria-hidden="true"></i>
+                          </button>
+                        </td>
+                      </tr>
+                      <?php
+                    }
+                    ?>
                     <tr>
                   </table>
                 </form>
@@ -172,9 +182,10 @@ $query = $this->db->get_where(TBL_PLAN_MAIN_LIST,$_where);
                   $q_car_ref = $this->db->get_where(TBL_CON_EACH_CAR,$_where);
                   $data_car_ref = $q_car_ref->row();
 //                  print_r($data_car_ref->row());
-                  if($q_car_ref->num_rows()>0){
+                  if ($q_car_ref->num_rows() > 0) {
                     $tr_show_cartype = '';
-                  }else{
+                  }
+                  else {
                     $tr_show_cartype = 'display:none;';
                   }
                   ?>
@@ -305,7 +316,7 @@ $query = $this->db->get_where(TBL_PLAN_MAIN_LIST,$_where);
                   }
 //                }
                   ?>
-                                                                                                            <!--<input type="hidden" value="<?=$i;?>" id="val_num_row" />-->
+                                                                                                                    <!--<input type="hidden" value="<?=$i;?>" id="val_num_row" />-->
                 </table>
               </form>
             </div>
