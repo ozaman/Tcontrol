@@ -2595,6 +2595,7 @@ function plusRowEachPerson() {
     $('.tb_each_person').find('.tr_ms_clone').last().clone().appendTo("#each_person_form table");
     $('#each_person_form').find('.tr_ms_clone').last().show();
   }
+//  return;
   var data = {
     pack_id: $('#pack_id').val(),
     plan_main: $('#plan_main').val()
