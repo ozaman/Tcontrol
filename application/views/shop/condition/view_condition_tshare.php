@@ -298,6 +298,37 @@ $query = $this->db->get_where(TBL_PLAN_MAIN_LIST,$_where);
               <span class="checkmark"></span>
             </label>
             <div style="padding-top: 5px;padding-left: 25px;padding-right: 25px;<?=$open_box;?>" id="box_set_<?=$val->id;?>" class="outbox">
+              <div style="padding: 0px 10px; padding-top: 5px; margin: 20px; border: 1px solid #efe8e8; box-shadow: 1px 1px 3px #e0e0e0;border-radius: 5px;">
+            <h4>ร้านค้า >> ทีแชร์</h3>
+            <table class="table" width="100%" style="margin-bottom: 5px;">
+                <tr>
+                  <td width="70" align="center" ><b style="font-size:16px;">จำนวน</b></td>
+                  <td ></td>
+                  <td align="center"><b style="font-size:16px;">ราคา</b></td>
+                  <td align="center"><b style="font-size:16px;">ภาษี ณ ที่จ่าย</b></td>
+                </tr>
+              <?php
+//              echo "<pre>";
+//              print_r($con_ref);
+//              echo "</pre>";
+              $_where = array();
+              $_where[i_plan_pack] = $con_ref->i_plan_pack;
+              $this->db->select('*');
+              $query_data_ap = $this->db->get_where(TBL_CON_PS_ONLY_REGIS,$_where);
+              foreach ($query_data_ap->result() as $key => $value) {
+                ?>
+                <tr>
+                  <td align="right">
+                    <span style="font-size:16px;"><?=$value->i_num_regis;?></span>
+                  </td>
+                  <td align="center"><span  style="font-size:16px;">ขึ้นไป</span></td>
+                  <td align="right"><span style="font-size:16px;"><?=$value->f_price;?></span></td>
+                  <td align="right"><span style="font-size:16px;"><?=$value->f_wht;?> %</span></td>
+                </tr>
+              <?php }
+              ?>
+            </table>
+            </div>
               <button type="button" class="btn btn-support3" onclick="plusRowRegisOnly();"><i class="fa fa-plus" aria-hidden="true"></i> เพิ่มแถว</button>
               <form id="each_regis_form">
                 <table class="tb-pad" width="100%">
