@@ -60,12 +60,12 @@ $query = $this->db->get_where(TBL_PLAN_MAIN_LIST,$_where);
       if ($con_pack->i_con_plan_main_list == $val->id) {
         $selected = "checked";
         $open_box = "";
-        $box_other = "";
+//        $box_other = "";
       }
       else {
         $selected = "";
         $open_box = "display:none;";
-        $box_other = "display:none;";
+//        $box_other = "display:none;";
       }
       ?>
       <div style="padding: 5px 0px 15px 0px; ">
@@ -78,80 +78,80 @@ $query = $this->db->get_where(TBL_PLAN_MAIN_LIST,$_where);
               <span class="checkmark"></span>
             </label>
             <div style="padding: 0px 10px; padding-top: 5px; margin: 20px; border: 1px solid #efe8e8; box-shadow: 1px 1px 3px #e0e0e0;border-radius: 5px;">
-            <h4>ร้านค้า >> ทีแชร์</h3>
-            <table class="table" width="100%" style="margin-bottom: 5px;">
-                <tr>
-                  <td width="70" align="center" ><b style="font-size:16px;">จำนวน</b></td>
-                  <td ></td>
-                  <td align="center"><b style="font-size:16px;">ราคา</b></td>
-                  <td align="center"><b style="font-size:16px;">ภาษี ณ ที่จ่าย</b></td>
-                </tr>
-              <?php
+              <h4>ร้านค้า >> ทีแชร์</h3>
+                <table class="table" width="100%" style="margin-bottom: 5px;">
+                  <tr>
+                    <td width="70" align="center" ><b style="font-size:16px;">จำนวน</b></td>
+                    <td ></td>
+                    <td align="center"><b style="font-size:16px;">ราคา</b></td>
+                    <td align="center"><b style="font-size:16px;">ภาษี ณ ที่จ่าย</b></td>
+                  </tr>
+                  <?php
 //              echo "<pre>";
 //              print_r($con_ref);
 //              echo "</pre>";
-              $_where = array();
-              $_where[i_plan_pack] = $con_ref->i_plan_pack;
-              $this->db->select('*');
-              $query_data_ep = $this->db->get_where(TBL_CON_EACH_PERSON,$_where);
-              foreach ($query_data_ep->result() as $key => $value) {
-                ?>
-                <tr>
-                  <td align="right">
-                    <span style="font-size:16px;"><?=$value->i_person_up;?></span>
-                  </td>
-                  <td align="center"><span  style="font-size:16px;">ขึ้นไป</span></td>
-                  <td align="right"><span style="font-size:16px;"><?=$value->f_price;?></span></td>
-                  <td align="right"><span style="font-size:16px;"><?=$value->f_wht;?> %</span></td>
-                </tr>
-              <?php }
-              ?>
-            </table>
+                  $_where = array();
+                  $_where[i_plan_pack] = $con_ref->i_plan_pack;
+                  $this->db->select('*');
+                  $query_data_ep = $this->db->get_where(TBL_CON_EACH_PERSON,$_where);
+                  foreach ($query_data_ep->result() as $key => $value) {
+                    ?>
+                    <tr>
+                      <td align="right">
+                        <span style="font-size:16px;"><?=$value->i_person_up;?></span>
+                      </td>
+                      <td align="center"><span  style="font-size:16px;">ขึ้นไป</span></td>
+                      <td align="right"><span style="font-size:16px;"><?=$value->f_price;?></span></td>
+                      <td align="right"><span style="font-size:16px;"><?=$value->f_wht;?> %</span></td>
+                    </tr>
+                  <?php }
+                  ?>
+                </table>
             </div>
-              <button type="button" class="btn btn-support3" onclick="plusRowEachPerson();"><i class="fa fa-plus" aria-hidden="true"></i> เพิ่มแถว</button>
-              <div class="row outbox" id="box_set_<?=$val->id;?>" style="<?=$open_box;?>">
-                <div class="col-md-12">
-                  <form id="each_person_form">
-                    <table class="tb-pad" width="100%">
-                      <tr>
-                        <td></td>
-                        <td></td>
-                        <td align="center"><b style="font-size: 16px;">จำนวน</b></td>
-                        <!--<td align="center" ><b style="font-size: 16px;">ถอด vat%</b></td>-->
-                        <td align="center"><b style="font-size: 16px;">ภาษี ณ ที่จ่าย</b></td>
+            <button type="button" class="btn btn-support3" onclick="plusRowEachPerson();"><i class="fa fa-plus" aria-hidden="true"></i> เพิ่มแถว</button>
+            <div class="row outbox" id="box_set_<?=$val->id;?>" style="<?=$open_box;?>">
+              <div class="col-md-12">
+                <form id="each_person_form">
+                  <table class="tb-pad" width="100%">
+                    <tr>
+                      <td></td>
+                      <td></td>
+                      <td align="center"><b style="font-size: 16px;">จำนวน</b></td>
+                      <!--<td align="center" ><b style="font-size: 16px;">ถอด vat%</b></td>-->
+                      <td align="center"><b style="font-size: 16px;">ภาษี ณ ที่จ่าย</b></td>
+                    </tr>
+                    <?php foreach ($query_con_tb->result() as $key => $val) {?>
+                      <tr class="tr_ms_clone" id="id_tr_each_ps_<?=$val->id;?>">
+                        <td  align="center">
+                          <div class="input-group">
+                            <span class="input-group-addon">จำนวนคน</span>
+                            <input class="form-control" type="number" name="i_person" id="each_person_i_person_<?=$val->id;?>" value="<?=$val->i_person_up;?>" style="width:90%;" onkeyup="saveDataKeyupEachps(<?=$val->id;?>);" />
+                          </div>
+                        </td>
+                        <td><span style="">ขึ้นไป</span></td>
+                        <td align="center">
+                          <input class="form-control" type="number" name="f_price" id="each_person_f_price_<?=$val->id;?>" value="<?=$val->f_price;?>" style="width:80%;" onkeyup="saveDataKeyupEachps(<?=$val->id;?>);" />
+                        </td>
+                        <td align="center" style="display: none;">
+                          <input class="form-control" type="number" name="f_vat" id="each_person_f_vat_<?=$val->id;?>" value="<?=$val->f_vat;?>" style="width:80%;" onkeyup="saveDataKeyupEachps(<?=$val->id;?>);" />
+                        </td>
+                        <td align="center">
+                          <input class="form-control" type="number" name="f_wht" id="each_person_f_wht_<?=$val->id;?>" value="<?=$val->f_wht;?>" style="width:80%;" onkeyup="saveDataKeyupEachps(<?=$val->id;?>);" />
+                        </td>
+                        <td>
+                          <button type="button" class="btn btn-danger button-cus del-row" onclick="deletedRowEachPerson(<?=$val->id;?>);">
+                            <i class="fa fa-trash-o" aria-hidden="true"></i>
+                          </button>
+                        </td>
                       </tr>
-    <?php foreach ($query_con_tb->result() as $key => $val) {?>
-                        <tr class="tr_ms_clone" id="id_tr_each_ps_<?=$val->id;?>">
-                          <td  align="center">
-                            <div class="input-group">
-                              <span class="input-group-addon">จำนวนคน</span>
-                              <input class="form-control" type="number" name="i_person" id="each_person_i_person_<?=$val->id;?>" value="<?=$val->i_person_up;?>" style="width:90%;" onkeyup="saveDataKeyupEachps(<?=$val->id;?>);" />
-                            </div>
-                          </td>
-                          <td><span style="">ขึ้นไป</span></td>
-                          <td align="center">
-                            <input class="form-control" type="number" name="f_price" id="each_person_f_price_<?=$val->id;?>" value="<?=$val->f_price;?>" style="width:80%;" onkeyup="saveDataKeyupEachps(<?=$val->id;?>);" />
-                          </td>
-                          <td align="center" style="display: none;">
-                            <input class="form-control" type="number" name="f_vat" id="each_person_f_vat_<?=$val->id;?>" value="<?=$val->f_vat;?>" style="width:80%;" onkeyup="saveDataKeyupEachps(<?=$val->id;?>);" />
-                          </td>
-                          <td align="center">
-                            <input class="form-control" type="number" name="f_wht" id="each_person_f_wht_<?=$val->id;?>" value="<?=$val->f_wht;?>" style="width:80%;" onkeyup="saveDataKeyupEachps(<?=$val->id;?>);" />
-                          </td>
-                          <td>
-                            <button type="button" class="btn btn-danger button-cus del-row" onclick="deletedRowEachPerson(<?=$val->id;?>);">
-                              <i class="fa fa-trash-o" aria-hidden="true"></i>
-                            </button>
-                          </td>
-                        </tr>
-                        <?php
-                      }
-                      ?>
-                      <tr>
-                    </table>
-                  </form>
-                </div>
+                      <?php
+                    }
+                    ?>
+                    <tr>
+                  </table>
+                </form>
               </div>
+            </div>
           </div>
           <?php
         }
@@ -300,36 +300,36 @@ $query = $this->db->get_where(TBL_PLAN_MAIN_LIST,$_where);
             </label>
             <div style="padding-top: 5px;padding-left: 25px;padding-right: 25px;<?=$open_box;?>" id="box_set_<?=$val->id;?>" class="outbox">
               <div style="padding: 0px 10px; padding-top: 5px; margin: 20px; border: 1px solid #efe8e8; box-shadow: 1px 1px 3px #e0e0e0;border-radius: 5px;">
-            <h4>ร้านค้า >> ทีแชร์</h3>
-            <table class="table" width="100%" style="margin-bottom: 5px;">
-                <tr>
-                  <td width="70" align="center" ><b style="font-size:16px;">จำนวน</b></td>
-                  <td ></td>
-                  <td align="center"><b style="font-size:16px;">ราคา</b></td>
-                  <td align="center"><b style="font-size:16px;">ภาษี ณ ที่จ่าย</b></td>
-                </tr>
-              <?php
+                <h4>ร้านค้า >> ทีแชร์</h3>
+                  <table class="table" width="100%" style="margin-bottom: 5px;">
+                    <tr>
+                      <td width="70" align="center" ><b style="font-size:16px;">จำนวน</b></td>
+                      <td ></td>
+                      <td align="center"><b style="font-size:16px;">ราคา</b></td>
+                      <td align="center"><b style="font-size:16px;">ภาษี ณ ที่จ่าย</b></td>
+                    </tr>
+                    <?php
 //              echo "<pre>";
 //              print_r($con_ref);
 //              echo "</pre>";
-              $_where = array();
-              $_where[i_plan_pack] = $con_ref->i_plan_pack;
-              $this->db->select('*');
-              $query_data_ap = $this->db->get_where(TBL_CON_PS_ONLY_REGIS,$_where);
-              foreach ($query_data_ap->result() as $key => $value) {
-                ?>
-                <tr>
-                  <td align="right">
-                    <span style="font-size:16px;"><?=$value->i_num_regis;?></span>
-                  </td>
-                  <td align="center"><span  style="font-size:16px;">ขึ้นไป</span></td>
-                  <td align="right"><span style="font-size:16px;"><?=$value->f_price;?></span></td>
-                  <td align="right"><span style="font-size:16px;"><?=$value->f_wht;?> %</span></td>
-                </tr>
-              <?php }
-              ?>
-            </table>
-            </div>
+                    $_where = array();
+                    $_where[i_plan_pack] = $con_ref->i_plan_pack;
+                    $this->db->select('*');
+                    $query_data_ap = $this->db->get_where(TBL_CON_PS_ONLY_REGIS,$_where);
+                    foreach ($query_data_ap->result() as $key => $value) {
+                      ?>
+                      <tr>
+                        <td align="right">
+                          <span style="font-size:16px;"><?=$value->i_num_regis;?></span>
+                        </td>
+                        <td align="center"><span  style="font-size:16px;">ขึ้นไป</span></td>
+                        <td align="right"><span style="font-size:16px;"><?=$value->f_price;?></span></td>
+                        <td align="right"><span style="font-size:16px;"><?=$value->f_wht;?> %</span></td>
+                      </tr>
+                    <?php }
+                    ?>
+                  </table>
+              </div>
               <button type="button" class="btn btn-support3" onclick="plusRowRegisOnly();"><i class="fa fa-plus" aria-hidden="true"></i> เพิ่มแถว</button>
               <form id="each_regis_form">
                 <table class="tb-pad" width="100%">
@@ -373,7 +373,7 @@ $query = $this->db->get_where(TBL_PLAN_MAIN_LIST,$_where);
                   }
 //                }
                   ?>
-                                                                                                                            <!--<input type="hidden" value="<?=$i;?>" id="val_num_row" />-->
+                                                                                                                                                    <!--<input type="hidden" value="<?=$i;?>" id="val_num_row" />-->
                 </table>
               </form>
             </div>
@@ -388,15 +388,13 @@ $query = $this->db->get_where(TBL_PLAN_MAIN_LIST,$_where);
             $data_up[i_con_plan_main_list] = $val->id;
             $this->db->update(TBL_PLAN_PACK_LIST,$data_up,$_where);
           }
-          
+
 //          $data = $this->Main_model->rowdata(TBL_SHOPPING_PRODUCT_SUB,array('id' => $_GET[shop_id]));
-          
 //          $_where = array();
 //          $_where[main] = $data->main;
 //          $_where[sub] = $data->id;
 //          $_where[i_status] = 1;
 //          $sub_type_list = $this->Main_model->fetch_data('','',TBL_SHOPPING_PRODUCT_SUB_TYPELIST,$_where,'',array('id' => 'asc'));
-          
 //          echo "<pre>";
 //          print_r($sub_type_list);
 //          echo "</pre>";
@@ -404,29 +402,62 @@ $query = $this->db->get_where(TBL_PLAN_MAIN_LIST,$_where);
           <div style="<?=$box_other;?>">
             <div class="col-md-12">
               <div class="form-group ">
+                <div style="padding: 0px 10px; padding-top: 5px; margin: 20px; border: 1px solid #efe8e8; box-shadow: 1px 1px 3px #e0e0e0;border-radius: 5px;">
+                  <h4>ร้านค้า >> ทีแชร์</h3>
+                    <table class="table" width="100%" style="margin-bottom: 5px;">
+                      <tr>
+                        <td  align="center" ><b style="font-size:16px;">รายการ</b></td>
+                        <td align="center"><b style="font-size:16px;">ค่าคอม</b></td>
+                        <td align="center"><b style="font-size:16px;">ภาษี ณ ที่จ่าย</b></td>
+                      </tr>
+                      <?php
+                      $_where = array();
+                      $_where[i_plan_pack] = $con_ref->i_plan_pack;
+                      $this->db->select('*');
+                      $query_data_product_type = $this->db->get_where(TBL_CON_COM_PRODUCT_TYPE,$_where);
+                      foreach ($query_data_product_type->result() as $key => $value) {
+                        $_where = array();
+                        $_where[id] = $value->i_product_sub_typelist;
+                        $this->db->select('i_main_typelist');
+                        $query = $this->db->get_where(TBL_SHOPPING_PRODUCT_SUB_TYPELIST,$_where);
+                        $data_pd_sub_typelist = $query->row();
+
+
+                        $_where = array();
+                        $_where[status] = 1;
+                        $_where[id] = $data_pd_sub_typelist->i_main_typelist;
+                        $this->db->select('topic_th');
+                        $query = $this->db->get_where(TBL_SHOPPING_PRODUCT_MAIN_TYPELIST,$_where);
+                        $data_pd = $query->row();
+                        ?>
+                        <tr>
+                          <td align="left">
+                            <span style="font-size:16px;"><?=$data_pd->topic_th;?></span>
+                          </td>
+                          <td align="right" width="120"><span style="font-size:16px;"><?=$value->f_price;?> %</span></td>
+                          <td align="right" width="120"><span style="font-size:16px;"><?=$value->f_wht;?> %</span></td>
+                        </tr>
+                      <?php }
+                      ?>
+                    </table>
+                </div>
                 <table width="100%" class="tb-pad">
                   <tr>
                     <td style="font-size: 16px;"><b>รายการ</b></td>
-                    <td style="width: 150px;font-size: 16px;text-align: center;"><b>ถอด Vat %</b></td>
-
-                    <td style="width: 150px;font-size: 16px;text-align: center;"><b>ค่าคอม %</b></td>
-
+                    <td style="width: 150px;font-size: 16px;text-align: center;"><b>ค่าคอม</b></td>
                     <td style="width: 150px;font-size: 16px;text-align: center;"><b>ภาษี ณ ที่จ่าย</b></td>
                   </tr>
                   <?php
-                echo "<pre>";
-                echo $_GET[pack_id];
-                print_r($con_ref_query->result());
-                echo "</pre>";
+                  
                   foreach ($query_con_tb->result() as $key => $value) {
-                    
+
                     $_where = array();
                     $_where[id] = $value->i_product_sub_typelist;
                     $this->db->select('*');
                     $query = $this->db->get_where(TBL_SHOPPING_PRODUCT_SUB_TYPELIST,$_where);
                     $data_pd_sub_typelist = $query->row();
-                    
-                    
+
+
                     $_where = array();
                     $_where[status] = 1;
                     $_where[id] = $data_pd_sub_typelist->i_main_typelist;
@@ -434,47 +465,45 @@ $query = $this->db->get_where(TBL_PLAN_MAIN_LIST,$_where);
                     $query = $this->db->get_where(TBL_SHOPPING_PRODUCT_MAIN_TYPELIST,$_where);
                     $data_pd = $query->row();
 
-//                    $_where = array();
-////                  $_where[i_status] = 1;
-//                    $_where[i_plan_pack] = $_GET[pack_id];
-//                    $_where[i_product_sub_typelist] = $value->id;
-//                    $this->db->select('*');
-//                    $query_pd_typelist = $this->db->get_where(TBL_CON_COM_PRODUCT_TYPE,$_where);
-//                    $data_con_pd_typelist = $query_pd_typelist->row();
-//                    
-//                    if ($data_con_pd_typelist->i_status > 0) {
-//                      $checked_pd_tl = "checked";
-//                      $active_box = "active";
-//                      $val_pd = 1;
-////                      $disabled_box_price = "";
-////                      $disabled_box_vat = "";
-////                      $disabled_box_wht = "";
-//                    }
-//                    else {
-//                      $checked_pd_tl = "";
-//                      $active_box = "";
-////                      $disabled_box_price = "disabled";
-////                      $disabled_box_vat = "disabled";
-////                      $disabled_box_wht = "disabled";
-//                      $val_pd = 0;
-//                    }
+                    $_where = array();
+//                  $_where[i_status] = 1;
+                    $_where[i_plan_pack] = $_GET[pack_id];
+                    $_where[i_product_sub_typelist] = $value->id;
+                    $this->db->select('*');
+                    $query_pd_typelist = $this->db->get_where(TBL_CON_COM_PRODUCT_TYPE,$_where);
+                    $data_con_pd_typelist = $query_pd_typelist->row();
+                    
+                    if ($data_con_pd_typelist->i_status > 0) {
+                      $checked_pd_tl = "checked";
+                      $active_box = "active";
+                      $val_pd = 1;
+//                      $disabled_box_price = "";
+//                      $disabled_box_vat = "";
+//                      $disabled_box_wht = "";
+                    }
+                    else {
+                      $checked_pd_tl = "";
+                      $active_box = "";
+//                      $disabled_box_price = "disabled";
+//                      $disabled_box_vat = "disabled";
+//                      $disabled_box_wht = "disabled";
+                      $val_pd = 0;
+                    }
                     ?>
                     <tr id="tr_list_type_product_<?=$value->id;?>">
                       <td>
                         <div data-toggle="buttons" onclick="selectProductTypeList(<?=$value->id;?>);">
-                          <label class="btn checkbox-inline btn-checkbox-default-inverse <?=$active_box;?>  "><span style="font-size:16px;"><?=$data_pd->topic_th;?>  </span>                    
+                          <label class="btn checkbox-inline btn-checkbox-default-inverse <?=$active_box;?>  "><span style="font-size:16px;"> <?=$data_pd->topic_th;?>  </span>                    
                             <input <?=$checked_pd_tl;?> type="checkbox" value="1" id="i_checkbox412" name="i_checkbox412"> </label>
                         </div>
                         <input id="val_ck_pd_<?=$value->id;?>" type="hidden" value="<?=$val_pd;?>" />
                       </td>
-                      <td align="center"><input onkeyup="saveDataComProductType(<?=$value->id;?>);" id="pd_type_f_price_<?=$value->id;?>" type="number" style="width: 90%;" class="form-control" value="<?=$data_con_pd_typelist->f_price;?>" <?=$disabled_box_price;?>></td>
                       <td align="center"><input onkeyup="saveDataComProductType(<?=$value->id;?>);" id="pd_type_f_vat_<?=$value->id;?>" type="number" style="width: 90%;" class="form-control" value="<?=$data_con_pd_typelist->f_vat;?>" <?=$disabled_box_vat;?>></td>
                       <td align="center"><input onkeyup="saveDataComProductType(<?=$value->id;?>);" id="pd_type_f_wht_<?=$value->id;?>" type="number" style="width: 90%;" class="form-control" value="<?=$data_con_pd_typelist->f_wht;?>" <?=$disabled_box_wht;?>></td>
                     </tr>
                   <?php }
                   ?>
                 </table>
-
               </div>
             </div>
           </div>
