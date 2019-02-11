@@ -187,8 +187,8 @@ $query = $this->db->get_where(TBL_PLAN_MAIN_LIST,$_where);
                     $_where = array();
                     $_where[id] = $value->i_car_type;
                     $this->db->select('name_th,id');
-                    $query = $this->db->get_where(TBL_WEB_CAR_USE_TYPE,$_where);
-                    $car_type = $query->row();
+                    $query_car_type = $this->db->get_where(TBL_WEB_CAR_USE_TYPE,$_where);
+                    $car_type = $query_car_type->row();
                     ?>
                     <tr>
                       <td align="left">
