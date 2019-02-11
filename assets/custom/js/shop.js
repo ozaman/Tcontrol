@@ -2483,7 +2483,7 @@ function saveEachPerson() {
 }
 
 var timer;
-function saveDataKeyup(id, type) {
+function saveDataKeyupEachCarType(id, type) {
   clearTimeout(timer);
   timer = setTimeout(function validate() {
 //    alert(555);
@@ -2498,6 +2498,8 @@ function saveDataKeyup(id, type) {
       plan_main: $('#plan_main').val(),
       id: id
     };
+    console.log(data);
+//    return;
     $.ajax({
       url: url,
       data: data,

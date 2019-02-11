@@ -60,12 +60,12 @@ $query = $this->db->get_where(TBL_PLAN_MAIN_LIST,$_where);
       if ($con_pack->i_con_plan_main_list == $val->id) {
         $selected = "checked";
         $open_box = "";
-//        $box_other = "";
+        $box_other = "";
       }
       else {
         $selected = "";
         $open_box = "display:none;";
-//        $box_other = "display:none;";
+        $box_other = "display:none;";
       }
       ?>
       <div style="padding: 5px 0px 15px 0px; ">
@@ -205,10 +205,8 @@ $query = $this->db->get_where(TBL_PLAN_MAIN_LIST,$_where);
               <table width="100%">
                 <tr>
                   <th style="text-align: left;"><b style="font-size: 16px;">รายการ</b></th>
-                  <!--<th style="text-align: center;"><b style="font-size: 16px;">ราคา(ร้านค้า)</b></th>-->
-                  <th style="text-align: center;"><b style="font-size: 16px;">ราคา</b></th>
-                  <!--<th style="text-align: center;"><b style="font-size: 16px;">ภาษี ณ ที่จ่าย(ร้านค้า)</b></th>-->
-                  <th style="text-align: center;"><b style="font-size: 16px;">ภาษี ณ ที่จ่าย</b></th>
+                  <th style="text-align: center;" width="200"><b style="font-size: 16px;">ราคา</b></th>
+                  <th style="text-align: center;" width="200"><b style="font-size: 16px;">ภาษี ณ ที่จ่าย</b></th>
                 </tr>
                 <?php
 //                echo "<pre>";
@@ -260,19 +258,13 @@ $query = $this->db->get_where(TBL_PLAN_MAIN_LIST,$_where);
                           <input type="checkbox" value="<?=$val->id;?>" role="<?=$val->name_th;?>"> </label>
                       </div>
                       <input type="hidden" value="<?=$val_chk;?>" id="val_ck_<?=$val->id;?>" />
-                      <input class="form-control" id="car_vat_<?=$val->id;?>" onkeyup="saveDataKeyup(<?=$val->id;?>, 'vat');" type="hidden" value="<?=$data_car->f_vat;?>" style="width:200px;" <?=$disabled_box_vat;?> />
+                      <input class="form-control" id="car_vat_<?=$val->id;?>" onkeyup="saveDataKeyupEachCarType(<?=$val->id;?>, 'vat');" type="hidden" value="<?=$data_car->f_vat;?>" style="width:200px;" <?=$disabled_box_vat;?> />
                     </td>
-      <!--                    <td align="right">
-                      <span><?=$data_car_ref->f_price;?></span>
-                    </td>-->
                     <td align="center">
-                      <input class="form-control" id="car_price_<?=$val->id;?>" onkeyup="saveDataKeyup(<?=$val->id;?>, 'price');" type="number" value="<?=$data_car->f_price;?>" style="width:80%;" <?=$disabled_box_price;?> />
+                      <input class="form-control" id="car_price_<?=$val->id;?>" onkeyup="saveDataKeyupEachCarType(<?=$val->id;?>, 'price');" type="number" value="<?=$data_car->f_price;?>" style="width:95%;" <?=$disabled_box_price;?> />
                     </td>
-      <!--                    <td align="right">
-                      <span><?=$data_car_ref->f_wht;?></span>
-                    </td>-->
                     <td align="center">
-                      <input class="form-control" id="car_wht_<?=$val->id;?>" onkeyup="saveDataKeyup(<?=$val->id;?>, 'wht');" type="number" value="<?=$data_car->f_wht;?>" style="width:80%;" <?=$disabled_box_wht;?> />
+                      <input class="form-control" id="car_wht_<?=$val->id;?>" onkeyup="saveDataKeyupEachCarType(<?=$val->id;?>, 'wht');" type="number" value="<?=$data_car->f_wht;?>" style="width:95%;" <?=$disabled_box_wht;?> />
                     </td>
                   </tr>
 
