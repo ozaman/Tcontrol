@@ -77,39 +77,40 @@ $query = $this->db->get_where(TBL_PLAN_MAIN_LIST,$_where);
               <input <?=$selected;?> type="radio" name="condition_type" value="<?=$val->id;?>" onclick="selectOptionSet('<?=$val->id;?>');" class="radio-check">
               <span class="checkmark"></span>
             </label>
-            <div style="padding: 0px 10px; padding-top: 5px; margin: 20px; border: 1px solid #efe8e8; box-shadow: 1px 1px 3px #e0e0e0;border-radius: 5px;">
-              <h4>ร้านค้า >> ทีแชร์</h3>
-                <table class="table" width="100%" style="margin-bottom: 5px;">
-                  <tr>
-                    <td width="70" align="center" ><b style="font-size:16px;">จำนวน</b></td>
-                    <td ></td>
-                    <td align="center"><b style="font-size:16px;">ราคา</b></td>
-                    <td align="center"><b style="font-size:16px;">ภาษี ณ ที่จ่าย</b></td>
-                  </tr>
-                  <?php
+            <div class="row outbox" id="box_set_<?=$val->id;?>" style="<?=$open_box;?>">
+              <div style="padding: 0px 10px; padding-top: 5px; margin: 20px; border: 1px solid #efe8e8; box-shadow: 1px 1px 3px #e0e0e0;border-radius: 5px;">
+                <h4>ร้านค้า >> ทีแชร์</h3>
+                  <table class="table" width="100%" style="margin-bottom: 5px;">
+                    <tr>
+                      <td width="70" align="center" ><b style="font-size:16px;">จำนวน</b></td>
+                      <td ></td>
+                      <td align="center"><b style="font-size:16px;">ราคา</b></td>
+                      <td align="center"><b style="font-size:16px;">ภาษี ณ ที่จ่าย</b></td>
+                    </tr>
+                    <?php
 //              echo "<pre>";
 //              print_r($con_ref);
 //              echo "</pre>";
-                  $_where = array();
-                  $_where[i_plan_pack] = $con_ref->i_plan_pack;
-                  $this->db->select('*');
-                  $query_data_ep = $this->db->get_where(TBL_CON_EACH_PERSON,$_where);
-                  foreach ($query_data_ep->result() as $key => $value) {
+                    $_where = array();
+                    $_where[i_plan_pack] = $con_ref->i_plan_pack;
+                    $this->db->select('*');
+                    $query_data_ep = $this->db->get_where(TBL_CON_EACH_PERSON,$_where);
+                    foreach ($query_data_ep->result() as $key => $value) {
+                      ?>
+                      <tr>
+                        <td align="right">
+                          <span style="font-size:16px;"><?=$value->i_person_up;?></span>
+                        </td>
+                        <td align="center"><span  style="font-size:16px;">ขึ้นไป</span></td>
+                        <td align="right"><span style="font-size:16px;"><?=$value->f_price;?></span></td>
+                        <td align="right"><span style="font-size:16px;"><?=$value->f_wht;?> %</span></td>
+                      </tr>
+                    <?php }
                     ?>
-                    <tr>
-                      <td align="right">
-                        <span style="font-size:16px;"><?=$value->i_person_up;?></span>
-                      </td>
-                      <td align="center"><span  style="font-size:16px;">ขึ้นไป</span></td>
-                      <td align="right"><span style="font-size:16px;"><?=$value->f_price;?></span></td>
-                      <td align="right"><span style="font-size:16px;"><?=$value->f_wht;?> %</span></td>
-                    </tr>
-                  <?php }
-                  ?>
-                </table>
-            </div>
-            <button type="button" class="btn btn-support3" onclick="plusRowEachPerson();"><i class="fa fa-plus" aria-hidden="true"></i> เพิ่มแถว</button>
-            <div class="row outbox" id="box_set_<?=$val->id;?>" style="<?=$open_box;?>">
+                  </table>
+              </div>
+              <button type="button" class="btn btn-support3" onclick="plusRowEachPerson();"><i class="fa fa-plus" aria-hidden="true"></i> เพิ่มแถว</button>
+
               <div class="col-md-12">
                 <form id="each_person_form">
                   <table class="tb-pad" width="100%">
@@ -160,6 +161,9 @@ $query = $this->db->get_where(TBL_PLAN_MAIN_LIST,$_where);
           $_where[status] = 1;
           $this->db->select('*');
           $query = $this->db->get_where(TBL_WEB_CAR_USE_TYPE,$_where);
+          echo "<pre>";
+          print_r($query->result());
+          echo "</pre>";
           ?>
           <div style="<?=$box_other;?>">
             <label class="container-rd" ><?=$val->s_topic;?>
@@ -171,9 +175,9 @@ $query = $this->db->get_where(TBL_PLAN_MAIN_LIST,$_where);
               <table width="100%">
                 <tr>
                   <th style="text-align: left;"><b style="font-size: 16px;">รายการ</b></th>
-                  <th   style="text-align: center;"><b style="font-size: 16px;">ราคา(ร้านค้า)</b></th>
+                  <!--<th style="text-align: center;"><b style="font-size: 16px;">ราคา(ร้านค้า)</b></th>-->
                   <th style="text-align: center;"><b style="font-size: 16px;">ราคา</b></th>
-                  <th style="text-align: center;"><b style="font-size: 16px;">ภาษี ณ ที่จ่าย(ร้านค้า)</b></th>
+                  <!--<th style="text-align: center;"><b style="font-size: 16px;">ภาษี ณ ที่จ่าย(ร้านค้า)</b></th>-->
                   <th style="text-align: center;"><b style="font-size: 16px;">ภาษี ณ ที่จ่าย</b></th>
                 </tr>
                 <?php
@@ -225,15 +229,15 @@ $query = $this->db->get_where(TBL_PLAN_MAIN_LIST,$_where);
                       <input type="hidden" value="<?=$val_chk;?>" id="val_ck_<?=$val->id;?>" />
                       <input class="form-control" id="car_vat_<?=$val->id;?>" onkeyup="saveDataKeyup(<?=$val->id;?>, 'vat');" type="hidden" value="<?=$data_car->f_vat;?>" style="width:200px;" <?=$disabled_box_vat;?> />
                     </td>
-                    <td align="right">
+<!--                    <td align="right">
                       <span><?=$data_car_ref->f_price;?></span>
-                    </td>
+                    </td>-->
                     <td align="center">
                       <input class="form-control" id="car_price_<?=$val->id;?>" onkeyup="saveDataKeyup(<?=$val->id;?>, 'price');" type="number" value="<?=$data_car->f_price;?>" style="width:80%;" <?=$disabled_box_price;?> />
                     </td>
-                    <td align="right">
+<!--                    <td align="right">
                       <span><?=$data_car_ref->f_wht;?></span>
-                    </td>
+                    </td>-->
                     <td align="center">
                       <input class="form-control" id="car_wht_<?=$val->id;?>" onkeyup="saveDataKeyup(<?=$val->id;?>, 'wht');" type="number" value="<?=$data_car->f_wht;?>" style="width:80%;" <?=$disabled_box_wht;?> />
                     </td>
@@ -343,8 +347,6 @@ $query = $this->db->get_where(TBL_PLAN_MAIN_LIST,$_where);
                     <td align="center"><b style="font-size: 16px;">ภาษี ณ ที่จ่าย</b></td>
                   </tr>
                   <?php
-//                if ($query_con_tb->num_rows() > 0) {
-
                   foreach ($query_con_tb->result() as $key => $val) {
                     ?>
 
@@ -371,9 +373,8 @@ $query = $this->db->get_where(TBL_PLAN_MAIN_LIST,$_where);
 
                     <?php
                   }
-//                }
                   ?>
-                                                                                                                                                    <!--<input type="hidden" value="<?=$i;?>" id="val_num_row" />-->
+                                                                                                                                                            <!--<input type="hidden" value="<?=$i;?>" id="val_num_row" />-->
                 </table>
               </form>
             </div>
@@ -448,7 +449,6 @@ $query = $this->db->get_where(TBL_PLAN_MAIN_LIST,$_where);
                     <td style="width: 150px;font-size: 16px;text-align: center;"><b>ภาษี ณ ที่จ่าย</b></td>
                   </tr>
                   <?php
-                  
                   foreach ($query_con_tb->result() as $key => $value) {
 
                     $_where = array();
@@ -472,7 +472,7 @@ $query = $this->db->get_where(TBL_PLAN_MAIN_LIST,$_where);
                     $this->db->select('*');
                     $query_pd_typelist = $this->db->get_where(TBL_CON_COM_PRODUCT_TYPE,$_where);
                     $data_con_pd_typelist = $query_pd_typelist->row();
-                    
+
                     if ($data_con_pd_typelist->i_status > 0) {
                       $checked_pd_tl = "checked";
                       $active_box = "active";
@@ -567,7 +567,4 @@ $query = $this->db->get_where(TBL_PLAN_MAIN_LIST,$_where);
     </td>
   </tr>
 </table>
-<?php
-//if($person)
-?>
 <input type="hidden" value="<?=$person;?>" id="chk_click_push_regis" />
