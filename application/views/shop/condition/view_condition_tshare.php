@@ -159,18 +159,48 @@ $query = $this->db->get_where(TBL_PLAN_MAIN_LIST,$_where);
         else if ($val->id == 2) {
           $_where = array();
           $_where[status] = 1;
-          $this->db->select('*');
+          $this->db->select('name_th,id');
           $query = $this->db->get_where(TBL_WEB_CAR_USE_TYPE,$_where);
-          echo "<pre>";
-          print_r($query->result());
-          echo "</pre>";
+//          echo "<pre>";
+//          print_r($query->result());
+//          echo "</pre>";
           ?>
           <div style="<?=$box_other;?>">
             <label class="container-rd" ><?=$val->s_topic;?>
               <input <?=$selected;?> type="radio" name="condition_type" value="<?=$val->id;?>" onclick="selectOptionSet('<?=$val->id;?>');"  class="radio-check">
               <span class="checkmark"></span>
             </label>
-
+            <div style="padding: 0px 10px; padding-top: 5px; margin: 20px; border: 1px solid #efe8e8; box-shadow: 1px 1px 3px #e0e0e0;border-radius: 5px;">
+              <h4>ร้านค้า >> ทีแชร์</h3>
+                <table class="table" width="100%" style="margin-bottom: 5px;">
+                  <tr>
+                    <td align="center" ><b style="font-size:16px;">รายการ</b></td>
+                    <td width="130" align="center"><b style="font-size:16px;">ราคา</b></td>
+                    <td width="130" align="center"><b style="font-size:16px;">ภาษี ณ ที่จ่าย</b></td>
+                  </tr>
+                  <?php
+                  $_where = array();
+                  $_where[i_plan_pack] = $con_ref->i_plan_pack;
+                  $this->db->select('*');
+                  $query_data_ap = $this->db->get_where(TBL_CON_EACH_CAR,$_where);
+                  foreach ($query_data_ap->result() as $key => $value) {
+                    $_where = array();
+                    $_where[id] = $value->i_car_type;
+                    $this->db->select('name_th,id');
+                    $query = $this->db->get_where(TBL_WEB_CAR_USE_TYPE,$_where);
+                    $car_type = $query->row();
+                    ?>
+                    <tr>
+                      <td align="left">
+                        <span style="font-size:16px;"><?=$car_type->name_th;?></span>
+                      </td>
+                      <td align="right"><span style="font-size:16px;"><?=$value->f_price;?></span></td>
+                      <td align="right"><span style="font-size:16px;"><?=$value->f_wht;?> %</span></td>
+                    </tr>
+                  <?php }
+                  ?>
+                </table>
+            </div>
             <div style="padding-top: 5px;padding-left: 25px;padding-right: 25px;<?=$open_box;?>" id="box_set_<?=$val->id;?>" class="outbox">
               <table width="100%">
                 <tr>
@@ -181,6 +211,9 @@ $query = $this->db->get_where(TBL_PLAN_MAIN_LIST,$_where);
                   <th style="text-align: center;"><b style="font-size: 16px;">ภาษี ณ ที่จ่าย</b></th>
                 </tr>
                 <?php
+//                echo "<pre>";
+//                print_r($query->result());
+//                echo "</pre>";
                 foreach ($query->result() as $key => $val) {
                   $_where = array();
                   $_where[i_car_type] = $val->id;
@@ -206,12 +239,12 @@ $query = $this->db->get_where(TBL_PLAN_MAIN_LIST,$_where);
                     $val_chk = 0;
                   }
                   $_where = array();
-                  $_where[i_plan_pack] = $con_ref->id;
+                  $_where[i_plan_pack] = $con_ref->i_plan_pack;
                   $_where[i_car_type] = $val->id;
                   $this->db->select('*');
                   $q_car_ref = $this->db->get_where(TBL_CON_EACH_CAR,$_where);
                   $data_car_ref = $q_car_ref->row();
-//                  print_r($data_car_ref->row());
+//                  echo $q_car_ref->num_rows()." || ".$con_ref->i_plan_pack."<br/>";
                   if ($q_car_ref->num_rows() > 0) {
                     $tr_show_cartype = '';
                   }
@@ -229,13 +262,13 @@ $query = $this->db->get_where(TBL_PLAN_MAIN_LIST,$_where);
                       <input type="hidden" value="<?=$val_chk;?>" id="val_ck_<?=$val->id;?>" />
                       <input class="form-control" id="car_vat_<?=$val->id;?>" onkeyup="saveDataKeyup(<?=$val->id;?>, 'vat');" type="hidden" value="<?=$data_car->f_vat;?>" style="width:200px;" <?=$disabled_box_vat;?> />
                     </td>
-<!--                    <td align="right">
+      <!--                    <td align="right">
                       <span><?=$data_car_ref->f_price;?></span>
                     </td>-->
                     <td align="center">
                       <input class="form-control" id="car_price_<?=$val->id;?>" onkeyup="saveDataKeyup(<?=$val->id;?>, 'price');" type="number" value="<?=$data_car->f_price;?>" style="width:80%;" <?=$disabled_box_price;?> />
                     </td>
-<!--                    <td align="right">
+      <!--                    <td align="right">
                       <span><?=$data_car_ref->f_wht;?></span>
                     </td>-->
                     <td align="center">
@@ -374,7 +407,7 @@ $query = $this->db->get_where(TBL_PLAN_MAIN_LIST,$_where);
                     <?php
                   }
                   ?>
-                                                                                                                                                            <!--<input type="hidden" value="<?=$i;?>" id="val_num_row" />-->
+                                                                                                                                                                            <!--<input type="hidden" value="<?=$i;?>" id="val_num_row" />-->
                 </table>
               </form>
             </div>
