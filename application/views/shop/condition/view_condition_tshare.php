@@ -48,7 +48,7 @@ $query = $this->db->get_where(TBL_PLAN_MAIN_LIST,$_where);
     $person = 0;
     foreach ($query->result() as $key => $val) {
 //      echo $con_pack->i_con_plan_main_list." ++++ ".$_GET[pack_id];
-
+     
       $tbl = $val->s_tbl;
       $_where = array();
       $_where[i_plan_pack] = $_GET[pack_id];
@@ -76,81 +76,56 @@ $query = $this->db->get_where(TBL_PLAN_MAIN_LIST,$_where);
               <input <?=$selected;?> type="radio" name="condition_type" value="<?=$val->id;?>" onclick="selectOptionSet('<?=$val->id;?>');" class="radio-check">
               <span class="checkmark"></span>
             </label>
-            <div style="padding: 0px 10px; padding-top: 5px; margin: 20px; border: 1px solid #efe8e8; box-shadow: 1px 1px 3px #e0e0e0;border-radius: 5px;">
-            <h4>ร้านค้า >> ทีแชร์</h3>
-            <table class="table" width="100%" style="margin-bottom: 5px;">
-                <tr>
-                  <td width="70" align="center" ><b style="font-size:16px;">จำนวน</b></td>
-                  <td ></td>
-                  <td align="center"><b style="font-size:16px;">ราคา</b></td>
-                  <td align="center"><b style="font-size:16px;">ภาษี ณ ที่จ่าย</b></td>
-                </tr>
-              <?php
-//              echo "<pre>";
-//              print_r($con_ref);
-//              echo "</pre>";
-              $_where = array();
-              $_where[i_plan_pack] = $con_ref->i_plan_pack;
-              $this->db->select('*');
-              $query_data_ep = $this->db->get_where(TBL_CON_EACH_PERSON,$_where);
-              foreach ($query_data_ep->result() as $key => $value) {
-                ?>
-                <tr>
-                  <td align="right">
-                    <span style="font-size:16px;"><?=$value->i_person_up;?></span>
-                  </td>
-                  <td align="center"><span  style="font-size:16px;">ขึ้นไป</span></td>
-                  <td align="right"><span style="font-size:16px;"><?=$value->f_price;?></span></td>
-                  <td align="right"><span style="font-size:16px;"><?=$value->f_wht;?> %</span></td>
-                </tr>
-              <?php }
-              ?>
-            </table>
-            </div>
-              <button type="button" class="btn btn-support3" onclick="plusRowEachPerson();"><i class="fa fa-plus" aria-hidden="true"></i> เพิ่มแถว</button>
-              <div class="row outbox" id="box_set_<?=$val->id;?>" style="<?=$open_box;?>">
-                <div class="col-md-12">
-                  <form id="each_person_form">
-                    <table class="tb-pad" width="100%">
-                      <tr>
-                        <td></td>
-                        <td></td>
-                        <td align="center"><b style="font-size: 16px;">จำนวน</b></td>
-                        <!--<td align="center" ><b style="font-size: 16px;">ถอด vat%</b></td>-->
-                        <td align="center"><b style="font-size: 16px;">ภาษี ณ ที่จ่าย</b></td>
+            <!--<button type="button" class="btn btn-support3" onclick="plusRowEachPerson();"><i class="fa fa-plus" aria-hidden="true"></i> เพิ่มแถว</button>-->
+            <div class="row outbox" id="box_set_<?=$val->id;?>" style="<?=$open_box;?>">
+              <div class="col-md-12">
+                <form id="each_person_form">
+                  <?php
+                  $_where = array();
+                  $_where[i_plan_main] = $con_ref->i_plan_main;
+                  $this->db->select('*');
+                  $query_data_ep = $this->db->get_where(TBL_CON_EACH_PERSON,$_where);
+                  ?>
+                  <table class="tb-pad" width="100%">
+                    <tr>
+                      <td></td>
+                      <td></td>
+                      <td align="center"><b style="font-size: 16px;">จำนวน</b></td>
+                      <td align="center" ><b style="font-size: 16px;">ถอด vat%</b></td>
+                      <td align="center"><b style="font-size: 16px;">ภาษี ณ ที่จ่าย</b></td>
+                    </tr>
+                    <?php foreach ($query_data_ep->result() as $key => $con) {?>
+                      <tr class="tr_ms_clone" id="id_tr_each_ps_<?=$val->id;?>">
+                        <td  align="center">
+                          <div class="input-group">
+                            <span class="input-group-addon">จำนวนคน</span>
+                            <input class="form-control" type="number" name="i_person" id="each_person_i_person_<?=$con->id;?>" value="<?=$con->i_person_up;?>" style="width:90%;" onkeyup="saveDataKeyupEachps(<?=$con->id;?>);" />
+                          </div>
+                        </td>
+                        <td><span style="">ขึ้นไป</span></td>
+                        <td align="center">
+                          <input class="form-control" type="number" name="f_price" id="each_person_f_price_<?=$con->id;?>" value="<?=$con->f_price;?>" style="width:80%;" onkeyup="saveDataKeyupEachps(<?=$con->id;?>);" />
+                        </td>
+                        <td align="center">
+                          <input class="form-control" type="number" name="f_vat" id="each_person_f_vat_<?=$con->id;?>" value="<?=$con->f_vat;?>" style="width:80%;" onkeyup="saveDataKeyupEachps(<?=$con->id;?>);" />
+                        </td>
+                        <td align="center">
+                          <input class="form-control" type="number" name="f_wht" id="each_person_f_wht_<?=$con->id;?>" value="<?=$con->f_wht;?>" style="width:80%;" onkeyup="saveDataKeyupEachps(<?=$con->id;?>);" />
+                        </td>
+                        <td>
+                          <button type="button" class="btn btn-danger button-cus del-row" onclick="deletedRowEachPerson(<?=$con->id;?>);">
+                            <i class="fa fa-trash-o" aria-hidden="true"></i>
+                          </button>
+                        </td>
                       </tr>
-    <?php foreach ($query_con_tb->result() as $key => $con) {?>
-                        <tr class="tr_ms_clone" id="id_tr_each_ps_<?=$val->id;?>">
-                          <td  align="center">
-                            <div class="input-group">
-                              <span class="input-group-addon">จำนวนคน</span>
-                              <input class="form-control" type="number" name="i_person" id="each_person_i_person_<?=$con->id;?>" value="<?=$con->i_person_up;?>" style="width:90%;" onkeyup="saveDataKeyupEachps(<?=$con->id;?>);" />
-                            </div>
-                          </td>
-                          <td><span style="">ขึ้นไป</span></td>
-                          <td align="center">
-                            <input class="form-control" type="number" name="f_price" id="each_person_f_price_<?=$con->id;?>" value="<?=$con->f_price;?>" style="width:80%;" onkeyup="saveDataKeyupEachps(<?=$con->id;?>);" />
-                          </td>
-                          <td align="center" style="display: none;">
-                            <input class="form-control" type="number" name="f_vat" id="each_person_f_vat_<?=$con->id;?>" value="<?=$con->f_vat;?>" style="width:80%;" onkeyup="saveDataKeyupEachps(<?=$con->id;?>);" />
-                          </td>
-                          <td align="center">
-                            <input class="form-control" type="number" name="f_wht" id="each_person_f_wht_<?=$con->id;?>" value="<?=$con->f_wht;?>" style="width:80%;" onkeyup="saveDataKeyupEachps(<?=$con->id;?>);" />
-                          </td>
-                          <td>
-                            <button type="button" class="btn btn-danger button-cus del-row" onclick="deletedRowEachPerson(<?=$con->id;?>);">
-                              <i class="fa fa-trash-o" aria-hidden="true"></i>
-                            </button>
-                          </td>
-                        </tr>
-                        <?php
-                      }
-                      ?>
-                      <tr>
-                    </table>
-                  </form>
-                </div>
+                      <?php
+                    }
+                    ?>
+                    <tr>
+                  </table>
+                </form>
               </div>
+            </div>
           </div>
           <?php
         }
@@ -298,37 +273,6 @@ $query = $this->db->get_where(TBL_PLAN_MAIN_LIST,$_where);
               <span class="checkmark"></span>
             </label>
             <div style="padding-top: 5px;padding-left: 25px;padding-right: 25px;<?=$open_box;?>" id="box_set_<?=$val->id;?>" class="outbox">
-              <div style="padding: 0px 10px; padding-top: 5px; margin: 20px; border: 1px solid #efe8e8; box-shadow: 1px 1px 3px #e0e0e0;border-radius: 5px;">
-            <h4>ร้านค้า >> ทีแชร์</h3>
-            <table class="table" width="100%" style="margin-bottom: 5px;">
-                <tr>
-                  <td width="70" align="center" ><b style="font-size:16px;">จำนวน</b></td>
-                  <td ></td>
-                  <td align="center"><b style="font-size:16px;">ราคา</b></td>
-                  <td align="center"><b style="font-size:16px;">ภาษี ณ ที่จ่าย</b></td>
-                </tr>
-              <?php
-//              echo "<pre>";
-//              print_r($con_ref);
-//              echo "</pre>";
-              $_where = array();
-              $_where[i_plan_pack] = $con_ref->i_plan_pack;
-              $this->db->select('*');
-              $query_data_ap = $this->db->get_where(TBL_CON_PS_ONLY_REGIS,$_where);
-              foreach ($query_data_ap->result() as $key => $value) {
-                ?>
-                <tr>
-                  <td align="right">
-                    <span style="font-size:16px;"><?=$value->i_num_regis;?></span>
-                  </td>
-                  <td align="center"><span  style="font-size:16px;">ขึ้นไป</span></td>
-                  <td align="right"><span style="font-size:16px;"><?=$value->f_price;?></span></td>
-                  <td align="right"><span style="font-size:16px;"><?=$value->f_wht;?> %</span></td>
-                </tr>
-              <?php }
-              ?>
-            </table>
-            </div>
               <button type="button" class="btn btn-support3" onclick="plusRowRegisOnly();"><i class="fa fa-plus" aria-hidden="true"></i> เพิ่มแถว</button>
               <form id="each_regis_form">
                 <table class="tb-pad" width="100%">
@@ -372,7 +316,7 @@ $query = $this->db->get_where(TBL_PLAN_MAIN_LIST,$_where);
                   }
 //                }
                   ?>
-                                                                                                                            <!--<input type="hidden" value="<?=$i;?>" id="val_num_row" />-->
+                                                                                                                    <!--<input type="hidden" value="<?=$i;?>" id="val_num_row" />-->
                 </table>
               </form>
             </div>
@@ -494,32 +438,6 @@ $query = $this->db->get_where(TBL_PLAN_MAIN_LIST,$_where);
     </td>
     <td>
       <button type="button" class="btn btn-danger button-cus del-row" onclick="deletedRowRegisOnly();">
-        <i class="fa fa-trash-o" aria-hidden="true"></i>
-      </button>
-    </td>
-  </tr>
-</table>
-
-<table class="tb_each_person">
-  <tr class="tr_ms_clone" style="display: none;">
-    <td  align="center">
-      <div class="input-group">
-        <span class="input-group-addon">จำนวนคน</span>
-        <input class="form-control" type="number" name="i_person" id="i_person" value="" style="width:90%;" />
-      </div>
-    </td>
-    <td><span style="">ขึ้นไป</span></td>
-    <td align="center">
-      <input class="form-control" type="number" name="f_price" id="each_f_price" value="" style="width:80%;" />
-    </td>
-    <td align="center">
-      <input class="form-control" type="number" name="f_vat" id="each_f_vat" value="" style="width:80%;" />
-    </td>
-    <td align="center">
-      <input class="form-control" type="number" name="f_wht" id="each_f_wht" value="" style="width:80%;" />
-    </td>
-    <td>
-      <button type="button" class="btn btn-danger button-cus del-row" onclick="deletedRowEachPerson();">
         <i class="fa fa-trash-o" aria-hidden="true"></i>
       </button>
     </td>
