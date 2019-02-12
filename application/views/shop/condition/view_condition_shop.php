@@ -217,21 +217,18 @@ $query = $this->db->get_where(TBL_PLAN_MAIN_LIST,$_where);
                       <td>
                         <div class="input-group">
                           <span class="input-group-addon">จำนวน</span>
-                          <input class="form-control" type="number" name="f_price" id="allpay_f_price" value="<?=$con->f_price;?>" />
+                          <input class="form-control" type="number" name="f_price" id="allpay_f_price" value="<?=$con->f_price;?>" onkeyup="saveDataKeyUpPayallcase(<?=$con->id;?>);" />
                         </div>
                       </td>
                       <td width="30"></td>
                       <td>
-                        <input class="form-control" type="number" name="f_vat" id="allpay_f_vat" value="<?=$con->f_vat;?>" />
+                        <input class="form-control" type="number" name="f_vat" id="allpay_f_vat" value="<?=$con->f_vat;?>" onkeyup="saveDataKeyUpPayallcase(<?=$con->id;?>);" />
                       </td>
                       <td width="30"></td>
                       <td>
-                        <input class="form-control" type="number" name="f_wht" id="allpay_f_wht" value="<?=$con->f_wht;?>" />
+                        <input class="form-control" type="number" name="f_wht" id="allpay_f_wht" value="<?=$con->f_wht;?>" onkeyup="saveDataKeyUpPayallcase(<?=$con->id;?>);" />
                       </td>
-                      <td>
-                        <button type="button" class="btn btn-success button-cus" onclick="saveAllpay();"><i class="fa fa-floppy-o" aria-hidden="true"></i>
-                        </button>
-                      </td>
+                     
                     </tr>
                   </table>
                 </form>

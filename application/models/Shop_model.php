@@ -1497,6 +1497,38 @@ class Shop_model extends CI_Model {
     }
     return $data;
   }
+  
+  public function save_con_pay_allcase() {
+//    return $_POST;
+//    exit();
+    $_where = array();
+    $_where[i_plan_main] = $_POST[plan_main];
+    $_where[i_plan_pack] = $_POST[pack_id];
+    $this->db->select('id');
+    $query = $this->db->get_where(TBL_CON_EACH_PS_ALL_PAY,$_where);
+    $check = $query->num_rows();
+
+    $data[f_price] = $_POST[f_price];
+    $data[f_vat] = $_POST[f_vat];
+    $data[f_wht] = $_POST[f_wht];
+    $data[i_plan_main] = $_POST[plan_main];
+    $data[i_plan_pack] = $_POST[pack_id];
+    $data[i_con_type] = 3;
+
+    $data[d_last_update] = date('Y-m-d H:i:s');
+    if ($check > 0) {
+      $_where = array();
+      $_where[id] = $query->row()->id;
+      $data[result] = $this->db->update(TBL_CON_EACH_PS_ALL_PAY,$data,$_where);
+      $data[type] = "update";
+    }
+    else {
+      $data[d_post_date] = date('Y-m-d H:i:s');
+      $data[result] = $this->db->insert(TBL_CON_EACH_PS_ALL_PAY,$data);
+      $data[type] = "insert";
+    }
+    return $data;
+  }
 
   public function add_data_regis_only() {
 

@@ -779,6 +779,11 @@ class Shop extends CI_Controller {
     echo json_encode($data);
   }
   
+  public function save_con_pay_allcase(){
+    $data = $this->Shop_model->save_con_pay_allcase();
+    echo json_encode($data);
+  }
+  
   public function add_data_regis_only(){
     $data = $this->Shop_model->add_data_regis_only();
     echo json_encode($data);

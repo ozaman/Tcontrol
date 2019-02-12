@@ -2809,8 +2809,8 @@ function selectProductTypeList(id, typelis) {
 
 var timer3;
 function saveDataComProductType(id) {
-  clearTimeout(timer2);
-  timer2 = setTimeout(function validate() {
+  clearTimeout(timer3);
+  timer3 = setTimeout(function validate() {
     console.log(id);
     var shop_id = $('#id_shop_product').val();
     var url = base_url + "shop/save_con_product_type?shop_id=" + shop_id;
@@ -2882,4 +2882,41 @@ function del_plan_pack(i_plan_pack) {
       }
     }
   });
+}
+
+var timer4;
+function saveDataKeyUpPayallcase(id) {
+  clearTimeout(timer4);
+  timer4 = setTimeout(function validate() {
+    console.log(id);
+    var shop_id = $('#id_shop_product').val();
+    var url = base_url + "shop/save_con_pay_allcase?shop_id=" + shop_id;
+    console.log(url);
+    var data = {
+      f_price: $('#allpay_f_price').val(),
+      f_vat: $('#allpay_f_vat').val(),
+      f_wht: $('#allpay_f_wht').val(),
+      pack_id: $('#pack_id').val(),
+      plan_main: $('#plan_main').val(),
+      id: id
+    };
+    console.log(data);
+    $.ajax({
+      url: url,
+      data: data,
+      dataType: "json",
+      type: 'post',
+      error: function () {
+        console.log('Error Profile');
+      },
+      success: function (res) {
+        console.log(res);
+        if (res.result == true) {
+          toastr.success('บันทึกข้อมูลสำเร็จ', '', {"closeButton": true});
+        } else {
+          toastr.error('บันทึกข้อมูลไม่สำเร็จ', '', {"closeButton": true});
+        }
+      }
+    });
+  }, 1000);
 }

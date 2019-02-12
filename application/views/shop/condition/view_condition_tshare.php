@@ -52,7 +52,7 @@ $query = $this->db->get_where(TBL_PLAN_MAIN_LIST,$_where);
       $tbl = $val->s_tbl;
       $_where = array();
       $_where[i_plan_pack] = $_GET[pack_id];
-      if($val->id != 5) {
+      if ($val->id != 5) {
         $_where[i_status] = 1;
       }
       $this->db->select('*');
@@ -84,9 +84,9 @@ $query = $this->db->get_where(TBL_PLAN_MAIN_LIST,$_where);
                 <h4>ร้านค้า >> ทีแชร์</h3>
                   <table class="table" width="100%" style="margin-bottom: 5px;">
                     <tr>
-                      <td  align="center" ><b style="font-size:16px;">จำนวน</b></td>
-                      <td width="120" align="center" width="150"><b style="font-size:16px;">ราคา</b></td>
-                      <td width="120" align="center" width="150"><b style="font-size:16px;">ภาษี ณ ที่จ่าย</b></td>
+                      <td  align="center" ><b style="font-size:15px;">จำนวน</b></td>
+                      <td width="120" align="center" width="150"><b style="font-size:15px;">ราคา</b></td>
+                      <td width="120" align="center" width="150"><b style="font-size:15px;">ภาษี ณ ที่จ่าย</b></td>
                     </tr>
                     <?php
 //              echo "<pre>";
@@ -100,11 +100,11 @@ $query = $this->db->get_where(TBL_PLAN_MAIN_LIST,$_where);
                       ?>
                       <tr>
                         <td align="center">
-                          <span style="font-size:16px;"><?=$value->i_person_up;?> ขึ้นไป</span>
+                          <span style="font-size:15px;"><?=$value->i_person_up;?> ขึ้นไป</span>
                         </td>
-                        <td align="right"><span style="font-size:16px;"><?=$value->f_price;?></span></td>
-                        <td align="right"><span style="font-size:16px;"><?=$value->f_wht;?> %</span></td>
-                       
+                        <td align="right"><span style="font-size:15px;"><?=$value->f_price;?></span></td>
+                        <td align="right"><span style="font-size:15px;"><?=$value->f_wht;?> %</span></td>
+
                       </tr>
                     <?php }
                     ?>
@@ -118,10 +118,10 @@ $query = $this->db->get_where(TBL_PLAN_MAIN_LIST,$_where);
                     <tr>
                       <td></td>
                       <td></td>
-                      <td align="center"><b style="font-size: 16px;">ราคา</b></td>
+                      <td align="center"><b style="font-size: 15px;">ราคา</b></td>
                       <!--<td align="center" ><b style="font-size: 16px;">ถอด vat%</b></td>-->
-                      <td align="center"><b style="font-size: 16px;">ภาษี ณ ที่จ่าย</b></td>
-                      
+                      <td align="center"><b style="font-size: 15px;">ภาษี ณ ที่จ่าย</b></td>
+
                     </tr>
                     <?php foreach ($query_con_tb->result() as $key => $val) {?>
                       <tr class="tr_ms_clone" id="id_tr_each_ps_<?=$val->id;?>">
@@ -172,13 +172,14 @@ $query = $this->db->get_where(TBL_PLAN_MAIN_LIST,$_where);
               <input <?=$selected;?> type="radio" name="condition_type" value="<?=$val->id;?>" onclick="selectOptionSet('<?=$val->id;?>');"  class="radio-check">
               <span class="checkmark"></span>
             </label>
+            <div style="<?=$open_box;?>" id="box_set_<?=$val->id;?>" class="outbox">
             <div style="padding: 0px 10px; padding-top: 5px; margin: 10px 0px; border: 1px solid #efe8e8; box-shadow: 1px 1px 3px #e0e0e0;border-radius: 5px;">
               <h4>ร้านค้า >> ทีแชร์</h3>
                 <table class="table" width="100%" style="margin-bottom: 5px;">
                   <tr>
-                    <td align="center" ><b style="font-size:16px;">รายการ</b></td>
-                    <td width="130" align="center"><b style="font-size:16px;">ราคา</b></td>
-                    <td width="130" align="center"><b style="font-size:16px;">ภาษี ณ ที่จ่าย</b></td>
+                    <td align="center" ><b style="font-size:15px;">รายการ</b></td>
+                    <td width="130" align="center"><b style="font-size:15px;">ราคา</b></td>
+                    <td width="130" align="center"><b style="font-size:15px;">ภาษี ณ ที่จ่าย</b></td>
                   </tr>
                   <?php
                   $_where = array();
@@ -194,21 +195,21 @@ $query = $this->db->get_where(TBL_PLAN_MAIN_LIST,$_where);
                     ?>
                     <tr>
                       <td align="left">
-                        <span style="font-size:16px;"><?=$car_type->name_th;?></span>
+                        <span style="font-size:15px;"><?=$car_type->name_th;?></span>
                       </td>
-                      <td align="right"><span style="font-size:16px;"><?=$value->f_price;?></span></td>
-                      <td align="right"><span style="font-size:16px;"><?=$value->f_wht;?> %</span></td>
+                      <td align="right"><span style="font-size:15px;"><?=$value->f_price;?></span></td>
+                      <td align="right"><span style="font-size:15px;"><?=$value->f_wht;?> %</span></td>
                     </tr>
                   <?php }
                   ?>
                 </table>
             </div>
-            <div style="padding-top: 5px;padding-left: 25px;padding-right: 25px;<?=$open_box;?>" id="box_set_<?=$val->id;?>" class="outbox">
+            
               <table width="100%">
                 <tr>
                   <th style="text-align: left;"><b style="font-size: 16px;">รายการ</b></th>
-                  <th style="text-align: center;" width="200"><b style="font-size: 16px;">ราคา</b></th>
-                  <th style="text-align: center;" width="200"><b style="font-size: 16px;">ภาษี ณ ที่จ่าย</b></th>
+                  <th style="text-align: center;" width="200"><b style="font-size: 15px;">ราคา</b></th>
+                  <th style="text-align: center;" width="200"><b style="font-size: 15px;">ภาษี ณ ที่จ่าย</b></th>
                 </tr>
                 <?php
 //                echo "<pre>";
@@ -256,7 +257,7 @@ $query = $this->db->get_where(TBL_PLAN_MAIN_LIST,$_where);
                     <td>
                       <div data-toggle="buttons">
                         <label class="btn checkbox-inline btn-checkbox-default-inverse <?=$active_box;?>" onclick="openListTypeCar('<?=$val->id;?>');">
-                          <span style="font-size:14px;"><?=$val->name_th;?></span>
+                          <span style="font-size:15px;"><?=$val->name_th;?></span>
                           <input type="checkbox" value="<?=$val->id;?>" role="<?=$val->name_th;?>"> </label>
                       </div>
                       <input type="hidden" value="<?=$val_chk;?>" id="val_ck_<?=$val->id;?>" />
@@ -286,30 +287,62 @@ $query = $this->db->get_where(TBL_PLAN_MAIN_LIST,$_where);
             </label>
             <div class="row outbox" id="box_set_<?=$val->id;?>" style="<?=$open_box;?>">
               <div class="col-md-12">
+                <div style="padding: 0px 10px; padding-top: 5px; margin: 10px 0px; border: 1px solid #efe8e8; box-shadow: 1px 1px 3px #e0e0e0;border-radius: 5px;">
+                  <h4>ร้านค้า >> ทีแชร์</h3>
+                    <?php
+                    $_where = array();
+                    $_where[i_plan_pack] = $con_ref->i_plan_pack;
+                    $this->db->select('*');
+                    $query_payall = $this->db->get_where(TBL_CON_EACH_PS_ALL_PAY,$_where);
+                    $con_payall = $query_payall->row();
+                    ?>  
+                    <table  class="table" width="100%" style="margin-bottom: 5px;">
+                      <tr>
+                        <td width="150"><b style="font-size:15px;">ราคาคนละ</b></td>
+                        <td><span style="font-size:15px;"><?=$con_payall->f_price;?></span></td>
+                      </tr>
+                      <tr>
+                        <td><b style="font-size:15px;">ภาษี ณ ที่จ่าย</b></td>
+                        <td><span style="font-size:15px;"><?=$con_payall->f_wht;?> %</span></td>
+                      </tr>
+                    </table>
+    <!--                  <table class="table" width="100%" style="margin-bottom: 5px;">
+                        <tr>
+                          <td align="center" ><b style="font-size:16px;">ราคาคนละ</b></td>
+                          <td width="130" align="center"><b style="font-size:16px;">ภาษี ณ ที่จ่าย</b></td>
+                        </tr>
+                        <tr>
+                          <td align="left">
+                            <span style="font-size:16px;"><?=$con_payall->f_price;?></span>
+                          </td>
+                          <td align="right"><span style="font-size:16px;"><?=$con_payall->f_wht;?> %</span></td>
+                        </tr>
+
+                      </table>-->
+                </div>
                 <form id="each_all_case_form">
                   <table class="tb-pad" width="100%">
                     <tr>
-                      <td align="center"><b style="font-size: 16px;">คนละ</b></td>
-                      <td></td>
-                      <!--<td align="center" width="220px"><b style="font-size: 16px;">ถอด vat%</b></td>-->
-                      <!--<td></td>-->
-                      <td align="center"><b style="font-size: 16px;">ภาษี ณ ที่จ่าย</b></td>
+                      <td align="center"><b style="font-size: 15px;">คนละ</b></td>
+    <!--                      <td></td>
+                      <td align="center" width="220px"><b style="font-size: 16px;">ถอด vat%</b></td>
+                      <td></td>-->
+                      <td align="center"><b style="font-size: 15px;">ภาษี ณ ที่จ่าย</b></td>
                     </tr>
                     <tr>
                       <td>
                         <div class="input-group">
                           <span class="input-group-addon">จำนวน</span>
-                          <input class="form-control" type="number" name="f_price" id="allpay_f_price" value="<?=$con->f_price;?>" />
+                          <input class="form-control" type="number" name="f_price" id="allpay_f_price" value="<?=$con->f_price;?>" onkeyup="saveDataKeyUpPayallcase(<?=$con->id;?>);" />
                         </div>
                       </td>
-                      <td width="30"></td>
-
+    <!--                      <td width="30"></td>
                       <td>
-                        <input class="form-control" type="number" name="f_wht" id="allpay_f_wht" value="<?=$con->f_wht;?>" />
+                        <input class="form-control" type="number" name="f_vat" id="allpay_f_vat" value="<?=$con->f_vat;?>" onkeyup="saveDataKeyUpPayallcase(<?=$con->id;?>);" />
                       </td>
+                      <td width="30"></td>-->
                       <td>
-                        <button type="button" class="btn btn-success button-cus" onclick="saveAllpay();"><i class="fa fa-floppy-o" aria-hidden="true"></i>
-                        </button>
+                        <input class="form-control" type="number" name="f_wht" id="allpay_f_wht" value="<?=$con->f_wht;?>" onkeyup="saveDataKeyUpPayallcase(<?=$con->id;?>);" />
                       </td>
                     </tr>
                   </table>
@@ -326,14 +359,14 @@ $query = $this->db->get_where(TBL_PLAN_MAIN_LIST,$_where);
               <input  class="radio-check" <?=$selected;?> type="radio" name="condition_type" value="<?=$val->id;?>" onclick="selectOptionSet('<?=$val->id;?>');">
               <span class="checkmark"></span>
             </label>
-            <div style="padding-top: 5px;padding-left: 25px;padding-right: 25px;<?=$open_box;?>" id="box_set_<?=$val->id;?>" class="outbox">
+            <div style="<?=$open_box;?>" id="box_set_<?=$val->id;?>" class="outbox">
               <div style="padding: 0px 10px; padding-top: 5px; margin: 10px 0px; border: 1px solid #efe8e8; box-shadow: 1px 1px 3px #e0e0e0;border-radius: 5px;">
                 <h4>ร้านค้า >> ทีแชร์</h3>
                   <table class="table" width="100%" style="margin-bottom: 5px;">
                     <tr>
-                      <td width="" align="center" ><b style="font-size:16px;">จำนวน</b></td>
-                      <td width="120" align="center"><b style="font-size:16px;">ราคา</b></td>
-                      <td width="120" align="center"><b style="font-size:16px;">ภาษี ณ ที่จ่าย</b></td>
+                      <td width="" align="center" ><b style="font-size:15px;">จำนวน</b></td>
+                      <td width="120" align="center"><b style="font-size:15px;">ราคา</b></td>
+                      <td width="120" align="center"><b style="font-size:15px;">ภาษี ณ ที่จ่าย</b></td>
                     </tr>
                     <?php
 //              echo "<pre>";
@@ -347,10 +380,10 @@ $query = $this->db->get_where(TBL_PLAN_MAIN_LIST,$_where);
                       ?>
                       <tr>
                         <td align="center">
-                          <span style="font-size:16px;"><?=$value->i_num_regis;?> ขึ้นไป</span>
+                          <span style="font-size:15px;"><?=$value->i_num_regis;?>  ขึ้นไป</span>
                         </td>
-                        <td align="right"><span style="font-size:16px;"><?=$value->f_price;?></span></td>
-                        <td align="right"><span style="font-size:16px;"><?=$value->f_wht;?> %</span></td>
+                        <td align="right"><span style="font-size:15px;"><?=$value->f_price;?></span></td>
+                        <td align="right"><span style="font-size:15px;"><?=$value->f_wht;?> %</span></td>
                       </tr>
                     <?php }
                     ?>
@@ -361,9 +394,9 @@ $query = $this->db->get_where(TBL_PLAN_MAIN_LIST,$_where);
                 <table class="tb-pad" width="100%">
                   <tr>
                     <td align="center"><b style="font-size: 16px;">จำนวนคน</b></td>
-                    <td align="center" width="170"><b style="font-size: 16px;">ราคา</b></td>
+                    <td align="center" width="170"><b style="font-size: 15px;">ราคา</b></td>
     <!--           <td align="center" width="220px"><b style="font-size: 16px;">ถอด vat%</b></td>-->
-                    <td align="center"  width="170"><b style="font-size: 16px;">ภาษี ณ ที่จ่าย</b></td>
+                    <td align="center"  width="170"><b style="font-size: 15px;">ภาษี ณ ที่จ่าย</b></td>
                     <td  width="50"></td>
                   </tr>
                   <?php
@@ -372,7 +405,7 @@ $query = $this->db->get_where(TBL_PLAN_MAIN_LIST,$_where);
 
                     <tr class="tr_regis_only" id="id_tr_regis_<?=$val->id;?>">
                       <td align="center">
-                        <span style="font-size:16px;"><?=$person = $person + 1;?>  คน</span>
+                        <span style="font-size:15px;"><?=$person = $person + 1;?>  คน</span>
                       </td>
                       <td><input class="form-control" type="number" name="f_price" id="regis_only_f_price_<?=$val->id;?>" value="<?=$val->f_price;?>" onkeyup="saveDataKeyupRegis(<?=$val->id;?>);" /></td>
                       <!--<td width="30"></td>-->
@@ -392,7 +425,7 @@ $query = $this->db->get_where(TBL_PLAN_MAIN_LIST,$_where);
                     <?php
                   }
                   ?>
-                                                                                                                                                                                        <!--<input type="hidden" value="<?=$i;?>" id="val_num_row" />-->
+                                                                                                                                                                                                        <!--<input type="hidden" value="<?=$i;?>" id="val_num_row" />-->
                 </table>
               </form>
             </div>
@@ -425,9 +458,9 @@ $query = $this->db->get_where(TBL_PLAN_MAIN_LIST,$_where);
                   <h4>ร้านค้า >> ทีแชร์</h3>
                     <table class="table" width="100%" style="margin-bottom: 5px;">
                       <tr>
-                        <td  align="center" ><b style="font-size:16px;">รายการ</b></td>
-                        <td align="center"><b style="font-size:16px;">ค่าคอม</b></td>
-                        <td align="center"><b style="font-size:16px;">ภาษี ณ ที่จ่าย</b></td>
+                        <td  align="center" ><b style="font-size:15px;">รายการ</b></td>
+                        <td align="center"><b style="font-size:15px;">ค่าคอม</b></td>
+                        <td align="center"><b style="font-size:15px;">ภาษี ณ ที่จ่าย</b></td>
                       </tr>
                       <?php
                       $_where = array();
@@ -451,10 +484,10 @@ $query = $this->db->get_where(TBL_PLAN_MAIN_LIST,$_where);
                         ?>
                         <tr>
                           <td align="left">
-                            <span style="font-size:16px;"><?=$data_pd->topic_th;?></span>
+                            <span style="font-size:15px;"><?=$data_pd->topic_th;?></span>
                           </td>
-                          <td align="right" width="120"><span style="font-size:16px;"><?=$value->f_price;?> %</span></td>
-                          <td align="right" width="120"><span style="font-size:16px;"><?=$value->f_wht;?> %</span></td>
+                          <td align="right" width="120"><span style="font-size:15px;"><?=$value->f_price;?> %</span></td>
+                          <td align="right" width="120"><span style="font-size:15px;"><?=$value->f_wht;?> %</span></td>
                         </tr>
                       <?php }
                       ?>
@@ -463,9 +496,9 @@ $query = $this->db->get_where(TBL_PLAN_MAIN_LIST,$_where);
 
                 <table width="100%" class="tb-pad">
                   <tr>
-                    <td style="font-size: 16px;"><b>รายการ</b></td>
-                    <td style="width: 150px;font-size: 16px;text-align: center;"><b>ค่าคอม</b></td>
-                    <td style="width: 150px;font-size: 16px;text-align: center;"><b>ภาษี ณ ที่จ่าย</b></td>
+                    <td style="font-size: 15px;"><b>รายการ</b></td>
+                    <td style="width: 150px;font-size: 15px;text-align: center;"><b>ค่าคอม</b></td>
+                    <td style="width: 150px;font-size: 15px;text-align: center;"><b>ภาษี ณ ที่จ่าย</b></td>
                   </tr>
                   <?php
                   if ($query_con_tb->num_rows() > 0) {
