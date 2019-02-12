@@ -729,8 +729,9 @@ class Shop extends CI_Controller {
     $_where[i_shop] = $_GET[shop_id];
     $_where[i_partner_group] = $_GET[partner_g];
     $this->db->select('*');
+    $this->db->order_by('id', 'ASC');
     $query = $this->db->get_where(TBL_PLAN_PACK,$_where);
-    $this->db->order_by("id", "asc");
+    
     $planpack = $query->result();
     $data[planpack] = $planpack;
     $this->load->view('shop/view_box_manage_com',$data);
