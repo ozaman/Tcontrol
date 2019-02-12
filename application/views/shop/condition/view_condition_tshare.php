@@ -84,10 +84,9 @@ $query = $this->db->get_where(TBL_PLAN_MAIN_LIST,$_where);
                 <h4>ร้านค้า >> ทีแชร์</h3>
                   <table class="table" width="100%" style="margin-bottom: 5px;">
                     <tr>
-                      <td width="70" align="center" ><b style="font-size:16px;">จำนวน</b></td>
-                      <td ></td>
-                      <td align="center" width="150"><b style="font-size:16px;">ราคา</b></td>
-                      <td align="center" width="150"><b style="font-size:16px;">ภาษี ณ ที่จ่าย</b></td>
+                      <td  align="center" ><b style="font-size:16px;">จำนวน</b></td>
+                      <td width="120" align="center" width="150"><b style="font-size:16px;">ราคา</b></td>
+                      <td width="120" align="center" width="150"><b style="font-size:16px;">ภาษี ณ ที่จ่าย</b></td>
                     </tr>
                     <?php
 //              echo "<pre>";
@@ -100,10 +99,9 @@ $query = $this->db->get_where(TBL_PLAN_MAIN_LIST,$_where);
                     foreach ($query_data_ep->result() as $key => $value) {
                       ?>
                       <tr>
-                        <td align="right">
-                          <span style="font-size:16px;"><?=$value->i_person_up;?></span>
+                        <td align="center">
+                          <span style="font-size:16px;"><?=$value->i_person_up;?> ขึ้นไป</span>
                         </td>
-                        <td align="center"><span  style="font-size:16px;">ขึ้นไป</span></td>
                         <td align="right"><span style="font-size:16px;"><?=$value->f_price;?></span></td>
                         <td align="right"><span style="font-size:16px;"><?=$value->f_wht;?> %</span></td>
                        
@@ -333,10 +331,9 @@ $query = $this->db->get_where(TBL_PLAN_MAIN_LIST,$_where);
                 <h4>ร้านค้า >> ทีแชร์</h3>
                   <table class="table" width="100%" style="margin-bottom: 5px;">
                     <tr>
-                      <td width="70" align="center" ><b style="font-size:16px;">จำนวน</b></td>
-                      <td ></td>
-                      <td align="center"><b style="font-size:16px;">ราคา</b></td>
-                      <td align="center"><b style="font-size:16px;">ภาษี ณ ที่จ่าย</b></td>
+                      <td width="" align="center" ><b style="font-size:16px;">จำนวน</b></td>
+                      <td width="120" align="center"><b style="font-size:16px;">ราคา</b></td>
+                      <td width="120" align="center"><b style="font-size:16px;">ภาษี ณ ที่จ่าย</b></td>
                     </tr>
                     <?php
 //              echo "<pre>";
@@ -349,10 +346,9 @@ $query = $this->db->get_where(TBL_PLAN_MAIN_LIST,$_where);
                     foreach ($query_data_ap->result() as $key => $value) {
                       ?>
                       <tr>
-                        <td align="right">
-                          <span style="font-size:16px;"><?=$value->i_num_regis;?></span>
+                        <td align="center">
+                          <span style="font-size:16px;"><?=$value->i_num_regis;?> ขึ้นไป</span>
                         </td>
-                        <td align="center"><span  style="font-size:16px;">ขึ้นไป</span></td>
                         <td align="right"><span style="font-size:16px;"><?=$value->f_price;?></span></td>
                         <td align="right"><span style="font-size:16px;"><?=$value->f_wht;?> %</span></td>
                       </tr>
