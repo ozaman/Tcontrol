@@ -518,7 +518,7 @@
                 $chk_withholding = ($shop->i_withholding == 1) ? 'checked' : '';
                 $chk_withholding_active = ($shop->i_withholding == 1) ? 'active' : '';
                 ?>
-                <div class="box-body no-padding">
+<!--                <div class="box-body no-padding">
                   <div class="box-head">
                     <header><h4 class="text-light"> หักภาษี ณ ที่จ่าย <strong></strong></h4></header>
                   </div>
@@ -540,7 +540,7 @@
                       </div>
                     </div>
                   </div>
-                </div>
+                </div>-->
                 <!-- ========================================================================================= -->
                 <div class="box-body no-padding">
                   <div class="box-head" style="padding: 15px 10px;">
@@ -575,7 +575,7 @@ if ($shop->id > 0) {
       _box_region_show('<?=$_GET[id];?>', '_company', 1);
       _box_contact('<?=$shop->id;?>');
       // _box_document('<?=$shop->id;?>')
-    }, 1000);
+    }, 500);
 
 
   </script>
