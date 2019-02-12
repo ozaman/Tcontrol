@@ -106,6 +106,7 @@ $query = $this->db->get_where(TBL_PLAN_MAIN_LIST,$_where);
                         <td align="center"><span  style="font-size:16px;">ขึ้นไป</span></td>
                         <td align="right"><span style="font-size:16px;"><?=$value->f_price;?></span></td>
                         <td align="right"><span style="font-size:16px;"><?=$value->f_wht;?> %</span></td>
+                       
                       </tr>
                     <?php }
                     ?>
@@ -122,6 +123,7 @@ $query = $this->db->get_where(TBL_PLAN_MAIN_LIST,$_where);
                       <td align="center"><b style="font-size: 16px;">ราคา</b></td>
                       <!--<td align="center" ><b style="font-size: 16px;">ถอด vat%</b></td>-->
                       <td align="center"><b style="font-size: 16px;">ภาษี ณ ที่จ่าย</b></td>
+                      
                     </tr>
                     <?php foreach ($query_con_tb->result() as $key => $val) {?>
                       <tr class="tr_ms_clone" id="id_tr_each_ps_<?=$val->id;?>">
@@ -362,13 +364,11 @@ $query = $this->db->get_where(TBL_PLAN_MAIN_LIST,$_where);
               <form id="each_regis_form">
                 <table class="tb-pad" width="100%">
                   <tr>
-                    <td align="center"  width="80"><b style="font-size: 16px;">จำนวนคน</b></td>
-                    <td></td>
-                    <td align="center"><b style="font-size: 16px;">ราคา</b></td>
-    <!--                    <td></td>
-                    <td align="center" width="220px"><b style="font-size: 16px;">ถอด vat%</b></td>-->
-                    <td></td>
-                    <td align="center"><b style="font-size: 16px;">ภาษี ณ ที่จ่าย</b></td>
+                    <td align="center"><b style="font-size: 16px;">จำนวนคน</b></td>
+                    <td align="center" width="170"><b style="font-size: 16px;">ราคา</b></td>
+    <!--           <td align="center" width="220px"><b style="font-size: 16px;">ถอด vat%</b></td>-->
+                    <td align="center"  width="170"><b style="font-size: 16px;">ภาษี ณ ที่จ่าย</b></td>
+                    <td  width="50"></td>
                   </tr>
                   <?php
                   foreach ($query_con_tb->result() as $key => $val) {
@@ -378,17 +378,15 @@ $query = $this->db->get_where(TBL_PLAN_MAIN_LIST,$_where);
                       <td align="center">
                         <span style="font-size:16px;"><?=$person = $person + 1;?>  คน</span>
                       </td>
-                      <td width="30"></td>
                       <td><input class="form-control" type="number" name="f_price" id="regis_only_f_price_<?=$val->id;?>" value="<?=$val->f_price;?>" onkeyup="saveDataKeyupRegis(<?=$val->id;?>);" /></td>
                       <!--<td width="30"></td>-->
                       <td style="display: none;">
                         <input class="form-control" type="number" name="f_vat" id="regis_only_f_vat_<?=$val->id;?>" value="<?=$val->f_vat;?>" onkeyup="saveDataKeyupRegis(<?=$val->id;?>);" />
                       </td>
-                      <td width="30"></td>
                       <td>
                         <input class="form-control" type="number" name="f_wht" id="regis_only_f_wht_<?=$val->id;?>" value="<?=$val->f_wht;?>" onkeyup="saveDataKeyupRegis(<?=$val->id;?>);" />
                       </td>
-                      <td>
+                      <td align="center">
                         <button type="button" class="btn btn-danger button-cus del-row" onclick="deletedRowRegisOnly(<?=$val->id;?>);">
                           <i class="fa fa-trash-o" aria-hidden="true"></i>
                         </button>
@@ -487,9 +485,9 @@ $query = $this->db->get_where(TBL_PLAN_MAIN_LIST,$_where);
 //                    $each_pd_loop = $query;
                     $cat = "prototype";
                   }
-                  echo "<pre>";
-                  print_r($cat." ".$query_con_tb->num_rows());
-                  echo "</pre>";
+//                  echo "<pre>";
+//                  print_r($cat." ".$query_con_tb->num_rows());
+//                  echo "</pre>";
                   foreach ($each_pd_loop->result() as $key => $value) {
 
                     $_where = array();
@@ -532,7 +530,7 @@ $query = $this->db->get_where(TBL_PLAN_MAIN_LIST,$_where);
                     }
                     ?>
                     <tr id="tr_list_type_product_<?=$value->id;?>">
-                      <td><?=$value->i_status;?>
+                      <td>
                         <div data-toggle="buttons" >
                           <label class="btn checkbox-inline btn-checkbox-default-inverse <?=$active_box;?>  " onclick="selectProductTypeList(<?=$value->id;?>,<?=$value->i_product_sub_typelist;?>);"><span style="font-size:16px;"> <?=$data_pd->topic_th;?>  </span>                    
                             <input <?=$checked_pd_tl;?> type="checkbox" value="1" id="i_checkbox412" name="i_checkbox_<?=$value->id;?>"> </label>
@@ -565,17 +563,15 @@ $query = $this->db->get_where(TBL_PLAN_MAIN_LIST,$_where);
     <td align="center">
       <span style="font-size:16px;"><?=$val->id;?>  คน</span>
     </td>
-    <td width="30"></td>
     <td><input class="form-control" type="number" name="f_price" id="regis_only_f_price_<?=$i;?>" value="<?=$con->f_vat;?>" /></td>
     <!--<td width="30"></td>-->
     <td style="display: none;">
       <input class="form-control" type="number" name="f_vat" id="regis_only_f_vat_<?=$i;?>" value="<?=$con->f_vat;?>" />
     </td>
-    <td width="30"></td>
     <td>
       <input class="form-control" type="number" name="f_wht" id="regis_only_f_wht_<?=$i;?>" value="<?=$con->f_wht;?>" />
     </td>
-    <td>
+    <td align="center">
       <button type="button" class="btn btn-danger button-cus del-row" onclick="deletedRowRegisOnly();">
         <i class="fa fa-trash-o" aria-hidden="true"></i>
       </button>
