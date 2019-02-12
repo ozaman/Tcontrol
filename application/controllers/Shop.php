@@ -730,6 +730,7 @@ class Shop extends CI_Controller {
     $_where[i_partner_group] = $_GET[partner_g];
     $this->db->select('*');
     $query = $this->db->get_where(TBL_PLAN_PACK,$_where);
+    $this->db->order_by("id", "asc");
     $planpack = $query->result();
     $data[planpack] = $planpack;
     $this->load->view('shop/view_box_manage_com',$data);
@@ -842,9 +843,9 @@ class Shop extends CI_Controller {
   }
   
   public function check_duplicate_pack(){
-//    $data = $this->Shop_model->check_duplicate_pack();
-//    echo json_encode($data);
-    echo 52555;
+    $data = $this->Shop_model->check_duplicate_pack();
+    echo json_encode($data);
+//    echo 52555;
   }
   ################################ SHOP #################################
 }

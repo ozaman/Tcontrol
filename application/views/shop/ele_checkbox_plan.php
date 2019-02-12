@@ -70,7 +70,7 @@ else {
   $val = $query_main->row();
     ?>
     <div data-toggle="buttons">
-      <label class="btn checkbox-inline btn-checkbox-default-inverse "><?=$val->s_topic;?>..<?=$val->id;?>
+      <label class="btn checkbox-inline btn-checkbox-default-inverse "><?=$val->s_topic;?>
         <input type="checkbox" value="<?=$val->id;?>" id="pack_<?=$val->id;?>" name="plan_pack[]" <?=$chk_withholding;?> role="<?=$val->s_topic;?>" > </label>
     </div>
     <?php

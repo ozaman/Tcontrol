@@ -52,7 +52,9 @@ $query = $this->db->get_where(TBL_PLAN_MAIN_LIST,$_where);
       $tbl = $val->s_tbl;
       $_where = array();
       $_where[i_plan_pack] = $_GET[pack_id];
-      $_where[i_status] = 1;
+      if($val->id != 5) {
+        $_where[i_status] = 1;
+      }
       $this->db->select('*');
       $query_con_tb = $this->db->get_where($tbl,$_where);
 //      $con = $query_con_tb->row();
@@ -78,14 +80,14 @@ $query = $this->db->get_where(TBL_PLAN_MAIN_LIST,$_where);
               <span class="checkmark"></span>
             </label>
             <div class="row outbox" id="box_set_<?=$val->id;?>" style="<?=$open_box;?>">
-              <div style="padding: 0px 10px; padding-top: 5px; margin: 20px; border: 1px solid #efe8e8; box-shadow: 1px 1px 3px #e0e0e0;border-radius: 5px;">
+              <div style="padding: 0px 10px; padding-top: 5px; margin: 10px 0px; border: 1px solid #efe8e8; box-shadow: 1px 1px 3px #e0e0e0;border-radius: 5px;">
                 <h4>ร้านค้า >> ทีแชร์</h3>
                   <table class="table" width="100%" style="margin-bottom: 5px;">
                     <tr>
                       <td width="70" align="center" ><b style="font-size:16px;">จำนวน</b></td>
                       <td ></td>
-                      <td align="center"><b style="font-size:16px;">ราคา</b></td>
-                      <td align="center"><b style="font-size:16px;">ภาษี ณ ที่จ่าย</b></td>
+                      <td align="center" width="150"><b style="font-size:16px;">ราคา</b></td>
+                      <td align="center" width="150"><b style="font-size:16px;">ภาษี ณ ที่จ่าย</b></td>
                     </tr>
                     <?php
 //              echo "<pre>";
@@ -117,7 +119,7 @@ $query = $this->db->get_where(TBL_PLAN_MAIN_LIST,$_where);
                     <tr>
                       <td></td>
                       <td></td>
-                      <td align="center"><b style="font-size: 16px;">จำนวน</b></td>
+                      <td align="center"><b style="font-size: 16px;">ราคา</b></td>
                       <!--<td align="center" ><b style="font-size: 16px;">ถอด vat%</b></td>-->
                       <td align="center"><b style="font-size: 16px;">ภาษี ณ ที่จ่าย</b></td>
                     </tr>
@@ -170,7 +172,7 @@ $query = $this->db->get_where(TBL_PLAN_MAIN_LIST,$_where);
               <input <?=$selected;?> type="radio" name="condition_type" value="<?=$val->id;?>" onclick="selectOptionSet('<?=$val->id;?>');"  class="radio-check">
               <span class="checkmark"></span>
             </label>
-            <div style="padding: 0px 10px; padding-top: 5px; margin: 20px; border: 1px solid #efe8e8; box-shadow: 1px 1px 3px #e0e0e0;border-radius: 5px;">
+            <div style="padding: 0px 10px; padding-top: 5px; margin: 10px 0px; border: 1px solid #efe8e8; box-shadow: 1px 1px 3px #e0e0e0;border-radius: 5px;">
               <h4>ร้านค้า >> ทีแชร์</h3>
                 <table class="table" width="100%" style="margin-bottom: 5px;">
                   <tr>
@@ -289,8 +291,8 @@ $query = $this->db->get_where(TBL_PLAN_MAIN_LIST,$_where);
                     <tr>
                       <td align="center"><b style="font-size: 16px;">คนละ</b></td>
                       <td></td>
-                      <td align="center" width="220px"><b style="font-size: 16px;">ถอด vat%</b></td>
-                      <td></td>
+                      <!--<td align="center" width="220px"><b style="font-size: 16px;">ถอด vat%</b></td>-->
+                      <!--<td></td>-->
                       <td align="center"><b style="font-size: 16px;">ภาษี ณ ที่จ่าย</b></td>
                     </tr>
                     <tr>
@@ -301,10 +303,10 @@ $query = $this->db->get_where(TBL_PLAN_MAIN_LIST,$_where);
                         </div>
                       </td>
                       <td width="30"></td>
-                      <td>
+    <!--                      <td>
                         <input class="form-control" type="number" name="f_vat" id="allpay_f_vat" value="<?=$con->f_vat;?>" />
-                      </td>
-                      <td width="30"></td>
+                      </td>-->
+                      <!--<td width="30"></td>-->
                       <td>
                         <input class="form-control" type="number" name="f_wht" id="allpay_f_wht" value="<?=$con->f_wht;?>" />
                       </td>
@@ -328,7 +330,7 @@ $query = $this->db->get_where(TBL_PLAN_MAIN_LIST,$_where);
               <span class="checkmark"></span>
             </label>
             <div style="padding-top: 5px;padding-left: 25px;padding-right: 25px;<?=$open_box;?>" id="box_set_<?=$val->id;?>" class="outbox">
-              <div style="padding: 0px 10px; padding-top: 5px; margin: 20px; border: 1px solid #efe8e8; box-shadow: 1px 1px 3px #e0e0e0;border-radius: 5px;">
+              <div style="padding: 0px 10px; padding-top: 5px; margin: 10px 0px; border: 1px solid #efe8e8; box-shadow: 1px 1px 3px #e0e0e0;border-radius: 5px;">
                 <h4>ร้านค้า >> ทีแชร์</h3>
                   <table class="table" width="100%" style="margin-bottom: 5px;">
                     <tr>
@@ -366,8 +368,8 @@ $query = $this->db->get_where(TBL_PLAN_MAIN_LIST,$_where);
                     <td align="center"  width="80"><b style="font-size: 16px;">จำนวนคน</b></td>
                     <td></td>
                     <td align="center"><b style="font-size: 16px;">ราคา</b></td>
-                    <td></td>
-                    <td align="center" width="220px"><b style="font-size: 16px;">ถอด vat%</b></td>
+    <!--                    <td></td>
+                    <td align="center" width="220px"><b style="font-size: 16px;">ถอด vat%</b></td>-->
                     <td></td>
                     <td align="center"><b style="font-size: 16px;">ภาษี ณ ที่จ่าย</b></td>
                   </tr>
@@ -381,8 +383,8 @@ $query = $this->db->get_where(TBL_PLAN_MAIN_LIST,$_where);
                       </td>
                       <td width="30"></td>
                       <td><input class="form-control" type="number" name="f_price" id="regis_only_f_price_<?=$val->id;?>" value="<?=$val->f_price;?>" onkeyup="saveDataKeyupRegis(<?=$val->id;?>);" /></td>
-                      <td width="30"></td>
-                      <td>
+                      <!--<td width="30"></td>-->
+                      <td style="display: none;">
                         <input class="form-control" type="number" name="f_vat" id="regis_only_f_vat_<?=$val->id;?>" value="<?=$val->f_vat;?>" onkeyup="saveDataKeyupRegis(<?=$val->id;?>);" />
                       </td>
                       <td width="30"></td>
@@ -399,7 +401,7 @@ $query = $this->db->get_where(TBL_PLAN_MAIN_LIST,$_where);
                     <?php
                   }
                   ?>
-                                                                                                                                                                            <!--<input type="hidden" value="<?=$i;?>" id="val_num_row" />-->
+                                                                                                                                                                                        <!--<input type="hidden" value="<?=$i;?>" id="val_num_row" />-->
                 </table>
               </form>
             </div>
@@ -428,7 +430,7 @@ $query = $this->db->get_where(TBL_PLAN_MAIN_LIST,$_where);
           <div style="<?=$box_other;?>">
             <div class="col-md-12">
               <div class="form-group ">
-                <div style="padding: 0px 10px; padding-top: 5px; margin: 20px; border: 1px solid #efe8e8; box-shadow: 1px 1px 3px #e0e0e0;border-radius: 5px;">
+                <div style="padding: 0px 10px; padding-top: 5px; margin: 10px 0px; border: 1px solid #efe8e8; box-shadow: 1px 1px 3px #e0e0e0;border-radius: 5px;">
                   <h4>ร้านค้า >> ทีแชร์</h3>
                     <table class="table" width="100%" style="margin-bottom: 5px;">
                       <tr>
@@ -467,6 +469,7 @@ $query = $this->db->get_where(TBL_PLAN_MAIN_LIST,$_where);
                       ?>
                     </table>
                 </div>
+
                 <table width="100%" class="tb-pad">
                   <tr>
                     <td style="font-size: 16px;"><b>รายการ</b></td>
@@ -474,7 +477,23 @@ $query = $this->db->get_where(TBL_PLAN_MAIN_LIST,$_where);
                     <td style="width: 150px;font-size: 16px;text-align: center;"><b>ภาษี ณ ที่จ่าย</b></td>
                   </tr>
                   <?php
-                  foreach ($query_con_tb->result() as $key => $value) {
+                  if ($query_con_tb->num_rows() > 0) {
+                    $each_pd_loop = $query_con_tb;
+                    $cat = "own";
+                  }
+                  else {
+                    $_where = array();
+                    $_where[i_plan_pack] = $con_ref->i_plan_pack;
+                    $this->db->select('*');
+                    $each_pd_loop = $this->db->get_where(TBL_CON_COM_PRODUCT_TYPE,$_where);
+//                    $data_pd_sub_typelist = $query->row();
+//                    $each_pd_loop = $query;
+                    $cat = "prototype";
+                  }
+                  echo "<pre>";
+                  print_r($cat." ".$query_con_tb->num_rows());
+                  echo "</pre>";
+                  foreach ($each_pd_loop->result() as $key => $value) {
 
                     $_where = array();
                     $_where[id] = $value->i_product_sub_typelist;
@@ -490,41 +509,41 @@ $query = $this->db->get_where(TBL_PLAN_MAIN_LIST,$_where);
                     $query = $this->db->get_where(TBL_SHOPPING_PRODUCT_MAIN_TYPELIST,$_where);
                     $data_pd = $query->row();
 
-                    $_where = array();
-//                  $_where[i_status] = 1;
-                    $_where[i_plan_pack] = $_GET[pack_id];
-                    $_where[i_product_sub_typelist] = $value->id;
-                    $this->db->select('*');
-                    $query_pd_typelist = $this->db->get_where(TBL_CON_COM_PRODUCT_TYPE,$_where);
-                    $data_con_pd_typelist = $query_pd_typelist->row();
+//                    $_where = array();
+////                  $_where[i_status] = 1;
+//                    $_where[i_plan_pack] = $_GET[pack_id];
+//                    $_where[i_product_sub_typelist] = $value->id;
+//                    $this->db->select('*');
+//                    $query_pd_typelist = $this->db->get_where(TBL_CON_COM_PRODUCT_TYPE,$_where);
+//                    $data_con_pd_typelist = $query_pd_typelist->row();
 
-                    if ($data_con_pd_typelist->i_status > 0) {
+                    if ($value->i_status > 0) {
                       $checked_pd_tl = "checked";
                       $active_box = "active";
                       $val_pd = 1;
-//                      $disabled_box_price = "";
-//                      $disabled_box_vat = "";
-//                      $disabled_box_wht = "";
+                      $disabled_box_price = "";
+                      $disabled_box_vat = "";
+                      $disabled_box_wht = "";
                     }
                     else {
                       $checked_pd_tl = "";
                       $active_box = "";
-//                      $disabled_box_price = "disabled";
-//                      $disabled_box_vat = "disabled";
-//                      $disabled_box_wht = "disabled";
+                      $disabled_box_price = "disabled";
+                      $disabled_box_vat = "disabled";
+                      $disabled_box_wht = "disabled";
                       $val_pd = 0;
                     }
                     ?>
                     <tr id="tr_list_type_product_<?=$value->id;?>">
-                      <td>
-                        <div data-toggle="buttons" onclick="selectProductTypeList(<?=$value->id;?>);">
-                          <label class="btn checkbox-inline btn-checkbox-default-inverse <?=$active_box;?>  "><span style="font-size:16px;"> <?=$data_pd->topic_th;?>  </span>                    
-                            <input <?=$checked_pd_tl;?> type="checkbox" value="1" id="i_checkbox412" name="i_checkbox412"> </label>
+                      <td><?=$value->i_status;?>
+                        <div data-toggle="buttons" >
+                          <label class="btn checkbox-inline btn-checkbox-default-inverse <?=$active_box;?>  " onclick="selectProductTypeList(<?=$value->id;?>,<?=$value->i_product_sub_typelist;?>);"><span style="font-size:16px;"> <?=$data_pd->topic_th;?>  </span>                    
+                            <input <?=$checked_pd_tl;?> type="checkbox" value="1" id="i_checkbox412" name="i_checkbox_<?=$value->id;?>"> </label>
                         </div>
                         <input id="val_ck_pd_<?=$value->id;?>" type="hidden" value="<?=$val_pd;?>" />
                       </td>
-                      <td align="center"><input onkeyup="saveDataComProductType(<?=$value->id;?>);" id="pd_type_f_vat_<?=$value->id;?>" type="number" style="width: 90%;" class="form-control" value="<?=$data_con_pd_typelist->f_vat;?>" <?=$disabled_box_vat;?>></td>
-                      <td align="center"><input onkeyup="saveDataComProductType(<?=$value->id;?>);" id="pd_type_f_wht_<?=$value->id;?>" type="number" style="width: 90%;" class="form-control" value="<?=$data_con_pd_typelist->f_wht;?>" <?=$disabled_box_wht;?>></td>
+                      <td align="center"><input onkeyup="saveDataComProductType(<?=$value->id;?>);" id="pd_type_f_vat_<?=$value->id;?>" type="number" style="width: 90%;" class="form-control" value="<?=$value->f_vat;?>" <?=$disabled_box_vat;?>></td>
+                      <td align="center"><input onkeyup="saveDataComProductType(<?=$value->id;?>);" id="pd_type_f_wht_<?=$value->id;?>" type="number" style="width: 90%;" class="form-control" value="<?=$value->f_wht;?>" <?=$disabled_box_wht;?>></td>
                     </tr>
                   <?php }
                   ?>
@@ -551,8 +570,8 @@ $query = $this->db->get_where(TBL_PLAN_MAIN_LIST,$_where);
     </td>
     <td width="30"></td>
     <td><input class="form-control" type="number" name="f_price" id="regis_only_f_price_<?=$i;?>" value="<?=$con->f_vat;?>" /></td>
-    <td width="30"></td>
-    <td>
+    <!--<td width="30"></td>-->
+    <td style="display: none;">
       <input class="form-control" type="number" name="f_vat" id="regis_only_f_vat_<?=$i;?>" value="<?=$con->f_vat;?>" />
     </td>
     <td width="30"></td>
@@ -579,7 +598,7 @@ $query = $this->db->get_where(TBL_PLAN_MAIN_LIST,$_where);
     <td align="center">
       <input class="form-control" type="number" name="f_price" id="each_f_price" value="" style="width:80%;" />
     </td>
-    <td align="center">
+    <td align="center" style="display: none;">
       <input class="form-control" type="number" name="f_vat" id="each_f_vat" value="" style="width:80%;" />
     </td>
     <td align="center">

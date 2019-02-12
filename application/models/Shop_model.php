@@ -1272,13 +1272,13 @@ class Shop_model extends CI_Model {
         $pack_list[i_plan_main] = $key;
         $pack_list[i_plan_pack] = $i_plan_pack;
         $pack_list[i_pay_type] = 2;
-        
+
         $_where = array();
         $_where['t2.i_plan_main'] = $key;
         $_where['t1.i_shop'] = $_POST[i_shop];
         $_where['t1.i_partner_group'] = 1;
         $_where['t1.i_country'] = $_POST[i_country];
-        
+
         $this->db->select('*');
         $this->db->where($_where);
         $this->db->from(TBL_PLAN_PACK." as t1");
@@ -1671,25 +1671,60 @@ class Shop_model extends CI_Model {
     $this->db->select('*');
     $query = $this->db->get_where(TBL_PLAN_PACK,$_where);
 //    $pack_list[pack] = $query->result();
+//    $last_chk = false;
     foreach ($query->result() as $key1 => $val1) {
-      foreach ($_POST[i_plan] as $key2 => $val2) {
+      $chk = 1;
+      $_where = array();
+      $_where[i_plan_pack] = $val1->id;
+      $_where[i_status] = 1;
+      $this->db->select('id');
+      $query_res = $this->db->get_where(TBL_PLAN_PACK_LIST,$_where);
+      $plan_list = $query_res->num_rows();
+      $plan_post = count($_POST[i_plan]);
 
-        $_where = array();
-        $_where[i_plan_main] = $key2;
-        $_where[i_plan_pack] = $val1->id;
-        $_where[i_status] = 1;
-        $this->db->select('id');
-        $query = $this->db->get_where(TBL_PLAN_PACK_LIST,$_where);
-        $check = $query->num_rows();
-        $res_chk = false; // ture = duplicate, false = unique
-        if ($check > 0) {
-          $res_chk = true;
+      if ($plan_list == $plan_post) {
+        foreach ($_POST[i_plan] as $key2 => $val2) {
+
+          $_where = array();
+          $_where[i_plan_main] = $key2;
+          $_where[i_plan_pack] = $val1->id;
+          $_where[i_status] = 1;
+          $this->db->select('id,i_plan_pack,i_plan_main');
+          $query = $this->db->get_where(TBL_PLAN_PACK_LIST,$_where);
+          $check = $query->num_rows();
+          
+//          $res_chk[$key2] = true;
+//          if ($check == 0) {
+//            $res_chk[$key2] = false;
+//            $chk = 0;
+//          }
+          
+          $pack_list[each][$val1->id] = $check;
         }
-//        $chk[$key2] = $res_chk;
+
+        foreach ($pack_list[each] as $key => $val) {
+          if ($val == 1) {
+            $last_chk[$val1->id] = true;
+          }
+          $pack_list[each_2][$key] = $last_chk;
+        }
+      }
+      else {
+        $last_chk[$val1->id] = false;
+      }
+//      $res_chk = $plan_list." ".$plan_post;
+//      $pack_list[tt][$val1->id] = $res_chk;
+    }
+    $final = false;
+    foreach ($last_chk as $key => $val) {
+      if ($val == true) {
+        $final = true;
       }
     }
-    $pack_list[chk] = $res_chk;
-    $pack_list[post] = $_POST;
+    $pack_list[chk] = $final;
+    $pack_list[chk_list] = $last_chk;
+//    $pack_list[post] = $_POST;
+//    $pack_list[chklt] = $chk;
     return $pack_list;
   }
 

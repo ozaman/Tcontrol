@@ -2278,11 +2278,13 @@ function submit_planpack(shop, user, partner_g) {
         console.log('Error Profile');
       },
       success: function (res) {
-
+        console.log(res);
+        
         if (res.chk == true) {
           toastr.error('บันทึกข้อมูลไม่สำเร็จ', "ค่าตอบแทนซ้ำ", {"closeButton": true});
           return;
         } else {
+//          return;
           var url = base_url + "shop/submit_planpack";
           $.ajax({
             url: url,
@@ -2762,7 +2764,7 @@ function saveDataKeyupRegis(id) {
   }, 1000);
 }
 
-function selectProductTypeList(id) {
+function selectProductTypeList(id, typelis) {
   var ele = $('#tr_list_type_product_' + id).find('input[type="number"]');
   var check = $('#val_ck_pd_' + id).val();
   console.log(check);
@@ -2780,9 +2782,11 @@ function selectProductTypeList(id) {
     id: id,
     pack_id: $('#pack_id').val(),
     plan_main: $('#plan_main').val(),
-    id_sub_typelist: id,
+    id_sub_typelist: typelis,
     status: $('#val_ck_pd_' + id).val()
   };
+  console.log(data);
+//  return;
   $.ajax({
     url: url,
     data: data,

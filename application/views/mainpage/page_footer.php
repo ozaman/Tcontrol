@@ -13,7 +13,7 @@
     </div>
 <!-- BEGIN JAVASCRIPT -->
 <div class="modal fade in " id="modal_custom" style="">
-	<div class="modal-dialog modal-lg">
+	<div class="modal-dialog modal-lg" style="width: 95vw;">
         <div class="modal-content">
            <div class="modal-header">
             <button type="button" class="close" data-dismiss="modal" aria-hidden="true" onclick="close_modal_custom('shop_manage')" >×</button>
