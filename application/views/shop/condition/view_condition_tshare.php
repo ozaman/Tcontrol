@@ -303,10 +303,7 @@ $query = $this->db->get_where(TBL_PLAN_MAIN_LIST,$_where);
                         </div>
                       </td>
                       <td width="30"></td>
-    <!--                      <td>
-                        <input class="form-control" type="number" name="f_vat" id="allpay_f_vat" value="<?=$con->f_vat;?>" />
-                      </td>-->
-                      <!--<td width="30"></td>-->
+
                       <td>
                         <input class="form-control" type="number" name="f_wht" id="allpay_f_wht" value="<?=$con->f_wht;?>" />
                       </td>
