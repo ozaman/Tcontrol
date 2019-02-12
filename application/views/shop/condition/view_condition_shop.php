@@ -323,9 +323,9 @@ $query = $this->db->get_where(TBL_PLAN_MAIN_LIST,$_where);
                 <table width="100%" class="tb-pad">
                   <tr>
                     <td style="font-size: 16px;"><b>รายการ</b></td>
-                    <td style="width: 150px;font-size: 16px;text-align: center;"><b>ถอด Vat %</b></td>
-
                     <td style="width: 150px;font-size: 16px;text-align: center;"><b>ค่าคอม %</b></td>
+
+                    <td style="width: 150px;font-size: 16px;text-align: center;"><b>ถอด Vat %</b></td>
 
                     <td style="width: 150px;font-size: 16px;text-align: center;"><b>ภาษี ณ ที่จ่าย</b></td>
                   </tr>

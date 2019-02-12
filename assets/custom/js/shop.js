@@ -2351,6 +2351,7 @@ function load_box_manage_com(shop, partner_g) {
 function editCondition(id, topic, plan_main, i_country) {
   $('#modal_custom_2').show();
   $('#title_add_region_sub').html('ตั้งค่าเงื่อนไข ' + topic)
+  $('#dody_modal_custom_2').html('<div align="center"><img src="'+base_url+'assets/img/loading.gif" /></div>');
   var shop = $('#id_shop_product').val();
   var url = base_url + "shop/view_condition?pack_id=" + id + "&plan_main=" + plan_main + "&shop_id=" + shop + "&partner_g=" + $('#partner_g').val() + "&i_country=" + i_country;
   console.log(url);
@@ -2482,7 +2483,7 @@ function saveEachPerson() {
 }
 
 var timer;
-function saveDataKeyup(id, type) {
+function saveDataKeyupEachCarType(id, type) {
   clearTimeout(timer);
   timer = setTimeout(function validate() {
 //    alert(555);
@@ -2497,6 +2498,8 @@ function saveDataKeyup(id, type) {
       plan_main: $('#plan_main').val(),
       id: id
     };
+    console.log(data);
+//    return;
     $.ajax({
       url: url,
       data: data,

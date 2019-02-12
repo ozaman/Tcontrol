@@ -1277,6 +1277,7 @@ class Shop_model extends CI_Model {
         $_where['t2.i_plan_main'] = $key;
         $_where['t1.i_shop'] = $_POST[i_shop];
         $_where['t1.i_partner_group'] = 1;
+        $_where['t1.i_country'] = $_POST[i_country];
         
         $this->db->select('*');
         $this->db->where($_where);
