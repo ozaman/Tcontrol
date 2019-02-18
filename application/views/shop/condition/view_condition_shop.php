@@ -370,9 +370,9 @@ $query = $this->db->get_where(TBL_PLAN_MAIN_LIST,$_where);
                         </div>
                         <input id="val_ck_pd_<?=$value->id;?>" type="hidden" value="<?=$val_pd;?>" />
                       </td>
-                      <td align="center"><input onkeyup="saveDataComProductType(<?=$value->id;?>);" id="pd_type_f_price_<?=$value->id;?>" type="number" style="width: 90%;" class="form-control" value="<?=$data_con_pd_typelist->f_price;?>" <?=$disabled_box_price;?>></td>
-                      <td align="center"><input onkeyup="saveDataComProductType(<?=$value->id;?>);" id="pd_type_f_vat_<?=$value->id;?>" type="number" style="width: 90%;" class="form-control" value="<?=$data_con_pd_typelist->f_vat;?>" <?=$disabled_box_vat;?>></td>
-                      <td align="center"><input onkeyup="saveDataComProductType(<?=$value->id;?>);" id="pd_type_f_wht_<?=$value->id;?>" type="number" style="width: 90%;" class="form-control" value="<?=$data_con_pd_typelist->f_wht;?>" <?=$disabled_box_wht;?>></td>
+                      <td align="center"><input onkeyup="saveDataComProductType(<?=$value->id;?>,'shop');" id="pd_type_f_price_<?=$value->id;?>" type="number" style="width: 90%;" class="form-control" value="<?=$data_con_pd_typelist->f_price;?>" <?=$disabled_box_price;?>></td>
+                      <td align="center"><input onkeyup="saveDataComProductType(<?=$value->id;?>,'shop');" id="pd_type_f_vat_<?=$value->id;?>" type="number" style="width: 90%;" class="form-control" value="<?=$data_con_pd_typelist->f_vat;?>" <?=$disabled_box_vat;?>></td>
+                      <td align="center"><input onkeyup="saveDataComProductType(<?=$value->id;?>,'shop');" id="pd_type_f_wht_<?=$value->id;?>" type="number" style="width: 90%;" class="form-control" value="<?=$data_con_pd_typelist->f_wht;?>" <?=$disabled_box_wht;?>></td>
                     </tr>
                   <?php }
                   ?>

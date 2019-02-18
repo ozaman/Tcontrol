@@ -2776,14 +2776,19 @@ function selectProductTypeList(id, typelis) {
     $('#val_ck_pd_' + id).val(0);
     ele.prop('disabled', true);
   }
-
+  
+  var f_price = $('#pd_type_f_price_'+id).val();
+  var f_wht = $('#pd_type_f_wht_'+id).val();
+  
   var url = base_url + "shop/select_com_product_type";
   var data = {
     id: id,
     pack_id: $('#pack_id').val(),
     plan_main: $('#plan_main').val(),
     id_sub_typelist: typelis,
-    status: $('#val_ck_pd_' + id).val()
+    status: $('#val_ck_pd_' + id).val(),
+    f_price: f_price,
+    f_wht: f_wht
   };
   console.log(data);
 //  return;
@@ -2808,7 +2813,7 @@ function selectProductTypeList(id, typelis) {
 }
 
 var timer3;
-function saveDataComProductType(id) {
+function saveDataComProductType(id, type) {
   clearTimeout(timer3);
   timer3 = setTimeout(function validate() {
     console.log(id);
@@ -2821,7 +2826,8 @@ function saveDataComProductType(id) {
       f_wht: $('#pd_type_f_wht_' + id).val(),
       pack_id: $('#pack_id').val(),
       plan_main: $('#plan_main').val(),
-      id: id
+      id: id,
+      type: type
     };
     $.ajax({
       url: url,

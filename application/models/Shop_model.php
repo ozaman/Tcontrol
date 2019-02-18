@@ -1497,7 +1497,7 @@ class Shop_model extends CI_Model {
     }
     return $data;
   }
-  
+
   public function save_con_pay_allcase() {
 //    return $_POST;
 //    exit();
@@ -1614,10 +1614,13 @@ class Shop_model extends CI_Model {
     $check = $query->num_rows();
 
     $data[i_product_sub_typelist] = $_POST[id_sub_typelist];
+//    $data[i_product_sub_typelist] = $_POST[id];
     $data[i_plan_main] = $_POST[plan_main];
     $data[i_plan_pack] = $_POST[pack_id];
     $data[i_con_type] = 5;
     $data[i_status] = $_POST[status];
+    $data[f_price] = $_POST[f_price];
+    $data[f_wht] = $_POST[f_wht];
 
     $data[d_last_update] = date('Y-m-d H:i:s');
     if ($check > 0) {
@@ -1649,20 +1652,19 @@ class Shop_model extends CI_Model {
     $data[i_plan_pack] = $_POST[pack_id];
     $data[i_con_type] = 5;
     $data[d_last_update] = date('Y-m-d H:i:s');
-//    if ($check > 0) {
+
     $_where = array();
-//    $_where[i_product_sub_typelist] = $_POST[id];
-//    $_where[i_plan_main] = $_POST[plan_main];
-//    $_where[i_plan_pack] = $_POST[pack_id];
-    $_where[id] =  $_POST[id];
+    if ($_POST[type] == "shop") {
+      $_where[i_product_sub_typelist] = $_POST[id];
+      $_where[i_plan_main] = $_POST[plan_main];
+      $_where[i_plan_pack] = $_POST[pack_id];
+    }
+    else {
+      $_where[id] = $_POST[id];
+    }
     $data[result] = $this->db->update(TBL_CON_COM_PRODUCT_TYPE,$data,$_where);
     $data[type] = "update";
-//    }
-//    else {
-//      $data[d_post_date] = date('Y-m-d H:i:s');
-//      $data[result] = $this->db->insert(TBL_CON_PS_ONLY_REGIS,$data);
-//      $data[type] = "insert";
-//    }
+
     return $data;
   }
 
@@ -1725,13 +1727,13 @@ class Shop_model extends CI_Model {
           $this->db->select('id,i_plan_pack,i_plan_main');
           $query = $this->db->get_where(TBL_PLAN_PACK_LIST,$_where);
           $check = $query->num_rows();
-          
+
 //          $res_chk[$key2] = true;
 //          if ($check == 0) {
 //            $res_chk[$key2] = false;
 //            $chk = 0;
 //          }
-          
+
           $pack_list[each][$val1->id] = $check;
         }
 
