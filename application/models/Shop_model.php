@@ -1651,9 +1651,10 @@ class Shop_model extends CI_Model {
     $data[d_last_update] = date('Y-m-d H:i:s');
 //    if ($check > 0) {
     $_where = array();
-    $_where[i_product_sub_typelist] = $_POST[id];
-    $_where[i_plan_main] = $_POST[plan_main];
-    $_where[i_plan_pack] = $_POST[pack_id];
+//    $_where[i_product_sub_typelist] = $_POST[id];
+//    $_where[i_plan_main] = $_POST[plan_main];
+//    $_where[i_plan_pack] = $_POST[pack_id];
+    $_where[id] =  $_POST[id];
     $data[result] = $this->db->update(TBL_CON_COM_PRODUCT_TYPE,$data,$_where);
     $data[type] = "update";
 //    }
