@@ -563,17 +563,17 @@ $query = $this->db->get_where(TBL_PLAN_MAIN_LIST,$_where);
                     }
 //                    }
                     ?>
-                    <tr id="tr_list_type_product_<?=$value->id;?>">
+                    <tr id="tr_list_type_product_<?=$value->i_product_sub_typelist;?>">
                       <td>
                         <div data-toggle="buttons" >
-                          <label class="btn checkbox-inline btn-checkbox-default-inverse <?=$active_box;?>  " onclick="selectProductTypeList(<?=$value->id;?>,<?=$value->i_product_sub_typelist;?>);"><span style="font-size:16px;"> <?=$data_pd->topic_th;?>  </span>                    
-                            <input <?=$checked_pd_tl;?> type="checkbox" value="1" id="i_checkbox412" name="i_checkbox_<?=$value->id;?>"> </label>
+                          <label class="btn checkbox-inline btn-checkbox-default-inverse <?=$active_box;?>  " onclick="selectProductTypeList(<?=$value->i_product_sub_typelist;?>);"><span style="font-size:16px;"> <?=$data_pd->topic_th;?>  </span>                    
+                            <input <?=$checked_pd_tl;?> type="checkbox" value="1" id="i_checkbox412" name="i_checkbox_<?=$value->i_product_sub_typelist;?>"> </label>
                         </div>
-                        <input id="val_ck_pd_<?=$value->id;?>" type="hidden" value="<?=$val_pd;?>" />
+                        <input id="val_ck_pd_<?=$value->i_product_sub_typelist;?>" type="hidden" value="<?=$val_pd;?>" />
                       </td>
-                      <!--<td align="center"><input onkeyup="saveDataComProductType(<?=$value->id;?>);" id="pd_type_f_vat_<?=$value->id;?>" type="number" style="width: 90%;" class="form-control" value="<?=$value->f_vat;?>" <?=$disabled_box_vat;?>></td>-->
-                      <td align="center"><input onkeyup="saveDataComProductType(<?=$value->id;?>, 'tshare');" id="pd_type_f_price_<?=$value->id;?>" type="number" style="width: 90%;" class="form-control" value="<?=$value->f_price;?>" <?=$disabled_box_price;?>></td>
-                      <td align="center"><input onkeyup="saveDataComProductType(<?=$value->id;?>, 'tshare');" id="pd_type_f_wht_<?=$value->id;?>" type="number" style="width: 90%;" class="form-control" value="<?=$value->f_wht;?>" <?=$disabled_box_wht;?>></td>
+                      <!--<td align="center"><input onkeyup="saveDataComProductType(<?=$value->i_product_sub_typelist;?>);" id="pd_type_f_vat_<?=$value->i_product_sub_typelist;?>" type="number" style="width: 90%;" class="form-control" value="<?=$value->f_vat;?>" <?=$disabled_box_vat;?>></td>-->
+                      <td align="center"><input onkeyup="saveDataComProductType(<?=$value->i_product_sub_typelist;?>, 'tshare');" id="pd_type_f_price_<?=$value->i_product_sub_typelist;?>" type="number" style="width: 90%;" class="form-control" value="<?=$value->f_price;?>" <?=$disabled_box_price;?>></td>
+                      <td align="center"><input onkeyup="saveDataComProductType(<?=$value->i_product_sub_typelist;?>, 'tshare');" id="pd_type_f_wht_<?=$value->i_product_sub_typelist;?>" type="number" style="width: 90%;" class="form-control" value="<?=$value->f_wht;?>" <?=$disabled_box_wht;?>></td>
                     </tr>
                   <?php }
                   ?>

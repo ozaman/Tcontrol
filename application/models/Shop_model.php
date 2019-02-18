@@ -1605,15 +1605,16 @@ class Shop_model extends CI_Model {
   }
 
   public function select_com_product_type() {
+    $id_sub_typelist = $_POST[id_sub_typelist];
     $_where = array();
     $_where[i_plan_main] = $_POST[plan_main];
     $_where[i_plan_pack] = $_POST[pack_id];
-    $_where[i_product_sub_typelist] = $_POST[id_sub_typelist];
+    $_where[i_product_sub_typelist] = $id_sub_typelist;
     $this->db->select('id');
     $query = $this->db->get_where(TBL_CON_COM_PRODUCT_TYPE,$_where);
     $check = $query->num_rows();
 
-    $data[i_product_sub_typelist] = $_POST[id_sub_typelist];
+    $data[i_product_sub_typelist] = $id_sub_typelist;
 //    $data[i_product_sub_typelist] = $_POST[id];
     $data[i_plan_main] = $_POST[plan_main];
     $data[i_plan_pack] = $_POST[pack_id];

@@ -2764,7 +2764,7 @@ function saveDataKeyupRegis(id) {
   }, 1000);
 }
 
-function selectProductTypeList(id, typelis) {
+function selectProductTypeList(id) {
   var ele = $('#tr_list_type_product_' + id).find('input[type="number"]');
   var check = $('#val_ck_pd_' + id).val();
   console.log(check);
@@ -2781,11 +2781,12 @@ function selectProductTypeList(id, typelis) {
   var f_wht = $('#pd_type_f_wht_'+id).val();
   
   var url = base_url + "shop/select_com_product_type";
+  
   var data = {
     id: id,
     pack_id: $('#pack_id').val(),
     plan_main: $('#plan_main').val(),
-    id_sub_typelist: typelis,
+    id_sub_typelist: id,
     status: $('#val_ck_pd_' + id).val(),
     f_price: f_price,
     f_wht: f_wht

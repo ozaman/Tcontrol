@@ -75,8 +75,9 @@ $query = $this->db->get_where(TBL_PLAN_MAIN_LIST,$_where);
               <input <?=$selected;?> type="radio" name="condition_type" value="<?=$val->id;?>" onclick="selectOptionSet('<?=$val->id;?>');" class="radio-check">
               <span class="checkmark"></span>
             </label>
-            <button type="button" class="btn btn-support3" onclick="plusRowEachPerson();"><i class="fa fa-plus" aria-hidden="true"></i> เพิ่มแถว</button>
+           
             <div class="row outbox" id="box_set_<?=$val->id;?>" style="<?=$open_box;?>">
+               <button type="button" class="btn btn-support3" onclick="plusRowEachPerson();"><i class="fa fa-plus" aria-hidden="true"></i> เพิ่มแถว</button>
               <div class="col-md-12">
                 <form id="each_person_form">
                   <table class="tb-pad" width="100%">
@@ -178,13 +179,13 @@ $query = $this->db->get_where(TBL_PLAN_MAIN_LIST,$_where);
                       <input type="hidden" value="<?=$val_chk;?>" id="val_ck_<?=$val->id;?>" />
                     </td>
                     <td align="center">
-                      <input class="form-control" id="car_price_<?=$val->id;?>" onkeyup="saveDataKeyup(<?=$val->id;?>, 'price');" type="number" value="<?=$data_car->f_price;?>" style="width:200px;" <?=$disabled_box_price;?> />
+                      <input class="form-control" id="car_price_<?=$val->id;?>" onkeyup="saveDataKeyupEachCarType(<?=$val->id;?>, 'price');" type="number" value="<?=$data_car->f_price;?>" style="width:200px;" <?=$disabled_box_price;?> />
                     </td>
                     <td align="center">
-                      <input class="form-control" id="car_vat_<?=$val->id;?>" onkeyup="saveDataKeyup(<?=$val->id;?>, 'vat');" type="number" value="<?=$data_car->f_vat;?>" style="width:200px;" <?=$disabled_box_vat;?> />
+                      <input class="form-control" id="car_vat_<?=$val->id;?>" onkeyup="saveDataKeyupEachCarType(<?=$val->id;?>, 'vat');" type="number" value="<?=$data_car->f_vat;?>" style="width:200px;" <?=$disabled_box_vat;?> />
                     </td>
                     <td align="center">
-                      <input class="form-control" id="car_wht_<?=$val->id;?>" onkeyup="saveDataKeyup(<?=$val->id;?>, 'wht');" type="number" value="<?=$data_car->f_wht;?>" style="width:200px;" <?=$disabled_box_wht;?> />
+                      <input class="form-control" id="car_wht_<?=$val->id;?>" onkeyup="saveDataKeyupEachCarType(<?=$val->id;?>, 'wht');" type="number" value="<?=$data_car->f_wht;?>" style="width:200px;" <?=$disabled_box_wht;?> />
                     </td>
                   </tr>
 
@@ -301,8 +302,9 @@ $query = $this->db->get_where(TBL_PLAN_MAIN_LIST,$_where);
             $_where = array();
             $_where[id] = $con_pack->id;
             $data_up[i_con_plan_main_list] = $val->id;
-            $this->db->update(TBL_PLAN_PACK_LIST,$data_up,$_where);
+            $result_insert = $this->db->update(TBL_PLAN_PACK_LIST,$data_up,$_where);
           }
+//          echo $con_pack->i_con_plan_main_list." ".$result_insert." +";
           $data = $this->Main_model->rowdata(TBL_SHOPPING_PRODUCT_SUB,array('id' => $_GET[shop_id]));
           $_where = array();
 
