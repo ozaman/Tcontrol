@@ -56,6 +56,7 @@ $query = $this->db->get_where(TBL_PLAN_MAIN_LIST,$_where);
         $_where[i_status] = 1;
       }
       $this->db->select('*');
+//      echo $tbl;
       $query_con_tb = $this->db->get_where($tbl,$_where);
 //      $con = $query_con_tb->row();
 
@@ -321,6 +322,12 @@ $query = $this->db->get_where(TBL_PLAN_MAIN_LIST,$_where);
                       </table>-->
                 </div>
                 <form id="each_all_case_form">
+                  <?php
+                  $con = $query_con_tb->row();
+//                  echo "<pre>";
+//                  print_r($con);
+//                  echo "</pre>";
+                  ?>
                   <table class="tb-pad" width="100%">
                     <tr>
                       <td align="center"><b style="font-size: 15px;">คนละ</b></td>
@@ -336,11 +343,11 @@ $query = $this->db->get_where(TBL_PLAN_MAIN_LIST,$_where);
                           <input class="form-control" type="number" name="f_price" id="allpay_f_price" value="<?=$con->f_price;?>" onkeyup="saveDataKeyUpPayallcase(<?=$con->id;?>);" />
                         </div>
                       </td>
-    <!--                      <td width="30"></td>
-                      <td>
-                        <input class="form-control" type="number" name="f_vat" id="allpay_f_vat" value="<?=$con->f_vat;?>" onkeyup="saveDataKeyUpPayallcase(<?=$con->id;?>);" />
-                      </td>
-                      <td width="30"></td>-->
+<!--                      <td width="30"></td>
+                      <td>-->
+                    <input class="form-control" type="hidden" name="f_vat" id="allpay_f_vat" value="<?=$con->f_vat;?>" onkeyup="saveDataKeyUpPayallcase(<?=$con->id;?>);" />
+                      <!--</td>-->
+                      <!--<td width="30"></td>-->
                       <td>
                         <input class="form-control" type="number" name="f_wht" id="allpay_f_wht" value="<?=$con->f_wht;?>" onkeyup="saveDataKeyUpPayallcase(<?=$con->id;?>);" />
                       </td>
@@ -425,7 +432,7 @@ $query = $this->db->get_where(TBL_PLAN_MAIN_LIST,$_where);
                     <?php
                   }
                   ?>
-                                                                                                                                                                                                            <!--<input type="hidden" value="<?=$i;?>" id="val_num_row" />-->
+                                                                                                                                                                                                                <!--<input type="hidden" value="<?=$i;?>" id="val_num_row" />-->
                 </table>
               </form>
             </div>
@@ -507,15 +514,15 @@ $query = $this->db->get_where(TBL_PLAN_MAIN_LIST,$_where);
 //                    $cat = "own";
 //                  }
 //                  else {
-                    $_where = array();
-                    $_where[i_plan_pack] = $con_ref->i_plan_pack;
-                    $this->db->select('*');
-                    $each_pd_loop = $this->db->get_where(TBL_CON_COM_PRODUCT_TYPE,$_where);
-                    $cat = "prototype";
+                  $_where = array();
+                  $_where[i_plan_pack] = $con_ref->i_plan_pack;
+                  $this->db->select('*');
+                  $each_pd_loop = $this->db->get_where(TBL_CON_COM_PRODUCT_TYPE,$_where);
+                  $cat = "prototype";
 //                  }
                   foreach ($each_pd_loop->result() as $key => $value) {
-                    
-                    
+
+
                     $_where = array();
                     $_where[id] = $value->i_product_sub_typelist;
                     $this->db->select('*');
@@ -529,31 +536,31 @@ $query = $this->db->get_where(TBL_PLAN_MAIN_LIST,$_where);
                     $this->db->select('*');
                     $query = $this->db->get_where(TBL_SHOPPING_PRODUCT_MAIN_TYPELIST,$_where);
                     $data_pd = $query->row();
-                    
+
                     $_where = array();
                     $_where[i_product_sub_typelist] = $value->i_product_sub_typelist;
                     $_where[i_plan_pack] = $_GET[pack_id];
                     $this->db->select('*');
                     $query = $this->db->get_where(TBL_CON_COM_PRODUCT_TYPE,$_where);
                     $data_s = $query->row();
-                    
+
 //                    if ($query_con_tb->num_rows() > 0) {
-                      if ($data_s->i_status > 0) {
-                        $checked_pd_tl = "checked";
-                        $active_box = "active";
-                        $val_pd = 1;
-                        $disabled_box_price = "";
-                        $disabled_box_vat = "";
-                        $disabled_box_wht = "";
-                      }
-                      else {
-                        $checked_pd_tl = "";
-                        $active_box = "";
-                        $disabled_box_price = "disabled";
-                        $disabled_box_vat = "disabled";
-                        $disabled_box_wht = "disabled";
-                        $val_pd = 0;
-                      }
+                    if ($data_s->i_status > 0) {
+                      $checked_pd_tl = "checked";
+                      $active_box = "active";
+                      $val_pd = 1;
+                      $disabled_box_price = "";
+                      $disabled_box_vat = "";
+                      $disabled_box_wht = "";
+                    }
+                    else {
+                      $checked_pd_tl = "";
+                      $active_box = "";
+                      $disabled_box_price = "disabled";
+                      $disabled_box_vat = "disabled";
+                      $disabled_box_wht = "disabled";
+                      $val_pd = 0;
+                    }
 //                    }
                     ?>
                     <tr id="tr_list_type_product_<?=$value->id;?>">
