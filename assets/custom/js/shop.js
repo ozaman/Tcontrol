@@ -2525,14 +2525,18 @@ function saveDataKeyupEachCarType(id, type) {
 function plusRowRegisOnly() {
 
   var count_ele = $("#each_regis_form").find('.tr_regis_only').length;
- count_ele = count_ele+1;
+//  if(count_ele<=0){
+    var num_regis = count_ele+1;
+//  }else{
+//    var num_regis = count_ele;
+//  }
 //  console.log(count_ele);
 //  return;
   var url = base_url + "shop/add_data_regis_only";
   var data = {
     pack_id: $('#pack_id').val(),
     plan_main: $('#plan_main').val(),
-    i_num_regis: count_ele
+    i_num_regis: num_regis
   };
   console.log(data);
 //  return;
