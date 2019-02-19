@@ -63,12 +63,12 @@ $query = $this->db->get_where(TBL_PLAN_MAIN_LIST,$_where);
       if ($con_pack->i_con_plan_main_list == $val->id) {
         $selected = "checked";
         $open_box = "";
-//        $box_other = "";
+        $box_other = "";
       }
       else {
         $selected = "";
         $open_box = "display:none;";
-//        $box_other = "display:none;";
+        $box_other = "display:none;";
       }
       ?>
       <div style="padding: 5px 0px 15px 0px; ">
