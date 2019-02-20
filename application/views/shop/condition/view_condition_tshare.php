@@ -185,6 +185,7 @@ $query = $this->db->get_where(TBL_PLAN_MAIN_LIST,$_where);
                     <?php
                     $_where = array();
                     $_where[i_plan_pack] = $con_ref->i_plan_pack;
+                    $_where[i_status] = 1;
                     $this->db->select('*');
                     $query_data_ap = $this->db->get_where(TBL_CON_EACH_CAR,$_where);
                     foreach ($query_data_ap->result() as $key => $value) {
@@ -243,6 +244,7 @@ $query = $this->db->get_where(TBL_PLAN_MAIN_LIST,$_where);
                   $_where = array();
                   $_where[i_plan_pack] = $con_ref->i_plan_pack;
                   $_where[i_car_type] = $val->id;
+//                  $_where[i_status] = 1;
                   $this->db->select('*');
                   $q_car_ref = $this->db->get_where(TBL_CON_EACH_CAR,$_where);
                   $data_car_ref = $q_car_ref->row();
