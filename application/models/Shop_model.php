@@ -1764,4 +1764,13 @@ class Shop_model extends CI_Model {
     return $pack_list;
   }
 
+  public function select_payer_packlist() {
+    $_where = array();
+    $_where[id] = $_POST[packlist_id];
+    $data[i_payer] = $_POST[partner_id];
+    $data[result] = $this->db->update(TBL_PLAN_PACK_LIST,$data,$_where);
+    $data[where] = $_where;
+    return $data;
+  }
+  
 }

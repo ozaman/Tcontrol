@@ -853,6 +853,12 @@ class Shop extends CI_Controller {
     echo json_encode($data);
 //    echo 52555;
   }
+  
+  public function select_payer_packlist() {
+    $data = $this->Shop_model->select_payer_packlist();
+    echo json_encode($data);
+  }
+  
   ################################ SHOP #################################
 }
 

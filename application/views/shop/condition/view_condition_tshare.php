@@ -15,22 +15,50 @@ $_where = array();
 $_where[i_plan_main] = $_GET[plan_main];
 $this->db->select('*');
 $query = $this->db->get_where(TBL_PLAN_MAIN_LIST,$_where);
+
+$_where = array();
+$_where[i_plan_pack] = $_GET[pack_id];
+$_where[i_plan_main] = $_GET[plan_main];
+$this->db->select('i_con_plan_main_list, id, i_payer');
+$querys = $this->db->get_where(TBL_PLAN_PACK_LIST,$_where);
+$con_pack = $querys->row();
+//echo "<pre>";
+//print_r($_GET);
+//echo "</pre>";
+//echo $con_pack->i_payer." +";
 ?>
 <div class="row">
   <form id="form_condition">
     <input type="hidden" value="<?=$_GET[pack_id];?>" id="pack_id" name="pack_id"/>
     <input type="hidden" value="<?=$_GET[plan_main];?>" id="plan_main" name="plan_main"/>
+    <span style="padding: 10px; font-size: 14px;">
+      <strong> เลือกผู้จ่าย : </strong>
+    </span>
+    <div class="btn-group" data-toggle="buttons">
+      <?php
+      $_where = array();
+      $_where[i_access_pay] = 1;
+      $this->db->select('*');
+      $query_partner = $this->db->get_where(TBL_PARTNER,$_where);
+      foreach ($query_partner->result() as $key => $val) {
+        if($con_pack->i_payer == $val->id){
+          $active_payer = "active";
+          $checked_payer = "checked";
+        }else{
+          $active_payer = "";
+          $checked_payer = "";
+        }
+//        echo $active_payer." ".$val->id;
+        ?>
+        <label class="btn btn-primary btn-outline btn-rounded <?=$active_payer;?>" style="padding: 5px 15px;" onclick="selectPayerPacklist(<?=$val->id;?>,<?=$con_pack->id;?>);">
+          <input type="radio" <?=$checked_payer;?>  name="select_payer" id="payer_<?=$val->id;?>"> <strong><?=$val->s_topic;?></strong> 
+        </label>
+      <?php }
+      ?>
+    </div>
   </form>
   <div class="col-md-12">
-
     <?php
-    $_where = array();
-    $_where[i_plan_pack] = $_GET[pack_id];
-    $_where[i_plan_main] = $_GET[plan_main];
-    $this->db->select('i_con_plan_main_list, id');
-    $querys = $this->db->get_where(TBL_PLAN_PACK_LIST,$_where);
-    $con_pack = $querys->row();
-
     $_where = array();
     $_where['t2.i_plan_main'] = $_GET[plan_main];
     $_where['t1.i_shop'] = $_GET[shop_id];
@@ -345,14 +373,14 @@ $query = $this->db->get_where(TBL_PLAN_MAIN_LIST,$_where);
                           <input class="form-control" type="number" name="f_price" id="allpay_f_price" value="<?=$con->f_price;?>" onkeyup="saveDataKeyUpPayallcase(<?=$con->id;?>);" />
                         </div>
                       </td>
-<!--                      <td width="30"></td>
+    <!--                      <td width="30"></td>
                       <td>-->
                     <input class="form-control" type="hidden" name="f_vat" id="allpay_f_vat" value="<?=$con->f_vat;?>" onkeyup="saveDataKeyUpPayallcase(<?=$con->id;?>);" />
-                      <!--</td>-->
-                      <!--<td width="30"></td>-->
-                      <td>
-                        <input class="form-control" type="number" name="f_wht" id="allpay_f_wht" value="<?=$con->f_wht;?>" onkeyup="saveDataKeyUpPayallcase(<?=$con->id;?>);" />
-                      </td>
+                    <!--</td>-->
+                    <!--<td width="30"></td>-->
+                    <td>
+                      <input class="form-control" type="number" name="f_wht" id="allpay_f_wht" value="<?=$con->f_wht;?>" onkeyup="saveDataKeyUpPayallcase(<?=$con->id;?>);" />
+                    </td>
                     </tr>
                   </table>
                 </form>
@@ -434,7 +462,7 @@ $query = $this->db->get_where(TBL_PLAN_MAIN_LIST,$_where);
                     <?php
                   }
                   ?>
-                                                                                                                                                                                                                <!--<input type="hidden" value="<?=$i;?>" id="val_num_row" />-->
+                                                                                                                                                                                                                                <!--<input type="hidden" value="<?=$i;?>" id="val_num_row" />-->
                 </table>
               </form>
             </div>

@@ -2279,7 +2279,7 @@ function submit_planpack(shop, user, partner_g) {
       },
       success: function (res) {
         console.log(res);
-        
+
         if (res.chk == true) {
           toastr.error('บันทึกข้อมูลไม่สำเร็จ', "ค่าตอบแทนซ้ำ", {"closeButton": true});
           return;
@@ -2323,7 +2323,8 @@ function submit_planpack(shop, user, partner_g) {
         console.log(res);
         if (res.result == true) {
           toastr.success('บันทึกข้อมูลสำเร็จ', '', {"closeButton": true});
-          load_box_manage_com(shop, i_partner_group);function name(parameters) {
+          load_box_manage_com(shop, i_partner_group);
+          function name(parameters) {
             _box_region_show(shop, '_company', i_partner_group);
           }
         } else {
@@ -2353,7 +2354,7 @@ function load_box_manage_com(shop, partner_g) {
 function editCondition(id, topic, plan_main, i_country) {
   $('#modal_custom_2').show();
   $('#title_add_region_sub').html('ตั้งค่าเงื่อนไข ' + topic)
-  $('#dody_modal_custom_2').html('<div align="center"><img src="'+base_url+'assets/img/loading.gif" /></div>');
+  $('#dody_modal_custom_2').html('<div align="center"><img src="' + base_url + 'assets/img/loading.gif" /></div>');
   var shop = $('#id_shop_product').val();
   var url = base_url + "shop/view_condition?pack_id=" + id + "&plan_main=" + plan_main + "&shop_id=" + shop + "&partner_g=" + $('#partner_g').val() + "&i_country=" + i_country;
   console.log(url);
@@ -2526,7 +2527,7 @@ function plusRowRegisOnly() {
 
   var count_ele = $("#each_regis_form").find('.tr_regis_only').length;
 //  if(count_ele<=0){
-    var num_regis = count_ele+1;
+  var num_regis = count_ele + 1;
 //  }else{
 //    var num_regis = count_ele;
 //  }
@@ -2782,12 +2783,12 @@ function selectProductTypeList(id) {
     $('#val_ck_pd_' + id).val(0);
     ele.prop('disabled', true);
   }
-  
-  var f_price = $('#pd_type_f_price_'+id).val();
-  var f_wht = $('#pd_type_f_wht_'+id).val();
-  
+
+  var f_price = $('#pd_type_f_price_' + id).val();
+  var f_wht = $('#pd_type_f_wht_' + id).val();
+
   var url = base_url + "shop/select_com_product_type";
-  
+
   var data = {
     id: id,
     pack_id: $('#pack_id').val(),
@@ -2932,4 +2933,29 @@ function saveDataKeyUpPayallcase(id) {
       }
     });
   }, 1000);
+}
+
+function selectPayerPacklist(partner_id, packlist_id) {
+  var url = base_url + "shop/select_payer_packlist";
+  var data = {
+    partner_id: partner_id,
+    packlist_id: packlist_id
+  };
+  $.ajax({
+    url: url,
+    data: data,
+    dataType: "json",
+    type: 'post',
+    error: function () {
+      console.log('Error Profile');
+    },
+    success: function (res) {
+      console.log(res);
+      if (res.result == true) {
+        toastr.success('บันทึกข้อมูลสำเร็จ', '', {"closeButton": true});
+      } else {
+        toastr.error('บันทึกข้อมูลไม่สำเร็จ', '', {"closeButton": true});
+      }
+    }
+  });
 }
