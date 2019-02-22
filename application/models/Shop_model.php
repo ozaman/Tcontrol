@@ -1240,7 +1240,7 @@ class Shop_model extends CI_Model {
         $pack_list = array();
         $pack_list[i_plan_main] = $key;
         $pack_list[i_plan_pack] = $i_plan_pack;
-        $pack_list[i_pay_type] = 2;
+//        $pack_list[i_pay_type] = 2;
         $pack_list[result] = $this->db->insert(TBL_PLAN_PACK_LIST,$pack_list);
         $array_packlist[$key] = $pack_list;
 
@@ -1768,6 +1768,15 @@ class Shop_model extends CI_Model {
     $_where = array();
     $_where[id] = $_POST[packlist_id];
     $data[i_payer] = $_POST[partner_id];
+    $data[result] = $this->db->update(TBL_PLAN_PACK_LIST,$data,$_where);
+    $data[where] = $_where;
+    return $data;
+  }
+  
+  public function select_paytype_packlist() {
+    $_where = array();
+    $_where[id] = $_POST[packlist_id];
+    $data[i_pay_type] = $_POST[paytype_id];
     $data[result] = $this->db->update(TBL_PLAN_PACK_LIST,$data,$_where);
     $data[where] = $_where;
     return $data;

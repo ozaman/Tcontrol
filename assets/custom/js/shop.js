@@ -2959,3 +2959,28 @@ function selectPayerPacklist(partner_id, packlist_id) {
     }
   });
 }
+
+function selectPayType(paytype_id, packlist_id) {
+  var url = base_url + "shop/select_paytype_packlist";
+  var data = {
+    paytype_id: paytype_id,
+    packlist_id: packlist_id
+  };
+  $.ajax({
+    url: url,
+    data: data,
+    dataType: "json",
+    type: 'post',
+    error: function () {
+      console.log('Error Profile');
+    },
+    success: function (res) {
+      console.log(res);
+      if (res.result == true) {
+        toastr.success('บันทึกข้อมูลสำเร็จ', '', {"closeButton": true});
+      } else {
+        toastr.error('บันทึกข้อมูลไม่สำเร็จ', '', {"closeButton": true});
+      }
+    }
+  });
+}

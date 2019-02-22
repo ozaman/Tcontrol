@@ -7,6 +7,9 @@
     padding: 2px 8px;
     font-size: 18px;
   }
+  .m5{
+    margin: 5px -15px;
+  }
 </style>
 <?php
 $partner_g = $_GET[partner_g];
@@ -19,7 +22,7 @@ $query = $this->db->get_where(TBL_PLAN_MAIN_LIST,$_where);
 $_where = array();
 $_where[i_plan_pack] = $_GET[pack_id];
 $_where[i_plan_main] = $_GET[plan_main];
-$this->db->select('i_con_plan_main_list, id, i_payer');
+$this->db->select('i_con_plan_main_list, id, i_payer, i_pay_type');
 $querys = $this->db->get_where(TBL_PLAN_PACK_LIST,$_where);
 $con_pack = $querys->row();
 //echo "<pre>";
@@ -31,31 +34,74 @@ $con_pack = $querys->row();
   <form id="form_condition">
     <input type="hidden" value="<?=$_GET[pack_id];?>" id="pack_id" name="pack_id"/>
     <input type="hidden" value="<?=$_GET[plan_main];?>" id="plan_main" name="plan_main"/>
-    <span style="padding: 10px; font-size: 14px;">
-      <strong> เลือกผู้จ่าย : </strong>
-    </span>
-    <div class="btn-group" data-toggle="buttons">
-      <?php
-      $_where = array();
-      $_where[i_access_pay] = 1;
-      $this->db->select('*');
-      $query_partner = $this->db->get_where(TBL_PARTNER,$_where);
-      foreach ($query_partner->result() as $key => $val) {
-        if($con_pack->i_payer == $val->id){
-          $active_payer = "active";
-          $checked_payer = "checked";
-        }else{
-          $active_payer = "";
-          $checked_payer = "";
-        }
+
+    <div class="m5 col-md-12">
+      <div class="col-md-2">
+        <span style="padding: 10px; font-size: 14px;">
+          <strong> เลือกผู้จ่าย : </strong>
+        </span>
+      </div>
+      <div class="col-md-6">
+        <div class="btn-group" data-toggle="buttons">
+          <?php
+          $_where = array();
+          $_where[i_access_pay] = 1;
+          $this->db->select('*');
+          $query_partner = $this->db->get_where(TBL_PARTNER,$_where);
+          foreach ($query_partner->result() as $key => $val) {
+            if ($con_pack->i_payer == $val->id) {
+              $active_payer = "active";
+              $checked_payer = "checked";
+            }
+            else {
+              $active_payer = "";
+              $checked_payer = "";
+            }
 //        echo $active_payer." ".$val->id;
-        ?>
-        <label class="btn btn-primary btn-outline btn-rounded <?=$active_payer;?>" style="padding: 5px 15px;" onclick="selectPayerPacklist(<?=$val->id;?>,<?=$con_pack->id;?>);">
-          <input type="radio" <?=$checked_payer;?>  name="select_payer" id="payer_<?=$val->id;?>"> <strong><?=$val->s_topic;?></strong> 
-        </label>
-      <?php }
-      ?>
+            ?>
+            <label class="btn btn-primary btn-outline btn-rounded <?=$active_payer;?>" style="padding: 5px 15px;" onclick="selectPayerPacklist(<?=$val->id;?>,<?=$con_pack->id;?>);">
+              <input type="radio" <?=$checked_payer;?>  name="select_payer" id="payer_<?=$val->id;?>"> <strong><?=$val->s_topic;?></strong> 
+            </label>
+          <?php }
+          ?>
+        </div>
+      </div>  
     </div>
+
+    <div class="m5 col-md-12">
+      <div class="col-md-2">
+        <span style="padding: 10px; font-size: 14px;">
+          <strong> เลือกประเภทการจ่าย : </strong>
+        </span>
+      </div>
+      <div class="col-md-6">
+        <div class="btn-group" data-toggle="buttons">
+          <?php
+//        echo $con_pack->i_pay_type." +";
+          $_where = array();
+          $_where[i_status] = 1;
+          $this->db->select('*');
+          $query_paytype = $this->db->get_where(TBL_PAY_TYPE,$_where);
+          foreach ($query_paytype->result() as $key => $val) {
+            if ($con_pack->i_pay_type == $val->id) {
+              $active_paytpye = "active";
+              $checked_paytpye = "checked";
+            }
+            else {
+              $active_paytpye = "";
+              $checked_paytpye = "";
+            }
+//        echo $active_payer." ".$val->id;
+            ?>
+            <label class="btn btn-primary btn-outline btn-rounded <?=$active_paytpye;?>" style="padding: 5px 15px;" onclick="selectPayType(<?=$val->id;?>,<?=$con_pack->id;?>);">
+              <input type="radio" <?=$checked_paytpye;?>  name="select_paytype" id="paytype_<?=$val->id;?>"> <strong><?=$val->s_topic;?></strong> 
+            </label>
+          <?php }
+          ?>
+        </div>
+      </div>
+    </div>
+
   </form>
   <div class="col-md-12">
     <?php
@@ -462,7 +508,7 @@ $con_pack = $querys->row();
                     <?php
                   }
                   ?>
-                                                                                                                                                                                                                                <!--<input type="hidden" value="<?=$i;?>" id="val_num_row" />-->
+                                                                                                                                                                                                                                            <!--<input type="hidden" value="<?=$i;?>" id="val_num_row" />-->
                 </table>
               </form>
             </div>
