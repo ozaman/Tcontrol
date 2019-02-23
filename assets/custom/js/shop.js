@@ -2837,6 +2837,7 @@ function saveDataComProductType(id, type) {
       id: id,
       type: type
     };
+    console.log(data);
     $.ajax({
       url: url,
       data: data,
