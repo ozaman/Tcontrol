@@ -863,7 +863,10 @@ class Shop extends CI_Controller {
     $data = $this->Shop_model->select_paytype_packlist();
     echo json_encode($data);
   }
-  
+  public function change_status_planpack($param) {
+    $data = $this->Shop_model->change_status_planpack();
+    echo json_encode($data);
+  }
   ################################ SHOP #################################
 }
 

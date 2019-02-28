@@ -36,7 +36,7 @@ $query = $this->db->get_where(TBL_PLAN_MAIN_LIST,$_where);
     $con_pack = $querys->row();
 
     $person = 0;
-    
+
     foreach ($query->result() as $key => $val) {
       $tbl = $val->s_tbl;
       $_where = array();
@@ -75,9 +75,9 @@ $query = $this->db->get_where(TBL_PLAN_MAIN_LIST,$_where);
               <input <?=$selected;?> type="radio" name="condition_type" value="<?=$val->id;?>" onclick="selectOptionSet('<?=$val->id;?>');" class="radio-check">
               <span class="checkmark"></span>
             </label>
-           
+
             <div class="row outbox" id="box_set_<?=$val->id;?>" style="<?=$open_box;?>">
-               <button type="button" class="btn btn-support3" onclick="plusRowEachPerson();"><i class="fa fa-plus" aria-hidden="true"></i> เพิ่มแถว</button>
+              <button type="button" class="btn btn-support3" onclick="plusRowEachPerson();"><i class="fa fa-plus" aria-hidden="true"></i> เพิ่มแถว</button>
               <div class="col-md-12">
                 <form id="each_person_form">
                   <table class="tb-pad" width="100%">
@@ -88,7 +88,7 @@ $query = $this->db->get_where(TBL_PLAN_MAIN_LIST,$_where);
                       <td align="center" ><b style="font-size: 16px;">ถอด vat%</b></td>
                       <td align="center"><b style="font-size: 16px;">ภาษี ณ ที่จ่าย</b></td>
                     </tr>
-                    <?php foreach ($query_con_tb->result() as $key => $con) { ?>
+                    <?php foreach ($query_con_tb->result() as $key => $con) {?>
                       <tr class="tr_ms_clone" id="id_tr_each_ps_<?=$val->id;?>">
                         <td  align="center">
                           <div class="input-group">
@@ -229,7 +229,7 @@ $query = $this->db->get_where(TBL_PLAN_MAIN_LIST,$_where);
                       <td>
                         <input class="form-control" type="number" name="f_wht" id="allpay_f_wht" value="<?=$con->f_wht;?>" onkeyup="saveDataKeyUpPayallcase(<?=$con->id;?>);" />
                       </td>
-                     
+
                     </tr>
                   </table>
                 </form>
@@ -289,7 +289,7 @@ $query = $this->db->get_where(TBL_PLAN_MAIN_LIST,$_where);
                   }
 //                }
                   ?>
-                                                                                                                        <!--<input type="hidden" value="<?=$i;?>" id="val_num_row" />-->
+                                                                                                                                <!--<input type="hidden" value="<?=$i;?>" id="val_num_row" />-->
                 </table>
               </form>
             </div>
@@ -316,6 +316,7 @@ $query = $this->db->get_where(TBL_PLAN_MAIN_LIST,$_where);
 //          print_r($sub_type_list);
 //          echo "</pre>";
           ?>
+          <input type="hidden" value="<?=$con_pack->i_con_plan_main_list;?>" id="check_con_plan_main_list" />
           <div style="<?=$box_other;?>">
             <div class="col-md-12">
               <div class="form-group ">
@@ -372,9 +373,9 @@ $query = $this->db->get_where(TBL_PLAN_MAIN_LIST,$_where);
                         </div>
                         <input id="val_ck_pd_<?=$value->id;?>" type="hidden" value="<?=$val_pd;?>" />
                       </td>
-                      <td align="center"><input onkeyup="saveDataComProductType(<?=$value->id;?>,'shop');" id="pd_type_f_price_<?=$value->id;?>" type="number" style="width: 90%;" class="form-control" value="<?=$data_con_pd_typelist->f_price;?>" <?=$disabled_box_price;?>></td>
-                      <td align="center"><input onkeyup="saveDataComProductType(<?=$value->id;?>,'shop');" id="pd_type_f_vat_<?=$value->id;?>" type="number" style="width: 90%;" class="form-control" value="<?=$data_con_pd_typelist->f_vat;?>" <?=$disabled_box_vat;?>></td>
-                      <td align="center"><input onkeyup="saveDataComProductType(<?=$value->id;?>,'shop');" id="pd_type_f_wht_<?=$value->id;?>" type="number" style="width: 90%;" class="form-control" value="<?=$data_con_pd_typelist->f_wht;?>" <?=$disabled_box_wht;?>></td>
+                      <td align="center"><input onkeyup="saveDataComProductType(<?=$value->id;?>, 'shop');" id="pd_type_f_price_<?=$value->id;?>" type="number" style="width: 90%;" class="form-control" value="<?=$data_con_pd_typelist->f_price;?>" <?=$disabled_box_price;?>></td>
+                      <td align="center"><input onkeyup="saveDataComProductType(<?=$value->id;?>, 'shop');" id="pd_type_f_vat_<?=$value->id;?>" type="number" style="width: 90%;" class="form-control" value="<?=$data_con_pd_typelist->f_vat;?>" <?=$disabled_box_vat;?>></td>
+                      <td align="center"><input onkeyup="saveDataComProductType(<?=$value->id;?>, 'shop');" id="pd_type_f_wht_<?=$value->id;?>" type="number" style="width: 90%;" class="form-control" value="<?=$data_con_pd_typelist->f_wht;?>" <?=$disabled_box_wht;?>></td>
                     </tr>
                   <?php }
                   ?>
@@ -383,7 +384,6 @@ $query = $this->db->get_where(TBL_PLAN_MAIN_LIST,$_where);
               </div>
             </div>
           </div>
-
           <?php
         }
         ?>
@@ -447,3 +447,9 @@ $query = $this->db->get_where(TBL_PLAN_MAIN_LIST,$_where);
 //if($person)
 ?>
 <input type="hidden" value="<?=$person;?>" id="chk_click_push_regis" />
+
+<script>
+  if ($('#check_con_plan_main_list').val() <= 0) {
+    load_box_manage_com($('#id_shop_product').val(), $('#partner_g').val());
+  }
+</script>

@@ -1656,9 +1656,9 @@ class Shop_model extends CI_Model {
 
     $_where = array();
 //    if ($_POST[type] == "shop") {
-      $_where[i_product_sub_typelist] = $_POST[id];
-      $_where[i_plan_main] = $_POST[plan_main];
-      $_where[i_plan_pack] = $_POST[pack_id];
+    $_where[i_product_sub_typelist] = $_POST[id];
+    $_where[i_plan_main] = $_POST[plan_main];
+    $_where[i_plan_pack] = $_POST[pack_id];
 //    }
 //    else {
 //      $_where[id] = $_POST[id];
@@ -1774,7 +1774,7 @@ class Shop_model extends CI_Model {
     $data[where] = $_where;
     return $data;
   }
-  
+
   public function select_paytype_packlist() {
     $_where = array();
     $_where[id] = $_POST[packlist_id];
@@ -1783,5 +1783,24 @@ class Shop_model extends CI_Model {
     $data[where] = $_where;
     return $data;
   }
-  
+
+  public function change_status_planpack() {
+    $_where = array();
+    $_where[id] = $_POST[i_pack_id];
+    $pack[i_status] = $_POST[i_status];
+    $pack[result] = $this->db->update(TBL_PLAN_PACK,$pack,$_where);
+    $pack[where] = $_where;
+    
+    $_where = array();
+    $_where[i_plan_pack] = $_POST[i_pack_id];
+    $packlist[i_status] = $_POST[i_status];
+    $packlist[result] = $this->db->update(TBL_PLAN_PACK_LIST,$packlist,$_where);
+    $packlist[where] = $_where;
+    
+    $return[pack] = $pack;
+    $return[packlist] = $packlist;
+    
+    return $return;
+  }
+
 }
