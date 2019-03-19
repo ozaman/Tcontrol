@@ -657,6 +657,13 @@ class Shop_model extends CI_Model {
       $data[product_id] = $_POST[contact_product_id];
       $result = $this->db->insert(TBL_SHOPPING_CONTACT,$data);
       $last_id = mysql_insert_id();
+
+
+      $dataability_user[i_user_id] = $last_id;
+      $dataability_user[i_company] = $_POST[contact_product_id];
+      $dataability_user[i_type_user] = $_POST[contact_usertype];
+      $dataability_user[d_date] = time();
+      $result_dataability_user = $this->db->insert(NEW_TBL_ABILITY_USER,$dataability_user);
       $data_return[id] = $_POST[contact_product_id];//$last_id;
       $data_return[result] = $result;
       return $data_return;
@@ -684,6 +691,15 @@ class Shop_model extends CI_Model {
       $data[zello_id] = $_POST[contact_zello_id];
       $this->db->where('id',$_POST[contact_id]);
       $result = $this->db->update(TBL_SHOPPING_CONTACT,$data);
+
+
+
+     
+    
+      $dataability_user[i_type_user] = $_POST[contact_usertype];
+      $dataability_user[d_date] = time();
+      $this->db->where('i_user_id',$_POST[contact_id]);
+      $result_dataability_user = $this->db->update(NEW_TBL_ABILITY_USER,$dataability_user);
       $data_return[id] = '';
       $data_return[result] = $result;
       return $data_return;

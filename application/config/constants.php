@@ -184,6 +184,8 @@ define('NEW_TBL_PLAN_PRICE_LIST', 'tbl_plan_price_list');
 define('NEW_TBL_UNIT_TYPE', 'tbl_unit_type');
 
 define('NEW_TBL_CON_EACH_PERSON', 'tbl_con_each_person');
+define('NEW_TBL_ABILITY_USER', 'tbl_ability_user');
+
 
 
 
