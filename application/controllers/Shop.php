@@ -441,6 +441,10 @@ class Shop extends CI_Controller {
     $data = $this->Shop_model->updatetype2();
     echo json_encode($data);
   }
+   public function updatetypework() {
+    $data = $this->Shop_model->updatetypework();
+    echo json_encode($data);
+  }
 
   public function detail_contact() {
     $this->load->view('shop/box_contact_edit');

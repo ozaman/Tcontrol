@@ -3,7 +3,7 @@
 if ($_GET[op] == 'edit') {
    # code...
 
-
+$show_edit = '';
   $_where = array();
   $_where['id'] = $_POST[id];
             // $_where['admintype'] = 2;
@@ -23,6 +23,9 @@ if ($_GET[op] == 'edit') {
   $arr[SHOPPING_PRODUCT] = $this->Main_model->fetch_data('','',TBL_SHOPPING_PRODUCT,$_where,$_select,$_order);
              // print_r(json_encode( $arr[SHOPPING_PRODUCT]));
 // $pro_id = $_POST[id];
+}
+else{
+  $show_edit = 'none';
 }
 
 // else{
@@ -216,6 +219,94 @@ if ($_GET[op] == 'edit') {
   </div>
 
 </div>
+
+<div class="form-group form-group-md" style="display: <?=$show_edit;?>">
+  <div class="col-md-2">
+    <label class="control-label">หน้าที่ตามจุด</label>
+  </div>
+  <?php 
+  // echo $_POST[id] .'sssssss';
+  // print_r(json_encode($arr[SHOPPING_CONTACT]));
+ 
+
+
+                          $_where = array();
+    $_where['i_user_contact'] = $_POST[id];
+    $_select = array('*');
+    $ABILITY_USER = $this->Main_model->rowdata(NEW_TBL_ABILITY_USER,$_where,$_select);
+       // echo '<pre>';
+       //  print_r($ABILITY_USER);
+       //  echo '</pre>';
+
+    if ($ABILITY_USER->i_lab_approve_job == 1) {
+      $lab_approve_job = 1;
+      $i_lab_approve_job = 'active';
+    }
+    else {
+      $set_value = 0;
+      $i_lab_approve_job = '';
+    }
+    if ($ABILITY_USER->i_check_guest_receive == 1) {
+      $check_guest_receive = 1;
+      $i_check_guest_receive = 'active';
+    }
+    else {
+      $set_value = 0;
+      $i_check_guest_receive = '';
+    }
+    if ($ABILITY_USER->i_check_guest_register == 1) {
+      $check_guest_register = 1;
+      $i_check_guest_register = 'active';
+    }
+    else {
+      $set_value = 0;
+      $i_check_guest_register = '';
+    }
+    if ($ABILITY_USER->i_check_lab_pay == 1) {
+      $check_lab_pay = 1;
+      $i_check_lab_pay = 'active';
+    }
+    else {
+      $set_value = 0;
+      $i_check_lab_pay = '';
+    }
+  ?>
+
+
+
+
+                 
+                  <div class="col-md-10 ">
+                    <div style="background: #f2f2f2;padding: 10px;">
+                      <div  data-toggle="buttons">
+                      
+                          <label class="btn btn-success btn-outline <?=$i_lab_approve_job;?>" id="i_lab_approve_job">
+                            <input  <?=$chk_in_taxi;?> type="checkbox" name="in_taxi" id="in_i_lab_approve_job" value="<?=$ABILITY_USER->i_lab_approve_job;?>" 
+                                                       onchange="updatetypework('<?=$_POST[id];?>', this.value, 'i_lab_approve_job')" > 
+                            <span style="text-transform:capitalize;">รับทราบงานแขก</span>
+                          </label>
+                          <label class="btn btn-success btn-outline <?=$i_check_guest_receive;?>" id="i_check_guest_receive">
+                            <input  <?=$chk_in_taxi;?> type="checkbox" name="in_taxi" id="in_i_check_guest_receive" value="<?=$ABILITY_USER->i_check_guest_receive;?>" 
+                                                       onchange="updatetypework('<?=$_POST[id];?>', this.value, 'i_check_guest_receive')" > 
+                            <span style="text-transform:capitalize;">พนักงานต้อนรับ</span>
+                          </label>
+                          <label class="btn btn-success btn-outline <?=$i_check_guest_register;?>" id="i_check_guest_register">
+                            <input  <?=$chk_in_taxi;?> type="checkbox" name="in_taxi" id="in_i_check_guest_register" value="<?=$ABILITY_USER->i_check_guest_register;?>" 
+                                                       onchange="updatetypework('<?=$_POST[id];?>', this.value, 'i_check_guest_register')" > 
+                            <span style="text-transform:capitalize;">ลงทะเบียน</span>
+                          </label>
+                          <label class="btn btn-success btn-outline <?=$i_check_lab_pay;?>" id="i_check_lab_pay">
+                            <input  <?=$chk_in_taxi;?> type="checkbox" name="in_taxi" id="in_i_check_lab_pay" value="<?=$ABILITY_USER->i_check_lab_pay;?>" 
+                                                       onchange="updatetypework('<?=$_POST[id];?>', this.value, 'i_check_lab_pay')" > 
+                            <span style="text-transform:capitalize;">บัญชี</span>
+                          </label>
+                        
+                      </div>
+                    </div>
+
+                  </div>
+                
+                </div>
 
 
 
