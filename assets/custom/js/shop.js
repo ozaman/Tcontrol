@@ -2298,11 +2298,12 @@ function submit_planpack(shop, user, partner_g) {
               console.log(res);
               if (res.result == true) {
                 toastr.success('บันทึกข้อมูลสำเร็จ', '', {"closeButton": true});
-                load_box_manage_com(shop, i_partner_group);
-                _box_region_show(shop, '_company', i_partner_group);
+
               } else {
                 toastr.error('บันทึกข้อมูลไม่สำเร็จ', '', {"closeButton": true});
               }
+              load_box_manage_com(shop, i_partner_group);
+              _box_region_show(shop, '_company', i_partner_group);
             }
           });
         }
@@ -2323,13 +2324,11 @@ function submit_planpack(shop, user, partner_g) {
         console.log(res);
         if (res.result == true) {
           toastr.success('บันทึกข้อมูลสำเร็จ', '', {"closeButton": true});
-          load_box_manage_com(shop, i_partner_group);
-          function name(parameters) {
-            _box_region_show(shop, '_company', i_partner_group);
-          }
         } else {
           toastr.error('บันทึกข้อมูลไม่สำเร็จ', '', {"closeButton": true});
         }
+        load_box_manage_com(shop, i_partner_group);
+        _box_region_show(shop, '_company', i_partner_group);
       }
     });
   }
@@ -2837,6 +2836,7 @@ function saveDataComProductType(id, type) {
       id: id,
       type: type
     };
+    console.log(data);
     $.ajax({
       url: url,
       data: data,
@@ -2983,4 +2983,39 @@ function selectPayType(paytype_id, packlist_id) {
       }
     }
   });
+}
+
+function changeStatusPack(pack_id) {
+
+  var status = $('#switch_st_' + pack_id).val();
+  console.log(pack_id + " " + status);
+  if (status > 0) {
+    status = 0;
+  } else {
+    status = 1;
+  }
+  var data = {
+    i_pack_id : pack_id,
+    i_status : status
+  };
+  var url = base_url + "shop/change_status_planpack";
+  $.ajax({
+    url: url,
+    data: data,
+    dataType: "json",
+    type: 'post',
+    error: function () {
+      console.log('Error Profile');
+    },
+    success: function (res) {
+      console.log(res);
+      if (res.result == true) {
+        toastr.success('บันทึกข้อมูลสำเร็จ', '', {"closeButton": true});
+      } else {
+        toastr.error('บันทึกข้อมูลไม่สำเร็จ', '', {"closeButton": true});
+      }
+    }
+  });
+  
+  $('#switch_st_' + pack_id).val(status);
 }

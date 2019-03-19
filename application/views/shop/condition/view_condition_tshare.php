@@ -36,7 +36,7 @@ $con_pack = $querys->row();
     <input type="hidden" value="<?=$_GET[plan_main];?>" id="plan_main" name="plan_main"/>
 
     <div class="m5 col-md-12">
-      <div class="col-md-2">
+      <div class="col-md-3">
         <span style="padding: 10px; font-size: 14px;">
           <strong> เลือกผู้จ่าย : </strong>
         </span>
@@ -69,9 +69,9 @@ $con_pack = $querys->row();
     </div>
 
     <div class="m5 col-md-12">
-      <div class="col-md-2">
+      <div class="col-md-3">
         <span style="padding: 10px; font-size: 14px;">
-          <strong> เลือกประเภทการจ่าย : </strong>
+          <strong> เลือกประเภทการจ่าย :</strong>
         </span>
       </div>
       <div class="col-md-6">
@@ -91,7 +91,7 @@ $con_pack = $querys->row();
               $active_paytpye = "";
               $checked_paytpye = "";
             }
-//        echo $active_payer." ".$val->id;
+//        echo $con_pack->i_pay_type." ".$val->id;
             ?>
             <label class="btn btn-primary btn-outline btn-rounded <?=$active_paytpye;?>" style="padding: 5px 15px;" onclick="selectPayType(<?=$val->id;?>,<?=$con_pack->id;?>);">
               <input type="radio" <?=$checked_paytpye;?>  name="select_paytype" id="paytype_<?=$val->id;?>"> <strong><?=$val->s_topic;?></strong> 
@@ -137,12 +137,12 @@ $con_pack = $querys->row();
       if ($con_pack->i_con_plan_main_list == $val->id) {
         $selected = "checked";
         $open_box = "";
-        $box_other = "";
+//        $box_other = "";
       }
       else {
         $selected = "";
         $open_box = "display:none;";
-        $box_other = "display:none;";
+//        $box_other = "display:none;";
       }
       ?>
       <div style="padding: 5px 0px 15px 0px; ">
@@ -617,9 +617,18 @@ $con_pack = $querys->row();
                     $_where[i_product_sub_typelist] = $value->i_product_sub_typelist;
                     $_where[i_plan_pack] = $_GET[pack_id];
                     $this->db->select('*');
-                    $query = $this->db->get_where(TBL_CON_COM_PRODUCT_TYPE,$_where);
-                    $data_s = $query->row();
-
+                    $query_com_pd_type = $this->db->get_where(TBL_CON_COM_PRODUCT_TYPE,$_where);
+                    $data_s = $query_com_pd_type->row();
+                    
+                    if($query_com_pd_type->num_rows()>0){
+                      $data_use = $query_com_pd_type->row();
+                    }else{
+                      $data_use = $value;
+                    }
+//                    echo "<pre>";
+//                    print_r($data_s);
+//                    echo "</pre>";
+                    
 //                    if ($query_con_tb->num_rows() > 0) {
                     if ($data_s->i_status > 0) {
                       $checked_pd_tl = "checked";
@@ -638,18 +647,21 @@ $con_pack = $querys->row();
                       $val_pd = 0;
                     }
 //                    }
+//                    echo "<pre>";
+//                    print_r($data_s);
+//                    echo "</pre>";
                     ?>
-                    <tr id="tr_list_type_product_<?=$value->i_product_sub_typelist;?>">
+                    <tr id="tr_list_type_product_<?=$data_use->i_product_sub_typelist;?>">
                       <td>
                         <div data-toggle="buttons" >
-                          <label class="btn checkbox-inline btn-checkbox-default-inverse <?=$active_box;?>  " onclick="selectProductTypeList(<?=$value->i_product_sub_typelist;?>);"><span style="font-size:16px;"> <?=$data_pd->topic_th;?>  </span>                    
-                            <input <?=$checked_pd_tl;?> type="checkbox" value="1" id="i_checkbox412" name="i_checkbox_<?=$value->i_product_sub_typelist;?>"> </label>
+                          <label class="btn checkbox-inline btn-checkbox-default-inverse <?=$active_box;?>  " onclick="selectProductTypeList(<?=$data_use->i_product_sub_typelist;?>);"><span style="font-size:16px;"> <?=$data_pd->topic_th;?>  </span>                    
+                            <input <?=$checked_pd_tl;?> type="checkbox" value="1" id="i_checkbox412" name="i_checkbox_<?=$data_use->i_product_sub_typelist;?>"> </label>
                         </div>
-                        <input id="val_ck_pd_<?=$value->i_product_sub_typelist;?>" type="hidden" value="<?=$val_pd;?>" />
+                        <input id="val_ck_pd_<?=$data_use->i_product_sub_typelist;?>" type="hidden" value="<?=$val_pd;?>" />
                       </td>
-                      <!--<td align="center"><input onkeyup="saveDataComProductType(<?=$value->i_product_sub_typelist;?>);" id="pd_type_f_vat_<?=$value->i_product_sub_typelist;?>" type="number" style="width: 90%;" class="form-control" value="<?=$value->f_vat;?>" <?=$disabled_box_vat;?>></td>-->
-                      <td align="center"><input onkeyup="saveDataComProductType(<?=$value->i_product_sub_typelist;?>, 'tshare');" id="pd_type_f_price_<?=$value->i_product_sub_typelist;?>" type="number" style="width: 90%;" class="form-control" value="<?=$value->f_price;?>" <?=$disabled_box_price;?>></td>
-                      <td align="center"><input onkeyup="saveDataComProductType(<?=$value->i_product_sub_typelist;?>, 'tshare');" id="pd_type_f_wht_<?=$value->i_product_sub_typelist;?>" type="number" style="width: 90%;" class="form-control" value="<?=$value->f_wht;?>" <?=$disabled_box_wht;?>></td>
+                      <!--<td align="center"><input onkeyup="saveDataComProductType(<?=$data_use->i_product_sub_typelist;?>);" id="pd_type_f_vat_<?=$data_use->i_product_sub_typelist;?>" type="number" style="width: 90%;" class="form-control" value="<?=$data_s->f_vat;?>" <?=$disabled_box_vat;?>></td>-->
+                      <td align="center"><input onkeyup="saveDataComProductType(<?=$data_use->i_product_sub_typelist;?>, 'tshare');" id="pd_type_f_price_<?=$data_use->i_product_sub_typelist;?>" type="number" style="width: 90%;" class="form-control" value="<?=$data_s->f_price;?>" <?=$disabled_box_price;?>></td>
+                      <td align="center"><input onkeyup="saveDataComProductType(<?=$data_use->i_product_sub_typelist;?>, 'tshare');" id="pd_type_f_wht_<?=$data_use->i_product_sub_typelist;?>" type="number" style="width: 90%;" class="form-control" value="<?=$data_s->f_wht;?>" <?=$disabled_box_wht;?>></td>
                     </tr>
                   <?php }
                   ?>
