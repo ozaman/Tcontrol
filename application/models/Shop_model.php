@@ -657,6 +657,59 @@ class Shop_model extends CI_Model {
       $data[product_id] = $_POST[contact_product_id];
       $result = $this->db->insert(TBL_SHOPPING_CONTACT,$data);
       $last_id = mysql_insert_id();
+
+
+      $password = substr(str_shuffle('1234567890'), 0, 4);
+  
+
+  $datadriver["password"] = $password;
+  $datadriver["name"] = $_POST[contact_name];
+  $datadriver["phone"] = $_POST[contact_phone];
+  $datadriver["i_company"] = $_POST[contact_product_id];
+ 
+  $datadriver["status"] = 1;
+  $datadriver["post_date"] = time();
+  $datadriver["update_date"] = time();
+  $add_result = $this->db->insert(TBL_WEB_DRIVER, $datadriver);
+
+ 
+  
+  $last_id_diver = mysql_insert_id();
+  $member_db = $last_id_diver;
+  $member_in = $this->genUsername($member_db);
+  $return[last_id] = $last_id_diver;
+  $data[i_driver] = $last_id_diver;
+  $return[member_in] = $member_in;
+
+  $data_update[username] = 'LAB'.$member_in;
+  $data_update[password] = $password;
+  $this->db->where('id', $last_id_diver);
+  $data_update[result] = $this->db->update(TBL_WEB_DRIVER, $data_update);
+  
+
+
+
+
+
+
+      $datalab[i_user_id] = $last_id;
+      $datalab[driver_class] = $_POST[contact_product_id];
+      $datalab[user_class] = $_POST[contact_usertype];
+      $datalab[d_date] = time();
+      $datalabre = $this->db->insert(NEW_TBL_ABILITY_USER,$datalab);
+
+
+
+      $dataability_user[i_user_contact] = $last_id;
+      $dataability_user[i_user_id] = $last_id_diver;
+      $dataability_user[i_company] = $_POST[contact_product_id];
+      $dataability_user[i_type_user] = $_POST[contact_usertype];
+      $dataability_user[d_date] = time();
+      $result_dataability_user = $this->db->insert(NEW_TBL_ABILITY_USER,$dataability_user);
+
+      
+
+
       $data_return[id] = $_POST[contact_product_id];//$last_id;
       $data_return[result] = $result;
       return $data_return;
@@ -684,12 +737,34 @@ class Shop_model extends CI_Model {
       $data[zello_id] = $_POST[contact_zello_id];
       $this->db->where('id',$_POST[contact_id]);
       $result = $this->db->update(TBL_SHOPPING_CONTACT,$data);
+
+
+
+     
+    
+      $dataability_user[i_type_user] = $_POST[contact_usertype];
+      $dataability_user[d_date] = time();
+      $this->db->where('i_user_id',$_POST[contact_id]);
+      $result_dataability_user = $this->db->update(NEW_TBL_ABILITY_USER,$dataability_user);
       $data_return[id] = '';
       $data_return[result] = $result;
       return $data_return;
     }
   }
-
+function genUsername($member_db){
+  if ($member_db >= 1000) {
+    $member_in = "$member_db";
+  } elseif ($member_db >= 100) {
+    $member_in = "0$member_db";
+  } elseif ($member_db >= 10) {
+    $member_in = "00$member_db";
+  } elseif ($member_db >= 1) {
+    $member_in = "000$member_db";
+  } else {
+    $member_in = "0000$member_db";
+  }
+  return $member_in;
+}
   public function save_document() {
     header('Content-Type: application/json');
 
@@ -1164,6 +1239,35 @@ class Shop_model extends CI_Model {
     $return[type] = $type;
     $return[post] = $_POST;
     $return[num_rows] = $num_row;
+
+    return $return;
+  }
+
+
+  public function updatetypework() {
+    ///////////// Time
+    $id = $_POST[id];
+    $status = $_POST[status];
+   
+    if ($status == 0) {
+      $status = 1;
+    }
+    else {
+      $status = 0;
+    }
+    $field = $this->input->post('field');
+
+    $_where = array();
+    $data[$field] = $status;
+    $_where = array();
+    $_where[i_user_contact] = $id;
+    $result = $this->db->update(NEW_TBL_ABILITY_USER,$data,$_where);     
+    
+    $return[result] = $result;  
+    $return[_where] = $_where;  
+    $return[field] = $field;  
+    $return[status] = $status;  
+    $return[data] = $data;  
 
     return $return;
   }

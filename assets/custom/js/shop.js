@@ -860,6 +860,57 @@ function updatetype(id, values, op, icom, partner_group) {
     }
   });
 }
+function updatetypework(id, values, op) {
+
+  var url = base_url + "shop/updatetypework";
+
+  console.log(url)
+ console.log(id)
+ console.log(values)
+ console.log(op)
+  console.log($('#in_' + op).prop('checked'))
+  if ($('#in_' + op).prop('checked') == true) {
+    $('#in_' + op).prop('checked', false);
+    Command: toastr["success"]("เปิดบริการแล้ว")
+  } else {
+    $('#in_' + op).prop('checked', true);
+    Command: toastr["warning"]("ปิดบริการแล้ว")
+
+
+
+  }
+  
+  var param = {
+    id: id,
+    status: values,
+    field: op
+   
+  }
+    
+ 
+  console.log(param)
+  $.ajax({
+    url: url,
+    data: param,
+    type: 'post',
+    dataType: 'json',
+    error: function () {
+      console.log('Error Profile');
+    },
+    success: function (res) {
+      console.log(res);
+      if (res.result == true) {
+      
+        $('#in' + op).value = res.status;
+        console.log(res.status)
+
+      }
+
+
+
+    }
+  });
+}
 function updateStatusSHOP(id, status, table) {
   var url = base_url + "shop/updateStatusSHOP?option=" + option;
   var ftable = '';

@@ -22,6 +22,10 @@
                           <th>ชื่อ</th>
                           <th>เบอร์โทรศัพท์</th>
                           <th>ตำแหน่ง</th>
+                          <!-- <th>หน้าที่</th> -->
+                          <th>ยูเซอร์(T-share)</th>
+                          <th>รหัสผ่าน(T-share)</th>
+
 
                         </tr>
                       </thead>
@@ -31,6 +35,15 @@
                           $_where['id'] = $value->usertype;
                           $_select = array('*');
                           $arr[CONTACT_TYPE] = $this->Main_model->rowdata(TBL_SHOPPING_CONTACT_TYPE,$_where,$_select);
+
+                                                  $_where = array();
+    $_where['i_user_contact'] = $value->id;
+    $_select = array('*');
+    $ABILITY_USER = $this->Main_model->rowdata(NEW_TBL_ABILITY_USER,$_where,$_select);
+     $_where = array();
+                          $_where['id'] = $ABILITY_USER->i_user_id;
+                          $_select = array('username','password');
+                          $WEB_DRIVER = $this->Main_model->rowdata(TBL_WEB_DRIVER,$_where,$_select);
                           ?>
 
                           <tr>
@@ -61,6 +74,63 @@
                               <?=$value->phone;?> 
                             </td>
                             <td > <?=$arr[CONTACT_TYPE]->name_th;?></td>
+                  <!--           <td>
+                              <div class="box-body no-padding">
+
+
+                  
+                  <div class="col-md-12 ">
+                    <div style="background: #f2f2f2;padding: 10px;">
+                      <div  data-toggle="buttons">
+                        <?php
+                        $where = array();
+                        $this->db->select('*');
+                        $where[i_from] = $admin->i_partner;
+                        $partner_g = $this->db->get_where(TBL_PARTNER_GROUP,$where);
+                        foreach ($partner_g->result() as $val) {
+
+                          $where = array();
+                          $this->db->select('s_topic,id');
+                          $where[id] = $val->i_to;
+                          $partner = $this->db->get_where(TBL_PARTNER,$where);
+                          $partner = $partner->row();
+
+                          $where = array();
+                          $this->db->select('*');
+                          $where[i_partner_group] = $val->id;
+                          $where[i_shop] = $shop->id;
+                          $partner_ctr = $this->db->get_where(TBL_PARTNER_CONTROL,$where);
+                          $partner_ctr = $partner_ctr->row();
+                          if ($partner_ctr == null) {
+                            $set_value = 0;
+                            $isactive = '';
+                          }
+                          else {
+                            $set_value = $partner_ctr->i_status;
+                            if ($set_value == 1) {
+                              $set_value = 1;
+                              $isactive = 'active';
+                            }
+                            else {
+                              $set_value = 0;
+                              $isactive = '';
+                            }
+                          }
+                          ?>
+                          <label class="btn btn-success btn-outline <?=$isactive;?>" id="l_<?=$partner->s_topic;?>">
+                            <input  <?=$chk_in_taxi;?> type="checkbox" name="in_taxi" id="i_<?=$partner->s_topic;?>" value="<?=$set_value;?>" 
+                                                       onchange="updatetype('<?=$_GET[id];?>', this.value, '<?=$partner->s_topic;?>', '<?=$partner_ctr->id;?>', '<?=$val->id;?>')" > 
+                            <span style="text-transform:capitalize;"><?=$partner->s_topic;?></span>
+                          </label>
+                        <?php }?>
+                      </div>
+                    </div>
+
+                  </div>
+                </div>
+                            </td> -->
+                            <td align="center"><?=$WEB_DRIVER->username;?></td>
+                            <td  align="center"><?=$WEB_DRIVER->password;?></td>
                           </tr>
                         <?php   } ?>
                       </tbody>
