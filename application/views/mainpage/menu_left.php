@@ -122,10 +122,12 @@ else {?>
       <a href="javascript:void(0);">
         <i class="fa icon-app-uniF13C fa-fw"></i><span class="title">ข้อมูลการใช้บริการ</span> <span class="expand-sign">+</span>
       </a>
+      
       <!--start submenu -->
       <ul>
-        <li><a href="forms/layouts">ข้อมูลการใช้บริการ</a></li>
-
+        <li><a href="<?=base_url();?>forms/layouts">ข้อมูลการใช้บริการ</a></li>
+        <li><a href="<?=base_url();?>job/job_manage_shop">จัดการงานส่งแขก</a></li>
+        
 
 
       </ul><!--end /submenu -->
