@@ -3,14 +3,14 @@
     <div class="col-lg-12">
       <div class="row" style="margin-bottom: 15px;">
         <div class="col-lg-2">
-          <a href="#" class="btn btn-outline btn-primary btn-block btn-labeled active">
+          <a href="<?=base_url();?>job/job_manage_shop" class="btn btn-outline btn-primary btn-block btn-labeled active">
             <span><i class="fa fa-clock-o"></i></span>
             <div>วันนี้</div>
-            <span class="label label-warning" id="count_job" style=" top: -10px;right: -7px; font-size: 13px;"></span> 
+            <span class="label label-warning" id="count_job" style=" top: -10px;right: -7px; font-size: 13px;">0</span> 
           </a>
         </div>
         <div class="col-lg-2">
-          <a href="#" class="btn btn-default btn-block btn-labeled">
+          <a href="<?=base_url();?>job/job_history_shop" class="btn btn-default btn-block btn-labeled">
             <span><i class="fa fa-calendar"></i></span>
             <div>ประวัติ</div>
             <span class="label label-danger"></span> 
@@ -24,17 +24,18 @@
         <div class="box-body">
           <div style="margin-bottom: 15px;">
             <div class="btn-group" data-toggle="buttons">
-              <label class="btn btn-primary btn-outline btn-rounded active">
-                <input type="radio" name="options" id="all_job"><span class="label label-danger" id="all_job_num">0</span>  ทั้งหมด 
+              <label class="btn btn-primary btn-outline btn-rounded active" onclick="openAllJobShop(1);">
+                <input type="radio" name="options" id="all_job" ><span class="label label-danger" id="all_job_num">0</span>  ดำเนินการ 
               </label>
-              <label class="btn btn-primary btn-outline btn-rounded">
-                <input type="radio" name="options" id="proceed_job"><span class="label label-danger" id="proceed_job_num">0</span> ดำเนินการ
-              </label>
-              <label class="btn btn-primary btn-outline btn-rounded">
-                <input type="radio" name="options" id="wait_pay_job"><span class="label label-danger" id="wait_pay_job_num">0</span> รอโอน
+<!--              <label class="btn btn-primary btn-outline btn-rounded" onclick="openProcessJobShop(2);">
+                <input type="radio" name="options" id="proceed_job" ><span class="label label-danger" id="proceed_job_num">0</span> ดำเนินการ
+              </label>-->
+              <label class="btn btn-primary btn-outline btn-rounded" onclick="openWaitPayJobShop(3);">
+                <input type="radio" name="options" id="wait_pay_job" ><span class="label label-danger" id="wait_pay_job_num">0</span> งานรอโอน
               </label>
             </div>
           </div>
+          <input type="hidden" id="check_func_now" value="1" />
           <div class="row">
             <div class="col-lg-12" id="body_list_shop_realtime">
             </div>
@@ -60,7 +61,7 @@
     var proceed = [];
     var waittrans = [];
 
-    $('#proceed_job_num').text(data.length);
+//    $('#proceed_job_num').text(data.length);
 
     var url = base_url + "job/count_shop_job";
     var current = formatDate(new Date());
@@ -77,17 +78,19 @@
         console.log('Error Profile');
       },
       success: function (res) {
-//        console.log(res);
+        console.log(res);
         $('#wait_pay_job_num').text(res.wait_trans);
         $('#count_job').text(res.all);
         $('#all_job_num').text(res.all);
       }
     });
 
-
 //    console.log(array_data);
     array_rooms = data;
-    render_job_shop();
+    var chk_menu = $('#check_func_now').val();
+    if (chk_menu == 1) {
+      render_job_shop();
+    }
   });
 
   var dataorder = {

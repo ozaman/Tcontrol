@@ -12,7 +12,14 @@ class Job extends CI_Controller {
   public function job_manage_shop() {
     $menu[menu] = 'usecontrol';
     $this->load->view('mainpage/page_header',$menu);
-    $this->load->view('job/shop');
+    $this->load->view('job/shop_manage');
+    $this->load->view('mainpage/page_footer');
+  }
+  
+  public function job_history_shop() {
+    $menu[menu] = 'usecontrol';
+    $this->load->view('mainpage/page_header',$menu);
+    $this->load->view('job/shop_history');
     $this->load->view('mainpage/page_footer');
   }
   
@@ -21,6 +28,10 @@ class Job extends CI_Controller {
 //    echo "<pre>";
 //print_r($_POST[data]);
 //echo "</pre>";
+  }
+  
+  public function render_shop_his() {
+    $this->load->view('job/list_job_shop_his');
   }
   
   public function count_shop_job() {
