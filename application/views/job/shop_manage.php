@@ -38,6 +38,7 @@
           <input type="hidden" id="check_func_now" value="1" />
           <div class="row">
             <div class="col-lg-12" id="body_list_shop_realtime">
+              <h3 style="color: #FF0000;">ไม่มีรายการ</h3>
             </div>
             <div class="col-lg-12" id="body_list_shop_history">
             </div>

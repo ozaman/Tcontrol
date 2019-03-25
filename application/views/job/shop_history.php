@@ -24,7 +24,7 @@
         <div class="box-body">
           <div style="margin-bottom: 15px;" class="col-md-3">
             <div class="input-group control-width-normal" id="filter-date">
-              <input type="text" class="form-control" id="input-date">
+              <input type="text" class="form-control" id="input-date" value="<?=date('Y-m-d');?>">
               <span class="input-group-addon"><i class="fa fa-calendar"></i></span>
             </div>
           </div>
@@ -41,7 +41,8 @@
 </div>
 
 <script>
-  $('#filter-date').datetimepicker({pickTime: false, format: 'YYYY-MM-DD'}).on("change.dp", function (e) {
+  openHistoryShopJob($('#input-date').val());
+  $('#filter-date').datetimepicker({pickTime: false, format: 'YYYY-MM-DD' }).on("change.dp", function (e) {
     var date = $('#input-date').val();
     console.log(date);
     openHistoryShopJob(date);

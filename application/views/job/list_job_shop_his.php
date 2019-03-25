@@ -1,13 +1,9 @@
-<div>
-  
-</div>
-
 <?php
 //echo "<pre>";
 //print_r($_POST[data]);
 //echo "</pre>";
 //exit();
-if(count($_POST[data])==0){ ?>
+if(count($_POST[data])==0 or $_POST[data]==""){ ?>
 <h3 style="color: #FF0000;">ไม่มีรายการ</h3>
 <?php }
 foreach ($_POST[data] as $key => $val) {
