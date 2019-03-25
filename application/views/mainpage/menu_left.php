@@ -127,6 +127,7 @@ else {?>
       <ul>
         <li><a href="<?=base_url();?>forms/layouts">ข้อมูลการใช้บริการ</a></li>
         <li><a href="<?=base_url();?>job/job_manage_shop">จัดการงานส่งแขก</a></li>
+        <li><a href="<?=base_url();?>job/job_nopaid_shop">รายการค้างจ่าย</a></li>
         
 
 

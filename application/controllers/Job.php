@@ -16,6 +16,13 @@ class Job extends CI_Controller {
     $this->load->view('mainpage/page_footer');
   }
   
+  public function job_nopaid_shop() {
+    $menu[menu] = 'usecontrol';
+    $this->load->view('mainpage/page_header',$menu);
+    $this->load->view('job/shop_nopaid');
+    $this->load->view('mainpage/page_footer');
+  }
+  
   public function job_history_shop() {
     $menu[menu] = 'usecontrol';
     $this->load->view('mainpage/page_header',$menu);

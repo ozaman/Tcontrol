@@ -25,7 +25,7 @@
           <div style="margin-bottom: 15px;" class="col-md-3">
             <div class="input-group control-width-normal" id="filter-date">
               <input type="text" class="form-control" id="input-date" value="<?=date('Y-m-d');?>">
-              <span class="input-group-addon"><i class="fa fa-calendar"></i></span>
+              <span class="input-group-addon" style="cursor: pointer;"><i class="fa fa-calendar"></i></span>
             </div>
           </div>
           <input type="hidden" id="check_func_now" value="1" />
