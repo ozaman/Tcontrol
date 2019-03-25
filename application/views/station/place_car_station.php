@@ -23,7 +23,7 @@
 										<font >จัดการ</font>     
 									</center>
 								</th>
-								<th width="50" align="center" ><font >ลบ</font></th>
+								<!-- <th width="50" align="center" ><font >ลบ</font></th> -->
 								<th height="30" align="center" ><font >TH</font> / <font >EN</font> / <font >CN</font></th>
 									<th width="120" align="center" >
 										<font >ประเภททั้งหมด</font>
@@ -34,19 +34,23 @@
 							<tbody>
 								<?php 
 								foreach($station as $key=>$val){
+									$_where = array();
+									  $_where[id] = $val->type;
+   $_select = array('*');
+    $STATION_TYPE = $this->Main_model->rowdata(TBL_PLACE_CAR_STATION_TYPE,$_where, $_select);
 									?>
 									<tr>
-										<td><?=$key+1;?></td>
+										<td width="5"><?=$key+1;?></td>
 										<td>
-											<a href="<?=base_url();?>shop/categorie_sub?id=<?=$val->id;?>"><button type="button" class="btn btn-xs btn-primary btn-equal" ><i class="fa fa-search-plus" ></i></button></a>
+											<button onclick="fun_edit_station('<?=$val->id;?>')" type="button" class="btn btn-xs btn-primary btn-equal" ><i class="fa fa-search-plus" ></i></button>
 
 										</td>
-									<td>
+									<!-- <td>
 										<button onclick="firstDelete('<?=$val->topic_th;?>/<?=$val->topic_en;?>/<?=$val->topic_cn;?>','<?=$val->id;?>','<?=TBL_SHOPPING_PRODUCT_MAIN;?>')" type="button" class="btn btn-xs btn-danger btn-equal" data-toggle="modal" data-target="#deleteModal"><i class="fa fa-trash-o"></i></button>
+									</td> -->
+									<td><span class="text-primary"><?=$val->topic_th;?></span><!--  / <span ><?=$val->topic_en;?></span> / <span class="text-success"><?=$val->topic_cn;?></span> -->
 									</td>
-									<td><span class="text-primary"><?=$val->topic_th;?></span> / <span ><?=$val->topic_en;?></span> / <span class="text-success"><?=$val->topic_cn;?></span>
-									</td>
-										<td align="center"><span><?=$val->i_num_type;?></span></td>
+										<td align="center"><span><?=$STATION_TYPE->s_topic_th;?></span></td>
 										<td>
 											<?php
 											if ($val->status == 0 ){

@@ -17,7 +17,7 @@ class Station extends CI_Controller {
 		$_order = array();
 		$_order['id'] = 'asc';
 		$menu[menu] = 'station';
-		$data['station'] = $this->Main_model->fetch_data('','',TBL_PLACE_CAR_STATION,$_where,$_select,$_order);
+		$data['station'] = $this->Main_model->fetch_data('','',TBL_PLACE_CAR_STATION_ORTHER,$_where,$_select,$_order);
 		$this->load->view('mainpage/page_header',$menu);
 		$this->load->view('station/place_car_station',$data);
 		$this->load->view('mainpage/page_footer');
@@ -33,6 +33,24 @@ class Station extends CI_Controller {
 		$data['station'] = $this->Main_model->fetch_data('','',TBL_PLACE_CAR_STATION,$_where,$_select,$_order);
 		// $this->load->view('mainpage/page_header',$menu);
 		$this->load->view('station/box_add_station',$data);
+		// $this->load->view('mainpage/page_footer');
+		
+	}
+	public function box_edit_station(){
+		$_where = array();
+		$_where['status'] = 1;
+		$_select = array('*');
+		
+		// $menu[menu] = 'station';
+		$_where = array();
+    $_where[id] = $_POST[id];
+    $_where[main] = $_POST[main];
+    $_where[sub] = $_POST[sub];
+    $_select = array('*');
+    $data['station'] = $this->Main_model->rowdata(TBL_PLACE_CAR_STATION_ORTHER,$_where);
+		 
+		// $this->load->view('mainpage/page_header',$menu);
+		$this->load->view('station/box_edit_station',$data);
 		// $this->load->view('mainpage/page_footer');
 		
 	}
