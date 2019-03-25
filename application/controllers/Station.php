@@ -44,10 +44,9 @@ class Station extends CI_Controller {
 		// $menu[menu] = 'station';
 		$_where = array();
     $_where[id] = $_POST[id];
-    $_where[main] = $_POST[main];
-    $_where[sub] = $_POST[sub];
+   
     $_select = array('*');
-    $data['station'] = $this->Main_model->rowdata(TBL_PLACE_CAR_STATION_ORTHER,$_where);
+    $data['station'] = $this->Main_model->rowdata(TBL_PLACE_CAR_STATION_ORTHER,$_where,$_select);
 		 
 		// $this->load->view('mainpage/page_header',$menu);
 		$this->load->view('station/box_edit_station',$data);

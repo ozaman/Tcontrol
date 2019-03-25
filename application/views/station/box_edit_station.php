@@ -2,6 +2,7 @@
 
   <div class="section-body ">
    <?php
+   // print_r(json_encode($station));
    $_select = array('*');
    $_order = array();
    $_order['topic_en'] = 'asc';
@@ -12,11 +13,11 @@
    $_order['name_th'] = 'asc';
    $arr[province] = $this->Main_model->fetch_data('','',TBL_WEB_PROVINCE,'',$_select,$_order);
    $_where = array();
-   $_where['PROVINCE_ID'] = $shop->province;
+   // $_where['PROVINCE_ID'] = $shop->province;
    $_select = array('*');
    $_order = array();
    $_order['name_th'] = 'asc';
-   $arr[amphur] = $this->Main_model->fetch_data('','',TBL_WEB_AMPHUR,$_where,$_select,$_order);
+   $arr[amphur] = $this->Main_model->fetch_data('','',TBL_WEB_AMPHUR,'',$_select,$_order);
    $_where = array();
    $_where['i_status'] = 1;
    $_select = array('*');
@@ -46,7 +47,7 @@
                     <label class="control-label">ชื่อ EN</label>
                   </div>
                   <div class="col-md-10">
-                   <input class="form-control" name="topic_en" type="text" id="topic_en"  value="">
+                   <input class="form-control" name="topic_en" type="text" id="topic_en"  value="<?=$station->topic_en;?>">
                  </div>
                </div>
                <div class="form-group form-group-md">
@@ -54,10 +55,10 @@
                   <label class="control-label">ชื่อ TH</label>
                 </div>
                 <div class="col-md-10">
-                 <input class="form-control" name="topic_th" type="text" id="topic_th"  value="">
+                 <input class="form-control" name="topic_th" type="text" id="topic_th"  value="<?=$station->topic_th;?>">
                </div>
              </div>
-             <div class="form-group form-group-md">
+             <!-- <div class="form-group form-group-md">
               <div class="col-md-2">
                 <label class="control-label">ชื่อ CN</label>
               </div>
@@ -65,14 +66,21 @@
               <div class="col-md-10">
                 <input class="form-control" name="topic_cn" type="text" id="topic_cn"  value="">
               </div>
-            </div>
+            </div> -->
             <div class="form-group form-group-md">
               <div class="col-md-2">
                 <label class="control-label">บริษัท</label>
               </div>
+              <?php
+                    $_where = array();
+                    $_where[id] = $station->type;
+   $_select = array('*');
+    $STATION_TYPE = $this->Main_model->rowdata(TBL_PLACE_CAR_STATION_TYPE,$_where, $_select);
+
+              ?>
 
               <div class="col-md-10">
-                <input class="form-control" name="company" type="text" id="company"  value="">
+                <input class="form-control" name="company" type="text" id="company"  value="<?=$STATION_TYPE->s_topic_th;?>">
               </div>
             </div>
             <div class="form-group form-group-md">
@@ -144,6 +152,7 @@
               </div>
               <div class="col-md-10">
                <textarea name="address" rows="3" class="form-control" id="address" placeholder="ที่อยู่">
+                <?=$station->address;?>
                </textarea>
              </div>
            </div>
@@ -152,7 +161,7 @@
               <label class="control-label">เบอร์โทรศัพท์</label>
             </div>
             <div class="col-md-10">
-              <input class="form-control" name="phone" type="text" id="phone"  value="">
+              <input class="form-control" name="phone" type="text" id="phone"  value="<?=$station->phone_company;?>">
             </div>
           </div>
           
