@@ -26,6 +26,7 @@
    $arr[COMPENSATION] = $this->Main_model->fetch_data('','',TBL_SHOP_COMPENSATION_TYPE,$_where,$_select,$_order);
    ?>
    <input type="hidden" name="" id="section_state" value="1">
+   <input type="hidden" name="section_id" id="section_id" value="<?=$station->id;?>">
    <div class="row" id="body_page_call">
     <div class="col-md-12">
       <div class="box box-outlined" >
@@ -80,7 +81,7 @@
               ?>
 
               <div class="col-md-10">
-                <input class="form-control" name="company" type="text" id="company"  value="<?=$STATION_TYPE->s_topic_th;?>">
+                <input class="form-control" name="company" type="text" id="company"  value="<?=$STATION_TYPE->s_topic_th;?>" disabled>
               </div>
             </div>
             <div class="form-group form-group-md">
@@ -161,7 +162,7 @@
               <label class="control-label">เบอร์โทรศัพท์</label>
             </div>
             <div class="col-md-10">
-              <input class="form-control" name="phone" type="text" id="phone"  value="<?=$station->phone_company;?>">
+              <input class="form-control" name="phone" type="text" id="phone" value="<?=$station->phone_company;?>" >
             </div>
           </div>
           
@@ -177,7 +178,7 @@
              $btn_none = 'show';
            }
            ?>
-           <button type="button" class="btn btn-primary btn-md  " id="submit_data_1" onclick="form_detail_station()"> <span id="txt_btn_save5" > บันทึกข้อมูล </span></button>
+           <button type="button" class="btn btn-primary btn-md  " id="submit_data_1" onclick="save_form_edit_station('<?=$station->id;?>')"> <span id="txt_btn_save5" > บันทึกข้อมูล </span></button>
          </div>
        </div>
      </div>

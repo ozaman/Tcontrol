@@ -23,6 +23,13 @@
    $_order = array();
    $_order['i_index'] = 'asc';
    $arr[COMPENSATION] = $this->Main_model->fetch_data('','',TBL_SHOP_COMPENSATION_TYPE,$_where,$_select,$_order);
+
+    $_where = array();
+   $_where['i_status'] = 1;
+   $_select = array('*');
+   $_order = array();
+   $_order['i_index'] = 'asc';
+   $arr[STATION_TYPE] = $this->Main_model->fetch_data('','',TBL_PLACE_CAR_STATION_TYPE,$_where,$_select,$_order);
    ?>
    <input type="hidden" name="" id="section_state" value="1">
    <div class="row" id="body_page_call">
@@ -68,12 +75,28 @@
             </div>
             <div class="form-group form-group-md">
               <div class="col-md-2">
-                <label class="control-label">บริษัท</label>
+                <label class="control-label">สังกัด</label>
               </div>
 
-              <div class="col-md-10">
-                <input class="form-control" name="company" type="text" id="company"  value="">
+               <div class="col-md-10">
+                <select class="form-control" name="company" id="company" onclick="//_region(this.value)">
+                  <option value="">ประเภท </option>
+                  <?php
+                  foreach($arr[STATION_TYPE] as $key=>$station_type){
+                    if($station->region == $station_type->id ){
+                      $selected_sub = "selected";
+                    }else{
+                      $selected_sub = "";
+                    }
+                    ?>
+                    <option value="<?=$region->id;?>"  <?=$selected_sub;?> ><?=$station_type->s_topic_th;?></option>
+                  <?php } ?>
+                </select>
               </div>
+
+              <!-- <div class="col-md-10">
+                <input class="form-control" name="company" type="text" id="company"  value="">
+              </div> -->
             </div>
             <div class="form-group form-group-md">
               <div class="col-md-2">

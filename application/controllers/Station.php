@@ -58,6 +58,11 @@ class Station extends CI_Controller {
 		$data = $this->Station_model->save_station();
 		echo json_encode($data);
 	}
+	public function save_edit_station(){
+		header('Content-Type: application/json');		
+		$data = $this->Station_model->save_edit_station();
+		echo json_encode($data);
+	}
 	
 	
 	################################ SHOP #################################

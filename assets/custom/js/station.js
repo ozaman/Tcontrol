@@ -63,15 +63,53 @@ var url = base_url + "station/save_station?opt=ADD";
     },
     success: function(res) {
       console.log(res)
-      if (res.station == true) {
-        Command: toastr[res.icon](res.msg)
+      if (res.status == true) {
+         _box_contact()
+         $('#modal_custom').hide();
+        // Command: toastr[res.icon](res.msg)
       }
       else {
         $('#btn_save_price_plann').hide();
         commision($('#manage_com').val())
         $('#box_plan_com').html('');
-        _box_plan_comision();
-        box_price_plan();
+        // _box_plan_comision();
+        // box_price_plan();
+      }
+
+
+
+    }
+  });
+  }
+
+
+  function save_form_edit_station() {
+var url = base_url + "station/save_edit_station?opt=EDIT";
+  console.log($('#form_station_all').serialize())
+  // console.log(form_station_all)
+  $.ajax({
+    url: url,
+    data: $('#form_station_all').serialize(),
+    type: 'post',
+    error: function() {
+      console.log('Error Profile');
+    },
+    success: function(res) {
+      console.log(res)
+      if (res.status == true) {
+         _box_contact()
+         $('#modal_custom').hide();
+        // Command: toastr[res.icon](res.msg)
+          
+
+      }
+      else {
+      // Command: toastr[res.icon](res.msg)
+        // commision($('#manage_com').val())
+        $('#box_plan_com').html('');
+        // _box_plan_comision();
+        // box_price_plan();
+        
       }
 
 

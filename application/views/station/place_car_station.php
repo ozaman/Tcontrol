@@ -62,7 +62,7 @@
 												$s_class = 'text-success';
 											}
 											?>
-											<span id="span_status<?=$val->id;?>" onclick="updateStatus('<?=$val->id;?>','<?=$val->status;?>','<?=TBL_SHOPPING_PRODUCT_MAIN;?>')" class="<?=$s_class;?>" style="cursor: pointer;"><?=$text_status;?></span>
+											<span id="span_status<?=$val->id;?>" onclick="updateStatus('<?=$val->id;?>','<?=$val->status;?>','<?=TBL_PLACE_CAR_STATION_ORTHER;?>')" class="<?=$s_class;?>" style="cursor: pointer;"><?=$text_status;?></span>
 										</td>
 								</tr>
 								<?php
