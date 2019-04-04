@@ -1680,6 +1680,31 @@ function edit_contact(id) {
   });
   // commision(id)
 }
+function edit_bank(id) {
+  console.log(id)
+  $('#modal_custom').show()
+  $('#formModalLabel').html('แก้ไขข้อมูลธนาคาร')
+  var url = base_url + "shop/detail_bank?op=edit";
+  var param = {
+    id: id
+  }
+  console.log(url)
+
+  $.ajax({
+    url: url,
+    data: param,
+    type: 'post',
+    error: function () {
+      console.log('Error Profile');
+    },
+    success: function (ele) {
+      console.log('Success Profile');
+      $('#dody_modal_custom').html(ele);
+
+    }
+  });
+  // commision(id)
+}
 function submit_detail_contact(id, op) {
   console.log($('#form_contact').serialize());
   console.log(id)
@@ -1803,6 +1828,15 @@ function _box_img(id) {
     _box_img_book(id)
   });
 }
+function _box_bank(id) {
+  // alert(id)
+  var url = base_url + "shop/box_bank?id=" + id;
+  console.log(url)
+  $.post(url, function (ele) {
+    // console.log(ele)
+    $('#box_bank').html(ele);
+  });
+}
 function open_check_expired() {
   console.log($('#check_expired').is(":checked"))
   if (!$('#check_expired').is(":checked")) {
@@ -1839,6 +1873,71 @@ function _form_upload_file(id) {
       if (data.status == true) {
         Command: toastr["success"](data.msg)
         _box_document(id);
+      } else {
+        Command: toastr["warning"](data.msg)
+      }
+
+    },
+    error: function (data) {
+
+    }
+  });
+
+}
+function _form_upload_rq_bank(id) {
+
+  var data_form = $('#form_upload_file_RQCODE').serialize();
+  var data_form = new FormData($('#form_shop_all')[0]);
+  var url = base_url + "shop/save_document_bank";
+  console.log(data_form)
+  $.ajax({
+    type: 'POST',
+    url: url,
+    data: data_form,
+    cache: false,
+    contentType: false,
+    processData: false,
+    beforeSend: function () {
+      //blockui_always();
+    },
+    success: function (data) {
+      console.log(data)
+      if (data.status == true) {
+        Command: toastr["success"](data.msg)
+        _box_bank(id);
+      } else {
+        Command: toastr["warning"](data.msg)
+      }
+
+    },
+    error: function (data) {
+
+    }
+  });
+
+}
+function _form_upload_rq_bank_edit(id) {
+
+  var data_form = $('#form_upload_file_RQCODE_edit').serialize();
+  var data_form = new FormData($('#form_bank_company')[0]);
+  var url = base_url + "shop/save_document_bank_edit";
+  console.log(data_form)
+  $.ajax({
+    type: 'POST',
+    url: url,
+    data: data_form,
+    cache: false,
+    contentType: false,
+    processData: false,
+    beforeSend: function () {
+      //blockui_always();
+    },
+    success: function (data) {
+      console.log(data)
+      if (data.status == true) {
+        $('#modal_custom').hide()
+        Command: toastr["success"](data.msg)
+        _box_bank(data.shop_id);
       } else {
         Command: toastr["warning"](data.msg)
       }

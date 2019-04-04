@@ -93,6 +93,7 @@
 
               <li class="" onclick="_box_img(<?=$_GET[id];?>)"><a href="#images"> รูปภาพ</a></li>
               <li class=""><a href="#section_time"> ติดต่อ / เวลาทำการ</a></li>
+              <li class="" onclick="_box_bank(<?=$_GET[id];?>)"><a href="#section_bank"> ข้อมูลธนาคาร</a></li>
             </ul>
           </div>
           <div class=" tab-content">
@@ -359,6 +360,13 @@
                   </div>
                 </div>
               </div><!--  END TIME OPEN -->
+            </div>
+            <div class="tab-pane" id="section_bank">
+              <div class="col-md-12">
+                <div id="box_bank">
+
+                </div>
+              </div>
             </div>
           </div>
         </div><!--end .box -->
