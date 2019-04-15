@@ -154,6 +154,7 @@ else {?>
       <!--start submenu -->
       <ul>
         <li><a href="<?=base_url();?>setting/car_brand"><span class="title">ยี่ห้อรถ</span></a></li>
+        <li><a href="<?=base_url();?>setting/car_type"><span class="title">ประเภทรถ</span></a></li>
         <!--<li><a href="#"><span class="title">รายจ่ายบริษัท</span></a></li>-->
       </ul><!--end /submenu -->
 

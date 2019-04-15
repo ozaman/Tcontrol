@@ -2408,7 +2408,7 @@ function editCondition(id, topic, plan_main, i_country) {
   var shop = $('#id_shop_product').val();
   var url = base_url + "shop/view_condition?pack_id=" + id + "&plan_main=" + plan_main + "&shop_id=" + shop + "&partner_g=" + $('#partner_g').val() + "&i_country=" + i_country;
   console.log(url);
-//  return;
+
   $.ajax({
     url: url,
     data: param,

@@ -94,7 +94,7 @@ function openHistoryShopJob(date) {
     },
     success: function (res) {
       console.log(res);
-      var url = base_url+"job/render_shop_his";
+      var url = base_url + "job/render_shop_his";
       $.ajax({
         url: url,
         data: res,
@@ -107,4 +107,48 @@ function openHistoryShopJob(date) {
   });
 }
 
-        
+function countJob(date) {
+  var url = base_url + "job/count_shop_job";
+
+  var param = {
+    date: date
+  };
+  $.ajax({
+    url: url,
+    data: param,
+    dataType: 'json',
+    type: 'post',
+    error: function () {
+      console.log('Error Profile');
+    },
+    success: function (res) {
+      console.log(res);
+      $('#wait_pay_job_num').text(res.wait_trans);
+      $('#count_job').text(res.all);
+      $('#all_job_num').text(res.process);
+    }
+  });
+}
+
+function viewDetailWorkstep(order_id, type) {
+//  $('#modal_custom_3').show();
+  $('#title_md_modal').text('ตรวจสอบการทำงาน');
+  var url = base_url + "job/view_detail_work";
+  var param = {
+    order_id: order_id,
+    type: type
+  };
+  $.ajax({
+    url: url,
+    data: param,
+    dataType: 'json',
+    type: 'post',
+    error: function () {
+      console.log('Error Profile');
+    },
+    success: function (res) {
+      console.log(res);
+      
+    }
+  });
+}

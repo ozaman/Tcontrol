@@ -1,9 +1,9 @@
 <ol class="breadcrumb">
-	<li class="head_title"><a class="head_title">จัดการงานส่งแขก</a></li>
-    <li class="head_title_sub">วันนี้</li>
-<!--	<li class="head_title_sub_2" style="display: none;"><a class="head_title_sub_2"></a></li>
-	<li class="head_title_sub_3" style="display: none;" ><a class="head_title_sub_3"></a></li>
-	<li class="head_title_sub_4" style="display: none;" ><a class="head_title_sub_4"></a></li>-->
+  <li class="head_title"><a class="head_title">จัดการงานส่งแขก</a></li>
+  <li class="head_title_sub">วันนี้</li>
+  <!--	<li class="head_title_sub_2" style="display: none;"><a class="head_title_sub_2"></a></li>
+      <li class="head_title_sub_3" style="display: none;" ><a class="head_title_sub_3"></a></li>
+      <li class="head_title_sub_4" style="display: none;" ><a class="head_title_sub_4"></a></li>-->
 </ol>
 
 <div class="section-body">
@@ -35,9 +35,9 @@
               <label class="btn btn-primary btn-outline btn-rounded active" onclick="openAllJobShop(1);">
                 <input type="radio" name="options" id="all_job" ><span class="label label-danger" id="all_job_num">0</span>  ดำเนินการ 
               </label>
-<!--              <label class="btn btn-primary btn-outline btn-rounded" onclick="openProcessJobShop(2);">
-                <input type="radio" name="options" id="proceed_job" ><span class="label label-danger" id="proceed_job_num">0</span> ดำเนินการ
-              </label>-->
+              <!--              <label class="btn btn-primary btn-outline btn-rounded" onclick="openProcessJobShop(2);">
+                              <input type="radio" name="options" id="proceed_job" ><span class="label label-danger" id="proceed_job_num">0</span> ดำเนินการ
+                            </label>-->
               <label class="btn btn-primary btn-outline btn-rounded" onclick="openWaitPayJobShop(3);">
                 <input type="radio" name="options" id="wait_pay_job" ><span class="label label-danger" id="wait_pay_job_num">0</span> งานรอโอน
               </label>
@@ -57,13 +57,16 @@
   </div>
 </div>
 <script>
-  var array_rooms;
+  var array_rooms = [];
   var res_socket;
   var socket = io.connect('https://www.welovetaxi.com:3443');
   var check_run_shop = 0;
 
   var frist_socket = true;
-
+  
+  var current = formatDate(new Date());
+  countJob(current);
+  
   socket.on('getbookinglab', function (data) {
 //    console.log(data);   
     var done = [];
@@ -72,27 +75,9 @@
 
 //    $('#proceed_job_num').text(data.length);
 
-    var url = base_url + "job/count_shop_job";
-    var current = formatDate(new Date());
-    var param = {
-      date: current
-    };
 
-    $.ajax({
-      url: url,
-      data: param,
-      dataType: 'json',
-      type: 'post',
-      error: function () {
-        console.log('Error Profile');
-      },
-      success: function (res) {
-        console.log(res);
-        $('#wait_pay_job_num').text(res.wait_trans);
-        $('#count_job').text(res.all);
-        $('#all_job_num').text(res.all);
-      }
-    });
+
+
 
 //    console.log(array_data);
     array_rooms = data;

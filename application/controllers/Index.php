@@ -31,6 +31,10 @@ class Index extends CI_Controller {
     $this->load->view('shop/page_categories',$data);
     $this->load->view('mainpage/page_footer');
   }
+  
+  public function test_socket($param) {
+    $this->load->view('test_socket');
+  }
 
   //////////////////////////// End
 }

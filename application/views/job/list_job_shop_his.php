@@ -3,9 +3,11 @@
 //print_r($_POST[data]);
 //echo "</pre>";
 //exit();
-if(count($_POST[data])==0 or $_POST[data]==""){ ?>
-<h3 style="color: #FF0000;">ไม่มีรายการ</h3>
-<?php }
+if (count($_POST[data]) == 0 or $_POST[data] == "") {
+  ?>
+  <h3 style="color: #FF0000;">ไม่มีรายการ</h3>
+<?php
+}
 foreach ($_POST[data] as $key => $val) {
   $data = $this->Main_model->rowdata(TBL_ORDER_BOOKING,array('id' => $val[id]),array('*'));
 
@@ -118,66 +120,72 @@ foreach ($_POST[data] as $key => $val) {
   <div class="col-lg-12 list-group-item">
 
     <div class="col-md-6">
-      <?php
-      $url = "../../data/pic/place/".$res_ps->pic_logo;
+      <div>
+        <?php
+        $url = "../../data/pic/place/".$res_ps->pic_logo;
 //        if (file_exists($url) != 1 || $res_ps->pic_logo == '') {
 //          $images_url = base_url().'assets/images/noimage_2.gif';
 //        }
 //        else {
 //          $images_url = $url;
 //        }
-      $images_url = $url;
-      ?>
+        $images_url = $url;
+        ?>
       <!--<img class="chat_gallery_items" src="<?=$images_url;?>"  alt="" style="box-shadow: 1px 1px 3px #333333;border-radius:  8px; border: 1px solid #ddd;height: 65px;width: 110px; ">-->
 
-      <h3 class="list-group-item-heading"><?=$res_ps->topic_th;?></h3>
-      <p class="list-group-item-text">
+        <h3 class="list-group-item-heading"><?=$res_ps->topic_th;?></h3>
+        <p class="list-group-item-text">
 
-        <span class="font-16"><?=$MAIN->topic_th;?>(<span class="font-17" ><?=$SUB->topic_th;?> </span>)</span>&nbsp;
-        <span class="font-16" style="color: #00000087;"><?=$data_pv->name_th;?> / <?=$aumper->name_th;?></span>
-      </p>
-      <table width="100%">
-        <tr>
-          <td>
-            <span class="font-16">
-              จำนวน : 
-              <?php if ($val[adult] > 0) {?>
-                ผู้ใหญ่ : <span id="txt_mn_adult_<?=$val[id];?>"><?=$val[adult];?></span> 
-              <?php }?>
-              <?php if ($val[child] > 0) {?>
-                เด็ก : <span id="txt_mn_child_<?=$val[id];?>"><?=$val[child];?></span>	
-              <?php }
-              ?>
-            </span>
-          </td>
-        </tr>
-        <tr>
-          <td>
-            <table style="margin-left: 0px;">
-              <tr>
-                <td style="padding: 0;"><span class="font-16">สัญชาติ</span> : </td>
-                <td style="padding: 0;">
-                  &nbsp;
-                  <img src="<?=base_url();?>assets/img/flag/icon/<?=$COUNTRY->country_code;?>.png" width="20" height="20" alt="">
-                </td>
-                <td style="padding: 0;">&nbsp;</td>
-                <td style="padding: 0;"><span class="font-16" id="txt_county_pp"><?=$COUNTRY->name_th;?></span></td>
-              </tr>
-            </table>
-          </td>
-        </tr>
-        <tr>
-          <td>
-            <span class="font-16">ประเภท : <?=$plan;?></span>
-          </td>
-        </tr>
-        <tr>
-          <td>
-            <span class="font-16" >เลขจอง : <?=$val[invoice];?></span>
-            <font color="#ff0000;" style="margin-left: 10px;" id="time_toplace_<?=$val[id];?>"><?="ถึงประมาณ ".$stamp." น.";?></font>
-          </td>
-        </tr>
-      </table>
+          <span class="font-16"><?=$MAIN->topic_th;?>(<span class="font-17" ><?=$SUB->topic_th;?> </span>)</span>&nbsp;
+          <span class="font-16" style="color: #00000087;"><?=$data_pv->name_th;?> / <?=$aumper->name_th;?></span>
+        </p>
+        <table width="100%">
+          <tr>
+            <td>
+              <span class="font-16">
+                จำนวน : 
+                <?php if ($val[adult] > 0) {?>
+                  ผู้ใหญ่ : <span id="txt_mn_adult_<?=$val[id];?>"><?=$val[adult];?></span> 
+                <?php }?>
+                <?php if ($val[child] > 0) {?>
+                  เด็ก : <span id="txt_mn_child_<?=$val[id];?>"><?=$val[child];?></span>	
+  <?php }
+  ?>
+              </span>
+            </td>
+          </tr>
+          <tr>
+            <td>
+              <table style="margin-left: 0px;">
+                <tr>
+                  <td style="padding: 0;"><span class="font-16">สัญชาติ</span> : </td>
+                  <td style="padding: 0;">
+                    &nbsp;
+                    <img src="<?=base_url();?>assets/img/flag/icon/<?=$COUNTRY->country_code;?>.png" width="20" height="20" alt="">
+                  </td>
+                  <td style="padding: 0;">&nbsp;</td>
+                  <td style="padding: 0;"><span class="font-16" id="txt_county_pp"><?=$COUNTRY->name_th;?></span></td>
+                </tr>
+              </table>
+            </td>
+          </tr>
+<!--          <tr>
+            <td>
+              <span class="font-16">ประเภท : <?=$plan;?></span>
+            </td>
+          </tr>-->
+          <tr>
+            <td>
+              <span class="font-16" >เลขจอง : <?=$val[invoice];?></span>
+              <font color="#ff0000;" style="margin-left: 10px;" id="time_toplace_<?=$val[id];?>"><?="ถึงประมาณ ".$stamp." น.";?></font>
+            </td>
+          </tr>
+        </table>
+      </div>
+      <div>
+        <h4 style="margin-bottom: 0;">ค่าตอบแทน</h4>
+        <span class="font-16">ประเภท : <?=$plan;?></span>
+      </div>
     </div>
     <div class="col-md-3">
       <ul class="list-group">
@@ -244,8 +252,8 @@ foreach ($_POST[data] as $key => $val) {
               foreach ($query_lab->result() as $key => $val) {
                 ?>
                 <a style='cursor: pointer;'><?=$val->phone." (".$val->name.")";?></a><br/>
-              <?php }
-              ?>
+  <?php }
+  ?>
             </span>
           </td>
         </tr>

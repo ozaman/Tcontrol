@@ -57,10 +57,23 @@ $con_pack = $querys->row();
               $active_payer = "";
               $checked_payer = "";
             }
+
+            if ($val->id == 2) {
+              
+              $_where = array();
+              $_where[id] = $_GET[shop_id];
+              $this->db->select('topic_th');
+              $query_product = $this->db->get_where(TBL_SHOPPING_PRODUCT,$_where);
+//              $query_product = $query_product->row();
+              $name = $query_product->row()->topic_th;
+            }
+            else{
+              $name = $val->s_topic;
+            }
 //        echo $active_payer." ".$val->id;
             ?>
             <label class="btn btn-primary btn-outline btn-rounded <?=$active_payer;?>" style="padding: 5px 15px;" onclick="selectPayerPacklist(<?=$val->id;?>,<?=$con_pack->id;?>);">
-              <input type="radio" <?=$checked_payer;?>  name="select_payer" id="payer_<?=$val->id;?>"> <strong><?=$val->s_topic;?></strong> 
+              <input type="radio" <?=$checked_payer;?>  name="select_payer" id="payer_<?=$val->id;?>"> <strong><?=$name;?></strong> 
             </label>
           <?php }
           ?>
@@ -508,7 +521,7 @@ $con_pack = $querys->row();
                     <?php
                   }
                   ?>
-                                                                                                                                                                                                                                            <!--<input type="hidden" value="<?=$i;?>" id="val_num_row" />-->
+                                                                                                                                                                                                                                                <!--<input type="hidden" value="<?=$i;?>" id="val_num_row" />-->
                 </table>
               </form>
             </div>
@@ -619,16 +632,16 @@ $con_pack = $querys->row();
                     $this->db->select('*');
                     $query_com_pd_type = $this->db->get_where(TBL_CON_COM_PRODUCT_TYPE,$_where);
                     $data_s = $query_com_pd_type->row();
-                    
-                    if($query_com_pd_type->num_rows()>0){
+
+                    if ($query_com_pd_type->num_rows() > 0) {
                       $data_use = $query_com_pd_type->row();
-                    }else{
+                    }
+                    else {
                       $data_use = $value;
                     }
 //                    echo "<pre>";
 //                    print_r($data_s);
 //                    echo "</pre>";
-                    
 //                    if ($query_con_tb->num_rows() > 0) {
                     if ($data_s->i_status > 0) {
                       $checked_pd_tl = "checked";

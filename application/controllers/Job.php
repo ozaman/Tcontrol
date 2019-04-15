@@ -50,6 +50,13 @@ class Job extends CI_Controller {
     
     $_where = array();
     $_where[transfer_date] = $_POST[date];
+    $_where[check_tran_job] = 0;
+    $_where[driver_complete] = 0;
+    $query_all = $this->db->get_where(TBL_ORDER_BOOKING, $_where);
+    $result[process] = $query_all->num_rows();
+    
+    $_where = array();
+    $_where[transfer_date] = $_POST[date];
     $_where[check_tran_job] = 1;
     $_where[check_lab_pay] = 1;
     $_where[transfer_money] = 0;

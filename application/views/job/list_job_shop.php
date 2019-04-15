@@ -3,9 +3,11 @@
 //print_r($_POST[data]);
 //echo "</pre>";
 //exit();
-if(count($_POST[data])==0){ ?>
-<h3 style="color: #FF0000;">ไม่มีรายการ</h3>
-<?php }
+if (count($_POST[data]) == 0) {
+  ?>
+  <h3 style="color: #FF0000;">ไม่มีรายการ</h3>
+  <?php
+}
 foreach ($_POST[data] as $key => $val) {
   $data = $this->Main_model->rowdata(TBL_ORDER_BOOKING,array('id' => $val[id]),array('*'));
 
@@ -117,7 +119,7 @@ foreach ($_POST[data] as $key => $val) {
   ?>
   <div class="col-lg-12 list-group-item">
 
-    <div class="col-md-6">
+    <div class="col-md-5">
       <?php
       $url = "../../data/pic/place/".$res_ps->pic_logo;
 //        if (file_exists($url) != 1 || $res_ps->pic_logo == '') {
@@ -179,34 +181,108 @@ foreach ($_POST[data] as $key => $val) {
         </tr>
       </table>
     </div>
-    <div class="col-md-3">
-      <ul class="list-group">
-        <li class="list-group-item " style="padding: 7px;<?=$lab_approve_color;?>">
-          <span class="x"><i class="<?=$lab_approve_icon;?>" aria-hidden="true"></i></span>
-          พนักงานรับทราบงาน
-        </li>
-        <li class="list-group-item" style="padding: 7px;<?=$driver_topoint_color;?>">
-          <span class="x"><i class="<?=$driver_topoint_icon;?>" aria-hidden="true"></i></span>
-          คนขับถึงสถานที่
-        </li>
-        <li class="list-group-item" style="padding: 7px;<?=$guest_receive_color;?>">
-          <span class="x"><i class="<?=$guest_receive_icon;?>" aria-hidden="true"></i></span>
-          พนักงานรับแขก
-        </li>
-        <li class="list-group-item" style="padding: 7px;<?=$guest_register_color;?>">
-          <span class="x"><i class="fa <?=$guest_register_icon;?>" aria-hidden="true"></i></span>
-          พนักงานลงทะเบียน
-        </li>
-        <li class="list-group-item" style="padding: 7px;<?=$lab_pay_color;?>">
-          <span class="x"><i class="fa <?=$lab_pay_icon;?>" aria-hidden="true"></i></span>
-          พนักงานยืนยันการจ่ายเงิน
-        </li>
-        <li class="list-group-item" style="padding: 7px;<?=$driver_pay_color;?>">
-          <span class="x"><i class="fa <?=$driver_pay_icon;?>" aria-hidden="true"></i></span>
-          คนขับยืนยันการรับเงิน
-        </li>
-      </ul>
+    <div class="col-md-4">
+      <table width="100%" class="table-cus" style="margin-top: -9px;">
+        <tr>
+          <td style="<?=$lab_approve_color;?>" class="font-15">
+            <a data-toggle="modal" data-target="#md_modal" onclick="viewDetailWorkstep(<?=$val[id];?>,'lab_approve');"><span class="x"><i class="<?=$lab_approve_icon;?>" aria-hidden="true"></i></span>
+            พนักงานรับทราบงาน</a>
+          </td>
+
+          <td style="<?=$driver_topoint_color;?>" class="font-15">
+            <a onclick="viewDetailWorkstep(<?=$val[id];?>,'driver_topoint');"><span class="x"><i class="<?=$driver_topoint_icon;?>" aria-hidden="true"></i></span>
+              คนขับถึงสถานที่</a>
+          </td>
+        </tr>
+        <tr>
+          <td style="<?=$guest_receive_color;?>" class="font-15">
+            <a onclick="viewDetailWorkstep(<?=$val[id];?>,'guest_receive');"><span class="x"><i class="<?=$guest_receive_icon;?>" aria-hidden="true"></i></span>
+              พนักงานรับแขก</a>
+          </td>
+
+          <td style="<?=$guest_register_color;?>" class="font-15">
+            <a onclick="viewDetailWorkstep(<?=$val[id];?>,'guest_register');"><span class="x"><i class="fa <?=$guest_register_icon;?>" aria-hidden="true"></i></span>
+              พนักงานลงทะเบียน</a>
+          </td>
+        </tr>
+        <tr>
+          <td style="<?=$lab_pay_color;?>" class="font-15">
+            <a onclick="viewDetailWorkstep(<?=$val[id];?>,'lab_pay');"><span class="x"><i class="fa <?=$lab_pay_icon;?>" aria-hidden="true"></i></span>
+              พนักงานยืนยันการจ่ายเงิน</a>
+          </td>
+
+          <td class="font-15" style="<?=$driver_pay_color;?>">
+            <a onclick="viewDetailWorkstep(<?=$val[id];?>,'driver_pay');"><span class="x"><i class="fa <?=$driver_pay_icon;?>" aria-hidden="true"></i></span>
+              คนขับยืนยันการรับเงิน</a>
+          </td>
+        </tr>
+        <?php
+        if ($val[check_tran_job] > 0) {
+          if ($val[transfer_money] <= 0) {
+            $transfer_icon = "fa fa-times";
+            $transfer_color = "color:#e51400";
+          }
+          else {
+            $transfer_icon = "fa fa-check";
+            $transfer_color = "color:#4CAF50";
+          }
+          
+          if ($val[driver_approve] <= 0) {
+            $driver_approve_icon = "fa fa-times";
+            $driver_approve_color = "color:#e51400";
+            
+          }
+          else {
+            $driver_approve_icon = "fa fa-check";
+            $driver_approve_color = "color:#4CAF50";
+          }
+          ?>
+          <tr>
+            <td style="<?=$transfer_color;?>" class="font-15">
+              <a onclick="viewDetailWorkstep(<?=$val[id];?>,'transfer_money');"><span class="x"><i class="fa <?=$transfer_icon;?>" aria-hidden="true"></i></span>
+                แจ้งโอนเงิน</a>
+            </td>
+
+            <td class="font-15" style="<?=$driver_approve_color;?>">
+              <a onclick="viewDetailWorkstep(<?=$val[id];?>,'driver_approve');"><span class="x"><i class="fa <?=$driver_approve_icon;?>" aria-hidden="true"></i></span>
+                คนขับยืนยันการรับโอน</a>
+            </td>
+          </tr>
+          <tr>
+            <td></td>
+          </tr>
+        <?php }?>
+      </table>
+      <!--      <ul class="list-group" style="display: none;">
+              <li class="list-group-item " style="padding: 7px;<?=$lab_approve_color;?>">
+                <span class="x"><i class="<?=$lab_approve_icon;?>" aria-hidden="true"></i></span>
+                พนักงานรับทราบงาน
+              </li>
+              <li class="list-group-item" style="padding: 7px;<?=$driver_topoint_color;?>">
+                <span class="x"><i class="<?=$driver_topoint_icon;?>" aria-hidden="true"></i></span>
+                คนขับถึงสถานที่
+              </li>
+              <li class="list-group-item" style="padding: 7px;<?=$guest_receive_color;?>">
+                <span class="x"><i class="<?=$guest_receive_icon;?>" aria-hidden="true"></i></span>
+                พนักงานรับแขก
+              </li>
+              <li class="list-group-item" style="padding: 7px;<?=$guest_register_color;?>">
+                <span class="x"><i class="fa <?=$guest_register_icon;?>" aria-hidden="true"></i></span>
+                พนักงานลงทะเบียน
+              </li>
+              <li class="list-group-item" style="padding: 7px;<?=$lab_pay_color;?>">
+                <span class="x"><i class="fa <?=$lab_pay_icon;?>" aria-hidden="true"></i></span>
+                พนักงานยืนยันการจ่ายเงิน
+              </li>
+              <li class="list-group-item" style="padding: 7px;<?=$driver_pay_color;?>">
+                <span class="x"><i class="fa <?=$driver_pay_icon;?>" aria-hidden="true"></i></span>
+                คนขับยืนยันการรับเงิน
+              </li>
+      
+      
+            </ul>-->
     </div>
+
     <div class="col-md-3" align="center">
       <b class="font-16">ติดต่อ</b>
       <table width="100%">
