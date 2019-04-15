@@ -1852,6 +1852,7 @@ $result[shop_id] =$arr[BANK_COMPANY]->shop_id;
     $data[f_price] = $_POST[f_price];
     $data[f_vat] = $_POST[f_vat];
     $data[f_wht] = $_POST[f_wht];
+    $data[i_num_regis] = $_POST[i_num];
     $data[i_plan_main] = $_POST[plan_main];
     $data[i_plan_pack] = $_POST[pack_id];
     $data[i_con_type] = 4;

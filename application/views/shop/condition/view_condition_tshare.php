@@ -59,7 +59,7 @@ $con_pack = $querys->row();
             }
 
             if ($val->id == 2) {
-              
+
               $_where = array();
               $_where[id] = $_GET[shop_id];
               $this->db->select('topic_th');
@@ -67,7 +67,7 @@ $con_pack = $querys->row();
 //              $query_product = $query_product->row();
               $name = $query_product->row()->topic_th;
             }
-            else{
+            else {
               $name = $val->s_topic;
             }
 //        echo $active_payer." ".$val->id;
@@ -428,7 +428,7 @@ $con_pack = $querys->row();
                     <tr>
                       <td>
                         <div class="input-group">
-                          <span class="input-group-addon">จำนวน</span>
+                          <span class="input-group-addon">จำนวนเงิน</span>
                           <input class="form-control" type="number" name="f_price" id="allpay_f_price" value="<?=$con->f_price;?>" onkeyup="saveDataKeyUpPayallcase(<?=$con->id;?>);" />
                         </div>
                       </td>
@@ -489,10 +489,10 @@ $con_pack = $querys->row();
               <form id="each_regis_form">
                 <table class="tb-pad" width="100%">
                   <tr>
-                    <td align="center"><b style="font-size: 16px;">จำนวนคน</b></td>
-                    <td align="center" width="170"><b style="font-size: 15px;">ราคา</b></td>
+                    <td align="center" width="200px"><b style="font-size: 16px;"></b></td>
+                    <td align="center" ><b style="font-size: 15px;">ราคา</b></td>
     <!--           <td align="center" width="220px"><b style="font-size: 16px;">ถอด vat%</b></td>-->
-                    <td align="center"  width="170"><b style="font-size: 15px;">ภาษี ณ ที่จ่าย</b></td>
+                    <td align="center"  ><b style="font-size: 15px;">ภาษี ณ ที่จ่าย</b></td>
                     <td  width="50"></td>
                   </tr>
                   <?php
@@ -501,7 +501,13 @@ $con_pack = $querys->row();
 
                     <tr class="tr_regis_only" id="id_tr_regis_<?=$val->id;?>">
                       <td align="center">
-                        <span style="font-size:15px;"><?=$person = $person + 1;?>  คน</span>
+                        <!--<span style="font-size:16px;"><?=$person = $person + 1;?>  คน</span>-->
+                        <div class="input-group">
+                          <span class="input-group-addon">ตั้งแต่</span>
+                          <input type="text" class="form-control" value="<?=$val->i_num_regis;?>" name="i_num" id="regis_only_num_<?=$val->id;?>" 
+                                 onkeyup="saveDataKeyupRegis(<?=$val->id;?>);">
+                          <span class="input-group-addon">คนขึ้นไป</span>
+                        </div>
                       </td>
                       <td><input class="form-control" type="number" name="f_price" id="regis_only_f_price_<?=$val->id;?>" value="<?=$val->f_price;?>" onkeyup="saveDataKeyupRegis(<?=$val->id;?>);" /></td>
                       <!--<td width="30"></td>-->
@@ -521,7 +527,7 @@ $con_pack = $querys->row();
                     <?php
                   }
                   ?>
-                                                                                                                                                                                                                                                <!--<input type="hidden" value="<?=$i;?>" id="val_num_row" />-->
+                                                                                                                                                                                                                                                    <!--<input type="hidden" value="<?=$i;?>" id="val_num_row" />-->
                 </table>
               </form>
             </div>
@@ -697,7 +703,13 @@ $con_pack = $querys->row();
 <table class="tb_regis_only">
   <tr class="tr_regis_only" style="display: none;">
     <td align="center">
-      <span style="font-size:16px;"><?=$val->id;?>  คน</span>
+                        <!--<span style="font-size:16px;"><?=$person = $person + 1;?>  คน</span>-->
+      <div class="input-group">
+        <span class="input-group-addon">ตั้งแต่</span>
+        <input type="text" class="form-control" value="<?=$val->i_num_regis;?>" name="i_num" id="regis_only_num_<?=$val->id;?>" 
+               onkeyup="saveDataKeyupRegis(<?=$val->id;?>);">
+        <span class="input-group-addon">คนขึ้นไป</span>
+      </div>
     </td>
     <td><input class="form-control" type="number" name="f_price" id="regis_only_f_price_<?=$i;?>" value="<?=$con->f_vat;?>" /></td>
     <!--<td width="30"></td>-->

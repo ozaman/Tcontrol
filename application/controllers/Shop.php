@@ -852,6 +852,7 @@ class Shop extends CI_Controller {
     $_where = array();
     $_where[i_shop] = $_POST[id];
     $_where[i_partner_group] = $_GET[partner_g];
+    $_where[i_status] = 1;
     $this->db->select('*');
     $query = $this->db->get_where(TBL_PLAN_PACK,$_where);
     $planpack = $query->result();

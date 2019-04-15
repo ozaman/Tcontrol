@@ -2716,26 +2716,29 @@ function plusRowRegisOnly() {
 
           $('.tb_regis_only').find('.tr_regis_only').clone().appendTo("#each_regis_form table");
           $('#each_regis_form').find('.tr_regis_only').show();
-          $('#each_regis_form').find('.tr_regis_only span').last().text(person + " คน");
+//          $('#each_regis_form').find('.tr_regis_only span').last().text(person + " คน");
 
         } else {
           $('#each_regis_form').find('.tr_regis_only').last().clone().appendTo("#each_regis_form table");
           $('#each_regis_form').find('.tr_regis_only').show();
-          $('#each_regis_form').find('.tr_regis_only span').last().text(person + " คน");
+//          $('#each_regis_form').find('.tr_regis_only span').last().text(person + " คน");
 
         }
 
         var vat_ele = $('#each_regis_form').find('.tr_regis_only').last().find('input[name="f_vat"]');
         var price_ele = $('#each_regis_form').find('.tr_regis_only').last().find('input[name="f_price"]');
         var wht_ele = $('#each_regis_form').find('.tr_regis_only').last().find('input[name="f_wht"]');
+        var num_ele = $('#each_regis_form').find('.tr_regis_only').last().find('input[name="i_num"]');
 
         vat_ele.attr('id', 'regis_only_f_vat_' + res.last_id);
         price_ele.attr('id', 'regis_only_f_price_' + res.last_id);
         wht_ele.attr('id', 'regis_only_f_wht_' + res.last_id);
+        num_ele.attr('id', 'regis_only_num_' + res.last_id);
 
         vat_ele.attr('onkeyup', 'saveDataKeyupRegis(' + res.last_id + ')');
         price_ele.attr('onkeyup', 'saveDataKeyupRegis(' + res.last_id + ')');
         wht_ele.attr('onkeyup', 'saveDataKeyupRegis(' + res.last_id + ')');
+        num_ele.attr('onkeyup', 'saveDataKeyupRegis(' + res.last_id + ')');
 
         $('#each_regis_form').find('.tr_regis_only').last().attr('id', 'id_tr_regis_' + res.last_id);
         $('#each_regis_form').find('.tr_regis_only').last().find('.del-row').attr('onclick', 'deletedRowRegisOnly(' + res.last_id + ')');
@@ -2896,6 +2899,7 @@ function saveDataKeyupRegis(id) {
       f_price: $('#regis_only_f_price_' + id).val(),
       f_vat: $('#regis_only_f_vat_' + id).val(),
       f_wht: $('#regis_only_f_wht_' + id).val(),
+      i_num: $('#regis_only_num_' + id).val(),
       pack_id: $('#pack_id').val(),
       plan_main: $('#plan_main').val(),
       id: id
@@ -3159,8 +3163,9 @@ function changeStatusPack(pack_id) {
     },
     success: function (res) {
       console.log(res);
-      if (res.result == true) {
+      if (res.pack.result == true) {
         toastr.success('บันทึกข้อมูลสำเร็จ', '', {"closeButton": true});
+         _box_region_show($('#id_shop_product').val(), '', $('#partner_g').val());
       } else {
         toastr.error('บันทึกข้อมูลไม่สำเร็จ', '', {"closeButton": true});
       }

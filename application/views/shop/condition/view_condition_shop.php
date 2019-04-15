@@ -217,7 +217,7 @@ $query = $this->db->get_where(TBL_PLAN_MAIN_LIST,$_where);
                     <tr>
                       <td>
                         <div class="input-group">
-                          <span class="input-group-addon">จำนวน</span>
+                          <span class="input-group-addon">จำนวนเงิน</span>
                           <input class="form-control" type="number" name="f_price" id="allpay_f_price" value="<?=$con->f_price;?>" onkeyup="saveDataKeyUpPayallcase(<?=$con->id;?>);" />
                         </div>
                       </td>
@@ -246,11 +246,11 @@ $query = $this->db->get_where(TBL_PLAN_MAIN_LIST,$_where);
               <span class="checkmark"></span>
             </label>
             <div style="padding-top: 5px;padding-left: 25px;padding-right: 25px;<?=$open_box;?>" id="box_set_<?=$val->id;?>" class="outbox">
-              <button type="button" class="btn btn-support3" onclick="plusRowRegisOnly();"><i class="fa fa-plus" aria-hidden="true"></i> เพิ่มแถว</button>
+              <button type="button" class="btn btn-support3" onclick="plusRowRegisOnly();"><i class="fa fa-plus" aria-hidden="true"></i> เพิ่ม</button>
               <form id="each_regis_form">
                 <table class="tb-pad" width="100%">
                   <tr>
-                    <td align="center"  width="80"><b style="font-size: 16px;">จำนวนคน</b></td>
+                    <td align="center" width="200px" ><b style="font-size: 16px;"></b></td>
                     <td></td>
                     <td align="center"><b style="font-size: 16px;">ราคา</b></td>
                     <td></td>
@@ -266,7 +266,13 @@ $query = $this->db->get_where(TBL_PLAN_MAIN_LIST,$_where);
 
                     <tr class="tr_regis_only" id="id_tr_regis_<?=$val->id;?>">
                       <td align="center">
-                        <span style="font-size:16px;"><?=$person = $person + 1;?>  คน</span>
+                        <!--<span style="font-size:16px;"><?=$person = $person + 1;?>  คน</span>-->
+                        <div class="input-group">
+                          <span class="input-group-addon">ตั้งแต่</span>
+                          <input type="text" class="form-control" value="<?=$val->i_num_regis;?>" name="i_num" id="regis_only_num_<?=$val->id;?>" 
+                                 onkeyup="saveDataKeyupRegis(<?=$val->id;?>);">
+                          <span class="input-group-addon">คนขึ้นไป</span>
+                        </div>
                       </td>
                       <td width="30"></td>
                       <td><input class="form-control" type="number" name="f_price" id="regis_only_f_price_<?=$val->id;?>" value="<?=$val->f_price;?>" onkeyup="saveDataKeyupRegis(<?=$val->id;?>);" /></td>
@@ -289,7 +295,7 @@ $query = $this->db->get_where(TBL_PLAN_MAIN_LIST,$_where);
                   }
 //                }
                   ?>
-                                                                                                                                <!--<input type="hidden" value="<?=$i;?>" id="val_num_row" />-->
+                                                                                                                                        <!--<input type="hidden" value="<?=$i;?>" id="val_num_row" />-->
                 </table>
               </form>
             </div>
@@ -398,7 +404,12 @@ $query = $this->db->get_where(TBL_PLAN_MAIN_LIST,$_where);
 <table class="tb_regis_only">
   <tr class="tr_regis_only" style="display: none;">
     <td align="center">
-      <span style="font-size:16px;"><?=$val->id;?>  คน</span>
+<!--      <span style="font-size:16px;"><?=$val->id;?>  คน</span>-->
+      <div class="input-group">
+        <span class="input-group-addon">ตั้งแต่</span>
+        <input type="text" class="form-control" value="">
+        <span class="input-group-addon">คนขึ้นไป</span>
+      </div>
     </td>
     <td width="30"></td>
     <td><input class="form-control" type="number" name="f_price" id="regis_only_f_price_<?=$i;?>" value="<?=$con->f_vat;?>" /></td>
@@ -446,7 +457,7 @@ $query = $this->db->get_where(TBL_PLAN_MAIN_LIST,$_where);
 <?php
 //if($person)
 ?>
-<input type="hidden" value="<?=$person;?>" id="chk_click_push_regis" />
+<!--<input type="hidden" value="<?=$person;?>" id="chk_click_push_regis" />-->
 
 <script>
   if ($('#check_con_plan_main_list').val() <= 0) {
