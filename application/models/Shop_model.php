@@ -906,6 +906,169 @@ function genUsername($member_db){
     return $result;
   }
 
+public function save_document_bank() {
+    header('Content-Type: application/json');
+$result = array();
+ $result[post] = $_POST;
+
+    // if ($_FILES["file"]["name"]) {
+    $product_id = $_POST[product_id];
+    
+    
+    $type = explode('.',$_FILES[file_doc][name]);
+
+
+    $type = strtolower($type[count($type) - 1]);
+
+    // $url = "../data/pic/document/place/";
+
+    $num = time();
+
+    $doc_name = $product_id.'_'.$_POST[bank_id].'.'.$type;
+    $target_file = "../data/pic/document/QRcode/".$doc_name;
+    $result[target_file] = $target_file;
+    if ($_POST[bank_id] == '') {
+            $result[status] = false;
+            $result[msg] = 'กรุณาเลือกธนาคาร';
+            return $result;
+          }
+          if ($_POST[bank_branch] == '') {
+            $result[status] = false;
+            $result[msg] = 'กรุณาป้อนสาขาธนาคาร';
+            return $result;
+          }
+          if ($_POST[bank_name] == '') {
+             $result[status] = false;
+            $result[msg] = 'กรุณาป้อนชื่อบัญชี';
+            return $result;
+          }
+          if ($_POST[bank_number] == '') {
+             $result[status] = false;
+            $result[msg] = 'กรุณาป้อนเลขที่บัญชี';
+            return $result;
+          }
+    if ($_FILES[file_doc][name] == '') {
+      $result[status] = false;
+      $result[msg] = 'กรุณาเลือกไฟล์';
+    }
+    elseif (in_array($type,array("jpg","jpeg","gif","png","PDF"))) {
+      // return  $type;
+      if (is_uploaded_file($_FILES[file_doc][tmp_name])) {
+        // return $target_file;
+        if (move_uploaded_file($_FILES[file_doc][tmp_name],$target_file)) {
+          $data = array();
+          $data[shop_id] = $product_id;
+         
+          
+          
+          
+          
+          
+          $data[qrcode] = $doc_name;
+          $data[bank_name] = $_POST[bank_name];
+          $data[bank_branch] = $_POST[bank_branch];
+          $data[bank_id] = $_POST[bank_id];
+          $data[bank_number] = $_POST[bank_number];
+          $data[post_date] = time();
+          $data[last_update] = time();
+
+
+          $add = $this->db->insert(TBL_WEB_BANK_COMPANY,$data);
+          $result[status] = $add;
+          $result[msg] = 'อัพโหลดไฟล์สำเร็จ';
+        }
+      }
+    }
+    else {
+      $result[status] = false;
+      $result[msg] = 'ไฟล์ที่อับโหลดไม่ถูกต้อง กรุณาอับโหลดใหม่';
+      // return  '$type';
+    }
+
+
+    $xx[post] = $_POST;
+    $xx[files] = $_FILES;
+    $xx[type] = $type;
+    $xx[doc_name] = $doc_name;
+    $xx[target_file] = $target_file;
+    $xx[product_id] = $product_id;
+$result[xx] = $xx;
+    return $result;
+  }
+  public function save_document_bank_edit() {
+    header('Content-Type: application/json');
+$result = array();
+ $result[post] = $_POST;
+
+    // if ($_FILES["file"]["name"]) {
+    $product_id = $_POST[product_id];
+    
+    
+    $type = explode('.',$_FILES[file_doc][name]);
+
+
+    $type = strtolower($type[count($type) - 1]);
+
+    // $url = "../data/pic/document/place/";
+
+    $num = time();
+
+    $doc_name = $product_id.'_'.$_POST[bank_id].'.'.$type;
+    $target_file = "../data/pic/document/QRcode/".$doc_name;
+    $result[target_file] = $target_file;
+     $data = array();
+    $data[shop_id] = $product_id;
+    
+if ($_FILES[file_doc][name] == '') {
+      $data[qrcode] = $_POST[qrcode];
+    }
+    else{   
+    
+    if (in_array($type,array("jpg","jpeg","gif","png","PDF"))) {
+      // return  $type;
+      if (is_uploaded_file($_FILES[file_doc][tmp_name])) {
+        // return $target_file;
+        if (move_uploaded_file($_FILES[file_doc][tmp_name],$target_file)) {
+         
+          
+          $data[qrcode] = $doc_name;
+        
+          
+        }
+      }
+    }
+  }
+      $data[bank_name] = $_POST[bank_name];
+          $data[bank_branch] = $_POST[bank_branch];
+          $data[bank_id] = $_POST[bank_id];
+          $data[bank_number] = $_POST[bank_number];
+          $data[post_date] = time();
+          $data[last_update] = time();
+
+ $this->db->where('id',$product_id);
+          $add = $this->db->update(TBL_WEB_BANK_COMPANY,$data);
+          $result[status] = $add;
+          $result[msg] = 'อัพโหลดไฟล์สำเร็จ';
+    // }
+  // }
+    
+$_where = array();
+$_where['id'] = $product_id;
+$_select = array('*');
+
+
+$arr[BANK_COMPANY] = $this->Main_model->rowdata(TBL_WEB_BANK_COMPANY,$_where,$_select);
+
+    $xx[post] = $_POST;
+    $xx[files] = $_FILES;
+    $xx[type] = $type;
+    $xx[doc_name] = $doc_name;
+    $xx[target_file] = $target_file;
+    $xx[product_id] = $product_id;
+$result[xx] = $xx;
+$result[shop_id] =$arr[BANK_COMPANY]->shop_id;
+    return $result;
+  }
   public function save_uploadimg() {
     header('Content-Type: application/json');
     // if ($_FILES["file"]["name"]) {

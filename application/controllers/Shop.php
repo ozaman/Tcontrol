@@ -449,6 +449,9 @@ class Shop extends CI_Controller {
   public function detail_contact() {
     $this->load->view('shop/box_contact_edit');
   }
+  public function detail_bank() {
+    $this->load->view('shop/box_bank_edit');
+  }
 
   public function submit_submit_detail_contact() {
     $data = $this->Shop_model->submit_submit_detail_contact();
@@ -464,13 +467,25 @@ class Shop extends CI_Controller {
   public function box_document() {
     $this->load->view('shop/box_document');
   }
+  public function box_bank() {
+    $this->load->view('shop/box_bank');
+  }
 
   public function save_document() {
 
     $data = $this->Shop_model->save_document();
     echo json_encode($data);
   }
-
+ public function save_document_bank() {
+  $data = $this->Shop_model->save_document_bank();
+    // $this->load->view('shop/save_document_bank');
+   echo json_encode($data);
+  }
+  public function save_document_bank_edit() {
+  $data = $this->Shop_model->save_document_bank_edit();
+    // $this->load->view('shop/save_document_bank');
+   echo json_encode($data);
+  }
   public function box_img() {
     $this->load->view('shop/box_img');
   }

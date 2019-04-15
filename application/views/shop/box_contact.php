@@ -4,9 +4,11 @@
             // $_where['admintype'] = 2;
             $_select = array('*');
             $_order = array();
-            $_order['id'] = 'asc';  
+            $_order['id'] = 'asc'; 
+            $this->db->order_by("status", "desc");
+
             $this->db->where('type<>','zello');
-            $arr[SHOPPING_CONTACT] = $this->Main_model->fetch_data('','',TBL_SHOPPING_CONTACT,$_where,$_select,$_order);
+            $arr[SHOPPING_CONTACT] = $this->Main_model->fetch_data('','',TBL_SHOPPING_CONTACT,$_where,$_select,'');
             // print_r(json_encode($arr[SHOPPING_CONTACT]));
             ?>
               <div class="form-group form-group-md">
@@ -18,7 +20,8 @@
                           <th>#</th>
                           <th>แก้ไข</th>
                           <th>สถานะ</th>
-                          <th>ลบ</th>
+                          <!-- <th>สถานะ</th> -->
+                          <!-- <th>ลบ</th> -->
                           <th>ชื่อ</th>
                           <th>เบอร์โทรศัพท์</th>
                           <th>ตำแหน่ง</th>
@@ -51,7 +54,7 @@
                             <td height="30" >
                               <button type="button" onclick="edit_contact('<?=$value->id;?>')" class="btn btn-md btn-info btn-equal" data-toggle="tooltip" data-placement="top" data-original-title="แก้ไข้"><i class="fa fa-pencil"></i></button>
                             </td>
-                            <td >
+                            <!-- <td >
                               <?php
                       if ($value->status == 0 ){
                         $text_status = 'ปิด';
@@ -63,10 +66,27 @@
                       }
                       ?>
                       <span id="span_status<?=$value->id;?>" onclick="updateStatus('<?=$value->id;?>','<?=$value->status;?>','<?=TBL_SHOPPING_CONTACT;?>')" class="<?=$s_class;?>" style="cursor: pointer;"><?=$text_status;?></span>
+                            </td> -->
+                            <td>
+                               <?php
+                      if ($value->i_online == 2 ){
+                        $text_status = 'หยุดชั่วคราว';
+                        $s_class = 'text-warning';
+                      }
+                      else if ($value->i_online == 1 ){
+                        $text_status = 'ออนไลน์';
+                        $s_class = 'text-success';
+                      }
+                      else{
+                        $text_status = 'หยุดทาวร';
+                        $s_class = 'text-danger';
+                      }
+                      ?>
+                      <span id="span_status<?=$value->id;?>"  class="<?=$s_class;?>" style="cursor: pointer;"><?=$text_status;?></span>
                             </td>
-                            <td >
+                            <!-- <td >
                               <button type="button" class="btn btn-md btn-danger btn-equal" data-toggle="modal" data-target="#deleteModal" data-original-title="ลบ" onclick="firstDelete('<?=$value->name;?>','<?=$value->id;?>','<?=TBL_SHOPPING_CONTACT;?>')"><i class="fa fa-trash-o"></i></button>
-                            </td>
+                            </td> -->
                             <td >  
                              <?=$value->name;?> </td>
                              <td >
