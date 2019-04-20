@@ -70,7 +70,7 @@
             </div> -->
             <div class="form-group form-group-md">
               <div class="col-md-2">
-                <label class="control-label">บริษัท</label>
+                <label class="control-label">ข้อมูลสังกัดรถ</label>
               </div>
               <?php
                     $_where = array();
@@ -81,7 +81,7 @@
               ?>
 
               <div class="col-md-10">
-                <input class="form-control" name="company" type="text" id="company"  value="<?=$STATION_TYPE->s_topic_th;?>" disabled>
+                <input class="form-control" name="company" type="text" id="company"  value="<?=$STATION_TYPE->topic_th;?>" disabled>
               </div>
             </div>
             <div class="form-group form-group-md">

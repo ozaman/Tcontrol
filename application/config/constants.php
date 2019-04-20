@@ -186,7 +186,7 @@ define('NEW_TBL_UNIT_TYPE', 'tbl_unit_type');
 define('NEW_TBL_CON_EACH_PERSON', 'tbl_con_each_person');
 define('NEW_TBL_ABILITY_USER', 'tbl_ability_user');
 define('TBL_PLACE_CAR_STATION_ORTHER', 'place_car_station_other');
-define('TBL_PLACE_CAR_STATION_TYPE', 'place_car_station_place_type');
+define('TBL_PLACE_CAR_STATION_TYPE', ' place_car_station_type');
 
 define('TBL_WEB_BANK_LIST', 'web_bank_list');
 define('TBL_WEB_BANK_COMPANY', 'web_bank_company');

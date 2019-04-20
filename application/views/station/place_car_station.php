@@ -24,12 +24,13 @@
 									</center>
 								</th>
 								<!-- <th width="50" align="center" ><font >ลบ</font></th> -->
-								<th height="30" align="center" ><font >TH</font> / <font >EN</font> / <font >CN</font></th>
+								<th height="30" align="center" ><font >TH</font> / <font >EN</font> / <font >CN</font>
+								</th>
 									<th width="120" align="center" >
-										<font >ประเภททั้งหมด</font>
+										<font >ข้อมูลสังกัดรถ</font>
 									</th>
 									<th width="60" align="center" ><font >สถานะ</font></th>
-								</tr>
+								
 							</thead>
 							<tbody>
 								<?php 
@@ -50,7 +51,7 @@
 									</td> -->
 									<td><span class="text-primary"><?=$val->topic_th;?></span><!--  / <span ><?=$val->topic_en;?></span> / <span class="text-success"><?=$val->topic_cn;?></span> -->
 									</td>
-										<td align="center"><span><?=$STATION_TYPE->s_topic_th;?></span></td>
+										<td align="center"><span><?=$STATION_TYPE->topic_th;?></span></td>
 										<td>
 											<?php
 											if ($val->status == 0 ){

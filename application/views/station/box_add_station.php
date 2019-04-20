@@ -39,7 +39,7 @@
 
           <div class="col-md-12">
             <header>
-              <h4 class="text-light"><i class="fa fa-pencil fa-fw"> </i><strong> ป้อนข้อมูลคิว </strong></h4>
+              <h4 class="text-light"><i class="fa fa-pencil fa-fw"> </i><strong> ข้อมูลสังกัดรถ </strong></h4>
             </header>
           </div>
         </div>
@@ -89,7 +89,7 @@
                       $selected_sub = "";
                     }
                     ?>
-                    <option value="<?=$region->id;?>"  <?=$selected_sub;?> ><?=$station_type->s_topic_th;?></option>
+                    <option value="<?=$region->id;?>"  <?=$selected_sub;?> ><?=$station_type->topic_th;?></option>
                   <?php } ?>
                 </select>
               </div>
