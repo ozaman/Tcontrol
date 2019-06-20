@@ -24,6 +24,29 @@ function func_openForm(id, tbl, s_title, i_main) {
     }
   });
 }
+function func_openFormadd(type,s_title) {
+  $('#modal_custom').show();
+
+  $('#formModalLabel').html(s_title);
+  var url = base_url + "users/func_openFormadd?type="+type;
+  var param = {
+    type: type
+   
+    
+  }
+  $.ajax({
+    url: url,
+    data: param,
+    type: 'post',
+    error: function () {
+      console.log('Error Profile');
+    },
+    success: function (ele) {
+      // console.log(ele)
+      $('#dody_modal_custom').html(ele);
+    }
+  });
+}
 function func_SaveDataFormAction() {
   var url = base_url + "shop/func_SaveDataFormAction";
   var dataForm = $('#DataFormAction').serialize();
@@ -3173,4 +3196,30 @@ function changeStatusPack(pack_id) {
   });
   
   $('#switch_st_' + pack_id).val(status);
+}
+function form_add_user() {
+  var url = base_url + "users/func_SaveData";
+  var dataForm = $('#form_add_user').serialize();
+  console.log(dataForm);
+  $.ajax({
+    url: url,
+    data: dataForm,
+    type: 'post',
+    error: function () {
+      console.log('Error Profile');
+    },
+    success: function (res) {
+      console.log(res);
+      if (res.i_status == 1) {
+        $('#modal_custom').hide();
+        toastr.success('บันทึกข้อมูลสำเร็จ', '', {"closeButton": true});
+        setTimeout(function () {
+          location.reload();
+        }, 300);
+      } else {
+        toastr.error(res.s_msg,'บันทึกข้อมูลไม่สำเร็จ',  {"closeButton": true});
+      }
+
+    }
+  });
 }

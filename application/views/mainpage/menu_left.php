@@ -61,16 +61,16 @@
       </a>
       <!--start submenu -->
       <ul>
-        <li><a href="pages/profile">ผู้ดูแลระบบ<span class="badge">42</span></a></li>
+        <li><a href="<?=base_url();?>users/content?type=admin">ผู้ดูแลระบบ<span class="badge"></span></a></li>
 
-        <li><a href="pages/invoice">ผู้ให้บริการ</a></li>
+        <li><a href="<?=base_url();?>Users/content?type=supplier">ผู้ให้บริการ</a></li>
 
-        <li><a href="pages/calendar">คนขับรถ</a></li>
+        <li><a href="<?=base_url();?>users/content?type=driver">คนขับรถ</a></li>
 
-        <li><a href="pages/pricing">เคาน์เตอร์</a></li>
+       <!--  <li><a href="users?type=supplier">เคาน์เตอร์</a></li>
 
 
-        <li><a href="pages/locked">สมาชิก</a></li>
+        <li><a href="users?type=supplier">สมาชิก</a></li> -->
 
 
 
@@ -175,7 +175,8 @@ else {?>
   <!-- END MAIN MENU -->
 </div>
 <script type="text/javascript">
-  var menu = '<?=$menu;?>'
+  var menu = '<?=$menu;?>';
+  // console.log(menu)
   // if (menu == 'station') {
   $('#head_' + menu).removeClass('expanded');
   $('#head_' + menu).addClass('expanded');
