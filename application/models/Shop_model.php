@@ -681,6 +681,8 @@ class Shop_model extends CI_Model {
   $data[i_driver] = $last_id_diver;
   $return[member_in] = $member_in;
 
+  
+  $data_update[user_class] = 'lab';
   $data_update[username] = 'LAB'.$member_in;
   $data_update[password] = $password;
   $this->db->where('id', $last_id_diver);

@@ -42,8 +42,8 @@ else{
                 <th width="60" align="center" ><font >สถานะ</font></th>
                 <!-- <th width="50" align="center" >แก้ไข</th> -->
                 <th width="100" align="center" >ภาพ</th>
-                <th width="130" align="center" >Username</th>
-                <th width="100" align="center" >Password</th>
+                <th width="130" align="center" >ชื่อผู้ใช้งาน</th>
+                <th width="100" align="center" >รหัสผ่าน</th>
                 <th width="100" align="center" >ชื่อ</th>
                 <th width="100" align="center" >เบอร์โทร</th>
                 <th width="100" align="center" >อีเมล์</th>
