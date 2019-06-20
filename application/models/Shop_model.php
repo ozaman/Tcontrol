@@ -666,7 +666,7 @@ class Shop_model extends CI_Model {
   $datadriver["name"] = $_POST[contact_name];
   $datadriver["phone"] = $_POST[contact_phone];
   $datadriver["i_company"] = $_POST[contact_product_id];
- 
+ $datadriver['user_class'] = 'lab';
   $datadriver["status"] = 1;
   $datadriver["post_date"] = time();
   $datadriver["update_date"] = time();
@@ -682,7 +682,7 @@ class Shop_model extends CI_Model {
   $return[member_in] = $member_in;
 
   
-  $data_update[user_class] = 'lab';
+  
   $data_update[username] = 'LAB'.$member_in;
   $data_update[password] = $password;
   $this->db->where('id', $last_id_diver);
