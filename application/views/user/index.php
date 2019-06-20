@@ -41,7 +41,7 @@ else{
                 <th width="50" height="25">#</th>
                 <th width="60" align="center" ><font >สถานะ</font></th>
                 <!-- <th width="50" align="center" >แก้ไข</th> -->
-                <th width="50" align="center" >ภาพ</th>
+                <th width="100" align="center" >ภาพ</th>
                 <th width="130" align="center" >Username</th>
                 <th width="100" align="center" >Password</th>
                 <th width="100" align="center" >ชื่อ</th>
