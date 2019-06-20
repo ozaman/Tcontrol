@@ -36,8 +36,9 @@ $query = $this->db->get_where(TBL_PLAN_MAIN_LIST,$_where);
     $con_pack = $querys->row();
 
     $person = 0;
-
+    
     foreach ($query->result() as $key => $val) {
+      
       $tbl = $val->s_tbl;
       $_where = array();
       $_where[i_plan_pack] = $_GET[pack_id];
@@ -303,7 +304,6 @@ $query = $this->db->get_where(TBL_PLAN_MAIN_LIST,$_where);
           <?php
         }
         else if ($val->id == 5) {
-
           if ($con_pack->i_con_plan_main_list <= 0) {
             $_where = array();
             $_where[id] = $con_pack->id;
@@ -311,15 +311,19 @@ $query = $this->db->get_where(TBL_PLAN_MAIN_LIST,$_where);
             $result_insert = $this->db->update(TBL_PLAN_PACK_LIST,$data_up,$_where);
           }
 //          echo $con_pack->i_con_plan_main_list." ".$result_insert." +";
-          $data = $this->Main_model->rowdata(TBL_SHOPPING_PRODUCT_SUB,array('id' => $_GET[shop_id]));
+//          $data = $this->Main_model->rowdata(TBL_SHOPPING_PRODUCT_SUB,array('id' => $_GET[shop_id]));
           $_where = array();
 
-          $_where[main] = $data->main;
-          $_where[sub] = $data->id;
+//          $_where[main] = $data->main;
+//          $_where[sub] = $data->id;
+          $_where[main] = $_POST[main];
+          $_where[sub] = $_POST[sub];
           $_where[i_status] = 1;
+          
           $sub_type_list = $this->Main_model->fetch_data('','',TBL_SHOPPING_PRODUCT_SUB_TYPELIST,$_where,'',array('id' => 'asc'));
 //          echo "<pre>";
-//          print_r($sub_type_list);
+//          print_r($_POST);
+//          print_r($data);
 //          echo "</pre>";
           ?>
           <input type="hidden" value="<?=$con_pack->i_con_plan_main_list;?>" id="check_con_plan_main_list" />

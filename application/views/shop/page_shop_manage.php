@@ -9,7 +9,6 @@
     $func_saveForm = 'shop';
   }
   ?>
-
   <?php
   session_start();
   if ($_SESSION[level] >= 8) {
@@ -33,6 +32,8 @@
   <?php }?>
   <div class="section-body ">
     <input type="hidden" name="" id="manage_com" value="<?=$_GET[id];?>">
+    <input type="hidden" name="" id="sub" value="<?=$_GET[sub];?>">
+    <input type="hidden" name="" id="main" value="<?=$_GET[main];?>">
     <!-- 1 T-SHARE - SHOP
          2 T-SHARE - COMPANY
     -->
