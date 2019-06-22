@@ -3236,3 +3236,82 @@ function form_add_user() {
     }
   });
 }
+
+
+// search */*******************************
+$("#search_product").autocomplete({
+    minLength: 1,
+    source: function(req, add){
+      console.log(req)
+      var companyList =   $.ajax({
+            url: 'main/search', //Controller where search is performed
+            dataType: 'json',
+            type: 'POST',
+            data: req,
+            success: function(data){
+              if(data.response ==true){
+                
+                console.log(data)
+
+               
+              }
+              else{
+              }
+            }
+        });
+    },
+    select: function (event, ui) {
+
+      
+      console.log('*******************************************22222');
+     
+
+
+      var req = {
+        id: ui.item.station,
+
+      };
+      $.ajax({
+            url: 'main/search_select', //Controller where search is performed
+            dataType: 'json',
+            type: 'POST',
+            data: req,
+            success: function(res){
+              ckstation = 0;
+              console.log(res)
+               _region_s(res.OTHRET.region)
+              //var count = '<?=count($MEMBER);?>'
+
+              $('#id_station').val(res.OTHRET.id)
+              // _province(res.OTHRET.province)
+              $('#region').val(res.OTHRET.region)
+              $('#province').val(res.OTHRET.province)
+              $('#amphur').val(res.OTHRET.amphur)
+              $('#region_s').val(res.OTHRET.region)
+              $('#province_s').val(res.OTHRET.province)
+              $('#amphur_s').val(res.OTHRET.amphur)
+              $('#selectTypeCarPlace_edit').val(res.OTHRET.type)
+              
+              // selectTypeCarPlace_edit(res.OTHRET.type);
+
+            setTimeout(function() {
+
+              //  $('#amphur').val(res.OTHRET.amphur)
+
+               $('#radio-'+res.OTHRET.type).prop("checked", true);
+                // $('#station_other').val(res.OTHRET.id)
+              //  if (count == 0) {
+              //    $('#check_get_have').val(3)
+
+              //  }
+               }, 1000);
+                // console.log(res)
+
+ 
+
+              }
+            });
+          return false;
+      },
+
+  });

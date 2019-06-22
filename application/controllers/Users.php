@@ -43,6 +43,9 @@ class Users extends CI_Controller {
     $data = $this->Users_model->func_SaveData();
     echo json_encode($data);
   }
+   public function get_form_data() {
+    $this->load->view('user/form_data');
+  }
   
   
   
