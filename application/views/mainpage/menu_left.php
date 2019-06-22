@@ -55,6 +55,10 @@
       </ul><!--end /submenu -->
     </li><!--end /menu-item -->
     <!-- Menu Pages -->
+     <?php
+    session_start();
+    if ($_SESSION[level] >= 8) {
+      ?>
     <li id="head_user">
       <a href="javascript:void(0);">
         <i class="fa fa-users fa-fw"></i><span class="title">ผู้ใช้งานระบบ</span> <span class="expand-sign">+</span>
@@ -79,10 +83,11 @@
       </ul><!--end /submenu -->
     </li><!--end /menu-item -->
     <!-- Menu Tables -->
+    <!-- ?>
     <?php
-    session_start();
-    if ($_SESSION[level] >= 8) {
-      ?>
+   // session_start();
+   //if ($_SESSION[level] >= 8) {
+      ?> -->
       <li id="head_shop">
         <a href="javascript:void(0);">
           <i class="fa icon-app-uniF11A-1 fa-fw"></i><span class="title">จัดการร้านค้า</span> <span class="expand-sign">+</span>
@@ -147,6 +152,9 @@ else {?>
 
       </ul><!--end /submenu -->
     </li>
+    <?php
+    if ($_SESSION[level] >= 8) { 
+    ?>
     <li id="setting_app_menu">
       <a href="javascript:void(0);">
         <i class="fa fa-file-text-o"></i><span class="title">ข้อมูลระบบ</span> <span class="expand-sign">+</span>
@@ -159,6 +167,7 @@ else {?>
       </ul><!--end /submenu -->
 
     </li>
+    <?php }?>
     <!-- <li>
         <a href="javascript:void(0);">
             <i class="fa fa-user fa-fw"></i><span class="title">แก้ไขข้อมูลส่วนตัว</span> 

@@ -169,13 +169,20 @@ class Shop extends CI_Controller {
     $where[id] = $_SESSION['admin_use'];
     $query = $this->db->get_where(TBL_WEB_ADMIN,$where);
     $admin = $query->row();
-    if ($_SESSION['level'] < 8) {
+      $_where = array();
+    $_where['id'] = $admin->product_id;
+    $_select = array('*');
+    $SHOPPING_PRODUCT = $this->Main_model->rowdata(TBL_SHOPPING_PRODUCT,$_where,$_select);
+     
+    // if ($_SESSION['level'] < 8) {
 
-      if ($admin->product_id != $_GET[id] or $admin->sub != $_GET[sub] or $admin->main != $_GET[main]) {
-        header("Location: ".base_url()."shop/shop_manage?sub=".$admin->sub."&main=".$admin->main."&id=".$admin->product_id,true,301);
-        exit();
-      }
-    }
+    //   if ($admin->product_id != $_GET[id] or $admin->sub != $_GET[sub] or $admin->main != $_GET[main]) {
+    //      header("Location: ".base_url()."shop/shop_manage?sub=".$SHOPPING_PRODUCT->sub."&main=".$SHOPPING_PRODUCT->main."&id=".$SHOPPING_PRODUCT->id, true, 301);
+        
+    //     // header("Location: ".base_url()."shop/shop_manage?sub=".$admin->sub."&main=".$admin->main."&id=".$admin->product_id,true,301);
+    //     exit();
+    //   }
+    // }
     $_where = array();
     $_where['product_id'] = $_GET[id];
     $_select = array('*');

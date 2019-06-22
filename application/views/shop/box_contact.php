@@ -82,7 +82,8 @@
                         $s_class = 'text-danger';
                       }
                       ?>
-                      <span id="span_status<?=$value->id;?>"  class="<?=$s_class;?>" style="cursor: pointer;"><?=$text_status;?></span>
+                       <span id="span_status<?=$value->id;?>" onclick="updateStatus('<?=$value->id;?>','<?=$value->status;?>','<?=TBL_SHOPPING_CONTACT;?>')" class="<?=$s_class;?>" style="cursor: pointer;"><?=$text_status;?></span>
+                      <!-- <span id="span_status<?=$value->id;?>"  class="<?=$s_class;?>" style="cursor: pointer;"><?=$text_status;?></span> -->
                             </td>
                             <!-- <td >
                               <button type="button" class="btn btn-md btn-danger btn-equal" data-toggle="modal" data-target="#deleteModal" data-original-title="ลบ" onclick="firstDelete('<?=$value->name;?>','<?=$value->id;?>','<?=TBL_SHOPPING_CONTACT;?>')"><i class="fa fa-trash-o"></i></button>

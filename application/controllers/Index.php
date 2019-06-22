@@ -6,7 +6,7 @@ class Index extends CI_Controller {
 
   public function __construct() {
     parent::__construct();
-    // $this->load->model('Main_model');
+    $this->load->model('Main_model');
     // $this->load->model('Shop_model');
   }
 
@@ -18,8 +18,11 @@ class Index extends CI_Controller {
       $where[id] = $_SESSION['admin_use'];
       $query = $this->db->get_where(TBL_WEB_ADMIN,$where);
       $admin = $query->row();
-      
-      header("Location: ".base_url()."shop/shop_manage?sub=".$admin->sub."&main=".$admin->main."&id=".$admin->product_id, true, 301);
+      $_where = array();
+    $_where['id'] = $admin->product_id;
+    $_select = array('*');
+    $SHOPPING_PRODUCT = $this->Main_model->rowdata(TBL_SHOPPING_PRODUCT,$_where,$_select);
+      header("Location: ".base_url()."shop/shop_manage?sub=".$SHOPPING_PRODUCT->sub."&main=".$SHOPPING_PRODUCT->main."&id=".$SHOPPING_PRODUCT->id, true, 301);
       exit();
     }
     $_select = array('*');
