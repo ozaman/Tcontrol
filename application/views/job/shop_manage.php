@@ -63,32 +63,12 @@
   var check_run_shop = 0;
 
   var frist_socket = true;
-  
+
   var current = formatDate(new Date());
   countJob(current);
-  
-  socket.on('getbookinglab', function (data) {
-//    console.log(data);   
-    var done = [];
-    var proceed = [];
-    var waittrans = [];
-
-//    $('#proceed_job_num').text(data.length);
-
-
-
-
-
-//    console.log(array_data);
-    array_rooms = data;
-    var chk_menu = $('#check_func_now').val();
-    if (chk_menu == 1) {
-      render_job_shop();
-    }
-  });
 
   var dataorder = {
-    order: parseInt(153)
+    order: parseInt(606)
   };
   socket.on('connect', function () {
     console.log(dataorder);
@@ -99,4 +79,13 @@
     socket.emit('adduser', dataorder);
   });
 
+
+  socket.on('getbookinglab', function (data) {
+      console.log(data)
+    array_rooms = data;
+    var chk_menu = $('#check_func_now').val();
+    if (chk_menu == 1) {
+      render_job_shop();
+    }
+  });
 </script>

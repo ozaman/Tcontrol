@@ -1562,6 +1562,16 @@ function default_time_other() {
 }
 
 function form_detail_shop(id, op) {
+  console.log(id+" "+op);
+  if($('#select_category').val==""){
+    Command: toastr["error"]("บันทึกข้อมูลไม่สำเร็จ กรุณากรอกข้อมูลให้ครบด้วยค่ะ");
+    return;
+  }
+  if($('#select_type').val==""){
+    Command: toastr["error"]("บันทึกข้อมูลไม่สำเร็จ กรุณากรอกข้อมูลให้ครบด้วยค่ะ");
+    return;
+  }
+  return;
   console.log($('#form_shop_all').serialize());
   var url = base_url + "shop/submit_data_plan_time?shop_id=" + id + '&op=' + op;
   $.ajax({

@@ -2,7 +2,7 @@
 function render_job_shop() {
   var url = base_url + "job/render_shop";
   var param = {data: array_rooms};
-  console.log(param);
+//  console.log(param);
   $.ajax({
     url: url,
     data: param,
