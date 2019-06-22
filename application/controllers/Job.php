@@ -42,9 +42,26 @@ class Job extends CI_Controller {
   }
   
   public function count_shop_job() {
+    session_start();
+				
+    $_where = array();
+    $_where[id] = $_SESSION['admin_use'];
+    $this->db->select('product_id');
+    $admins = $this->db->get_where(TBL_WEB_ADMIN, $_where);
+    $admin = $admins->row();
+    
+//    echo $_SESSION['admin_use'];
+//    echo json_encode($admin);
+//    exit();
+    
     $_where = array();
     $_where[transfer_date] = $_POST[date];
+    if($admin->product_id>0){
+      $_where[program] = $admin->product_id;
+    }
+    $this->db->select('id');
     $query_all = $this->db->get_where(TBL_ORDER_BOOKING, $_where);
+    
     
     $result[all] = $query_all->num_rows();
     
@@ -52,6 +69,10 @@ class Job extends CI_Controller {
     $_where[transfer_date] = $_POST[date];
     $_where[check_tran_job] = 0;
     $_where[driver_complete] = 0;
+    if($admin->product_id>0){
+      $_where[program] = $admin->product_id;
+    }
+    $this->db->select('id');
     $query_all = $this->db->get_where(TBL_ORDER_BOOKING, $_where);
     $result[process] = $query_all->num_rows();
     
@@ -60,6 +81,10 @@ class Job extends CI_Controller {
     $_where[check_tran_job] = 1;
     $_where[check_lab_pay] = 1;
     $_where[transfer_money] = 0;
+    if($admin->product_id>0){
+      $_where[program] = $admin->product_id;
+    }
+    $this->db->select('id');
     $query_waittrans = $this->db->get_where(TBL_ORDER_BOOKING, $_where);
     
     $result[wait_trans] = $query_waittrans->num_rows();
