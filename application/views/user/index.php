@@ -1,11 +1,13 @@
 <?php
+
+// $category = $this->Main_model->rowdata(TBL_WEB_ADMIN,array('id' => $_GET[id]));
+
 $_where = array();
-         $_where['levelname'] = $_GET[type];
+         // $_where['levelname'] = $_GET[type];
         $_select = array('*');
          $_order = array();
             $_order['id'] = 'asc'; 
-$arr[WEB_ADMIN] = $this->Main_model->fetch_data('','',TBL_WEB_ADMIN,$_where,$_select,$_order);
-// $category = $this->Main_model->rowdata(TBL_WEB_ADMIN,array('id' => $_GET[id]));
+$arr[SHOPPING_PRODUCT] = $this->Main_model->fetch_data('','',TBL_SHOPPING_PRODUCT,'',$_select,$_order);
 
 if ($_GET[type] == 'admin') {
   $txt_add = 'ผู้ดูแลระบบ';
@@ -31,82 +33,84 @@ else{
         <div class="box-head">
           <div class="box-body" style="padding-bottom: 0">
             <!-- <a href="<?=base_url(); ?>shop/data_shop_categorie"><button class="btn " ><span><i class="fa fa-chevron-left" ></i> </span>กลับ</button></a> -->
-            <button class="btn btn-success" onclick="func_openFormadd('<?=$_GET[type]; ?>','<?=$txt_add;?>');"><span><i class="fa fa-plus"></i> </span>เพิ่ม<?=$txt_add;?></button>
+            <table width="100%">
+              <tr>
+                <td><button class="btn btn-success" onclick="func_openFormadd('<?=$_GET[type]; ?>','<?=$txt_add;?>');"><span><i class="fa fa-plus"></i> </span>เพิ่ม<?=$txt_add;?></button></td>
+                <td>
+                  <select id="select_type_search" class="form-control " name="shop_product"> <?=$chk_disabled;?> >
+                        <option value="">เลือกชื่อร้านค้า</option>
+                        <?php
+                        foreach ($arr[SHOPPING_PRODUCT] as $key => $value) {
+                          
+                          ?>
+                          <option value="<?=$value->id;?>"   ><?=$value->topic_th;?></option>
+                        <?php }?>
+
+                      </select>
+                </td>
+                <td ><button class="btn btn-success" onclick="get_data()" style="margin-left: 5px"><span> </span>Reset</button></td>
+              </tr>
+            </table>
+            
+           
           </div>
         </div>
-        <div class="box-body table-responsive">
-          <table class="table table-hover table-striped no-margin">
-            <thead>
-              <tr>
-                <th width="50" height="25">#</th>
-                <th width="60" align="center" ><font >สถานะ</font></th>
-                <!-- <th width="50" align="center" >แก้ไข</th> -->
-                <th width="100" align="center" >ภาพ</th>
-                <th width="130" align="center" >ชื่อผู้ใช้งาน</th>
-                <th width="100" align="center" >รหัสผ่าน</th>
-                <th width="100" align="center" >ชื่อ</th>
-                <th width="100" align="center" >เบอร์โทร</th>
-                <th width="100" align="center" >อีเมล์</th>
-                
-                <th width="150" align="center" >ชื่อบริษัท</th>
-                
-                <!-- <th width="50" align="center" ><font >ลบ</font></th> -->
-              </tr>
-            </thead>
-            <tbody>
-              <?php
-              foreach($arr[WEB_ADMIN] as $key => $val) {
-                $_where = array();
-        $_where['id'] = $val->product_id;
-        $_select = array('*');
-        $SHOPPING_PRODUCT = $this->Main_model->rowdata(TBL_SHOPPING_PRODUCT,$_where,$_select);
-                // $count_sub = $this->Main_model->rows(TBL_SHOPPING_PRODUCT,array('sub' => $val->id));
-                // $count_type_list = $this->Main_model->rows(TBL_SHOPPING_PRODUCT_SUB_TYPELIST,array('sub' => $val->id,'i_status'=>1));
-                ?>
-                <tr  id="tr_delete<?=$val->id; ?>">
-                  <td><?=$key + 1; ?></td>
-                  <td>
-                    <?php
-                    if($val->status == 0) {
-                      $text_status = 'ปิด';
-                      $s_class = 'text-danger';
-                    }
-                    else {
-                      $text_status = 'เปิด';
-                      $s_class = 'text-success';
-                    }
-                    ?>
-                    <span id="span_status<?=$val->id; ?>" onclick="updateStatus('<?=$val->id; ?>', '<?=$val->status; ?>', '<?=TBL_SHOPPING_PRODUCT_SUB; ?>')" class="<?=$s_class; ?>" style="cursor: pointer;"><?=$text_status; ?></span>
-                  </td>
-                 <!--  <td>
-                    <a style="cursor:pointer;" onclick="//func_openForm('<?=$val->id; ?>', '<?=TBL_SHOPPING_PRODUCT_SUB; ?>', 'แก้ไขประเภท :: <?=$val->topic_th; ?> / <?=$val->topic_en; ?> / <?=$val->topic_cn; ?>', '<?=$val->main; ?>');" class="text-primary">
-                      <i class="fa fa-edit fa-lg" ></i>
-                    </a>
-                  </td> -->
-                   <td><span><img id="img_logo_shop" src="../../data/pic/place/<?=$SHOPPING_PRODUCT->pic_logo?>?v=<?=time()?>" alt="" style="cursor: pointer;width:100%;border-radius: 5px;" title="แก้ไข"></span></td>
-
-                   <td><span><?=$val->username; ?></span></td>
-                   <td><span><?=$val->password; ?></span></td>
-                   <td><span><?=$val->name; ?></span></td>
-                   <td><span><?=$val->phone; ?></span></td>
-                   <td><span><?=$val->email; ?></span></td>
-                   <td><span class="text-primary"><?=$SHOPPING_PRODUCT->topic_th; ?></span> / <span ><?=$SHOPPING_PRODUCT->topic_en; ?></span> / <span class="text-success"><?=$SHOPPING_PRODUCT->topic_cn; ?></span></td>
-
-
-
-
-                 
-                  
-                  <!-- <td>
-                    <button onclick="func_openFormDel('<?=$val->id; ?>', '<?=TBL_SHOPPING_PRODUCT_SUB; ?>', '<?=$val->topic_th; ?> / <?=$val->topic_en; ?> / <?=$val->topic_cn; ?>')" type="button" class="btn btn-xs btn-danger btn-equal" data-toggle="modal" data-target="#deleteModalBase"><i class="fa fa-trash-o"></i></button>
-                  </td> -->
-                </tr>
-                </tr>
-                <?php
-              }
-              ?>
-            </tbody>
-          </table>
-        </div><!--end .box-body -->
+        <div id="form_data" >
+          
+        </div>
+        
       </div><!--end .box -->
     </div>
+  </div>
+</div>
+
+<script type="text/javascript">
+get_data()
+  function get_data() {
+    var type = '<?=$_GET[type];?>';
+    var url2 = base_url + "users/get_form_data?opt=all&type=" + type;
+    console.log(base_url)
+    // var param = {
+    //   i_shop: item
+    // }
+    console.log('************************************')
+    console.log(url2)
+    $.ajax({
+      url: url2,
+      // data: param,
+      type: 'post',
+      error: function () {
+        console.log('Error Profile');
+      },
+      success: function (ele) {
+        // console.log(ele);
+        $('#form_data').html(ele);
+
+      }
+    });
+  }
+  
+  $('#select_type_search').on('change', function() {
+    var type = '<?=$_GET[type];?>';
+    var url2 = base_url + "users/get_form_data?opt=search&type=" + type+'&id='+$('#select_type_search').val();
+    console.log(base_url)
+    // var param = {
+    //   i_shop: item
+    // }
+    console.log('************************************')
+    console.log($('#select_type_search').val())
+    $.ajax({
+      url: url2,
+      // data: param,
+      type: 'post',
+      error: function () {
+        console.log('Error Profile');
+      },
+      success: function (ele) {
+        // console.log(ele);
+        $('#form_data').html(ele);
+
+      }
+    });
+  });
+</script>
