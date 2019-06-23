@@ -34,6 +34,7 @@ class Login_model extends CI_Model
 				$data[msg] = 'สำเร็จ';
 				session_start();
 				$_SESSION['admin_use'] = $data[ADMIN]->id;
+				$_SESSION['company'] = $data[ADMIN]->product_id;
 				$_SESSION['level'] = $data[ADMIN]->level;
 				
 				$this->load->library('session');

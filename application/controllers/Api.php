@@ -196,7 +196,12 @@ class Api extends CI_Controller {
     }
     if ($status != "") {
       $sql_status = " and status = '".$status."' ";
-    }$sql = "select * from order_booking where driver_complete = 1 ".$sql_date.$sql_status.$sql_class." order by id desc";
+    }
+    session_start();
+    if($_SESSION['company']>0){
+      $filter_company = " and program = ".$_SESSION['company'];
+    }
+    $sql = "select * from order_booking where driver_complete = 1 ".$sql_date.$sql_status.$sql_class.$filter_company." order by id desc";
     $query = $this->db->query($sql);
 
     foreach ($query->result() as $row) {
