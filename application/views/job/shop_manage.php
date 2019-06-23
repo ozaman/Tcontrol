@@ -67,25 +67,79 @@
   var current = formatDate(new Date());
   countJob(current);
 
+//  $.ajax({
+//    url: base_url + "job/get_id_web_driver",
+//    dataType: 'json',
+//    type: 'post',
+//    success: function (res) {
+//      console.log(res);
+//      if(res.admin >0 ){
+//        connectSocket(res.dv);
+//        socketEachdata();
+//      }else{
+//        connectSocket(0);
+//        socketAlldata();
+//      }
+//      
+//    }
+//  });
+  
+//  function connectSocket(id){
+//    var dataorder = {
+//        order: parseInt(id)
+//      };
+//      socket.on('connect', function () {
+//        console.log(dataorder);
+//        socket.emit('adduser', dataorder);
+//      });
+//  }
+//  
+//  function socketEachdata() {
+//    socket.on('getbookinglab', function (data) {
+//      console.log(data)
+//      array_rooms = data;
+//      array_rooms = [];
+//      console.log(array_rooms);
+//      var chk_menu = $('#check_func_now').val();
+//      if (chk_menu == 1) {
+//        render_job_shop();
+//      }
+//    });
+//  }
+//  function socketAlldata() {
+//    socket.on('monitor', function (rooms, data) {
+//      array_rooms = [];
+//      // console.log('in case monitor')
+//      array_rooms = data;
+//      // console.log(all_data)
+////      array_rooms = data;
+//      console.log(array_rooms);
+//      var chk_menu = $('#check_func_now').val();
+//      if (chk_menu == 1) {
+//        render_job_shop();
+//      }
+//    });
+//  }
+  
+  
   var dataorder = {
-    order: parseInt(606)
-  };
-  socket.on('connect', function () {
-    console.log(dataorder);
-    // call the server-side function 'adduser' and send one parameter (value of prompt)
-    // socket.emit('addroom', prompt("What's your name?"));
-    //	  socket.emit('addroom', name);
-    //	  socket.emit('sendchat', '');
-    socket.emit('adduser', dataorder);
-  });
-
-
-  socket.on('getbookinglab', function (data) {
-      console.log(data)
-    array_rooms = data;
-    var chk_menu = $('#check_func_now').val();
-    if (chk_menu == 1) {
-      render_job_shop();
-    }
-  });
+        order: parseInt(1)
+      };
+      socket.on('connect', function () {
+//        console.log(dataorder);
+        socket.emit('adduser', dataorder);
+      });
+      
+  socket.on('monitor', function (rooms, data) {
+      array_rooms = [];
+      // console.log('in case monitor')
+      array_rooms = data;
+      // console.log(all_data)
+//      array_rooms = data;
+      console.log(array_rooms);
+      var chk_menu = $('#check_func_now').val();
+      if (chk_menu == 1) {
+        render_job_shop();
+      }
+    });
 </script>

@@ -887,6 +887,7 @@ class Shop extends CI_Controller {
     $data = $this->Shop_model->change_status_planpack();
     echo json_encode($data);
   }
+  
   ################################ SHOP #################################
 }
 
