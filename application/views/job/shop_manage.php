@@ -123,7 +123,7 @@
   
   
   var dataorder = {
-        order: parseInt(1)
+        order: parseInt(606)
       };
       socket.on('connect', function () {
 //        console.log(dataorder);
@@ -142,4 +142,5 @@
         render_job_shop();
       }
     });
+//    alert();
 </script>
