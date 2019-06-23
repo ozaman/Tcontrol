@@ -168,7 +168,8 @@ class Api extends CI_Controller {
     else {
       $dv = "";
     }
-    $curl_post_data2 = '{"driver_id":"'.$dv.'","date":"'.$date.'"}';
+    session_start();
+    $curl_post_data2 = '{"driver_id":"'.$dv.'","date":"'.$date.', "program": '.$_SESSION[company].'}';
 //attach encoded JSON string to the POST fields
     curl_setopt($ch,CURLOPT_POSTFIELDS,$curl_post_data2);
 //set the content type to application/json
