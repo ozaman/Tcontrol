@@ -185,34 +185,34 @@ foreach ($_POST[data] as $key => $val) {
       <table width="100%" class="table-cus" style="margin-top: -9px;">
         <tr>
           <td style="<?=$lab_approve_color;?>" class="font-15">
-            <a data-toggle="modal" data-target="#md_modal" onclick="viewDetailWorkstep(<?=$val[id];?>,'lab_approve');"><span class="x"><i class="<?=$lab_approve_icon;?>" aria-hidden="true"></i></span>
-            พนักงานรับทราบงาน</a>
+            <a data-toggle="modal" data-target="#md_modal" onclick="viewDetailWorkstep(<?=$val[id];?>, 'lab_approve');"><span class="x"><i class="<?=$lab_approve_icon;?>" aria-hidden="true"></i></span>
+              พนักงานรับทราบงาน</a>
           </td>
 
           <td style="<?=$driver_topoint_color;?>" class="font-15">
-            <a onclick="viewDetailWorkstep(<?=$val[id];?>,'driver_topoint');"><span class="x"><i class="<?=$driver_topoint_icon;?>" aria-hidden="true"></i></span>
+            <a onclick="viewDetailWorkstep(<?=$val[id];?>, 'driver_topoint');"><span class="x"><i class="<?=$driver_topoint_icon;?>" aria-hidden="true"></i></span>
               คนขับถึงสถานที่</a>
           </td>
         </tr>
         <tr>
           <td style="<?=$guest_receive_color;?>" class="font-15">
-            <a onclick="viewDetailWorkstep(<?=$val[id];?>,'guest_receive');"><span class="x"><i class="<?=$guest_receive_icon;?>" aria-hidden="true"></i></span>
+            <a onclick="viewDetailWorkstep(<?=$val[id];?>, 'guest_receive');"><span class="x"><i class="<?=$guest_receive_icon;?>" aria-hidden="true"></i></span>
               พนักงานรับแขก</a>
           </td>
 
           <td style="<?=$guest_register_color;?>" class="font-15">
-            <a onclick="viewDetailWorkstep(<?=$val[id];?>,'guest_register');"><span class="x"><i class="fa <?=$guest_register_icon;?>" aria-hidden="true"></i></span>
+            <a onclick="viewDetailWorkstep(<?=$val[id];?>, 'guest_register');"><span class="x"><i class="fa <?=$guest_register_icon;?>" aria-hidden="true"></i></span>
               พนักงานลงทะเบียน</a>
           </td>
         </tr>
         <tr>
           <td style="<?=$lab_pay_color;?>" class="font-15">
-            <a onclick="viewDetailWorkstep(<?=$val[id];?>,'lab_pay');"><span class="x"><i class="fa <?=$lab_pay_icon;?>" aria-hidden="true"></i></span>
+            <a onclick="viewDetailWorkstep(<?=$val[id];?>, 'lab_pay');"><span class="x"><i class="fa <?=$lab_pay_icon;?>" aria-hidden="true"></i></span>
               พนักงานยืนยันการจ่ายเงิน</a>
           </td>
 
           <td class="font-15" style="<?=$driver_pay_color;?>">
-            <a onclick="viewDetailWorkstep(<?=$val[id];?>,'driver_pay');"><span class="x"><i class="fa <?=$driver_pay_icon;?>" aria-hidden="true"></i></span>
+            <a onclick="viewDetailWorkstep(<?=$val[id];?>, 'driver_pay');"><span class="x"><i class="fa <?=$driver_pay_icon;?>" aria-hidden="true"></i></span>
               คนขับยืนยันการรับเงิน</a>
           </td>
         </tr>
@@ -226,11 +226,10 @@ foreach ($_POST[data] as $key => $val) {
             $transfer_icon = "fa fa-check";
             $transfer_color = "color:#4CAF50";
           }
-          
+
           if ($val[driver_approve] <= 0) {
             $driver_approve_icon = "fa fa-times";
             $driver_approve_color = "color:#e51400";
-            
           }
           else {
             $driver_approve_icon = "fa fa-check";
@@ -239,12 +238,12 @@ foreach ($_POST[data] as $key => $val) {
           ?>
           <tr>
             <td style="<?=$transfer_color;?>" class="font-15">
-              <a onclick="viewDetailWorkstep(<?=$val[id];?>,'transfer_money');"><span class="x"><i class="fa <?=$transfer_icon;?>" aria-hidden="true"></i></span>
+              <a onclick="viewDetailWorkstep(<?=$val[id];?>, 'transfer_money');"><span class="x"><i class="fa <?=$transfer_icon;?>" aria-hidden="true"></i></span>
                 แจ้งโอนเงิน</a>
             </td>
 
             <td class="font-15" style="<?=$driver_approve_color;?>">
-              <a onclick="viewDetailWorkstep(<?=$val[id];?>,'driver_approve');"><span class="x"><i class="fa <?=$driver_approve_icon;?>" aria-hidden="true"></i></span>
+              <a onclick="viewDetailWorkstep(<?=$val[id];?>, 'driver_approve');"><span class="x"><i class="fa <?=$driver_approve_icon;?>" aria-hidden="true"></i></span>
                 คนขับยืนยันการรับโอน</a>
             </td>
           </tr>
@@ -316,8 +315,18 @@ foreach ($_POST[data] as $key => $val) {
           <td>
             <span class="font-16" >
               <?php
-              $query_lab = $this->db->query("SELECT id,phone,name,usertype FROM shopping_contact  WHERE product_id='".$res_ps->id."' and type='phone' and status=1");
+              $query_lab = $this->db->query("SELECT id,phone,name,usertype FROM shopping_contact  WHERE product_id='".$res_ps->id."' and type='phone'  and i_online = 1");
               foreach ($query_lab->result() as $key => $val) {
+//                $this->db->select('id,i_user_contact');
+//                $_where = array();
+//                $_where[i_user_id] = $row->id;
+//                $query_lab = $this->db->get_where('tbl_ability_user',$_where);
+//                $check_status_lab = $query_lab->row();
+//                if ($check_status_lab == false) {
+//                  $return[msg] = 'ผู้ใช้ถูกปิดการใช้งาน กรุณาติดต่อผู้ดูแลของท่าน';
+//                  $return[status] = false;
+//                  return $return;
+//                }
                 ?>
                 <a style='cursor: pointer;'><?=$val->phone." (".$val->name.")";?></a><br/>
               <?php }

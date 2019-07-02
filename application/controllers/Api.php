@@ -217,6 +217,7 @@ class Api extends CI_Controller {
     $return[sql] = $sql;
     echo json_encode($return);
   }
+  
 
   public function detect_driver_approve_transfer() {
     $url = "http://www.welovetaxi.com:3000/recheckBooking";

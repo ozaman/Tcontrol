@@ -101,14 +101,14 @@ class Job extends CI_Controller {
 
     if ($admin->product_id > 0) {
       $_where = array();
-      $_where[id] = $admin->product_id;
-      $this->db->select('id');
+      $_where[i_company] = $admin->product_id;
+      $this->db->select('id, username');
       $dvs = $this->db->get_where(TBL_WEB_DRIVER,$_where);
       $dv = $dvs->row();
-      $return[dv] = $dv->id;
+      $return[dv] = $dv;
     }
     $return[admin] = $admin->product_id;
-    echo json_encode($admin);
+    echo json_encode($return);
   }
 
   // ================================================================================================
