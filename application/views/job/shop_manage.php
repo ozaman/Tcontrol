@@ -98,15 +98,15 @@ $admin = $admins->row();
   
   var dataorder = {
 //    order: parseInt(id),
-    company_id: id
+    company_id:  parseInt(id)
             
   };
   socket.on('connect', function () {
-//        console.log(dataorder);
+        console.log(dataorder);
     socket.emit('usercompany', dataorder);
   });
 
-    socket.on('monitor', function (rooms, data) {
+    socket.on('CONMONITOR', function (rooms, data) {
       array_rooms = [];
       // console.log('in case monitor')
       array_rooms = data;
