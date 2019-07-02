@@ -64,14 +64,14 @@ $this->db->select('product_id');
 $admins = $this->db->get_where(TBL_WEB_ADMIN,$_where);
 $admin = $admins->row();
 
-if ($admin->product_id > 0) {
-  $_where = array();
-  $_where[i_company] = $admin->product_id;
-  $this->db->select('id, username');
-  $dvs = $this->db->get_where(TBL_WEB_DRIVER,$_where);
-  $dv = $dvs->row();
-//  $return[dv] = $dv;
-}
+//if ($admin->product_id > 0) {
+//  $_where = array();
+//  $_where[i_company] = $admin->product_id;
+//  $this->db->select('id, username');
+//  $dvs = $this->db->get_where(TBL_WEB_DRIVER,$_where);
+//  $dv = $dvs->row();
+////  $return[dv] = $dv;
+//}
 ?>
 <script>
   var array_rooms = [];
@@ -84,36 +84,38 @@ if ($admin->product_id > 0) {
   var current = formatDate(new Date());
   countJob(current);
 
-  var sss = '<?=$admin->product_id;?>';
-  if (sss > 0) {
-    var id = '<?=$dv->id;?>';
-  } else {
-    var id = 606;
-  }
+  var id = '<?=$admin->product_id;?>';
+
   console.log("++++++++++++++++++++");
   console.log(id);
+//  if (id > 0) {
+//    console.log('company');
+//    var socket_txt = 'usercompany';
+//  } else {
+//    console.log('monitor');
+//    var socket_txt = 'monitor';
+//  }
   
   var dataorder = {
-    order: parseInt(id)
+//    order: parseInt(id),
+    company_id: id
+            
   };
   socket.on('connect', function () {
 //        console.log(dataorder);
-    socket.emit('adduser', dataorder);
+    socket.emit('usercompany', dataorder);
   });
 
-
-  socket.on('monitor', function (rooms, data) {
-    array_rooms = [];
-    // console.log('in case monitor')
-    array_rooms = data;
-    // console.log(all_data)
+    socket.on('monitor', function (rooms, data) {
+      array_rooms = [];
+      // console.log('in case monitor')
+      array_rooms = data;
+      // console.log(all_data)
 //      array_rooms = data;
-    console.log(array_rooms);
-    var chk_menu = $('#check_func_now').val();
-    if (chk_menu == 1) {
-      render_job_shop();
-    }
+      console.log(array_rooms);
+      var chk_menu = $('#check_func_now').val();
+      if (chk_menu == 1) {
+        render_job_shop();
+      }
   });
-
-//    alert();
 </script>
