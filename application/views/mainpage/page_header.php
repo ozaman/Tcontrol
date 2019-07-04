@@ -32,8 +32,7 @@
     <link type="text/css" rel="stylesheet" href="<?=base_url();?>assets/css/modules/boostbox/css/theme-default/libs/wysihtml5/wysihtml5.css" />
 
     <link type="text/css" rel="stylesheet" href="<?=base_url();?>assets/custom/css/main.css?v=<?=time()?>">
-    <link type="text/css" rel="stylesheet" href="<?=base_url();?>assets/css/modules/boostbox/css/theme-default/libs/bootstrap-datetimepicker/bootstrap-colorpicker.css?v=<?=time();?>">
-    <link type="text/css" rel="stylesheet" href="<?=base_url();?>assets/css/modules/boostbox/css/theme-default/libs/bootstrap-datetimepicker/bootstrap-datetimepicker.css?v=<?=time();?>">
+
     <script>
       var base_url = '<?=base_url();?>';
       var call_toastr = 0;
@@ -70,8 +69,7 @@
     <script src="<?=base_url();?>assets/js/modules/boostbox/libs/toastr/toastr.min.js"></script><!-- <script src="<?=base_url();?>assets/js/modules/boostbox/libs/autosize/jquery.autosize.min.js"></script> -->
     <script src="<?=base_url();?>assets/js/modules/boostbox/libs/slimscroll/jquery.slimscroll.min.js"></script>
     <script src="<?=base_url();?>assets/js/modules/boostbox/libs/moment/moment.min.js?v=<?=time();?>"></script>
-    <script src="<?=base_url();?>assets/js/modules/boostbox/libs/bootstrap-colorpicker/bootstrap-colorpicker.min.js?v=<?=time();?>"></script>
-    <script src="<?=base_url();?>assets/js/modules/boostbox/libs/bootstrap-colorpicker/bootstrap-datetimepicker.js?v=<?=time();?>"></script>
+
     <script src="<?=base_url();?>assets/js/modules/boostbox/core/demo/DemoFormEditors.js"></script>
     <script src="<?=base_url();?>assets/js/modules/boostbox/core/App.js"></script>
     <script src="<?=base_url();?>assets/js/modules/boostbox/core/demo/Demo.js?v=<?=time()?>"></script>
@@ -84,30 +82,41 @@
     <script src="<?=base_url();?>assets/custom/js/setting.js?v=<?=time()?>"></script>
     <script src="<?=base_url();?>assets/custom/js/shop_trans.js?v=<?=time()?>"></script>
     <script src="<?=base_url();?>assets/custom/js/job.js?v=<?=time()?>"></script>
-    
+
     <script src="https://www.welovetaxi.com:3443/socket.io/socket.io.js?v=<?=time()?>"></script>
     <!-- END STYLESHEETS -->
     <script>
-      var loader =  '<div align="center"><img src="'+base_url+'assets/img/loading.gif"/ width="300px"></div>';
+      var loader = '<div align="center"><img src="' + base_url + 'assets/img/loading.gif"/ width="300px"></div>';
 //      console.log(loader);
     </script>
+    
+<link href="<?=base_url();?>assets/datetimepicker/bootstrap/css/bootstrap.css?v=<?=time();?>" rel="stylesheet" media="screen">
+<link type="text/css" rel="stylesheet" href="<?=base_url();?>assets/datetimepicker/css/bootstrap-datetimepicker.css?v=<?=time();?>">
+<script src="<?=base_url();?>assets/datetimepicker/js/bootstrap-datetimepicker.js?v=<?=time()?>"></script>
+<script src="<?=base_url();?>assets/datetimepicker/js/locales/bootstrap-datetimepicker.th.js?v=<?=time()?>"></script>
+
+    <!--<link type="text/css" rel="stylesheet" href="<?=base_url();?>assets/css/modules/boostbox/css/theme-default/libs/bootstrap-datetimepicker/bootstrap-colorpicker.css?v=<?=time();?>">-->
+    <!--<link type="text/css" rel="stylesheet" href="<?=base_url();?>assets/css/modules/boostbox/css/theme-default/libs/bootstrap-datetimepicker/bootstrap-datetimepicker.css?v=<?=time();?>">-->
+
+    <!--<script src="<?=base_url();?>assets/js/modules/boostbox/libs/bootstrap-colorpicker/bootstrap-colorpicker.min.js?v=<?=time();?>"></script>-->
+    <!--<script src="<?=base_url();?>assets/js/modules/boostbox/libs/bootstrap-colorpicker/bootstrap-datetimepicker.js?v=<?=time();?>"></script>-->
 
     <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
     <!--[if lt IE 9]>
 <script type="text/javascript" src="/assets/js/modules/materialadmin/libs/utils/html5shiv.js?1422823601"></script>
 <script type="text/javascript" src="/assets/js/modules/materialadmin/libs/utils/respond.min.js?1422823601"></script>
 <![endif]-->
-  
+
 
 
     <?php
     if ($_COOKIE[savedata] == 1) {
       ?>
       <script>
-        call_toastr = 1;
-        var page_title = "บันทึกข้อมูลสำเร็จ";
-        var page_msg = "";
-        var page_type = 'success';
+      call_toastr = 1;
+      var page_title = "บันทึกข้อมูลสำเร็จ";
+      var page_msg = "";
+      var page_type = 'success';
       </script>
       <?php
 //       @setcookie('savedata');
