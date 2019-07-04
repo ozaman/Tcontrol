@@ -88,6 +88,7 @@ class Job extends CI_Controller {
     $query_waittrans = $this->db->get_where(TBL_ORDER_BOOKING,$_where);
 
     $result[wait_trans] = $query_waittrans->num_rows();
+    $result[admin] = $admin;
     echo json_encode($result);
   }
 
