@@ -126,7 +126,7 @@ $admin = $admins->row();
   var frist_socket = true;
 
   var current = formatDate(new Date());
-  countJob(current);
+
 
   var id = '<?=$admin->product_id;?>';
 
@@ -151,6 +151,7 @@ $admin = $admins->row();
   });
 
   socket.on('CONMONITOR', function (rooms, data) {
+    countJob(current);
     array_rooms = [];
     // console.log('in case monitor')
     array_rooms = data;
