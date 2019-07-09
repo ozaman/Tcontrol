@@ -192,6 +192,20 @@ define('TBL_WEB_BANK_LIST', 'web_bank_list');
 define('TBL_WEB_BANK_COMPANY', 'web_bank_company');
 
 
+define('TBL_COM_ORDER_BOOKING', 'tbl_com_order_booking');
+define('TBL_COM_ORDER_BOOKING_LOGS', 'tbl_com_order_booking_logs');
+define('TBL_COM_ORDER_BOOKING_COMPANY_LOGS', 'tbl_com_order_booking_company_logs');
+
+define('TBL_COM_ORDER_BOOKING_COM', 'tbl_order_booking_com');
+define('TBL_COM_ORDER_BOOKING_COM_COMPANY', 'tbl_order_booking_com_company');
+
+define('TBL_COM_ORDER_BOOKING_CHANGE_PLAN', 'tbl_order_booking_com_change_plan');
+define('TBL_COM_ORDER_BOOKING_COMPANY_CHANGE_PLAN', 'tbl_order_booking_com_company_change_plan');
+
+define('TBL_PAY_HIS_DRIVER_SHOPPING', '	pay_history_driver_shopping');
+define('TBL_WEB_BANK_DRIVER', '	web_bank_driver');
+define('TBL_CHANGE_PLAN_LOGS', 'tbl_change_plan_logs');
+define('SHOP_TYPE_CHANGE_PLAN', 'shop_type_change_plan');
 
 
 

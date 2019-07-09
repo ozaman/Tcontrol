@@ -182,11 +182,11 @@ foreach ($_POST[data] as $key => $val) {
       </table>
     </div>
     <div class="col-md-4">
-      <table width="100%" class="table-cus" style="margin-top: -9px;">
+      <table width="100%" class="table-cus" style="margin-top: 0;">
         <tr>
           <td style="<?=$lab_approve_color;?>" class="font-15">
             <a data-toggle="modal" data-target="#md_modal" onclick="viewDetailWorkstep(<?=$val[id];?>, 'lab_approve');"><span class="x"><i class="<?=$lab_approve_icon;?>" aria-hidden="true"></i></span>
-              พนักงานรับทราบงาน</a>
+              พนักงานรับทราบ</a>
           </td>
 
           <td style="<?=$driver_topoint_color;?>" class="font-15">

@@ -215,6 +215,7 @@ foreach ($_POST[data] as $key => $val) {
         </li>
       </ul>
     </div>
+    
     <div class="col-md-3" align="center">
       <b class="font-16">ติดต่อ</b>
       <table width="100%">
@@ -248,12 +249,22 @@ foreach ($_POST[data] as $key => $val) {
           <td>
             <span class="font-16" >
               <?php
-              $query_lab = $this->db->query("SELECT id,phone,name,usertype FROM shopping_contact  WHERE product_id='".$res_ps->id."' and type='phone' and status=1");
+              $query_lab = $this->db->query("SELECT id,phone,name,usertype FROM shopping_contact  WHERE product_id='".$res_ps->id."' and type='phone'  and i_online = 1");
               foreach ($query_lab->result() as $key => $val) {
+//                $this->db->select('id,i_user_contact');
+//                $_where = array();
+//                $_where[i_user_id] = $row->id;
+//                $query_lab = $this->db->get_where('tbl_ability_user',$_where);
+//                $check_status_lab = $query_lab->row();
+//                if ($check_status_lab == false) {
+//                  $return[msg] = 'ผู้ใช้ถูกปิดการใช้งาน กรุณาติดต่อผู้ดูแลของท่าน';
+//                  $return[status] = false;
+//                  return $return;
+//                }
                 ?>
                 <a style='cursor: pointer;'><?=$val->phone." (".$val->name.")";?></a><br/>
-  <?php }
-  ?>
+              <?php }
+              ?>
             </span>
           </td>
         </tr>

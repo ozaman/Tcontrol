@@ -107,6 +107,37 @@ function openHistoryShopJob(date) {
   });
 }
 
+function openPayTransferShopJob(date) {
+  console.log(date);
+  $('#body_list_shop_hise').html(loader);
+  var url = base_url + "api/shop_pay_transfer";
+  var param = {
+    date: date,
+    class_name: "lab"
+  };
+  $.ajax({
+    url: url,
+    data: param,
+    dataType: 'json',
+    type: 'post',
+    error: function () {
+      console.log('Error Profile');
+    },
+    success: function (res) {
+      console.log(res);
+      var url = base_url + "job/render_shop_pay_tran";
+      $.ajax({
+        url: url,
+        data: res,
+        type: 'post',
+        success: function (ele) {
+          $('#body_list_shop_hise').html(ele);
+        }
+      });
+    }
+  });
+}
+
 function countJob(date) {
   var url = base_url + "job/count_shop_job";
 

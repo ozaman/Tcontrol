@@ -31,6 +31,25 @@
 
   <!-- END MENU SEARCH -->
 
+  <?php
+  $url = $actual_link = (isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] === 'on' ? "https" : "http") . "://{$_SERVER['HTTP_HOST']}{$_SERVER['REQUEST_URI']}";
+  
+  if (preg_match("/\/(\d+)$/",$url,$matches)) {
+    $end = $matches[1];
+  }
+  else {
+    //Your URL didn't match.  This may or may not be a bad thing.
+  }
+  $str = parse_url($url);
+  $str2 = explode("/",$str[path]);
+  $length = count($str2) - 1;
+  $menu_li = $str2[$length];
+//  echo "<pre>";
+//  print_r($str2[$length]);
+//  echo "</pre>";
+//  echo $end;
+//  $li_active = "";
+  ?>
   <!-- BEGIN MAIN MENU -->
   <ul class="main-menu">
     <!-- Menu Dashboard -->
@@ -46,47 +65,47 @@
       </a>
       <!--start submenu -->
       <ul>
-        <li><a href="ui/boxes">ตั้งค่าระบบ</a></li>
+        <li id="li_boxes"><a href="ui/boxes">ตั้งค่าระบบ</a></li>
 
-        <li><a href="ui/buttons">แจ้งเตือน</a></li>
+        <li id="li_buttons"><a href="ui/buttons">แจ้งเตือน</a></li>
 
 
 
       </ul><!--end /submenu -->
     </li><!--end /menu-item -->
     <!-- Menu Pages -->
-     <?php
+    <?php
     session_start();
     if ($_SESSION[level] >= 8) {
       ?>
-    <li id="head_user">
-      <a href="javascript:void(0);">
-        <i class="fa fa-users fa-fw"></i><span class="title">ผู้ใช้งานระบบ</span> <span class="expand-sign">+</span>
-      </a>
-      <!--start submenu -->
-      <ul>
-        <li><a href="<?=base_url();?>users/content?type=admin">ผู้ดูแลระบบ<span class="badge"></span></a></li>
+      <li id="head_user">
+        <a href="javascript:void(0);">
+          <i class="fa fa-users fa-fw"></i><span class="title">ผู้ใช้งานระบบ</span> <span class="expand-sign">+</span>
+        </a>
+        <!--start submenu -->
+        <ul>
+          <li id="li_content_admin"><a href="<?=base_url();?>users/content?type=admin">ผู้ดูแลระบบ<span class="badge"></span></a></li>
 
-        <li><a href="<?=base_url();?>Users/content?type=supplier">ผู้ให้บริการ</a></li>
+          <li id="li_content_supplier"><a href="<?=base_url();?>Users/content?type=supplier">ผู้ให้บริการ</a></li>
 
-        <li><a href="<?=base_url();?>users/content?type=driver">คนขับรถ</a></li>
+          <li id="li_content_driver"><a href="<?=base_url();?>users/content?type=driver">คนขับรถ</a></li>
 
-       <!--  <li><a href="users?type=supplier">เคาน์เตอร์</a></li>
-
-
-        <li><a href="users?type=supplier">สมาชิก</a></li> -->
-
-
+          <!--  <li><a href="users?type=supplier">เคาน์เตอร์</a></li>
+   
+   
+           <li><a href="users?type=supplier">สมาชิก</a></li> -->
 
 
 
-      </ul><!--end /submenu -->
-    </li><!--end /menu-item -->
-    <!-- Menu Tables -->
-    <!-- ?>
-    <?php
-   // session_start();
-   //if ($_SESSION[level] >= 8) {
+
+
+        </ul><!--end /submenu -->
+      </li><!--end /menu-item -->
+      <!-- Menu Tables -->
+      <!-- ?>
+      <?php
+      // session_start();
+      //if ($_SESSION[level] >= 8) {
       ?> -->
       <li id="head_shop">
         <a href="javascript:void(0);">
@@ -94,13 +113,15 @@
         </a>
         <!--start submenu -->
         <ul>
-          <li><a href="<?=base_url();?>shop/data_shop_categorie" >หมวดหมู่ทั้งหมด</a></li>
-          <li><a  href="<?=base_url();?>shop/data_shop_all" >สถานที่ทั้งหมด</a></li>
+          <li id="li_data_shop_categorie"><a href="<?=base_url();?>shop/data_shop_categorie" >หมวดหมู่ทั้งหมด</a></li>
+          <li id="li_data_shop_all"><a  href="<?=base_url();?>shop/data_shop_all" >สถานที่ทั้งหมด</a></li>
           <!-- <li><a href="tables/dynamic">ประเภทสินค้าย่อย</a></li> -->
         </ul><!--end /submenu -->
       </li><!--end /menu-item -->
-<?php }
-else {?>
+    <?php
+    }
+    else {
+      ?>
       <li id="head_shop">
         <a href="">
           <i class="fa icon-app-uniF11A-1 fa-fw"></i><span class="title">จัดการร้านค้า</span>
@@ -127,13 +148,13 @@ else {?>
       <a href="javascript:void(0);">
         <i class="fa icon-app-uniF13C fa-fw"></i><span class="title">ข้อมูลการใช้บริการ</span> <span class="expand-sign">+</span>
       </a>
-      
+
       <!--start submenu -->
       <ul>
-        <li><a href="<?=base_url();?>forms/layouts">ข้อมูลการใช้บริการ</a></li>
-        <li><a href="<?=base_url();?>job/job_manage_shop">จัดการงานส่งแขก</a></li>
-        <li><a href="<?=base_url();?>job/job_nopaid_shop">รายการค้างจ่าย</a></li>
-        
+        <li id="li_layouts"><a href="<?=base_url();?>forms/layouts">ข้อมูลการใช้บริการ</a></li>
+        <li id="li_job_manage_shop"><a href="<?=base_url();?>job/job_manage_shop">จัดการงานส่งแขก</a></li>
+        <li id="li_job_nopaid_shop"><a href="<?=base_url();?>job/job_nopaid_shop">รายการค้างจ่าย</a></li>
+
 
 
       </ul><!--end /submenu -->
@@ -153,21 +174,21 @@ else {?>
       </ul><!--end /submenu -->
     </li>
     <?php
-    if ($_SESSION[level] >= 8) { 
-    ?>
-    <li id="setting_app_menu">
-      <a href="javascript:void(0);">
-        <i class="fa fa-file-text-o"></i><span class="title">ข้อมูลระบบ</span> <span class="expand-sign">+</span>
-      </a>
-      <!--start submenu -->
-      <ul>
-        <li><a href="<?=base_url();?>setting/car_brand"><span class="title">ยี่ห้อรถ</span></a></li>
-        <li><a href="<?=base_url();?>setting/car_type"><span class="title">ประเภทรถ</span></a></li>
-        <!--<li><a href="#"><span class="title">รายจ่ายบริษัท</span></a></li>-->
-      </ul><!--end /submenu -->
+    if ($_SESSION[level] >= 8) {
+      ?>
+      <li id="setting_app_menu">
+        <a href="javascript:void(0);">
+          <i class="fa fa-file-text-o"></i><span class="title">ข้อมูลระบบ</span> <span class="expand-sign">+</span>
+        </a>
+        <!--start submenu -->
+        <ul>
+          <li><a href="<?=base_url();?>setting/car_brand"><span class="title">ยี่ห้อรถ</span></a></li>
+          <li><a href="<?=base_url();?>setting/car_type"><span class="title">ประเภทรถ</span></a></li>
+          <!--<li><a href="#"><span class="title">รายจ่ายบริษัท</span></a></li>-->
+        </ul><!--end /submenu -->
 
-    </li>
-    <?php }?>
+      </li>
+<?php }?>
     <!-- <li>
         <a href="javascript:void(0);">
             <i class="fa fa-user fa-fw"></i><span class="title">แก้ไขข้อมูลส่วนตัว</span> 
@@ -185,9 +206,19 @@ else {?>
 </div>
 <script type="text/javascript">
   var menu = '<?=$menu;?>';
-  // console.log(menu)
+  var menu_li = '<?=$menu_li;?>';
+  console.log(menu)
   // if (menu == 'station') {
   $('#head_' + menu).removeClass('expanded');
   $('#head_' + menu).addClass('expanded');
   // }
+  var type = '';
+  if(menu_li == "content"){
+    type = '_<?=$_GET[type];?>';
+  }
+  
+  $('#li_' + menu_li + type).removeClass('active');
+  $('#li_' + menu_li + type).addClass('active');
+  
+  
 </script>

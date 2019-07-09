@@ -40,6 +40,10 @@ class Job extends CI_Controller {
   public function render_shop_his() {
     $this->load->view('job/list_job_shop_his');
   }
+  
+  public function render_shop_pay_tran() {
+    $this->load->view('job/list_job_shop_pay_trans');
+  }
 
   public function count_shop_job() {
     session_start();

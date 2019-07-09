@@ -202,7 +202,9 @@ class Api extends CI_Controller {
     if($_SESSION['company']>0){
       $filter_company = " and program = ".$_SESSION['company'];
     }
-    $sql = "select * from order_booking where driver_complete = 1 ".$sql_date.$sql_status.$sql_class.$filter_company." order by id desc";
+    $sql = "select * from order_booking where driver_complete = 1 "
+            .$sql_date.$sql_status.$sql_class.$filter_company." order by id desc";
+    
     $query = $this->db->query($sql);
 
     foreach ($query->result() as $row) {
@@ -218,6 +220,28 @@ class Api extends CI_Controller {
     echo json_encode($return);
   }
   
+  function shop_pay_transfer() {
+     session_start();
+    if($_SESSION['company']>0){
+      $filter_company = " and program = ".$_SESSION['company'];
+    }
+    $sqltrans = " and transfer_money = 0";
+    $sql = "select * from order_booking where check_tran_job = 1". $sqltrans. $filter_company;
+    
+    $query = $this->db->query($sql);
+
+    foreach ($query->result() as $row) {
+      $data[] = $row;
+    }
+    if (count($data) > 0) {
+      $return[data] = $data;
+    }
+    else {
+      $return[data] = "";
+    }
+    $return[sql] = $sql;
+    echo json_encode($return);
+  }
 
   public function detect_driver_approve_transfer() {
     $url = "http://www.welovetaxi.com:3000/recheckBooking";

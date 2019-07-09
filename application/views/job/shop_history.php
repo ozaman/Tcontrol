@@ -145,22 +145,29 @@ $admin = $admins->row();
     company_id: parseInt(id)
 
   };
-  socket.on('connect', function () {
-    console.log(dataorder);
-    socket.emit('usercompany', dataorder);
-  });
 
-  socket.on('CONMONITOR', function (rooms, data) {
+//  socket.on('connect', function () {
+//    console.log(dataorder);
+//    socket.emit('usercompany', dataorder);
+//  });
+
+  setInterval(function () {
     countJob(current);
-    array_rooms = [];
-    // console.log('in case monitor')
-    array_rooms = data;
-    // console.log(all_data)
-//      array_rooms = data;
-    console.log(array_rooms);
-    var chk_menu = $('#check_func_now').val();
-    if (chk_menu == 1) {
-      render_job_shop();
-    }
-  });
+//    socket.emit('usercompany', dataorder);
+
+  }, 3000);
+//
+//  socket.on('CONMONITOR', function (rooms, data) {
+//    countJob(current);
+//    array_rooms = [];
+//    // console.log('in case monitor')
+//    array_rooms = data;
+//    // console.log(all_data)
+////      array_rooms = data;
+//    console.log(array_rooms);
+//    var chk_menu = $('#check_func_now').val();
+//    if (chk_menu == 1) {
+//      render_job_shop();
+//    }
+//  });
 </script>
