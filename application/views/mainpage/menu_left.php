@@ -59,11 +59,11 @@
       </a>
     </li><!--end /menu-item -->
     <!-- Menu UI -->
-    <li id="head_setting">
+<!--    <li id="head_setting">
       <a href="javascript:void(0);">
         <i class="fa fa-cog fa-fw"></i><span class="title">ตั้งค่าระบบ</span> <span class="expand-sign">+</span>
       </a>
-      <!--start submenu -->
+      start submenu 
       <ul>
         <li id="li_boxes"><a href="ui/boxes">ตั้งค่าระบบ</a></li>
 
@@ -71,8 +71,8 @@
 
 
 
-      </ul><!--end /submenu -->
-    </li><!--end /menu-item -->
+      </ul>end /submenu 
+    </li>end /menu-item -->
     <!-- Menu Pages -->
     <?php
     session_start();
@@ -151,7 +151,7 @@
 
       <!--start submenu -->
       <ul>
-        <li id="li_layouts"><a href="<?=base_url();?>forms/layouts">ข้อมูลการใช้บริการ</a></li>
+        <!--<li id="li_layouts"><a href="<?=base_url();?>forms/layouts">ข้อมูลการใช้บริการ</a></li>-->
         <li id="li_job_manage_shop"><a href="<?=base_url();?>job/job_manage_shop">จัดการงานส่งแขก</a></li>
         <li id="li_job_nopaid_shop"><a href="<?=base_url();?>job/job_nopaid_shop">รายการค้างจ่าย</a></li>
 
